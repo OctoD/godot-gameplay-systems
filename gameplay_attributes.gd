@@ -3,17 +3,31 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	var icon = load("res://addons/gameplay_attributes/assets/attribute_icon.png");
+	var attribute_node_icon = load("res://addons/gameplay_attributes/assets/attribute_icon.png");
+	var gameplay_effect_icon = load("res://addons/gameplay_attributes/assets/timed_icon.png")
+	var damage_effect_icon = load("res://addons/gameplay_attributes/assets/damage_gameplay_effect.png")
 	
-	add_custom_type("GameplayAttributeMap", "Node", load("res://addons/gameplay_attributes/nodes/GameplayAttributeMap.gd"), icon);
-	add_custom_type("GameplayAttribute", "Node", load("res://addons/gameplay_attributes/nodes/GameplayAttribute.gd"), icon);
-	add_custom_type("GameplayEffect", "Node", load("res://addons/gameplay_attributes/nodes/GameplayEffect.gd"), icon);
-	add_custom_type("TimedGameplayEffect", "Node", load("res://addons/gameplay_attributes/nodes/TimedGameplayEffect.gd"), icon);
+	# basenodes
+	add_custom_type("GameplayAttributeMap", "Node", load("res://addons/gameplay_attributes/nodes/GameplayAttributeMap.gd"), attribute_node_icon);
+	add_custom_type("GameplayAttribute", "Node", load("res://addons/gameplay_attributes/nodes/GameplayAttribute.gd"), attribute_node_icon);
+	add_custom_type("GameplayEffect", "Node", load("res://addons/gameplay_attributes/nodes/GameplayEffect.gd"), gameplay_effect_icon);
+	add_custom_type("TimedGameplayEffect", "Node", load("res://addons/gameplay_attributes/nodes/TimedGameplayEffect.gd"), gameplay_effect_icon);
 
+	# premade gameplay effects
+	add_custom_type("AttributeConsumeGameplayEffect", "Node", load("res://addons/gameplay_attributes/premade_gameplay_effects/AttributeConsumeGameplayEffect.gd"), gameplay_effect_icon);
+	add_custom_type("AttributeRegenGameplayEffect", "Node", load("res://addons/gameplay_attributes/premade_gameplay_effects/AttributeRegenGameplayEffect.gd"), gameplay_effect_icon);
+	add_custom_type("DamageGameplayEffect", "Node", load("res://addons/gameplay_attributes/premade_gameplay_effects/DamageGameplayEffect.gd"), damage_effect_icon);
+		
 
 func _exit_tree():
+	# basenodes
+	
 	remove_custom_type("GameplayAttribute")
 	remove_custom_type("GameplayAttributeMap")
 	remove_custom_type("GameplayEffect")
 	remove_custom_type("TimedGameplayEffect")
-	
+
+	# premade gameplay effects
+	remove_custom_type("AttributeConsumeGameplayEffect")
+	remove_custom_type("AttributeRegenGameplayEffect")
+	remove_custom_type("DamageGameplayEffect")

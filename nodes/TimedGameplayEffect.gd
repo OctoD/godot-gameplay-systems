@@ -1,18 +1,39 @@
 tool
-extends "res://addons/gameplay_attributes/nodes/GameplayEffect.gd"
+extends GameplayEffect
 class_name TimedGameplayEffect
 
 
+export(int) var duration = 1
+
+
+var ticks_performed = 0
 var timer: Timer
 
 
-func _ready():
-  .connect_to_parent_signal()
-  timer = Timer.new()
-  add_child(timer)
+func setup_effect() -> void:
+	.setup_effect()
+	timer = Timer.new()
+	timer.connect("timeout", self, "_on_timer_ticked")
+
+	add_child(timer)
 
 
-# func apply_effect(attribute_name: String, attribute_type: String, attribute_value: float) -> void:
-#   if _active
+func _on_timer_ticked() -> void:
+	if duration == 0:
+		return
   
-#     pass
+	ticks_performed += 1
+
+
+func should_activate() -> bool:
+	if timer.is_stopped():
+		timer.start()
+  
+	return true
+
+
+func should_deactivate() -> bool:
+	if duration != 0 and duration == ticks_performed:
+		return true
+	else:
+		return false
