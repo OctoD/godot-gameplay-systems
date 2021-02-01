@@ -24,7 +24,7 @@ func connect_child_signals() -> void:
 				child.connect("attribute_changed", self, "on_attribute_changed")
 
 
-func get_attribute(attribute_name: string) -> GameplayAttribute:
+func get_attribute(attribute_name: String) -> GameplayAttribute:
 	var found: GameplayAttribute = find_node(attribute_name)
 	return found
 
