@@ -10,6 +10,9 @@ enum EffectActivationEvent {
 export(EffectActivationEvent) var activation_trigger = EffectActivationEvent.ImmediateActivation
 
 
+signal effect_applied
+
+
 func _ready():
 	if not Engine.editor_hint:
 		setup_effect()
