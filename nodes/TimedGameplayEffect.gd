@@ -19,15 +19,16 @@ func setup_effect() -> void:
 
 
 func _on_timer_ticked() -> void:
-	if duration == 0:
-		return
-  
+	if should_deactivate():
+		queue_free()
+
 	ticks_performed += 1
+	apply_effect()
 
 
 func should_activate(activation_event: int) -> bool:
 	if activation_event == EffectActivationEvent.ImmediateActivation:
-		if timer.is_stopped():
+		if timer.is_stopped() and is_inside_tree():
 			timer.start()
 	  
 		return true

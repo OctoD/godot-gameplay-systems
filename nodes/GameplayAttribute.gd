@@ -19,13 +19,11 @@ func get_max_value() -> float:
 
 
 func set_current_value(value: float) -> void:
-	if is_inside_tree():
-		current_value = clamp(value, 0, max_value)
-		emit_signal("attribute_changed", self, "current_value")
-		
+	current_value = clamp(value, 0, max_value)
+	emit_signal("attribute_changed", self, "current_value")
 
 func set_max_value(value: float) -> void:
-	if is_inside_tree() and value >= 0:
+	if value >= 0:
 		max_value = value
 		emit_signal("attribute_changed", self, "max_value")
 

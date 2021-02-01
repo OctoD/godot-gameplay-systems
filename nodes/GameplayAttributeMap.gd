@@ -9,7 +9,7 @@ var _is_valid = false
 
 
 func _ready():
-	if _is_valid:
+	if _is_valid or not Engine.editor_hint:
 		connect_child_signals()
 
 
@@ -48,8 +48,9 @@ func _get_configuration_warning():
 	var children = get_children()
 	var message = "Requires at least on GameplayAttribute node"
 	var parent = get_parent()
+	var is_editing = Engine.editor_hint
 	
-	if parent != null and not (parent is KinematicBody or parent is KinematicBody2D):
+	if parent != null and not (parent is KinematicBody or parent is KinematicBody2D) and is_editing:
 		_is_valid = false
 		return "GameplayAttributeMap must be direct child of a KinematicBody or KinematicBody2D"
 	

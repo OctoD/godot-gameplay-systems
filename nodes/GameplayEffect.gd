@@ -1,4 +1,3 @@
-tool
 extends Node
 class_name GameplayEffect
 
@@ -12,12 +11,13 @@ export(EffectActivationEvent) var activation_trigger = EffectActivationEvent.Imm
 
 
 func _ready():
-	setup_effect()
-	if should_activate(EffectActivationEvent.ImmediateActivation):
-		apply_effect()
+	if not Engine.editor_hint:
+		setup_effect()
+		if should_activate(EffectActivationEvent.ImmediateActivation):
+			apply_effect()
 
-		if should_deactivate():
-			queue_free()
+			if should_deactivate():
+				queue_free()
 
 
 func setup_effect() -> void:
