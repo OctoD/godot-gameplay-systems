@@ -4,6 +4,19 @@ Gameplay Attributes
 Gameplay attributes are a set of nodes used to describe some
 characters attributes for both 2D and 3D games made with Godot.
 
+- [Gameplay Attributes](#gameplay-attributes)
+- [Install](#install)
+- [How it works](#how-it-works)
+  - [Example: creating your first Attributes map](#example-creating-your-first-attributes-map)
+  - [Creating your own effects](#creating-your-own-effects)
+- [Docs](#docs)
+  - [GameplayAttributesMap](#gameplayattributesmap)
+  - [GameplayAttribute](#gameplayattribute)
+      - [members](#members)
+  - [GameplayEffect](#gameplayeffect)
+      - [methods](#methods)
+- [Contribution](#contribution)
+
 # Install
 
 Clone this repo inside your `addons` directory.
@@ -84,6 +97,70 @@ At this point, I'd suggest you to create your own effects inheriting the existin
 - `DamageGameplayEffect` calculates the instant damage with min/max parameters
 
 You can of course create you own starting from the base class `GameplayEffect` or `TimedGameplayEffect`
+
+# Docs
+
+## GameplayAttributesMap
+
+`GameplayAttributesMap` allows you to connect to two `signal`s:
+
+- `attribute_changed` emitted when an attribute changes a current or maximum value
+- `effect_activated` emitted when an effect decides to emit the same signal (useful for ui notification)
+- `effect_applied` emitted when an effect decides to emit the same signal (useful for ui notification)
+- `effect_deactivated` emitted when an effect decides to emit the same signal (useful for ui notification)
+
+## GameplayAttribute
+
+`GameplayAttribute` allows you to connect to one `signal`:
+
+- `attribute_changed` emitted when the current value or the maximum value of an attribute
+changes
+
+#### members
+
+**`current_value`** (`float`)
+
+describes how the attribute is represented at the current time
+
+**`max_value`** (`float`)
+
+describes the attribute's max value (like max health, max mana etc, max level etc)
+
+## GameplayEffect
+
+`GameplayEffect` allows you to connect to three `signal`s:
+
+- `effect_activated` you can emit it when the effect is activated inside the `should_activate` method
+- `effect_applied` you can emit it when the effect is applied inside the `apply_effect` method
+- `effect_deactivated` you can emit it when the effect is deactivated inside the `should_deactivate` method
+
+#### methods
+
+**`setup_effect`** 
+
+This is where you setup your effect. It is called during the `_ready` function but only when in game.
+
+**`apply_effect`**
+
+This is where your effect logic should stay. 
+
+If you need to notify the owning character, emit the signal `effect_applied`
+
+**`get_parent_attribute_map`**
+
+Returns the parent `GameplayAttributeMap`
+
+**`should_activate`**
+
+Should return `true` when the effect can be activated. 
+
+If you need to notify the owning character, emit the signal `effect_activated`
+
+**`should_deactivate`**
+
+Should return `true` when the effect can be activated. 
+
+If you need to notify the owning character, emit the signal `effect_deactivated`
 
 # Contribution
 
