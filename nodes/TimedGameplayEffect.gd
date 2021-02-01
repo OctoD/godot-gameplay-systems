@@ -25,11 +25,14 @@ func _on_timer_ticked() -> void:
 	ticks_performed += 1
 
 
-func should_activate() -> bool:
-	if timer.is_stopped():
-		timer.start()
-  
-	return true
+func should_activate(activation_event: int) -> bool:
+	if activation_event == EffectActivationEvent.ImmediateActivation:
+		if timer.is_stopped():
+			timer.start()
+	  
+		return true
+
+	return false
 
 
 func should_deactivate() -> bool:

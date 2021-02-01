@@ -11,12 +11,12 @@ func _enter_tree():
 	add_custom_type("GameplayAttributeMap", "Node", load("res://addons/gameplay_attributes/nodes/GameplayAttributeMap.gd"), attribute_node_icon);
 	add_custom_type("GameplayAttribute", "Node", load("res://addons/gameplay_attributes/nodes/GameplayAttribute.gd"), attribute_node_icon);
 	add_custom_type("GameplayEffect", "Node", load("res://addons/gameplay_attributes/nodes/GameplayEffect.gd"), gameplay_effect_icon);
-	add_custom_type("TimedGameplayEffect", "Node", load("res://addons/gameplay_attributes/nodes/TimedGameplayEffect.gd"), gameplay_effect_icon);
+	add_custom_type("TimedGameplayEffect", "GameplayEffect", load("res://addons/gameplay_attributes/nodes/TimedGameplayEffect.gd"), gameplay_effect_icon);
 
 	# premade gameplay effects
-	add_custom_type("AttributeConsumeGameplayEffect", "Node", load("res://addons/gameplay_attributes/premade_gameplay_effects/AttributeConsumeGameplayEffect.gd"), gameplay_effect_icon);
-	add_custom_type("AttributeRegenGameplayEffect", "Node", load("res://addons/gameplay_attributes/premade_gameplay_effects/AttributeRegenGameplayEffect.gd"), gameplay_effect_icon);
-	add_custom_type("DamageGameplayEffect", "Node", load("res://addons/gameplay_attributes/premade_gameplay_effects/DamageGameplayEffect.gd"), damage_effect_icon);
+	add_custom_type("AttributeConsumeGameplayEffect", "TimedGameplayEffect", load("res://addons/gameplay_attributes/premade_gameplay_effects/AttributeConsumeGameplayEffect.gd"), gameplay_effect_icon);
+	add_custom_type("AttributeRegenGameplayEffect", "TimedGameplayEffect", load("res://addons/gameplay_attributes/premade_gameplay_effects/AttributeRegenGameplayEffect.gd"), gameplay_effect_icon);
+	add_custom_type("DamageGameplayEffect", "GameplayEffect", load("res://addons/gameplay_attributes/premade_gameplay_effects/DamageGameplayEffect.gd"), damage_effect_icon);
 		
 
 func _exit_tree():
