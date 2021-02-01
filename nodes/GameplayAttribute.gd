@@ -20,12 +20,12 @@ func get_max_value() -> float:
 
 func set_current_value(value: float) -> void:
 	current_value = clamp(value, 0, max_value)
-	emit_signal("attribute_changed", self, "current_value")
+	emit_signal("attribute_changed", self)
 
 func set_max_value(value: float) -> void:
 	if value >= 0:
 		max_value = value
-		emit_signal("attribute_changed", self, "max_value")
+		emit_signal("attribute_changed", self)
 
 
 func _get_configuration_warning():

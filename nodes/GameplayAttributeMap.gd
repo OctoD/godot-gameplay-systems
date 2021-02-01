@@ -29,8 +29,8 @@ func get_attribute(attribute_name: String) -> GameplayAttribute:
 	return found
 
 
-func on_attribute_changed(attribute: GameplayAttribute, attribute_value_changed: String) -> void:
-	emit_signal("attribute_changed", attribute, attribute_value_changed, self)
+func on_attribute_changed(attribute: GameplayAttribute) -> void:
+	emit_signal("attribute_changed", attribute)
 
 
 
