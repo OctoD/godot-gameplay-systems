@@ -44,7 +44,7 @@ Connect `CharacterAttributes`'s signal `attribute_changed` to a function
 
 ```gdscript
 func _on_attribute_changed(attribute, value, attribute_map) -> void:
-  print(attribute.attribute_name + ":" + str(attribute.current_value))
+  print(attribute.name + ":" + str(attribute.current_value))
 ```
 
 Start your game and watch your mana regen!
