@@ -15,7 +15,9 @@ characters attributes for both 2D and 3D games made with Godot.
       - [members](#members)
   - [GameplayEffect](#gameplayeffect)
       - [methods](#methods)
+- [In next releases](#in-next-releases)
 - [Contribution](#contribution)
+- [Licence](#licence)
 
 # Install
 
@@ -162,6 +164,23 @@ Should return `true` when the effect can be activated.
 
 If you need to notify the owning character, emit the signal `effect_deactivated`
 
+# In next releases
+
+- [ ] Adds a serialize/deserialize function to `GameplayAttributeMap` node
+- [ ] Adds multiplayer functionalities to `GameplayAttributeMap` node
+- [ ] Adds dash effect
+- [ ] Adds fall effect
+- [ ] Adds jump effect
+- [ ] Adds move effect
+- [ ] Adds sprint effect
+- [ ] Adds high level configurable `GameplayAttributeMap` (you can config attributes via parameters on `GameplayAttributeMap`)
+
 # Contribution
 
-Every contribution is really welcome, so feel free to contribute!
+Every contribution is really welcome, feel free to contribute!
+
+You can open PR, issues or you can suggest features
+
+# Licence
+
+MIT licence
