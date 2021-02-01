@@ -10,7 +10,9 @@ enum EffectActivationEvent {
 export(EffectActivationEvent) var activation_trigger = EffectActivationEvent.ImmediateActivation
 
 
+signal effect_activated
 signal effect_applied
+signal effect_deactivated
 
 
 func _ready():

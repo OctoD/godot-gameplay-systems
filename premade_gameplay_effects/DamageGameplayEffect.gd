@@ -1,3 +1,4 @@
+tool
 extends GameplayEffect
 class_name DamageGameplayEffect
 
@@ -20,6 +21,7 @@ func apply_effect() -> void:
 		var attribute: GameplayAttribute = parent.get_attribute(attribute_name)
 		if attribute and attribute.name == attribute_name:
 			attribute.current_value = clamp(-get_damage(), 0, attribute.max_value)
+			emit_signal("effect_applied", self)
 
 
 func get_damage() -> float:

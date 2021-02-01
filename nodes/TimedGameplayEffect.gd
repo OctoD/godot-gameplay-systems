@@ -31,6 +31,8 @@ func should_activate(activation_event: int) -> bool:
 		if timer.is_stopped() and is_inside_tree():
 			timer.start()
 	  
+		emit_signal("effect_activated", self)
+		
 		return true
 
 	return false
@@ -38,6 +40,7 @@ func should_activate(activation_event: int) -> bool:
 
 func should_deactivate() -> bool:
 	if duration != 0 and duration == ticks_performed:
+		emit_signal("effect_deactivated", self)
 		return true
 	else:
 		return false

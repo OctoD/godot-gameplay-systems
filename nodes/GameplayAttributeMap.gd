@@ -4,7 +4,9 @@ class_name GameplayAttributeMap
 
 
 signal attribute_changed
+signal effect_activated
 signal effect_applied
+signal effect_deactivated
 
 var _is_valid = false
 
@@ -23,8 +25,12 @@ func connect_child_signals() -> void:
 		for child in get_children():
 			if child.has_signal("attribute_changed"):
 				child.connect("attribute_changed", self, "on_attribute_changed")
+			if child.has_signal("effect_activated"):
+				child.connect("effect_activated", self, "on_effect_activated")
 			if child.has_signal("effect_applied"):
 				child.connect("effect_applied", self, "on_effect_applied")
+			if child.has_signal("effect_deactivated"):
+				child.connect("effect_deactivated", self, "on_effect_deactivated")
 
 
 func get_attribute(attribute_name: String) -> GameplayAttribute:
@@ -36,8 +42,16 @@ func on_attribute_changed(attribute: GameplayAttribute) -> void:
 	emit_signal("attribute_changed", attribute)
 
 
+func on_on_effect_activated(effect: GameplayEffect) -> void:
+	emit_signal("on_effect_activated", effect)
+
+
 func on_effect_applied(effect: GameplayEffect) -> void:
 	emit_signal("effect_applied", effect)
+
+
+func on_on_effect_deactivated(effect: GameplayEffect) -> void:
+	emit_signal("on_effect_deactivated", effect)
 
 
 func _get_gameplay_effects() -> Array:
