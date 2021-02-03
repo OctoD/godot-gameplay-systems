@@ -47,6 +47,12 @@ func _connect_to_parent_signal() -> void:
 		parent.connect("attribute_changed", self, "_on_attribute_changed")
 
 
+func get_kinematic_owner():
+	var parent = get_parent_attribute_map()
+
+	if parent:
+		return parent.get_parent()
+
 func get_parent_attribute_map():
 	return get_parent()
 

@@ -195,6 +195,11 @@ If you need to notify the owning character, emit the signal `effect_applied`
 This is where you setup your effect. It is called during the `_ready` function but only when in game.
 
 
+**get_kinematic_owner**
+
+Returns the `KinematicBody` or `KinematicBody3D` owner of the `GameplayAttributeMap` which contains the effect.
+
+
 
 **`get_parent_attribute_map`**
 
