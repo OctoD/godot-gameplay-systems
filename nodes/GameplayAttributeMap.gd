@@ -45,6 +45,15 @@ func get_attribute_value(attribute_name: String) -> float:
 		return attribute.current_value
 	else:
 		return 0.0
+
+
+func get_attribute_max_value(attribute_name: String) -> float:
+	var attribute = get_attribute(attribute_name)
+
+	if attribute:
+		return attribute.max_value
+	else:
+		return 0.0
 		
 
 func get_gameplay_effect(effect_name: String) -> GameplayEffect:

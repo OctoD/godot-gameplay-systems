@@ -131,6 +131,10 @@ Returns a `GameplayAttribute` if there's one named like `attribute_name` inside 
 
 Returns a `GameplayAttribute` current_value if there's one named like `attribute_name` inside the `GameplayAttributesMap` tree.
 
+**`get_attribute_max_value(attribute_name: String) -> float`**
+
+Returns a `GameplayAttribute` max_value if there's one named like `attribute_name` inside the `GameplayAttributesMap` tree.
+
 If no attribute is found, returns 0.0
 
 **`get_effect(effect_name: String) -> GameplayAttribute`**
