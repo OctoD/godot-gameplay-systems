@@ -221,11 +221,6 @@ If you need to notify the owning character, emit the signal `effect_deactivated`
 
 - [ ] Adds a serialize/deserialize function to `GameplayAttributeMap` node
 - [ ] Adds multiplayer functionalities to `GameplayAttributeMap` node
-- [ ] Adds dash effect
-- [ ] Adds fall effect
-- [ ] Adds jump effect
-- [ ] Adds move effect
-- [ ] Adds sprint effect
 - [ ] Adds high level configurable `GameplayAttributeMap` (you can config attributes via parameters on `GameplayAttributeMap`)
 
 # Contribution
