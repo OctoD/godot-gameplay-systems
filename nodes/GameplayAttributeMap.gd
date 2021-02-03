@@ -24,38 +24,63 @@ func connect_child_signals() -> void:
 	if not Engine.editor_hint:
 		for child in get_children():
 			if child.has_signal("attribute_changed"):
-				child.connect("attribute_changed", self, "on_attribute_changed")
+				child.connect("attribute_changed", self, "_on_attribute_changed")
 			if child.has_signal("effect_activated"):
-				child.connect("effect_activated", self, "on_effect_activated")
+				child.connect("effect_activated", self, "_on_effect_activated")
 			if child.has_signal("effect_applied"):
-				child.connect("effect_applied", self, "on_effect_applied")
+				child.connect("effect_applied", self, "_on_effect_applied")
 			if child.has_signal("effect_deactivated"):
-				child.connect("effect_deactivated", self, "on_effect_deactivated")
+				child.connect("effect_deactivated", self, "_on_effect_deactivated")
 
 
 func get_attribute(attribute_name: String) -> GameplayAttribute:
 	var found: GameplayAttribute = find_node(attribute_name)
 	return found
+		
+
+func get_gameplay_effect(effect_name: String) -> GameplayEffect:
+	var found: GameplayEffect = find_node(effect_name)
+	return found
+
+	
+func get_attributes() -> Array:
+	var attributes = []
+	
+	for child in get_children():
+		if child is GameplayAttribute:
+			attributes.append(child)
+		
+	return attributes
 
 
-func on_attribute_changed(attribute: GameplayAttribute) -> void:
+func get_effects() -> Array:
+	var effects = []
+	
+	for child in get_children():
+		if child is GameplayEffect:
+			effects.append(child)
+		
+	return effects
+
+
+func _on_attribute_changed(attribute: GameplayAttribute) -> void:
 	emit_signal("attribute_changed", attribute)
 
 
-func on_on_effect_activated(effect: GameplayEffect) -> void:
+func _on_effect_activated(effect: GameplayEffect) -> void:
 	emit_signal("on_effect_activated", effect)
 
 
-func on_effect_applied(effect: GameplayEffect) -> void:
+func _on_effect_applied(effect: GameplayEffect) -> void:
 	emit_signal("effect_applied", effect)
 
 
-func on_on_effect_deactivated(effect: GameplayEffect) -> void:
+func _on_effect_deactivated(effect: GameplayEffect) -> void:
 	emit_signal("on_effect_deactivated", effect)
 
 
 func play_effect(effect_name: String) -> bool:
-	for effect in _get_gameplay_effects():
+	for effect in get_effects():
 		if effect.name == effect_name:
 			effect.play_effect()
 			return true
@@ -65,22 +90,12 @@ func play_effect(effect_name: String) -> bool:
 
 
 func pause_effect(effect_name: String) -> bool:
-	for effect in _get_gameplay_effects():
+	for effect in get_effects():
 		if effect.name == effect_name:
 			effect.pause_effect()
 			return true
 
 	return false
-		
-
-func _get_gameplay_effects() -> Array:
-	var effects = []
-	
-	for child in get_children():
-		if child is GameplayEffect:
-			effects.append(child)
-		
-	return effects
 
 
 func _get_configuration_warning():
