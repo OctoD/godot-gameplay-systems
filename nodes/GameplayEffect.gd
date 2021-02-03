@@ -17,7 +17,7 @@ signal effect_deactivated
 
 func _ready():
 	if not Engine.editor_hint:
-		_setup_effect()
+		setup_effect()
 		if should_activate(EffectActivationEvent.ImmediateActivation):
 			apply_effect()
 
@@ -32,7 +32,7 @@ func play_effect() -> void:
 func pause_effect() -> void:
 	pass
 
-func _setup_effect() -> void:
+func setup_effect() -> void:
 	_connect_to_parent_signal()
 
 
