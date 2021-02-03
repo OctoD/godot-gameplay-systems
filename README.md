@@ -11,10 +11,11 @@ characters attributes for both 2D and 3D games made with Godot.
   - [Creating your own effects](#creating-your-own-effects)
 - [Docs](#docs)
   - [GameplayAttributesMap](#gameplayattributesmap)
+      - [methods](#methods)
   - [GameplayAttribute](#gameplayattribute)
       - [members](#members)
   - [GameplayEffect](#gameplayeffect)
-      - [methods](#methods)
+      - [methods](#methods-1)
 - [In next releases](#in-next-releases)
 - [Contribution](#contribution)
 - [Licence](#licence)
@@ -100,6 +101,8 @@ At this point, I'd suggest you to create your own effects inheriting the existin
 
 You can of course create you own starting from the base class `GameplayEffect` or `TimedGameplayEffect`
 
+--------
+
 # Docs
 
 ## GameplayAttributesMap
@@ -110,6 +113,41 @@ You can of course create you own starting from the base class `GameplayEffect` o
 - `effect_activated` emitted when an effect decides to emit the same signal (useful for ui notification)
 - `effect_applied` emitted when an effect decides to emit the same signal (useful for ui notification)
 - `effect_deactivated` emitted when an effect decides to emit the same signal (useful for ui notification)
+
+
+#### methods
+
+Here are the public methods in `GameplayAttributesMap`
+
+**`apply_effect(effect: GameplayEffect) -> void`**
+
+Apply an effect
+
+**`get_attribute(attribute_name: String) -> GameplayAttribute`**
+
+Returns a `GameplayAttribute` if there's one named like `attribute_name` inside the `GameplayAttributesMap` tree.
+
+**`get_effect(effect_name: String) -> GameplayAttribute`**
+
+Returns a `GameplayEffect` if there's one named like `effect_name` inside the `GameplayAttributesMap` tree.
+
+**`get_attributes() -> Array`**
+
+Returns an `Array` of `GameplayAttribute` nested inside the `GameplayAttributesMap` tree.
+
+**`get_effects() -> Array`**
+
+Returns an `Array` of `GameplayEffect` nested inside the `GameplayAttributesMap` tree.
+
+**`play_effect(effect_name: String) -> bool`**
+
+Restarts a `GameplayEffect`  if there's one named like `effect_name` inside the `GameplayAttributesMap` tree.
+
+**`pause_effect(effect_name: String) -> bool`**
+
+Pauses a `GameplayEffect`  if there's one named like `effect_name` inside the `GameplayAttributesMap` tree.
+
+----------
 
 ## GameplayAttribute
 
@@ -128,6 +166,8 @@ describes how the attribute is represented at the current time
 
 describes the attribute's max value (like max health, max mana etc, max level etc)
 
+----------
+
 ## GameplayEffect
 
 `GameplayEffect` allows you to connect to three `signal`s:
@@ -138,9 +178,14 @@ describes the attribute's max value (like max health, max mana etc, max level et
 
 #### methods
 
+Here are the `GameplayEffect` public methods
+
+
 **`setup_effect`** 
 
 This is where you setup your effect. It is called during the `_ready` function but only when in game.
+
+
 
 **`apply_effect`**
 
@@ -148,9 +193,13 @@ This is where your effect logic should stay.
 
 If you need to notify the owning character, emit the signal `effect_applied`
 
+
+
 **`get_parent_attribute_map`**
 
 Returns the parent `GameplayAttributeMap`
+
+
 
 **`should_activate`**
 
@@ -158,11 +207,15 @@ Should return `true` when the effect can be activated.
 
 If you need to notify the owning character, emit the signal `effect_activated`
 
+
+
 **`should_deactivate`**
 
 Should return `true` when the effect can be activated. 
 
 If you need to notify the owning character, emit the signal `effect_deactivated`
+
+
 
 # In next releases
 
