@@ -16,7 +16,7 @@ characters attributes for both 2D and 3D games made with Godot.
       - [members](#members)
   - [GameplayEffect](#gameplayeffect)
       - [methods](#methods-1)
-- [In next releases](#in-next-releases)
+- [Ideas for a next releases](#ideas-for-a-next-releases)
 - [Contribution](#contribution)
 - [Licence](#licence)
 
@@ -233,11 +233,11 @@ If you need to notify the owning character, emit the signal `effect_deactivated`
 
 
 
-# In next releases
+# Ideas for a next releases
 
-- [ ] Adds a serialize/deserialize function to `GameplayAttributeMap` node
+- [ ] Adds a serialize/deserialize function to `GameplayAttributeMap` node (for savegames, remote savegames etc)
 - [ ] Adds multiplayer functionalities to `GameplayAttributeMap` node
-- [ ] Adds high level configurable `GameplayAttributeMap` (you can config attributes via parameters on `GameplayAttributeMap`)
+- [ ] Adds high level configurable `GameplayAttributeMap` (maybe with a tool? So you can config attributes via parameters on `GameplayAttributeMap`)
 
 # Contribution
 
