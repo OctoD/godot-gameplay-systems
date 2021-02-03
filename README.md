@@ -127,6 +127,12 @@ Apply an effect
 
 Returns a `GameplayAttribute` if there's one named like `attribute_name` inside the `GameplayAttributesMap` tree.
 
+**`get_attribute_value(attribute_name: String) -> float`**
+
+Returns a `GameplayAttribute` current_value if there's one named like `attribute_name` inside the `GameplayAttributesMap` tree.
+
+If no attribute is found, returns 0.0
+
 **`get_effect(effect_name: String) -> GameplayAttribute`**
 
 Returns a `GameplayEffect` if there's one named like `effect_name` inside the `GameplayAttributesMap` tree.

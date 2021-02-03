@@ -36,6 +36,15 @@ func connect_child_signals() -> void:
 func get_attribute(attribute_name: String) -> GameplayAttribute:
 	var found: GameplayAttribute = find_node(attribute_name)
 	return found
+
+
+func get_attribute_value(attribute_name: String) -> float:
+	var attribute = get_attribute(attribute_name)
+
+	if attribute:
+		return attribute.current_value
+	else:
+		return 0.0
 		
 
 func get_gameplay_effect(effect_name: String) -> GameplayEffect:
