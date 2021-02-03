@@ -18,8 +18,8 @@ func pause_effect() -> void:
 	timer.stop()
 
 
-func setup_effect() -> void:
-	.setup_effect()
+func _setup_effect() -> void:
+	._setup_effect()
 	timer = Timer.new()
 	timer.connect("timeout", self, "_on_timer_ticked")
 
