@@ -22,6 +22,7 @@ func set_current_value(value: float) -> void:
 	current_value = clamp(value, 0, max_value)
 	emit_signal("attribute_changed", self)
 
+
 func set_max_value(value: float) -> void:
 	if value >= 0:
 		max_value = value
