@@ -10,6 +10,14 @@ var ticks_performed = 0
 var timer: Timer
 
 
+func play_effect() -> void:
+	if timer.is_stopped():
+		timer.start()
+
+func pause_effect() -> void:
+	timer.stop()
+
+
 func setup_effect() -> void:
 	.setup_effect()
 	timer = Timer.new()

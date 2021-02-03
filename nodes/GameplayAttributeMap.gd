@@ -54,6 +54,25 @@ func on_on_effect_deactivated(effect: GameplayEffect) -> void:
 	emit_signal("on_effect_deactivated", effect)
 
 
+func play_effect(effect_name: String) -> bool:
+	for effect in _get_gameplay_effects():
+		if effect.name == effect_name:
+			effect.play_effect()
+			return true
+
+	return false
+		
+
+
+func pause_effect(effect_name: String) -> bool:
+	for effect in _get_gameplay_effects():
+		if effect.name == effect_name:
+			effect.pause_effect()
+			return true
+
+	return false
+		
+
 func _get_gameplay_effects() -> Array:
 	var effects = []
 	

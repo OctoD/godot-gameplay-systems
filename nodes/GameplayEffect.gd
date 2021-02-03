@@ -25,6 +25,13 @@ func _ready():
 				queue_free()
 
 
+func play_effect() -> void:
+	pass
+
+
+func pause_effect() -> void:
+	pass
+
 func setup_effect() -> void:
 	connect_to_parent_signal()
 
