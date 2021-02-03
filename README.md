@@ -181,17 +181,18 @@ describes the attribute's max value (like max health, max mana etc, max level et
 Here are the `GameplayEffect` public methods
 
 
-**`setup_effect`** 
-
-This is where you setup your effect. It is called during the `_ready` function but only when in game.
-
-
 
 **`apply_effect`**
 
 This is where your effect logic should stay. 
 
 If you need to notify the owning character, emit the signal `effect_applied`
+
+
+
+**`setup_effect`** 
+
+This is where you setup your effect. It is called during the `_ready` function but only when in game.
 
 
 
