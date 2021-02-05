@@ -6,6 +6,7 @@ func _enter_tree():
 	var attribute_node_icon = load("res://addons/gameplay_attributes/assets/attribute_icon.png");
 	var gameplay_effect_icon = load("res://addons/gameplay_attributes/assets/timed_icon.png")
 	var damage_effect_icon = load("res://addons/gameplay_attributes/assets/damage_gameplay_effect.png")
+	var restore_effect_icon = load("res://addons/gameplay_attributes/assets/restore_attribute_icon.png")
 	
 	# basenodes
 	add_custom_type("GameplayAttributeMap", "Node", load("res://addons/gameplay_attributes/nodes/GameplayAttributeMap.gd"), attribute_node_icon);
@@ -17,6 +18,7 @@ func _enter_tree():
 	add_custom_type("AttributeConsumeGameplayEffect", "TimedGameplayEffect", load("res://addons/gameplay_attributes/premade_gameplay_effects/AttributeConsumeGameplayEffect.gd"), gameplay_effect_icon);
 	add_custom_type("AttributeRegenGameplayEffect", "TimedGameplayEffect", load("res://addons/gameplay_attributes/premade_gameplay_effects/AttributeRegenGameplayEffect.gd"), gameplay_effect_icon);
 	add_custom_type("DamageGameplayEffect", "GameplayEffect", load("res://addons/gameplay_attributes/premade_gameplay_effects/DamageGameplayEffect.gd"), damage_effect_icon);
+	add_custom_type("RestoreGameplayEffect", "GameplayEffect", load("res://addons/gameplay_attributes/premade_gameplay_effects/RestoreGameplayEffect.gd"), restore_effect_icon);
 		
 
 func _exit_tree():
@@ -31,3 +33,4 @@ func _exit_tree():
 	remove_custom_type("AttributeConsumeGameplayEffect")
 	remove_custom_type("AttributeRegenGameplayEffect")
 	remove_custom_type("DamageGameplayEffect")
+	remove_custom_type("RestoreGameplayEffect")

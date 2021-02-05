@@ -1,10 +1,9 @@
 tool
 extends GameplayEffect
-class_name DamageGameplayEffect
+class_name RestoreGameplayEffect
 
 export(String) var attribute_name
-export(float) var damage_min = 0
-export(float) var damage_max = 0
+export(float) var value = 0
 
 
 func _ready():
@@ -20,10 +19,5 @@ func apply_effect() -> void:
 	if parent:
 		var attribute: GameplayAttribute = parent.get_attribute(attribute_name)
 		if attribute and attribute.name == attribute_name:
-			attribute.current_value = clamp(attribute.current_value - _get_damage(), 0, attribute.max_value)
+			attribute.current_value = clamp(attribute.current_value + value, 0, attribute.max_value)
 			emit_signal("effect_applied", self)
-
-
-func _get_damage() -> float:
-	randomize()
-	return (randf() * (damage_max - damage_min)) + damage_min

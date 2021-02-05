@@ -9,6 +9,11 @@ characters attributes for both 2D and 3D games made with Godot.
 - [How it works](#how-it-works)
   - [Example: creating your first Attributes map](#example-creating-your-first-attributes-map)
   - [Creating your own effects](#creating-your-own-effects)
+- [Prebuilt gameplay effects](#prebuilt-gameplay-effects)
+  - [AttributeConsumeGameplayEffect](#attributeconsumegameplayeffect)
+  - [AttributeRegenGameplayEffect](#attributeregengameplayeffect)
+  - [DamageGameplayEffect](#damagegameplayeffect)
+  - [RestoreGameplayEffect](#restoregameplayeffect)
 - [Docs](#docs)
   - [GameplayAttributesMap](#gameplayattributesmap)
       - [methods](#methods)
@@ -100,6 +105,43 @@ At this point, I'd suggest you to create your own effects inheriting the existin
 - `DamageGameplayEffect` calculates the instant damage with min/max parameters
 
 You can of course create you own starting from the base class `GameplayEffect` or `TimedGameplayEffect`
+
+--------
+
+# Prebuilt gameplay effects
+
+## AttributeConsumeGameplayEffect
+
+Inherits from `TimedGameplayEffect`. You can specify an attribute to consume over time.
+
+Ideal for all *dot* (damage over time) damages
+
+## AttributeRegenGameplayEffect
+
+Inherits from `TimedGameplayEffect`. You can specify an attribute to regenerate over time.
+
+Ideal for:
+- mana regen
+- slow health regen
+- stamina regen
+
+## DamageGameplayEffect
+
+Lowers a `GameplayAttribute` current_value by a given value. 
+
+Ideal for every immediate malus like:
+- attributes nerfs
+- damage
+- fall damage
+
+## RestoreGameplayEffect
+
+Increments a `GameplayAttribute` current_value by a given value.
+
+Ideal for:
+- Health restore (potions, medikits, whateverkit)
+- Attributes restore
+- Xp gain
 
 --------
 
