@@ -57,8 +57,7 @@ func get_attribute_max_value(attribute_name: String) -> float:
 		
 
 func get_gameplay_effect(effect_name: String) -> GameplayEffect:
-	var found: GameplayEffect = find_node(effect_name)
-	return found
+	return find_node(effect_name) as GameplayEffect
 
 	
 func get_attributes() -> Array:
@@ -81,7 +80,7 @@ func get_effects() -> Array:
 	return effects
 
 
-func _on_attribute_changed(attribute: GameplayAttribute) -> void:
+func _on_attribute_changed(attribute: Dictionary) -> void:
 	emit_signal("attribute_changed", attribute)
 
 

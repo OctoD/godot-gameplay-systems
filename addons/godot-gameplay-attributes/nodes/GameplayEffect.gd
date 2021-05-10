@@ -32,6 +32,7 @@ func play_effect() -> void:
 func pause_effect() -> void:
 	pass
 
+
 func setup_effect() -> void:
 	_connect_to_parent_signal()
 
@@ -53,11 +54,12 @@ func get_kinematic_owner():
 	if parent:
 		return parent.get_parent()
 
+
 func get_parent_attribute_map():
 	return get_parent()
 
 
-func _on_attribute_changed(attribute: GameplayAttribute) -> void:
+func _on_attribute_changed(attribute: Dictionary) -> void:
 	if should_activate(EffectActivationEvent.AttributeChanged):
 		apply_effect();
 

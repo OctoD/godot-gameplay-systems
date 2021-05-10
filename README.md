@@ -151,7 +151,7 @@ Ideal for:
 
 `GameplayAttributesMap` allows you to connect to two `signal`s:
 
-- `attribute_changed` emitted when an attribute changes a current or maximum value
+- `attribute_changed` emitted when an attribute changes a current or maximum value. A dictionary will be passed with the previous max/current values and the newly set max/current values
 - `effect_activated` emitted when an effect decides to emit the same signal (useful for ui notification)
 - `effect_applied` emitted when an effect decides to emit the same signal (useful for ui notification)
 - `effect_deactivated` emitted when an effect decides to emit the same signal (useful for ui notification)
