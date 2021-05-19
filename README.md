@@ -68,6 +68,18 @@ func _on_attribute_changed(attribute) -> void:
   print(attribute.name + ":" + str(attribute.current_value))
 ```
 
+> Note: the passed attribute is a dictionary with these keys/values
+> 
+> `prev_max`: float
+> 
+> `prev_value`: float
+> 
+> `current_max`: float
+> 
+> `current_value`: float
+> 
+> `name`: String
+
 Start your game and watch your mana regen!
 
 ## Creating your own effects
