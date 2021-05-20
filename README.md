@@ -1,5 +1,5 @@
-Gameplay Attributes
-===================
+⚔️ Gameplay Attributes ⚔️
+=========================
 
 Gameplay attributes are a set of nodes used to describe some
 characters attributes for both 2D and 3D games made with Godot.
@@ -297,7 +297,7 @@ If you need to notify the owning character, emit the signal `effect_deactivated`
 
 Every contribution is really welcome, feel free to contribute!
 
-You can open PR, issues or you can suggest features
+You can open PR, issues or you can suggest features. Have a good day you wonderful Godot people!
 
 # Licence
 
