@@ -7,7 +7,7 @@ export(float) var max_value = 0.0 setget set_max_value, get_max_value
 export(float) var current_value = 0.0  setget set_current_value, get_current_value
 
 
-signal attribute_changed
+signal attribute_changed(attribute)
 
 
 func get_current_value() -> float:
