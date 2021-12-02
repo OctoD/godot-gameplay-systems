@@ -24,6 +24,6 @@ func apply_effect() -> void:
 	
 	if parent:
 		var attribute: GameplayAttribute = parent.get_attribute(attribute_name)
-		if attribute and attribute.attribute_name == attribute_name:
+		if attribute and attribute.name == attribute_name:
 			attribute.current_value = clamp(attribute.current_value - abs(consume_per_second), 0, attribute.max_value)
 			emit_signal("effect_applied", self)
