@@ -48,6 +48,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Control" type="Control" parent="KinematicBody2D/Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="KinematicBody2D/Control/Control"]
+anchor_bottom = 1.0
+margin_left = -492.5
+margin_top = -215.0
+margin_right = -321.5
+margin_bottom = -190.0
+text = "press 1 to heal
+press 2 to consume health
+press 3 to consume mana
+"
+
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 texture = ExtResource( 1 )
 
