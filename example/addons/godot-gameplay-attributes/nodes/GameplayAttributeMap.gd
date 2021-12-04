@@ -3,10 +3,10 @@ extends Node
 class_name GameplayAttributeMap
 
 
-signal attribute_changed
-signal effect_activated
-signal effect_applied
-signal effect_deactivated
+signal attribute_changed(attribute)
+signal effect_activated(effect)
+signal effect_applied(effect)
+signal effect_deactivated(effect)
 
 var _is_valid = false
 
@@ -85,7 +85,7 @@ func _on_attribute_changed(attribute: Dictionary) -> void:
 
 
 func _on_effect_activated(effect: GameplayEffect) -> void:
-	emit_signal("on_effect_activated", effect)
+	emit_signal("effect_activated", effect)
 
 
 func _on_effect_applied(effect: GameplayEffect) -> void:
@@ -93,7 +93,7 @@ func _on_effect_applied(effect: GameplayEffect) -> void:
 
 
 func _on_effect_deactivated(effect: GameplayEffect) -> void:
-	emit_signal("on_effect_deactivated", effect)
+	emit_signal("effect_deactivated", effect)
 
 
 func play_effect(effect_name: String) -> bool:
