@@ -121,10 +121,6 @@ func _get_configuration_warning():
 	var parent = get_parent()
 	var is_editing = Engine.editor_hint
 	
-	if parent != null and not (parent is KinematicBody or parent is KinematicBody2D) and is_editing:
-		_is_valid = false
-		return "GameplayAttributeMap must be direct child of a KinematicBody or KinematicBody2D"
-	
 	if children.size() == 0:
 		_is_valid = false
 		return message

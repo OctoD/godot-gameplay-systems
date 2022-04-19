@@ -4,7 +4,7 @@
 Gameplay attributes are a set of nodes used to describe some
 characters attributes for both 2D and 3D games made with Godot.
 
-- [Gameplay Attributes](#gameplay-attributes)
+- [⚔️ Gameplay Attributes ⚔️](#️-gameplay-attributes-️)
 - [Install](#install)
 - [How it works](#how-it-works)
   - [Example: creating your first Attributes map](#example-creating-your-first-attributes-map)
@@ -259,10 +259,9 @@ If you need to notify the owning character, emit the signal `effect_applied`
 This is where you setup your effect. It is called during the `_ready` function but only when in game.
 
 
-**get_kinematic_owner**
+**get_effect_owner**
 
-Returns the `KinematicBody` or `KinematicBody3D` owner of the `GameplayAttributeMap` which contains the effect.
-
+Returns the owner of the `GameplayAttributeMap` which contains the effect.
 
 
 **`get_parent_attribute_map`**
