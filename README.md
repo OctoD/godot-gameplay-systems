@@ -91,6 +91,7 @@ circumstances:
 
 - Immediate activation (`EffectActivationEvent.ImmediateActivation`)
 - Attribute changed activation (`EffectActivationEvent.AttributeChanged`)
+- When added to a GameplayAttributeMap (`EffectActivationEvent.AddedToAttributeMap`)
 
 There are two main effect categories: instants and timed-based.
 

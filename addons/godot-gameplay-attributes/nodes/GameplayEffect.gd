@@ -3,7 +3,8 @@ class_name GameplayEffect
 
 enum EffectActivationEvent {
 	AttributeChanged,
-	ImmediateActivation
+	AddedToAttributeMap,
+	ImmediateActivation,
 }
 
 

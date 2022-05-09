@@ -19,6 +19,12 @@ func _ready():
 func apply_effect(effect: GameplayEffect) -> void:
 	add_child(effect)
 
+	if effect.should_activate(GameplayEffect.EffectActivationEvent.AddedToAttributeMap):
+		effect.apply_effect()
+
+		if effect.should_deactivate():
+			effect.queue_free()
+
 
 func connect_child_signals() -> void:
 	if not Engine.editor_hint:
