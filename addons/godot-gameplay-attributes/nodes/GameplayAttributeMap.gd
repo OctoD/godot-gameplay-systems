@@ -40,7 +40,7 @@ func connect_child_signals() -> void:
 
 
 func get_attribute(attribute_name: String) -> GameplayAttribute:
-	var found: GameplayAttribute = find_node(attribute_name)
+	var found = find_node(attribute_name) as GameplayAttribute
 	return found
 
 
