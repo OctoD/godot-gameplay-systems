@@ -2,9 +2,9 @@ tool
 extends GameplayEffect
 class_name DamageGameplayEffect
 
-export(String) var attribute_name
-export(float) var damage_min = 0
-export(float) var damage_max = 0
+@export var attribute_name: String = ""
+@export var damage_min: float = 0
+@export var damage_max: float = 0
 
 
 func _ready():
@@ -20,10 +20,7 @@ func apply_effect() -> void:
 	if parent:
 		var attribute  = parent.get_attribute(attribute_name) as GameplayAttribute
 		if attribute and attribute.name == attribute_name:
-			attribute.current_value = clamp(attribute.current_value - _get_damage(), 0, attribute.max_value)
-			emit_signal("effect_applied", self)
-
-
-func _get_damage() -> float:
-	randomize()
-	return (randf() * (damage_max - damage_min)) + damage_min
+			randomize()
+			var dmg = (randf() * (damage_max - damage_min)) + damage_min
+			attribute.current_value = clamp(attribute.current_value - dmg, 0, attribute.max_value)
+			effect_applied.emit(self)

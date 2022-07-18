@@ -1,22 +1,18 @@
-tool
+@tool
 extends TimedGameplayEffect
 class_name AttributeConsumeGameplayEffect
 
-export(String) var attribute_name = ""
-export(float) var consume_per_second = 1 setget set_consume_per_second, get_consume_per_second
+@export var attribute_name: String = ""
+@export var consume_per_second: float = 1 setget:
+	get:
+		return consume_per_second
+	set(value):
+		consume_per_second = abs(value)
 
 
 func _ready():
 	duration = 0
 	activation_trigger = EffectActivationEvent.ImmediateActivation
-
-
-func set_consume_per_second(value: float) -> void:
-	consume_per_second = abs(value)
-
-
-func get_consume_per_second() -> float:
-	return consume_per_second
 
 
 func apply_effect() -> void:
@@ -26,4 +22,4 @@ func apply_effect() -> void:
 		var attribute  = parent.get_attribute(attribute_name) as GameplayAttribute
 		if attribute and attribute.name == attribute_name:
 			attribute.current_value = clamp(attribute.current_value - abs(consume_per_second), 0, attribute.max_value)
-			emit_signal("effect_applied", self)
+			effect_applied.emit(self)

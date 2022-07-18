@@ -8,7 +8,7 @@ enum EffectActivationEvent {
 }
 
 
-export(EffectActivationEvent) var activation_trigger = EffectActivationEvent.ImmediateActivation
+@export var activation_trigger: EffectActivationEvent = EffectActivationEvent.ImmediateActivation
 
 
 signal effect_activated(effect)
@@ -46,7 +46,7 @@ func _connect_to_parent_signal() -> void:
 	var parent = get_parent()
 
 	if parent.has_signal("attribute_changed"):
-		parent.connect("attribute_changed", self, "_on_attribute_changed")
+		parent.attribute_changed.connect(_on_attribute_changed)
 
 
 func get_effect_owner():

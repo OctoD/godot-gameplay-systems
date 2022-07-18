@@ -1,4 +1,4 @@
-tool
+@tool
 extends GameplayEffect
 class_name TimedGameplayEffect
 
@@ -8,9 +8,9 @@ enum DurationType {
 	Minutes,
 }
 
-export(int) var duration = 1
-export(DurationType) var duration_type = DurationType.Seconds
-export(DurationType) var apply_effect_every = DurationType.Seconds
+@export var duration: int = 1
+@export var duration_type: DurationType = DurationType.Seconds
+@export var apply_effect_every: DurationType = DurationType.Seconds
 
 var timer: Timer
 var ticks_left = 0
@@ -50,7 +50,7 @@ func setup_effect() -> void:
 	single_tick = _get_tick_unit(apply_effect_every)
 	timer = Timer.new()
 	timer.wait_time = _get_timer_wait_time()
-	timer.connect("timeout", self, "_on_timer_ticked")
+	timer.timeout.connect(_on_timer_ticked)
 
 	add_child(timer)
 
@@ -69,7 +69,7 @@ func should_activate(activation_event: int) -> bool:
 		if timer.is_stopped() and is_inside_tree():
 			timer.start()
 	  
-		emit_signal("effect_activated", self)
+		effect_activated.emit(self)
 		
 		return true
 
@@ -78,7 +78,7 @@ func should_activate(activation_event: int) -> bool:
 
 func should_deactivate() -> bool:
 	if duration != 0 and ticks_left == 0:
-		emit_signal("effect_deactivated", self)
+		effect_deactivated.emit(self)
 		return true
 	else:
 		return false

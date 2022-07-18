@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 class_name GameplayAttributeMap
 
@@ -9,7 +9,6 @@ signal effect_applied(effect)
 signal effect_deactivated(effect)
 
 var _is_valid = false
-
 
 func _ready():
 	if _is_valid or not Engine.editor_hint:
@@ -40,7 +39,7 @@ func connect_child_signals() -> void:
 
 
 func get_attribute(attribute_name: String) -> GameplayAttribute:
-	var found = find_node(attribute_name) as GameplayAttribute
+	var found = find_child(attribute_name) as GameplayAttribute
 	return found
 
 
@@ -63,7 +62,7 @@ func get_attribute_max_value(attribute_name: String) -> float:
 		
 
 func get_gameplay_effect(effect_name: String) -> GameplayEffect:
-	return find_node(effect_name) as GameplayEffect
+	return find_child(effect_name) as GameplayEffect
 
 	
 func get_attributes() -> Array:
@@ -87,19 +86,19 @@ func get_effects() -> Array:
 
 
 func _on_attribute_changed(attribute: Dictionary) -> void:
-	emit_signal("attribute_changed", attribute)
+	attribute_changed.emit(attribute)
 
 
 func _on_effect_activated(effect: GameplayEffect) -> void:
-	emit_signal("effect_activated", effect)
+	effect_activated.emit(effect)
 
 
 func _on_effect_applied(effect: GameplayEffect) -> void:
-	emit_signal("effect_applied", effect)
+	effect_applied.emit(effect)
 
 
 func _on_effect_deactivated(effect: GameplayEffect) -> void:
-	emit_signal("effect_deactivated", effect)
+	effect_deactivated.emit(effect)
 
 
 func play_effect(effect_name: String) -> bool:
