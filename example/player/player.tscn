@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://vp5di21g6ii6"]
+
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_map.gd" id="1_2mn40"]
+[ext_resource type="Resource" uid="uid://bdkgp25raxo71" path="res://example/gameplay/attributes/health.tres" id="2_tkkyi"]
+[ext_resource type="Resource" uid="uid://c1rn8l8p7kiih" path="res://example/gameplay/attributes/score.tres" id="3_qe7am"]
+[ext_resource type="Texture2D" uid="uid://c7lgk28i4ps8i" path="res://icon.svg" id="4_6v80r"]
+
+[node name="Player" type="Node2D"]
+
+[node name="GameplayAttributeMap" type="Node" parent="."]
+script = ExtResource("1_2mn40")
+owning_character_path = NodePath("..")
+attributes = [ExtResource("2_tkkyi"), ExtResource("3_qe7am")]
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+texture = ExtResource("4_6v80r")
+
+[node name="Camera2d" type="Camera2D" parent="."]
+current = true

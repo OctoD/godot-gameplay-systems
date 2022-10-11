@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://brax0sycrjce6"]
+
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="1_1n3tj"]
+[ext_resource type="Resource" uid="uid://bdkgp25raxo71" path="res://example/gameplay/attributes/health.tres" id="2_kiyr5"]
+
+[node name="DamageEffect" type="Node"]
+script = ExtResource("1_1n3tj")
+apply_as_range = true
+modified_attributes = [ExtResource("2_kiyr5")]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daciut71ieyuj"
-path="res://.godot/imported/timed_icon.png-c6a1a1379fcb51e63e380efcd0482704.ctex"
+uid="uid://id0wcd6ue2cu"
+path="res://.godot/imported/stats-icon.png-27adc209d864d4427abc22fb57746ed4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot-gameplay-attributes/assets/timed_icon.png"
-dest_files=["res://.godot/imported/timed_icon.png-c6a1a1379fcb51e63e380efcd0482704.ctex"]
+source_file="res://stats-icon.png"
+dest_files=["res://.godot/imported/stats-icon.png-27adc209d864d4427abc22fb57746ed4.ctex"]
 
 [params]
 

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bdkgp25raxo71"]
+
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_resource.gd" id="1_0jvg8"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_0jvg8")
+attribute_name = "Health"
+minimum_value = -10.0
+maximum_value = -25.0
+default_value = 12.5

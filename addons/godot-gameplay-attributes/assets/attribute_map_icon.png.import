@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daciut71ieyuj"
-path="res://.godot/imported/timed_icon.png-c6a1a1379fcb51e63e380efcd0482704.ctex"
+uid="uid://dsbqe45ypvrbv"
+path="res://.godot/imported/attribute_map_icon.png-34a57e34ce82a6dd9ab00cee33ad5687.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot-gameplay-attributes/assets/timed_icon.png"
-dest_files=["res://.godot/imported/timed_icon.png-c6a1a1379fcb51e63e380efcd0482704.ctex"]
+source_file="res://addons/godot-gameplay-attributes/assets/attribute_map_icon.png"
+dest_files=["res://.godot/imported/attribute_map_icon.png-34a57e34ce82a6dd9ab00cee33ad5687.ctex"]
 
 [params]
 
