@@ -1,3 +1,5 @@
+@icon("res://addons/godot-gameplay-attributes/assets/attribute_map_icon.png")
+
 class_name AttributeTable extends Resource
 
 @export_category("Attributes")

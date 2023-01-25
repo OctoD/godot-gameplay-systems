@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpjttl3frqvaw"]
+[gd_scene load_steps=4 format=3 uid="uid://bpjttl3frqvaw"]
 
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/inspector/components/attribute_effect_row.gd" id="1_rhimp"]
+[ext_resource type="Texture2D" uid="uid://daciut71ieyuj" path="res://addons/godot-gameplay-attributes/assets/timed_icon.png" id="2_hcwmt"]
+[ext_resource type="Texture2D" uid="uid://ctk6eogeq0mb" path="res://addons/godot-gameplay-attributes/assets/one_shot_icon.png" id="2_vew8r"]
 
 [node name="AttributeEffectRow" type="GridContainer"]
 anchors_preset = 15
@@ -56,8 +58,10 @@ alignment = 1
 item_count = 2
 selected = 0
 popup/item_0/text = "One Shot"
+popup/item_0/icon = ExtResource("2_vew8r")
 popup/item_0/id = 0
 popup/item_1/text = "Time-Based"
+popup/item_1/icon = ExtResource("2_hcwmt")
 popup/item_1/id = 1
 
 [node name="Panel" type="Panel" parent="."]

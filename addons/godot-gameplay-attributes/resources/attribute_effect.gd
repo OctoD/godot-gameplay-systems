@@ -1,3 +1,5 @@
+@icon("res://addons/godot-gameplay-attributes/assets/effect_icon.png")
+
 class_name AttributeEffect extends Resource
 
 @export_category("Effect life-time")
