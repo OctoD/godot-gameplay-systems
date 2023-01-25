@@ -1,140 +1,147 @@
-extends Node
-class_name GameplayAttributeMap
+@tool
+class_name GameplayAttributeMap extends Node
 
 
-signal attribute_changed(name: String, value: float, previous_value: float)
-signal effect_added(effect: GameplayEffect)
+signal attribute_changed(attribute: AttributeSpec)
 signal effect_applied(effect: GameplayEffect)
-signal setup_finished(map: GameplayAttributeMap)
-
-@export_category("Gameplay attributes map")
-@export_node_path(Node2D, Node3D) var owning_character_path := NodePath()
-@export var attributes: Array[Resource]
+signal effect_paused(effect: GameplayEffect)
+signal effect_removed(effect: GameplayEffect)
 
 
-var _effects_paused = false
+@export_category("Owner")
+@export_node_path var owning_character = NodePath()
 
 
-var owning_character: 
-	get:
-		return find_child(owning_character_path)
+@export_category("Attributes")
+@export var attributes: Array[Attribute] = []
+@export var table: AttributeTable = null
 
 
-func _ready():
-	if owner:
-		await owner.ready
-	set_meta("gameplay_attribute_map", "true")
+var _attributes_dict: Dictionary = {}
+
+
+func _add_attribute_spec(spec: Attribute) -> void:
+	if Engine.is_editor_hint():
+		attributes.append(spec)
+
+
+func _handle_character_child_entered_tree(node: Node) -> void:
+	if node is GameplayEffect and node.owner:
+		node.owner.remove_child(node)
+		add_child(node)
+	elif node is GameplayEffect:
+		add_child(node)
+
+
+func _handle_character():
+	if owning_character != null and not owning_character.is_empty():
+		var node = get_node(owning_character)
+		
+		if node != null:
+			if not node.child_entered_tree.is_connected(_handle_character_child_entered_tree):
+				node.child_entered_tree.connect(_handle_character_child_entered_tree)
+
+
+func _get_attribute_at(index: int) -> Attribute:
+	if Engine.is_editor_hint():
+		if attributes.size() > index:
+			return attributes[index]
+
+		attributes.append(Attribute.new())
+		return attributes[index]
+	else:
+		return null
+
+
+func _ready() -> void:
+	_handle_character()
 	
+	if not Engine.is_editor_hint():
+		_setup_attributes()
+
+
+func _setup_attributes() -> void:
+	_attributes_dict = {}
+
 	for attribute in attributes:
-		add_child(attribute.to_attribute())
-	
-	for attribute in get_attributes():
-		if not attribute.attribute_changed.is_connected(_handle_attribute_changed):
-			attribute.attribute_changed.connect(_handle_attribute_changed)
+		var previous = get_attribute_by_name(attribute.attribute_name)
 		
-	for effect in get_effects():
-		effect.effect_activated.connect(_handle_effect_applied)
-
-	child_entered_tree.connect(_handle_child_entered)
-	child_exiting_tree.connect(_handle_child_exiting)
-	tree_exiting.connect(_handle_tree_exiting)
-	setup_finished.emit(self)
-	
-
-func _handle_attribute_changed(name: String, value: float, previous_value: float):
-	attribute_changed.emit(name, value, previous_value)
-
-	for effect in get_effects():
-		if effect.attribute_name == name: 
-			effect.apply(GameplayEffect.ActivationEvent.ON_ATTRIBUTE_CHANGE)
-
-
-func _handle_child_entered(child: Node):
-	if child is GameplayAttribute:
-		child.attribute_changed.connect(_handle_attribute_changed)
-
-	if child is GameplayEffect:
-		child.effect_activated.connect(_handle_effect_applied)
-		child.apply(child.ActivationEvent.ON_ENTER_TREE)
-		effect_added.emit(child)
-
-
-func _handle_child_exiting(child: Node):
-	if child is GameplayAttribute:
-		child.attribute_changed.disconnect(_handle_attribute_changed)
+		if previous:
+			previous.free()
 		
-	if child is GameplayEffect:
-		child.effect_activated.disconnect(_handle_effect_applied)
+		var spec = AttributeSpec.from_attribute(attribute)
+		
+		spec.changed.connect(func (attribute): 
+			attribute_changed.emit(attribute)	
+		)
+		
+		_attributes_dict[spec.attribute_name] = spec
 
 
-func _handle_effect_applied(activated_effect: GameplayEffect):
-	for modified_effect in activated_effect.modified_attributes:
-		if modified_effect is GameplayAttributeResource:
-			var attr = find_attribute(modified_effect.attribute_name)
+func _update_attribute(index: int, key: String, value: float) -> void:
+	if Engine.is_editor_hint():
+		if attributes.size() >= index:
+			if key in attributes[index]:
+				attributes[index][key] = value
+
+
+func get_attribute_by_name(attribute_name: String) -> AttributeSpec:
+	if _attributes_dict.has(attribute_name):
+		return _attributes_dict.get(attribute_name)
+	
+	return null
+
+
+class AttributeSpec extends Object:
+	signal changed(spec: AttributeSpec)
+	signal minimum_value_changed(from: float, to: float)
+	signal maximum_value_changed(from: float, to: float)
+	
+	var __setup := false
+	var attribute_name := ""
+	var current_value := 0.0:
+		get:
+			return current_value
+		set(value):
+			var previous_value = current_value
 			
-			if attr:
-				if activated_effect.apply_as_range:
-					attr.current_value += randf_range(modified_effect.minimum_value, modified_effect.maximum_value)
-				else:
-					attr.current_value += modified_effect.default_value
+			if previous_value == value:
+				return
 			
-	if not activated_effect.is_paused:
-		effect_applied.emit(activated_effect)
+			if maximum_value > minimum_value:
+				current_value = clampf(value, minimum_value, maximum_value)
+			elif maximum_value == minimum_value and maximum_value == 0.0:
+				current_value = value
+			else:
+				current_value = clampf(value, maximum_value, minimum_value)
+			if not __setup:
+				changed.emit(self)
+	var maximum_value := 0.0:
+		get:
+			return maximum_value
+		set(value):
+			var previous_value = maximum_value
+			maximum_value = value
+			
+			if not __setup:
+				maximum_value_changed.emit(previous_value, value)
+	var minimum_value := 0.0:
+		get: 
+			return minimum_value
+		set(value):
+			var previous_value = minimum_value
+			minimum_value = value
+			
+			if not __setup:
+				minimum_value_changed.emit(previous_value, value)
 
 
-func _handle_tree_exiting():
-	pass
-
-
-func add_effect(effect: GameplayEffect) -> void:
-	if effect:
-		if effect.owner:
-			effect.owner.remove_child(effect)
-		add_child(effect)
-
-
-func find_attribute(path: NodePath) -> GameplayAttribute:
-	return get_node(path) as GameplayAttribute
-
-
-func find_effect(path: NodePath) -> GameplayEffect:
-	return get_node(path) as GameplayEffect
-
-
-func get_attributes() -> Array[GameplayAttribute]:
-	var children = [] as Array[GameplayAttribute]
-	
-	for child in get_children():
-		if child is GameplayAttribute:
-			children.append(child)
-
-	return children
-
-
-func get_effects() -> Array[GameplayEffect]:
-	var children = [] as Array[GameplayEffect]
-	
-	for child in get_children():
-		if child is GameplayEffect:
-			children.append(child)
-	
-	return children
-
-
-func pause_effects() -> void:
-	if _effects_paused:
-		return
-	
-	_effects_paused = true
-	for effect in get_effects():
-		effect.pause()
-
-
-func resume_effects() -> void:
-	if not _effects_paused:
-		return
-	
-	_effects_paused = false
-	for effect in get_effects():
-		effect.resume()
-	
+	static func from_attribute(attribute: Attribute) -> AttributeSpec:
+		var instance = AttributeSpec.new()
+		instance.__setup = true
+		instance.attribute_name = attribute.attribute_name
+		instance.maximum_value = attribute.maximum_value
+		instance.minimum_value = attribute.minimum_value
+		instance.current_value = attribute.current_value
+		instance.__setup = false
+		return instance

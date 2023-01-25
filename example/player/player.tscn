@@ -1,19 +1,60 @@
-[gd_scene load_steps=5 format=3 uid="uid://vp5di21g6ii6"]
+[gd_scene load_steps=12 format=3 uid="uid://dlilmrpe4icgc"]
 
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_map.gd" id="1_2mn40"]
-[ext_resource type="Resource" uid="uid://bdkgp25raxo71" path="res://example/gameplay/attributes/health.tres" id="2_tkkyi"]
-[ext_resource type="Resource" uid="uid://c1rn8l8p7kiih" path="res://example/gameplay/attributes/score.tres" id="3_qe7am"]
+[ext_resource type="Script" path="res://example/player/player.gd" id="1_uv2vo"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_map.gd" id="3_85ne8"]
 [ext_resource type="Texture2D" uid="uid://c7lgk28i4ps8i" path="res://icon.svg" id="4_6v80r"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute.gd" id="4_lwbis"]
+[ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="5_7fuph"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="6_fbded"]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2anqr"]
+size = Vector2(80, 80)
 
-[node name="GameplayAttributeMap" type="Node" parent="."]
-script = ExtResource("1_2mn40")
-owning_character_path = NodePath("..")
-attributes = [ExtResource("2_tkkyi"), ExtResource("3_qe7am")]
+[sub_resource type="Resource" id="Resource_1w78m"]
+script = ExtResource("4_lwbis")
+attribute_name = "speed"
+minimum_value = 500.0
+maximum_value = 1.0
+current_value = 500.0
 
-[node name="Sprite2d" type="Sprite2D" parent="."]
+[sub_resource type="Resource" id="Resource_kobx3"]
+script = ExtResource("4_lwbis")
+attribute_name = "jump_height"
+minimum_value = -500.0
+maximum_value = 0.0
+current_value = -500.0
+
+[sub_resource type="Resource" id="Resource_a6tcp"]
+script = ExtResource("4_lwbis")
+attribute_name = "health"
+minimum_value = 5.0
+maximum_value = 0.0
+current_value = 5.0
+
+[sub_resource type="Resource" id="Resource_3u85c"]
+script = ExtResource("4_lwbis")
+attribute_name = "score"
+minimum_value = 0.0
+maximum_value = 0.0
+current_value = 0.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_uv2vo")
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2anqr")
+
+[node name="Sprite2d" type="Sprite2D" parent="CollisionShape2d"]
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_6v80r")
 
-[node name="Camera2d" type="Camera2D" parent="."]
-current = true
+[node name="GameplayAttributeMap" type="Node" parent="."]
+script = ExtResource("3_85ne8")
+owning_character = NodePath("..")
+attributes = [SubResource("Resource_1w78m"), SubResource("Resource_kobx3"), SubResource("Resource_a6tcp"), SubResource("Resource_3u85c")]
+table = ExtResource("5_7fuph")
+
+[node name="GameplayEffect" type="Node" parent="GameplayAttributeMap"]
+script = ExtResource("6_fbded")
+table = ExtResource("5_7fuph")
+attributes_affected = []

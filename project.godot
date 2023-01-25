@@ -8,46 +8,16 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "Node",
-"class": &"GameplayAttribute",
-"language": &"GDScript",
-"path": "res://addons/godot-gameplay-attributes/nodes/gameplay_attribute.gd"
-}, {
-"base": "Node",
-"class": &"GameplayAttributeMap",
-"language": &"GDScript",
-"path": "res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_map.gd"
-}, {
-"base": "Resource",
-"class": &"GameplayAttributeResource",
-"language": &"GDScript",
-"path": "res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_resource.gd"
-}, {
-"base": "Node",
-"class": &"GameplayEffect",
-"language": &"GDScript",
-"path": "res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd"
-}, {
-"base": "GameplayEffect",
-"class": &"TimedGameplayEffect",
-"language": &"GDScript",
-"path": "res://addons/godot-gameplay-attributes/nodes/timed_gameplay_effect.gd"
-}]
-_global_script_class_icons={
-"GameplayAttribute": "",
-"GameplayAttributeMap": "",
-"GameplayAttributeResource": "",
-"GameplayEffect": "",
-"TimedGameplayEffect": ""
-}
-
 [application]
 
 config/name="Godot-gameplay-attributes"
 run/main_scene="res://example/levels/test_level.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+
+[editor]
+
+export/convert_text_resources_to_binary=true
 
 [editor_plugins]
 

@@ -1,7 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://vlimbdaohxgb"]
+[gd_scene load_steps=6 format=3 uid="uid://vlimbdaohxgb"]
 
 [ext_resource type="PackedScene" uid="uid://vp5di21g6ii6" path="res://example/player/player.tscn" id="1_0jjra"]
+[ext_resource type="Script" path="res://example/levels/test_level.gd" id="1_glbc1"]
+[ext_resource type="Texture2D" uid="uid://c7lgk28i4ps8i" path="res://icon.svg" id="2_c40qc"]
+[ext_resource type="PackedScene" uid="uid://bbsrxyvcasvsx" path="res://example/levels/hud.tscn" id="4_8msdp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6q2jf"]
+size = Vector2(1200, 100)
 
 [node name="TestLevel" type="Node2D"]
+script = ExtResource("1_glbc1")
 
 [node name="Player" parent="." instance=ExtResource("1_0jjra")]
+
+[node name="Camera2d" type="Camera2D" parent="."]
+current = true
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+position = Vector2(0, 204)
+scale = Vector2(8.72, 1)
+texture = ExtResource("2_c40qc")
+
+[node name="StaticBody2d" type="StaticBody2D" parent="Sprite2d"]
+position = Vector2(-1.37615, -6)
+scale = Vector2(0.114679, 0.96)
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="Sprite2d/StaticBody2d"]
+shape = SubResource("RectangleShape2D_6q2jf")
+
+[node name="Hud" parent="." instance=ExtResource("4_8msdp")]

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cbv7qpyl1i4ac"]
+
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_table.gd" id="1_vjqjq"]
+
+[resource]
+script = ExtResource("1_vjqjq")
+attributes = ["speed", "jump_height", "health", "score"]

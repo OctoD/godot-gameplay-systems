@@ -1,0 +1,105 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpjttl3frqvaw"]
+
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/inspector/components/attribute_effect_row.gd" id="1_rhimp"]
+
+[node name="AttributeEffectRow" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rhimp")
+
+[node name="AttributeName" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+clip_text = true
+
+[node name="MinimumValue" type="BoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MinimumValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Minimum value applied"
+
+[node name="SpinBox" type="SpinBox" parent="MinimumValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="MaximumValue" type="BoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MaximumValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Maximum value applied"
+
+[node name="SpinBox" type="SpinBox" parent="MaximumValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="LifeTime" type="BoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LifeTime"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Life time type"
+
+[node name="OptionButton" type="OptionButton" parent="LifeTime"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = "One Shot"
+popup/item_0/id = 0
+popup/item_1/text = "Time-Based"
+popup/item_1/id = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 61.0
+grow_horizontal = 2
+
+[node name="Lifetime Setup" type="Label" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 50)
+layout_mode = 2
+text = "Life time settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerSetupContainer" type="BoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TimeoutLabel" type="Label" parent="Panel/VBoxContainer/TimerSetupContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seconds"
+
+[node name="TimeoutSpinBox" type="SpinBox" parent="Panel/VBoxContainer/TimerSetupContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSeparator" type="VSeparator" parent="Panel/VBoxContainer/TimerSetupContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ApplicationCountLabel" type="Label" parent="Panel/VBoxContainer/TimerSetupContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Apply times (0 = infinite)"
+
+[node name="ApplicationCountSpinBox" type="SpinBox" parent="Panel/VBoxContainer/TimerSetupContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
