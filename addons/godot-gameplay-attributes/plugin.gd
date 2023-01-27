@@ -17,6 +17,8 @@ var gameplay_attribute_map = preload("res://addons/godot-gameplay-attributes/nod
 
 var attribute_inspector_plugin_script = preload("res://addons/godot-gameplay-attributes/inspector/gameplay_attribute_map_inspector_plugin.gd")
 var attribute_inspector_plugin: EditorInspectorPlugin
+var effect_inspector_plugin_script = preload("res://addons/godot-gameplay-attributes/inspector/gameplay_effect_inspector_plugin.gd")
+var effect_inspector_plugin: EditorInspectorPlugin
 
 
 func _enter_tree():
@@ -27,8 +29,10 @@ func _enter_tree():
 	add_custom_type(GAMEPLAY_EFFECT_NAME, "Node", gameplay_effect, preload("res://addons/godot-gameplay-attributes/assets/effect_icon.png"))
 
 	attribute_inspector_plugin = attribute_inspector_plugin_script.new()
+	effect_inspector_plugin = effect_inspector_plugin_script.new()
 	
 	add_inspector_plugin(attribute_inspector_plugin)
+	add_inspector_plugin(effect_inspector_plugin)
 
 
 func _exit_tree():
@@ -39,3 +43,4 @@ func _exit_tree():
 	remove_custom_type(GAMEPLAY_EFFECT_NAME)
 	
 	remove_inspector_plugin(attribute_inspector_plugin)
+	remove_inspector_plugin(effect_inspector_plugin)
