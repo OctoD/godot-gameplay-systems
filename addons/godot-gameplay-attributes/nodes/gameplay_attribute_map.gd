@@ -5,6 +5,7 @@ class_name GameplayAttributeMap extends Node
 
 signal attribute_changed(attribute: AttributeSpec)
 signal attribute_effect_applied(attribute_effect: AttributeEffect)
+signal attribute_effect_removed(attribute_effect: AttributeEffect)
 signal effect_applied(effect: GameplayEffect)
 
 
@@ -110,6 +111,9 @@ func _update_attribute(index: int, key: String, value: float) -> void:
 
 
 func apply_effect(effect: GameplayEffect) -> void:
+	if effect == null:
+		return
+
 	for attribute_affected in effect.attributes_affected:
 		if not attribute_affected.attribute_name in _attributes_dict:
 			return
@@ -117,6 +121,7 @@ func apply_effect(effect: GameplayEffect) -> void:
 		if attribute_affected.life_time == AttributeEffect.LIFETIME_ONE_SHOT:
 			_attributes_dict[attribute_affected.attribute_name].current_value += attribute_affected.get_current_value()
 			attribute_effect_applied.emit(attribute_affected)
+			attribute_effect_removed.emit(attribute_affected)
 		elif attribute_affected.life_time == AttributeEffect.LIFETIME_TIME_BASED:
 			var counts = 0
 			var timer = Timer.new()
@@ -126,6 +131,7 @@ func apply_effect(effect: GameplayEffect) -> void:
 			timer.wait_time = attribute_affected.apply_every_second
 			timer.timeout.connect(func ():
 				if attribute_affected.max_applications != 0 and attribute_affected.max_applications == counts:
+					attribute_effect_removed.emit(attribute_affected)
 					timer.stop()
 					remove_child(timer)
 				else:
@@ -137,6 +143,8 @@ func apply_effect(effect: GameplayEffect) -> void:
 			)
 			
 			timer.start()
+
+	effect_applied.emit(effect)
 
 
 func get_attribute_by_name(attribute_name: String) -> AttributeSpec:
