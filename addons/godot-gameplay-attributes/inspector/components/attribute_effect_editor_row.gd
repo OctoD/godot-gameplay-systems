@@ -58,21 +58,35 @@ func _populate_attribute_name_list() -> void:
 func _ready() -> void:
 	timer_setup_container.visible = false
 	
-	minimum_value_spinbox.changed.connect(func (value):
-		attribute_effect.minimum_value = value	
+	application_count_spinbox.value_changed.connect(func (value):
+		attribute_effect.max_applications = value	
 	)
 	
-	maximum_value_spinbox.changed.connect(func (value):
-		attribute_effect.maximum_value = value	
-	)
+	attribute_option_button.item_selected.connect(func (index):
+		if attributes_table and attribute_effect:
+			if attributes_table.attributes.size() > index:
+				attribute_effect.attribute_name	= attributes_table.attributes[index]
+	)	
 	
 	life_time_option_button.item_selected.connect(func (id):
 		attribute_effect.life_time = id
 		_set_lifetime(id)
 	)
+
+	minimum_value_spinbox.value_changed.connect(func (value):
+		attribute_effect.minimum_value = value
+	)
+	
+	maximum_value_spinbox.value_changed.connect(func (value):
+		attribute_effect.maximum_value = value
+	)
 	
 	remove_button.pressed.connect(func (): 
 		removed.emit()	
+	)
+	
+	timer_spinbox.value_changed.connect(func (value):
+		attribute_effect.apply_every_second = value	
 	)
 	
 	_redraw()
@@ -80,17 +94,14 @@ func _ready() -> void:
 
 func _redraw() -> void:
 	_populate_attribute_name_list()
-	_select_attribute_name()
 	_inherit_from_resource()
+	_select_attribute_name()
 	
 
 func _select_attribute_name() -> void:
 	if attributes_table and attribute_effect:
 		var index = attributes_table.attributes.find(attribute_effect.attribute_name)
-		attribute_option_button.select(index)
-		
-		if index < 0:
-			attribute_option_button.select(0)
+		attribute_option_button.selected = clampi(index, 0, attribute_option_button.item_count)
 
 
 func _set_lifetime(value: int) -> void:

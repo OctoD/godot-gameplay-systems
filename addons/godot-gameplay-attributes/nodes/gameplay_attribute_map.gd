@@ -86,6 +86,11 @@ func _update_attribute(index: int, key: String, value: float) -> void:
 				attributes[index][key] = value
 
 
+func add_effect(gameplay_effect: GameplayEffect) -> void:
+	if Engine.is_editor_hint():
+		return
+
+
 func get_attribute_by_name(attribute_name: String) -> AttributeSpec:
 	if _attributes_dict.has(attribute_name):
 		return _attributes_dict.get(attribute_name)

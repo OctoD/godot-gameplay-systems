@@ -8,9 +8,4 @@ signal attributes_affected_changed(effects: Array[AttributeEffect])
 
 @export_category("Effect")
 @export var table: AttributeTable = null
-@export var attributes_affected: Array[AttributeEffect] = []:
-	get:
-		return attributes_affected
-	set(value):
-		attributes_affected = value
-		attributes_affected_changed.emit(attributes_affected)
+@export var attributes_affected: Array[AttributeEffect] = []

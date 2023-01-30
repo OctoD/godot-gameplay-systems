@@ -39,14 +39,14 @@ minimum_value = 0.0
 maximum_value = 0.0
 current_value = 0.0
 
-[sub_resource type="Resource" id="Resource_qrbq7"]
+[sub_resource type="Resource" id="Resource_7vfkk"]
 script = ExtResource("7_xp7iw")
 life_time = 0
-apply_every_second = 1.0
-max_applications = 1
-attribute_name = ""
-minimum_value = 0.0
-maximum_value = 0.0
+apply_every_second = 0.0
+max_applications = 0
+attribute_name = "health"
+minimum_value = 1.0
+maximum_value = 2.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uv2vo")
@@ -67,4 +67,4 @@ table = ExtResource("5_7fuph")
 [node name="GameplayEffect" type="Node" parent="GameplayAttributeMap"]
 script = ExtResource("6_fbded")
 table = ExtResource("5_7fuph")
-attributes_affected = [SubResource("Resource_qrbq7")]
+attributes_affected = [SubResource("Resource_7vfkk")]

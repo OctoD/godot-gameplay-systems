@@ -8,7 +8,7 @@ var row_editor_scene = preload("res://addons/godot-gameplay-attributes/inspector
 var vbox_container := VBoxContainer.new()
 
 
-func _draw_effects_row(table: AttributeTable, res: AttributeEffect) -> Control:
+func _draw_effects_row(table: AttributeTable, res: AttributeEffect, index: int) -> Control:
 	var instance = row_editor_scene.instantiate()
 	
 	instance.set_values(table, res)
@@ -19,17 +19,26 @@ func _draw_effects_row(table: AttributeTable, res: AttributeEffect) -> Control:
 		_update_ui()
 	)
 	
+	res.changed.connect(func ():
+		var prop = get_edited_property()
+		var target = get_edited_object()
+		
+		target[prop][index] = res;
+	)
+	
 	return instance
 
 
 func _draw_effects_rows() -> void:
 	var target = get_edited_object() as GameplayEffect
+	var index = 0
 
 	_empty_scroll_container()
 	
 	if target and target.attributes_affected:
 		for eff in target.attributes_affected:
-			scroll_container.add_child(_draw_effects_row(target.table, eff))
+			scroll_container.add_child(_draw_effects_row(target.table, eff, index))
+			index += 1
 
 
 func _handle_add_attribute_effect() -> void:
@@ -88,10 +97,12 @@ func _update_property() -> void:
 
 
 func _update_ui() -> void:
+	var target = get_edited_object()
+	
 	_empty_scroll_container()
 	_draw_effects_rows()
 	
-	if get_edited_object().table:
+	if target and target.table:
 		add_row_button.show()
 	else:
 		add_row_button.hide()
