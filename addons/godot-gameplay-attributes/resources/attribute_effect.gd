@@ -2,6 +2,11 @@
 
 class_name AttributeEffect extends Resource
 
+enum {
+	LIFETIME_ONE_SHOT = 0,
+	LIFETIME_TIME_BASED = 1,
+}
+
 @export_category("Effect life-time")
 @export_enum("One-Shot", "Time-Based") var life_time = 0:
 	get:
@@ -41,3 +46,12 @@ class_name AttributeEffect extends Resource
 	set(value):
 		maximum_value = value
 		emit_changed()
+
+
+func get_current_value() -> Variant:
+	if minimum_value < maximum_value:
+		return randf_range(minimum_value, maximum_value)
+	elif minimum_value > maximum_value:
+		return randf_range(minimum_value, maximum_value)
+	else:
+		return minimum_value

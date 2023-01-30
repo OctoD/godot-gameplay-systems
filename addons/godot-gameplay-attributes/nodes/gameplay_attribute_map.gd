@@ -4,13 +4,14 @@ class_name GameplayAttributeMap extends Node
 
 
 signal attribute_changed(attribute: AttributeSpec)
+signal attribute_effect_applied(attribute_effect: AttributeEffect)
 signal effect_applied(effect: GameplayEffect)
 signal effect_paused(effect: GameplayEffect)
 signal effect_removed(effect: GameplayEffect)
 
 
 @export_category("Owner")
-@export_node_path var owning_character = NodePath()
+@export_node_path var owning_character := NodePath()
 
 
 @export_category("Attributes")
@@ -19,6 +20,15 @@ signal effect_removed(effect: GameplayEffect)
 
 
 var _attributes_dict: Dictionary = {}
+var effects: Array[GameplayEffect] = []:
+	get:
+		var _effects: Array[GameplayEffect] = []
+		
+		for child in get_children():
+			if child is GameplayEffect:
+				_effects.append(child)
+		
+		return _effects
 
 
 func _add_attribute_spec(spec: Attribute) -> void:
@@ -26,21 +36,14 @@ func _add_attribute_spec(spec: Attribute) -> void:
 		attributes.append(spec)
 
 
+func _apply_initial_effects() -> void:
+	for effect in effects:
+		apply_effect(effect)
+	
+
 func _handle_character_child_entered_tree(node: Node) -> void:
-	if node is GameplayEffect and node.owner:
-		node.owner.remove_child(node)
+	if node is GameplayEffect:
 		add_child(node)
-	elif node is GameplayEffect:
-		add_child(node)
-
-
-func _handle_character():
-	if owning_character != null and not owning_character.is_empty():
-		var node = get_node(owning_character)
-		
-		if node != null:
-			if not node.child_entered_tree.is_connected(_handle_character_child_entered_tree):
-				node.child_entered_tree.connect(_handle_character_child_entered_tree)
 
 
 func _get_attribute_at(index: int) -> Attribute:
@@ -55,10 +58,19 @@ func _get_attribute_at(index: int) -> Attribute:
 
 
 func _ready() -> void:
-	_handle_character()
-	
 	if not Engine.is_editor_hint():
 		_setup_attributes()
+		
+		if owning_character != null and not owning_character.is_empty():
+			var character = get_node(owning_character)
+
+			if character:
+				character.child_entered_tree.connect(func (child):
+					if child is GameplayEffect:
+						apply_effect(child)	
+				)
+
+		_apply_initial_effects()
 
 
 func _setup_attributes() -> void:
@@ -79,6 +91,19 @@ func _setup_attributes() -> void:
 		_attributes_dict[spec.attribute_name] = spec
 
 
+func _setup_owning_character() -> void:
+	if owning_character == null or owning_character.is_empty():
+		return
+	
+	var owning_character = get_node(owning_character)
+
+	if owning_character:
+		owning_character.child_entered_tree.connect(func (child):
+			if child is GameplayEffect:
+				apply_effect(child)	
+		)
+		
+
 func _update_attribute(index: int, key: String, value: float) -> void:
 	if Engine.is_editor_hint():
 		if attributes.size() >= index:
@@ -86,9 +111,34 @@ func _update_attribute(index: int, key: String, value: float) -> void:
 				attributes[index][key] = value
 
 
-func add_effect(gameplay_effect: GameplayEffect) -> void:
-	if Engine.is_editor_hint():
-		return
+func apply_effect(effect: GameplayEffect) -> void:
+	for attribute_affected in effect.attributes_affected:
+		if not attribute_affected.attribute_name in _attributes_dict:
+			return
+		
+		if attribute_affected.life_time == AttributeEffect.LIFETIME_ONE_SHOT:
+			_attributes_dict[attribute_affected.attribute_name].current_value += attribute_affected.get_current_value()
+			attribute_effect_applied.emit(attribute_affected)
+		elif attribute_affected.life_time == AttributeEffect.LIFETIME_TIME_BASED:
+			var counts = 0
+			var timer = Timer.new()
+			
+			add_child(timer)
+			
+			timer.wait_time = attribute_affected.apply_every_second
+			timer.timeout.connect(func ():
+				if attribute_affected.max_applications != 0 and attribute_affected.max_applications == counts:
+					timer.stop()
+					remove_child(timer)
+				else:
+					_attributes_dict[attribute_affected.attribute_name].current_value += attribute_affected.get_current_value()
+					attribute_effect_applied.emit(attribute_affected)
+					
+					if attribute_affected.max_applications != 0:
+						counts += 1
+			)
+			
+			timer.start()
 
 
 func get_attribute_by_name(attribute_name: String) -> AttributeSpec:
