@@ -12,7 +12,7 @@ func _ready() -> void:
 	player.gameplay_attribute_map.attribute_changed.connect(_setup_attribute)
 
 
-func _setup_attribute(attribute):
+func _setup_attribute(attribute: GameplayAttributeMap.AttributeSpec):
 	if attribute.attribute_name == "health":
 		hud.handle_attribute_changed("Health", attribute.current_value, 0)
 	elif attribute.attribute_name == "score":

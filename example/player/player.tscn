@@ -36,17 +36,17 @@ current_value = 5.0
 script = ExtResource("4_lwbis")
 attribute_name = "score"
 minimum_value = 0.0
-maximum_value = 0.0
+maximum_value = 100000.0
 current_value = 0.0
 
-[sub_resource type="Resource" id="Resource_7vfkk"]
+[sub_resource type="Resource" id="Resource_4iem1"]
 script = ExtResource("7_xp7iw")
-life_time = 0
-apply_every_second = 0.0
+life_time = 1
+apply_every_second = 1.0
 max_applications = 0
 attribute_name = "health"
 minimum_value = 1.0
-maximum_value = 2.0
+maximum_value = 1.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uv2vo")
@@ -64,7 +64,7 @@ owning_character = NodePath("..")
 attributes = [SubResource("Resource_1w78m"), SubResource("Resource_kobx3"), SubResource("Resource_a6tcp"), SubResource("Resource_3u85c")]
 table = ExtResource("5_7fuph")
 
-[node name="GameplayEffect" type="Node" parent="GameplayAttributeMap"]
+[node name="RegenLifeEffect" type="Node" parent="GameplayAttributeMap"]
 script = ExtResource("6_fbded")
 table = ExtResource("5_7fuph")
-attributes_affected = [SubResource("Resource_7vfkk")]
+attributes_affected = [SubResource("Resource_4iem1")]

@@ -1,1 +1,1 @@
-extends Area2D
+extends EffectedArea2D

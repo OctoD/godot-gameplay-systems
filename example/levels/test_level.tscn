@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://vlimbdaohxgb"]
+[gd_scene load_steps=8 format=3 uid="uid://vlimbdaohxgb"]
 
-[ext_resource type="PackedScene" uid="uid://vp5di21g6ii6" path="res://example/player/player.tscn" id="1_0jjra"]
+[ext_resource type="PackedScene" uid="uid://dlilmrpe4icgc" path="res://example/player/player.tscn" id="1_0jjra"]
 [ext_resource type="Script" path="res://example/levels/test_level.gd" id="1_glbc1"]
 [ext_resource type="Texture2D" uid="uid://c7lgk28i4ps8i" path="res://icon.svg" id="2_c40qc"]
 [ext_resource type="PackedScene" uid="uid://bbsrxyvcasvsx" path="res://example/levels/hud.tscn" id="4_8msdp"]
+[ext_resource type="PackedScene" uid="uid://dbbc2uv8u37hl" path="res://example/coin/coin.tscn" id="5_o0j0s"]
+[ext_resource type="PackedScene" uid="uid://db17c7pmyfuty" path="res://example/hazard/hazard.tscn" id="6_3bf0a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6q2jf"]
 size = Vector2(1200, 100)
@@ -29,3 +31,31 @@ scale = Vector2(0.114679, 0.96)
 shape = SubResource("RectangleShape2D_6q2jf")
 
 [node name="Hud" parent="." instance=ExtResource("4_8msdp")]
+
+[node name="coins" type="Node2D" parent="."]
+
+[node name="coin" parent="coins" instance=ExtResource("5_o0j0s")]
+position = Vector2(-340, -12)
+
+[node name="coin2" parent="coins" instance=ExtResource("5_o0j0s")]
+position = Vector2(162, -190)
+
+[node name="coin3" parent="coins" instance=ExtResource("5_o0j0s")]
+position = Vector2(482, 70)
+
+[node name="coin4" parent="coins" instance=ExtResource("5_o0j0s")]
+position = Vector2(380, 68)
+
+[node name="hazards" type="Node2D" parent="."]
+
+[node name="hazard" parent="hazards" instance=ExtResource("6_3bf0a")]
+position = Vector2(226, 116)
+
+[node name="hazard2" parent="hazards" instance=ExtResource("6_3bf0a")]
+position = Vector2(-480, 116)
+
+[node name="hazard3" parent="hazards" instance=ExtResource("6_3bf0a")]
+position = Vector2(-438, -138)
+
+[node name="hazard4" parent="hazards" instance=ExtResource("6_3bf0a")]
+position = Vector2(-116, 84)

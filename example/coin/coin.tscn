@@ -1,11 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbbc2uv8u37hl"]
+[gd_scene load_steps=8 format=3 uid="uid://dbbc2uv8u37hl"]
 
 [ext_resource type="Texture2D" uid="uid://c7lgk28i4ps8i" path="res://icon.svg" id="1_54eoc"]
 [ext_resource type="Script" path="res://example/coin/coin.gd" id="1_dfp86"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="3_vux7a"]
+[ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="4_85n6h"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="5_hvr8x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gd8hr"]
 size = Vector2(48, 48)
+
+[sub_resource type="Resource" id="Resource_cpg8d"]
+script = ExtResource("5_hvr8x")
+life_time = 0
+apply_every_second = 0.0
+max_applications = 0
+attribute_name = "score"
+minimum_value = 1.0
+maximum_value = 1.0
 
 [node name="coin" type="Area2D"]
 script = ExtResource("1_dfp86")
@@ -20,4 +31,5 @@ region_rect = Rect2(30, 68, 48, 48)
 
 [node name="GameplayEffect" type="Node" parent="."]
 script = ExtResource("3_vux7a")
-attributes_affected = []
+table = ExtResource("4_85n6h")
+attributes_affected = [SubResource("Resource_cpg8d")]

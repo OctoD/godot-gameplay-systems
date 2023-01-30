@@ -20,7 +20,7 @@ func _ready() -> void:
 	jump_velocity = gameplay_attribute_map.get_attribute_by_name("jump_height").current_value
 	
 	gameplay_attribute_map.attribute_changed.connect(func (attribute):
-		print("attribute changed ", attribute)	
+		attribute_changed.emit(attribute.attribute_name, attribute.current_value, 0)
 	)
 
 func _physics_process(delta: float) -> void:
