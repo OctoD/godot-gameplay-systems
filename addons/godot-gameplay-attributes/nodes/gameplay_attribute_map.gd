@@ -6,8 +6,6 @@ class_name GameplayAttributeMap extends Node
 signal attribute_changed(attribute: AttributeSpec)
 signal attribute_effect_applied(attribute_effect: AttributeEffect)
 signal effect_applied(effect: GameplayEffect)
-signal effect_paused(effect: GameplayEffect)
-signal effect_removed(effect: GameplayEffect)
 
 
 @export_category("Owner")
