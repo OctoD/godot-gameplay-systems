@@ -1,12 +1,19 @@
 @tool
 class_name EffectedArea2D extends Area2D
 
+## An extension to base class with automatism for GameplayAttributeMap
+## 
+## Applies [GameplayEffect]s automatically when a collision is triggered and [method should_apply_effect] returns [code]true[/code].
+
 
 @export_category("Gameplay Effect Handling")
+## Removes the EffectedArea2D if [method should_apply_effect] returns [code]true[/code]
 @export var remove_self_on_apply := true
+## Removes all child [GameplayEffect]s when colliding and when [method should_apply_effect] returns [code]true[/code]
 @export var remove_effects_on_apply := true
 
 
+## Gets all child GameplayEffect nodes
 var effects: Array[GameplayEffect] = []:
 	get:
 		var _effects: Array[GameplayEffect] = []
@@ -33,5 +40,6 @@ func _ready() -> void:
 		)
 
 
+## Returns true if the effect should be applied to a certain node
 func should_apply_effect(node: Node2D) -> bool:
 	return true

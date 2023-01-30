@@ -3,8 +3,6 @@ class_name Player
 
 
 signal attribute_changed(attribute_name: String, new_value: float, old_value: float)
-signal attributes_ready(attribute_map: GameplayAttributeMap)
-signal player_ready()
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.

@@ -1,9 +1,13 @@
 class_name Attribute extends Resource
 
 @export_category("Attribute")
+## Is the attribute name
 @export var attribute_name := ""
+## Is the attribute minimum value
 @export var minimum_value := 0.0
+## Is the attribute maximum value
 @export var maximum_value := 0.0
+## Is the attribute initial value
 @export var current_value := 0.0
 
 

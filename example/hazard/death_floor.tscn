@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://daa2asutewogx"]
+
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/effected_area2d.gd" id="1_sm8hi"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="2_xg7xs"]
+[ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="3_ska1t"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="4_ybq36"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghexy"]
+size = Vector2(5000, 200)
+
+[sub_resource type="Resource" id="Resource_qhnsu"]
+script = ExtResource("4_ybq36")
+life_time = 0
+apply_every_second = 0.0
+max_applications = 0
+attribute_name = "health"
+minimum_value = -100000.0
+maximum_value = -100000.0
+
+[node name="death_floor" type="Area2D"]
+script = ExtResource("1_sm8hi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ghexy")
+
+[node name="GameplayEffect" type="Node" parent="."]
+script = ExtResource("2_xg7xs")
+table = ExtResource("3_ska1t")
+attributes_affected = [SubResource("Resource_qhnsu")]

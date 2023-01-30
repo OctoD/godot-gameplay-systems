@@ -28,8 +28,8 @@ current_value = -500.0
 [sub_resource type="Resource" id="Resource_a6tcp"]
 script = ExtResource("4_lwbis")
 attribute_name = "health"
-minimum_value = 5.0
-maximum_value = 0.0
+minimum_value = 0.0
+maximum_value = 10.0
 current_value = 5.0
 
 [sub_resource type="Resource" id="Resource_3u85c"]
@@ -42,7 +42,7 @@ current_value = 0.0
 [sub_resource type="Resource" id="Resource_4iem1"]
 script = ExtResource("7_xp7iw")
 life_time = 1
-apply_every_second = 1.0
+apply_every_second = 5.0
 max_applications = 0
 attribute_name = "health"
 minimum_value = 1.0

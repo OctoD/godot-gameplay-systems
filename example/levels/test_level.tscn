@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vlimbdaohxgb"]
+[gd_scene load_steps=9 format=3 uid="uid://vlimbdaohxgb"]
 
 [ext_resource type="PackedScene" uid="uid://dlilmrpe4icgc" path="res://example/player/player.tscn" id="1_0jjra"]
 [ext_resource type="Script" path="res://example/levels/test_level.gd" id="1_glbc1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbsrxyvcasvsx" path="res://example/levels/hud.tscn" id="4_8msdp"]
 [ext_resource type="PackedScene" uid="uid://dbbc2uv8u37hl" path="res://example/coin/coin.tscn" id="5_o0j0s"]
 [ext_resource type="PackedScene" uid="uid://db17c7pmyfuty" path="res://example/hazard/hazard.tscn" id="6_3bf0a"]
+[ext_resource type="PackedScene" uid="uid://daa2asutewogx" path="res://example/hazard/death_floor.tscn" id="7_chd2m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6q2jf"]
 size = Vector2(1200, 100)
@@ -59,3 +60,6 @@ position = Vector2(-438, -138)
 
 [node name="hazard4" parent="hazards" instance=ExtResource("6_3bf0a")]
 position = Vector2(-116, 84)
+
+[node name="death_floor" parent="hazards" instance=ExtResource("7_chd2m")]
+position = Vector2(0, 460)
