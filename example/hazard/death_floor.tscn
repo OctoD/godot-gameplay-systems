@@ -16,6 +16,7 @@ max_applications = 0
 attribute_name = "health"
 minimum_value = -100000.0
 maximum_value = -100000.0
+conditions = null
 
 [node name="death_floor" type="Area2D"]
 script = ExtResource("1_sm8hi")
@@ -26,4 +27,4 @@ shape = SubResource("RectangleShape2D_ghexy")
 [node name="GameplayEffect" type="Node" parent="."]
 script = ExtResource("2_xg7xs")
 table = ExtResource("3_ska1t")
-attributes_affected = [SubResource("Resource_qhnsu")]
+attributes_affected = Array[ExtResource("4_ybq36")]([SubResource("Resource_qhnsu")])

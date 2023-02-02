@@ -17,7 +17,6 @@ script = ExtResource("1_glbc1")
 [node name="Player" parent="." instance=ExtResource("1_0jjra")]
 
 [node name="Camera2d" type="Camera2D" parent="."]
-current = true
 
 [node name="Sprite2d" type="Sprite2D" parent="."]
 position = Vector2(0, 204)

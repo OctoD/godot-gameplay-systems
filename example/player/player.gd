@@ -16,7 +16,7 @@ var jump_velocity: float = 0.0
 func _ready() -> void:
 	speed = gameplay_attribute_map.get_attribute_by_name("speed").current_value
 	jump_velocity = gameplay_attribute_map.get_attribute_by_name("jump_height").current_value
-	
+
 	gameplay_attribute_map.attribute_changed.connect(func (attribute):
 		attribute_changed.emit(attribute.attribute_name, attribute.current_value, 0)
 	)

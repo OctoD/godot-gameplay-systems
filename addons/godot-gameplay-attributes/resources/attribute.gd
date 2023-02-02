@@ -1,4 +1,4 @@
-class_name Attribute extends Resource
+class_name AttributeResource extends Resource
 
 @export_category("Attribute")
 ## Is the attribute name

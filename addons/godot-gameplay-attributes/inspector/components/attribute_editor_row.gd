@@ -6,7 +6,7 @@ signal attribute_updated(key: String, value: float)
 
 
 @export_category("Attribute")
-@export var attribute: Attribute = null:
+@export var attribute: AttributeResource = null:
 	get:
 		return attribute
 	set(value):
@@ -54,6 +54,6 @@ func _update_ui() -> void:
 		_updating_ui = false
 
 
-func set_values(res: Attribute) -> void:
+func set_values(res: AttributeResource) -> void:
 	await ready
 	attribute = res

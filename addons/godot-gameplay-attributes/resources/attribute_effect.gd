@@ -64,6 +64,8 @@ enum {
 	set(value):
 		maximum_value = value
 		emit_changed()
+@export_group("Pipeline")
+@export var conditions: Array[AttributeEffectCondition] = []
 
 
 ## Gets the computed current value.[br]
@@ -78,3 +80,15 @@ func get_current_value() -> float:
 		return randf_range(maximum_value, minimum_value)
 	else:
 		return minimum_value
+
+
+## Checks if the current attribute effect can be applied
+func should_apply(gameplay_effect: GameplayEffect, gameplay_attribute_map: GameplayAttributeMap) -> bool:
+	if conditions.size() == 0:
+		return true
+	
+	for condition in conditions:
+		if not condition.get_action(self, gameplay_effect, gameplay_attribute_map):
+			return false
+	
+	return true
