@@ -27,6 +27,7 @@ signal removed()
 @onready var timer_setup_container: VBoxContainer = $VBoxContainer
 @onready var timer_spinbox: SpinBox = $VBoxContainer/TimerSetupContainer/TimeoutSpinBox
 @onready var remove_button: Button = $AttributeName/RemoveButton
+var condition_resource_input := EditorResourcePicker.new()
 
 
 func _init() -> void:
@@ -43,6 +44,7 @@ func _inherit_from_resource() -> void:
 		maximum_value_spinbox.value = attribute_effect.maximum_value
 		timer_spinbox.value = attribute_effect.apply_every_second
 		application_count_spinbox.value = attribute_effect.max_applications
+		condition_resource_input.edited_resource = attribute_effect.condition
 		_set_lifetime(attribute_effect.life_time)
 
 
@@ -56,6 +58,14 @@ func _populate_attribute_name_list() -> void:
 
 
 func _ready() -> void:
+	var condition_label = Label.new()
+	
+	condition_label.text = "Condition"
+	condition_resource_input.base_type = "AttributeEffectCondition"
+	
+	add_child(condition_label)
+	add_child(condition_resource_input)
+	
 	timer_setup_container.visible = false
 	
 	application_count_spinbox.value_changed.connect(func (value):
@@ -68,9 +78,23 @@ func _ready() -> void:
 				attribute_effect.attribute_name	= attributes_table.attributes[index]
 	)	
 	
+	condition_resource_input.resource_changed.connect(func (resource):
+		if resource:
+			attribute_effect.condition = resource
+		else:
+			attribute_effect.condition = null
+	)
+	condition_resource_input.resource_selected.connect(func (resource, _i):
+		if resource:
+			attribute_effect.condition = resource
+		else:
+			attribute_effect.condition = null
+	)
+	
 	life_time_option_button.item_selected.connect(func (id):
-		attribute_effect.life_time = id
-		_set_lifetime(id)
+		if id is int:
+			attribute_effect.life_time = id
+			_set_lifetime(id)
 	)
 
 	minimum_value_spinbox.value_changed.connect(func (value):

@@ -16,7 +16,6 @@ max_applications = 0
 attribute_name = "health"
 minimum_value = -100000.0
 maximum_value = -100000.0
-conditions = null
 
 [node name="death_floor" type="Area2D"]
 script = ExtResource("1_sm8hi")

@@ -135,7 +135,7 @@ func apply_effect(effect: GameplayEffect) -> void:
 		
 		if attribute_affected.life_time == AttributeEffect.LIFETIME_ONE_SHOT:
 			var spec = _attributes_dict[attribute_affected.attribute_name]
-			
+
 			if not attribute_affected.should_apply(effect, self):
 				continue
 			
@@ -151,7 +151,7 @@ func apply_effect(effect: GameplayEffect) -> void:
 			timer.wait_time = attribute_affected.apply_every_second
 			timer.timeout.connect(func ():
 				var spec = _attributes_dict[attribute_affected.attribute_name]
-				
+
 				if not attribute_affected.should_apply(effect, self):
 					counts += 1
 					return

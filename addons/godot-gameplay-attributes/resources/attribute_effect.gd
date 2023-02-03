@@ -65,7 +65,13 @@ enum {
 		maximum_value = value
 		emit_changed()
 @export_group("Pipeline")
-@export var conditions: Array[AttributeEffectCondition] = []
+## If it is set, it will call [method AttributeEffectCondition.should_apply]
+@export var condition: Resource = null:
+	get:
+		return condition
+	set(value):
+		condition = value
+		emit_changed()
 
 
 ## Gets the computed current value.[br]
@@ -84,11 +90,12 @@ func get_current_value() -> float:
 
 ## Checks if the current attribute effect can be applied
 func should_apply(gameplay_effect: GameplayEffect, gameplay_attribute_map: GameplayAttributeMap) -> bool:
-	if conditions.size() == 0:
+	if condition == null:
 		return true
 	
-	for condition in conditions:
-		if not condition.get_action(self, gameplay_effect, gameplay_attribute_map):
-			return false
+	if condition.has_method("should_apply"):
+		return condition.should_apply(self, gameplay_effect, gameplay_attribute_map)
+
+	printerr("condition has not a method should_apply(attribute_effect: AttributeEffect, effect: GameplayEffect, gameplay_attributes: GameplayAttributeMap) -> bool")
 	
 	return true

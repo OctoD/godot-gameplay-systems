@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlilmrpe4icgc"]
+[gd_scene load_steps=16 format=3 uid="uid://dlilmrpe4icgc"]
 
 [ext_resource type="Script" path="res://example/player/player.gd" id="1_uv2vo"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_map.gd" id="3_85ne8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute.gd" id="4_lwbis"]
 [ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="5_7fuph"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="6_fbded"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/stop_effect_if_0.gd" id="7_5dgle"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="7_xp7iw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2anqr"]
@@ -39,7 +40,10 @@ minimum_value = 0.0
 maximum_value = 100000.0
 current_value = 0.0
 
-[sub_resource type="Resource" id="Resource_4iem1"]
+[sub_resource type="Resource" id="Resource_42y1g"]
+script = ExtResource("7_5dgle")
+
+[sub_resource type="Resource" id="Resource_h56y6"]
 script = ExtResource("7_xp7iw")
 life_time = 1
 apply_every_second = 1.0
@@ -47,7 +51,7 @@ max_applications = 0
 attribute_name = "health"
 minimum_value = 1.0
 maximum_value = 1.0
-conditions = null
+condition = SubResource("Resource_42y1g")
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uv2vo")
@@ -62,10 +66,10 @@ texture = ExtResource("4_6v80r")
 [node name="GameplayAttributeMap" type="Node" parent="."]
 script = ExtResource("3_85ne8")
 owning_character = NodePath("..")
-attributes = [SubResource("Resource_1w78m"), SubResource("Resource_kobx3"), SubResource("Resource_a6tcp"), SubResource("Resource_3u85c")]
+attributes = Array[ExtResource("4_lwbis")]([SubResource("Resource_1w78m"), SubResource("Resource_kobx3"), SubResource("Resource_a6tcp"), SubResource("Resource_3u85c")])
 table = ExtResource("5_7fuph")
 
-[node name="RegenLifeEffect" type="Node" parent="GameplayAttributeMap"]
+[node name="GameplayEffect" type="Node" parent="GameplayAttributeMap"]
 script = ExtResource("6_fbded")
 table = ExtResource("5_7fuph")
-attributes_affected = Array[ExtResource("7_xp7iw")]([SubResource("Resource_4iem1")])
+attributes_affected = Array[ExtResource("7_xp7iw")]([SubResource("Resource_h56y6")])
