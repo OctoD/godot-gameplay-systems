@@ -30,7 +30,7 @@ current_value = -500.0
 script = ExtResource("4_lwbis")
 attribute_name = "health"
 minimum_value = 0.0
-maximum_value = 10.0
+maximum_value = 5.0
 current_value = 5.0
 
 [sub_resource type="Resource" id="Resource_3u85c"]
@@ -69,7 +69,7 @@ owning_character = NodePath("..")
 attributes = Array[ExtResource("4_lwbis")]([SubResource("Resource_1w78m"), SubResource("Resource_kobx3"), SubResource("Resource_a6tcp"), SubResource("Resource_3u85c")])
 table = ExtResource("5_7fuph")
 
-[node name="GameplayEffect" type="Node" parent="GameplayAttributeMap"]
+[node name="HealthRegen" type="Node" parent="GameplayAttributeMap"]
 script = ExtResource("6_fbded")
 table = ExtResource("5_7fuph")
 attributes_affected = Array[ExtResource("7_xp7iw")]([SubResource("Resource_h56y6")])
