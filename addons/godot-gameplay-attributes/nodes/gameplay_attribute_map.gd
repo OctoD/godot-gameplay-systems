@@ -126,6 +126,9 @@ func _update_attribute(index: int, key: String, value: float) -> void:
 
 ## Applies an effect on current GameplayAttributeMap
 func apply_effect(effect: GameplayEffect) -> void:
+	if multiplayer and not multiplayer.is_server():
+		return
+
 	if effect == null:
 		return
 
@@ -182,7 +185,7 @@ func get_attribute_by_name(attribute_name: String) -> AttributeSpec:
 
 
 ## Represents an attribute as a class
-class AttributeSpec extends Object:
+class AttributeSpec extends Node:
 	## Emitted when the instance has changed one of it's values
 	signal changed(spec: AttributeSpec)
 	## Emitted when the instance has changed it's minimum value
@@ -200,7 +203,7 @@ class AttributeSpec extends Object:
 			return current_value
 		set(value):
 			var previous_value = current_value
-			
+
 			if previous_value == value:
 				return
 			
