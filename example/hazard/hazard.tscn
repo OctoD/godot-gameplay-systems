@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="2_0054a"]
 [ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="3_vowes"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="4_wsra7"]
-[ext_resource type="Texture2D" uid="uid://id0wcd6ue2cu" path="res://stats-icon.png" id="5_4aqye"]
+[ext_resource type="Texture2D" uid="uid://bc5txpyp23vl0" path="res://example/kenney_pixelplatformer/Characters/character_0026.png" id="5_6lkrr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oq85g"]
 
@@ -14,10 +14,12 @@ life_time = 0
 apply_every_second = 0.0
 max_applications = 0
 attribute_name = "health"
-minimum_value = -2.0
-maximum_value = -2.0
+minimum_value = -1.0
+maximum_value = -1.0
 
 [node name="hazard" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_1b51t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -26,8 +28,7 @@ shape = SubResource("CircleShape2D_oq85g")
 [node name="GameplayEffect" type="Node" parent="."]
 script = ExtResource("2_0054a")
 table = ExtResource("3_vowes")
-attributes_affected = [SubResource("Resource_kbnsc")]
+attributes_affected = Array[ExtResource("4_wsra7")]([SubResource("Resource_kbnsc")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_4aqye")
+texture = ExtResource("5_6lkrr")

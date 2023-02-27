@@ -15,6 +15,18 @@ run/main_scene="res://example/levels/test_level.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/aspect="expand"
+window/stretch/scale=4.0
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot-gameplay-attributes/plugin.cfg")
+
+[layer_names]
+
+2d_physics/layer_1="terrain"
+2d_physics/layer_2="player"
+2d_physics/layer_3="hazard"
+2d_physics/layer_4="collectible"

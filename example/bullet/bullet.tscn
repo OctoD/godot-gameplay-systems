@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnjiebocvs4wa"]
+
+[ext_resource type="Script" path="res://example/bullet/bullet.gd" id="1_m6e4e"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="2_egwse"]
+[ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="3_ot3ii"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="4_dk51x"]
+
+[sub_resource type="Resource" id="Resource_1gdvf"]
+script = ExtResource("4_dk51x")
+life_time = 0
+apply_every_second = 0.0
+max_applications = 0
+attribute_name = "health"
+minimum_value = 1.0
+maximum_value = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_66u6r"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2y3nt"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+gravity = Vector3(-20, -1, 2.08165e-12)
+orbit_velocity_min = 2.08167e-14
+orbit_velocity_max = 2.08167e-14
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_m6e4e")
+bullet_direction = Vector2(100, 1)
+bullet_trail_length = 20.0
+can_damage_layers = 2
+
+[node name="GameplayEffect" type="Node" parent="."]
+script = ExtResource("2_egwse")
+table = ExtResource("3_ot3ii")
+attributes_affected = Array[ExtResource("4_dk51x")]([SubResource("Resource_1gdvf")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_66u6r")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_2y3nt")

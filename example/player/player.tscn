@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://dlilmrpe4icgc"]
+[gd_scene load_steps=20 format=3 uid="uid://dlilmrpe4icgc"]
 
 [ext_resource type="Script" path="res://example/player/player.gd" id="1_uv2vo"]
+[ext_resource type="Script" path="res://example/player/hud.gd" id="2_ai5bq"]
+[ext_resource type="Texture2D" uid="uid://bj3wqaubjklhr" path="res://example/kenney_pixelplatformer/Tilemap/characters_packed.png" id="2_f43wi"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_map.gd" id="3_85ne8"]
-[ext_resource type="Texture2D" uid="uid://c7lgk28i4ps8i" path="res://icon.svg" id="4_6v80r"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute.gd" id="4_lwbis"]
 [ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="5_7fuph"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="6_fbded"]
@@ -10,7 +11,29 @@
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="7_xp7iw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2anqr"]
-size = Vector2(80, 80)
+size = Vector2(24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gufhc"]
+atlas = ExtResource("2_f43wi")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqk2w"]
+atlas = ExtResource("2_f43wi")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n63lc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gufhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqk2w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="Resource" id="Resource_1w78m"]
 script = ExtResource("4_lwbis")
@@ -46,7 +69,7 @@ script = ExtResource("7_5dgle")
 [sub_resource type="Resource" id="Resource_h56y6"]
 script = ExtResource("7_xp7iw")
 life_time = 1
-apply_every_second = 1.0
+apply_every_second = 60.0
 max_applications = 0
 attribute_name = "health"
 minimum_value = 1.0
@@ -54,14 +77,47 @@ maximum_value = 1.0
 condition = SubResource("Resource_42y1g")
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_uv2vo")
+
+[node name="Hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_ai5bq")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Hud"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Health" type="Label" parent="Hud/HBoxContainer"]
+layout_mode = 2
+text = "Health: 0"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="Hud/HBoxContainer"]
+layout_mode = 2
+text = "Score: 0"
+horizontal_alignment = 1
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2anqr")
 
-[node name="Sprite2d" type="Sprite2D" parent="CollisionShape2d"]
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("4_6v80r")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2d"]
+sprite_frames = SubResource("SpriteFrames_n63lc")
+frame_progress = 0.844291
 
 [node name="GameplayAttributeMap" type="Node" parent="."]
 script = ExtResource("3_85ne8")
@@ -73,3 +129,5 @@ table = ExtResource("5_7fuph")
 script = ExtResource("6_fbded")
 table = ExtResource("5_7fuph")
 attributes_affected = Array[ExtResource("7_xp7iw")]([SubResource("Resource_h56y6")])
+
+[node name="Camera2D" type="Camera2D" parent="."]

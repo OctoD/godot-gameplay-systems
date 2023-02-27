@@ -2,24 +2,38 @@ extends CharacterBody2D
 class_name Player
 
 
-signal attribute_changed(attribute_name: String, new_value: float, old_value: float)
-
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var speed: float = 0.0
 var jump_velocity: float = 0.0
+var flipped := true
 
 @onready var gameplay_attribute_map: GameplayAttributeMap = $GameplayAttributeMap
+@onready var hud = $Hud
+@onready var animated_sprite: AnimatedSprite2D = $CollisionShape2d/AnimatedSprite2D
+
+
+func _handle_attribute_changed(spec: GameplayAttributeMap.AttributeSpec) -> void:
+	var prev_health = gameplay_attribute_map.get_attribute_by_name("health").current_value
+	
+	hud.handle_attribute_changed(spec)
+	
+	match spec.attribute_name:
+		"health":
+			if prev_health > spec.current_value:
+				velocity.y -= 5.0
 
 
 func _ready() -> void:
 	speed = gameplay_attribute_map.get_attribute_by_name("speed").current_value
 	jump_velocity = gameplay_attribute_map.get_attribute_by_name("jump_height").current_value
 
-	gameplay_attribute_map.attribute_changed.connect(func (attribute):
-		attribute_changed.emit(attribute.attribute_name, attribute.current_value, 0)
-	)
+	gameplay_attribute_map.attribute_changed.connect(_handle_attribute_changed)
+
+	hud.initialize(gameplay_attribute_map)
+	animated_sprite.play("default")
+	
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -37,5 +51,12 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+
+	if velocity.x > 1:
+		flipped = true
+	elif velocity.x < -1:
+		flipped = false
+
+	animated_sprite.flip_h = flipped
 
 	move_and_slide()
