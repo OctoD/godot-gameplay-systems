@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbbc2uv8u37hl"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://example/coin/coin.gd" id="1_dfp86"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="3_vux7a"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/nodes/gameplay_effect.gd" id="3_vux7a"]
 [ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="4_85n6h"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="5_hvr8x"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/resources/attribute_effect.gd" id="5_hvr8x"]
 [ext_resource type="Texture2D" uid="uid://dk4huo4kxpuh" path="res://example/kenney_pixelplatformer/Tilemap/tiles.png" id="5_p8iq8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gd8hr"]

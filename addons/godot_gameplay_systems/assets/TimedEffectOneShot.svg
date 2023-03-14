@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="156px" height="156px" viewBox="0 0 156 156" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>TimedEffectOneShot</title>
+    <g id="gameplay-attributes-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="TimedEffectOneShot">
+            <g id="GameplayEffect" fill="#9CFFEB" stroke="#4D998A" stroke-width="8">
+                <rect id="Rectangle" x="4" y="4" width="148" height="148" rx="8"></rect>
+            </g>
+            <g id="Hourglass" transform="translate(38.000000, 23.000000)" fill="#9CFFEB" stroke="#4D998A" stroke-linejoin="round" stroke-width="8">
+                <polygon id="Lower" points="40 55 80 111 0 111"></polygon>
+                <polygon id="Triangle-Copy" transform="translate(40.000000, 28.000000) rotate(180.000000) translate(-40.000000, -28.000000) " points="40 0 80 56 0 56"></polygon>
+            </g>
+            <g id="Dot" transform="translate(88.000000, 7.000000)">
+                <circle id="Oval" fill="#CE1B1B" cx="30" cy="30" r="30"></circle>
+                <g id="1" transform="translate(19.057617, 10.222656)" fill="#FFFFFF" fill-rule="nonzero">
+                    <path d="M0,12.0703125 L0,8.02734375 C3.80859375,7.65625 6.46484375,7.03613281 7.96875,6.16699219 C9.47265625,5.29785156 10.5957031,3.2421875 11.3378906,0 L15.4980469,0 L15.4980469,41.7773438 L9.87304688,41.7773438 L9.87304688,12.0703125 L0,12.0703125 Z" id="Path"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
