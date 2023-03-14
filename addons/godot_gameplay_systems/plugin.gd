@@ -39,17 +39,17 @@ func _enter_tree():
 	add_custom_type(ACTIVATION_EVENT_NAME, "RefCounted", activation_event_script, null)
 	add_custom_type(ATTRIBUTE_SPEC_NAME, "RefCounted", attribute_spec_script, null)
 	
-	add_custom_type(ATTRIBUTE_RESOURCE_NAME, "Resource", attribute_resource, preload("res://addons/godot_gameplay_systems/assets/Attribute.svg"))
-	add_custom_type(ATTRIBUTE_TABLE_RESOURCE_NAME, "Resource", attributes_table_resource, preload("res://addons/godot_gameplay_systems/assets/AttributeTable.svg"))
-	add_custom_type(ATTRIBUTE_EFFECT_RESOURCE_NAME, "Resource", attribute_effect_resource, preload("res://addons/godot_gameplay_systems/assets/GameplayEffect.svg"))
+	add_custom_type(ATTRIBUTE_RESOURCE_NAME, "Resource", attribute_resource, preload("res://addons/godot_gameplay_systems/assets/Attribute@0.15x.png"))
+	add_custom_type(ATTRIBUTE_TABLE_RESOURCE_NAME, "Resource", attributes_table_resource, preload("res://addons/godot_gameplay_systems/assets/AttributeTable@0.15x.png"))
+	add_custom_type(ATTRIBUTE_EFFECT_RESOURCE_NAME, "Resource", attribute_effect_resource, preload("res://addons/godot_gameplay_systems/assets/GameplayEffect@0.15x.png"))
 	add_custom_type(ATTRIBUTE_EFFECT_CONDITION_RESOURCE_NAME, "Resource", attribute_effect_condition_resource, null)
-	add_custom_type(GAMEPLAY_ATTRIBUTE_MAP_NAME, "Node", gameplay_attribute_map, preload("res://addons/godot_gameplay_systems/assets/GameplayAttributeMap.svg"))
-	add_custom_type(GAMEPLAY_EFFECT_NAME, "Node", gameplay_effect, preload("res://addons/godot_gameplay_systems/assets/GameplayEffect.svg"))
+	add_custom_type(GAMEPLAY_ATTRIBUTE_MAP_NAME, "Node", gameplay_attribute_map, preload("res://addons/godot_gameplay_systems/assets/GameplayAttributeMap@0.15x.png"))
+	add_custom_type(GAMEPLAY_EFFECT_NAME, "Node", gameplay_effect, preload("res://addons/godot_gameplay_systems/assets/GameplayEffect@0.15x.png"))
 	add_custom_type(EFFECTED_AREA2D, "Area2D", effected_area2d, null)
 	add_custom_type(EFFECTED_AREA3D, "Area3D", effected_area3d, null)
 	add_custom_type(STOP_EFFECT_IF0_RESOURCE_NAME, ATTRIBUTE_EFFECT_CONDITION_RESOURCE_NAME, stop_effect_if0_resource, null)
 
-	add_custom_type(ABILITY_CONTAINER_NAME, "Node",	ability_container_resource, preload("res://addons/godot_gameplay_systems/assets/AbilityContainer.svg"))
+	add_custom_type(ABILITY_CONTAINER_NAME, "Node",	ability_container_resource, preload("res://addons/godot_gameplay_systems/assets/AbilityContainer@0.15x.png"))
 
 	attribute_inspector_plugin = attribute_inspector_plugin_script.new()
 	effect_inspector_plugin = effect_inspector_plugin_script.new()
