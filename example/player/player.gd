@@ -8,12 +8,22 @@ var speed: float = 0.0
 var jump_velocity: float = 0.0
 var flipped := true
 
+var is_dead: bool:
+	get:
+		var attribute = gameplay_attribute_map.get_attribute_by_name("health")
+		
+		if attribute:
+			return attribute.current_value <= 0.0
+		
+		return true
+
+@onready var ability_container: AbilityContainer = $AbilityContainer
 @onready var gameplay_attribute_map: GameplayAttributeMap = $GameplayAttributeMap
-@onready var hud = $Hud
+@onready var hud = $Camera2D/CanvasLayer/Hud
 @onready var animated_sprite: AnimatedSprite2D = $CollisionShape2d/AnimatedSprite2D
 
 
-func _handle_attribute_changed(spec: GameplayAttributeMap.AttributeSpec) -> void:
+func _handle_attribute_changed(spec: AttributeSpec) -> void:
 	var prev_health = gameplay_attribute_map.get_attribute_by_name("health").current_value
 	
 	hud.handle_attribute_changed(spec)
@@ -22,6 +32,9 @@ func _handle_attribute_changed(spec: GameplayAttributeMap.AttributeSpec) -> void
 		"health":
 			if prev_health > spec.current_value:
 				velocity.y -= 5.0
+			if spec.current_value <= 0.0:
+				print("Added dead tag to player ability container")
+				ability_container.add_tag("dead")
 
 
 func _ready() -> void:
@@ -30,15 +43,34 @@ func _ready() -> void:
 
 	gameplay_attribute_map.attribute_changed.connect(_handle_attribute_changed)
 
-	hud.initialize(gameplay_attribute_map)
+	hud.initialize_attributes(gameplay_attribute_map)
+	
 	animated_sprite.play("default")
 	
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("resurrect"):
+		ability_container.add_tag("resurrect.start")
+		ability_container.activate_many()
+	
+	if event.is_action_pressed("fireball"):
+		ability_container.add_tag("fireball.shoot")
+		ability_container.activate_many()
 
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
+		
+
+	# You are dead, sorry. Press "r" to resurrect
+	if is_dead:
+		velocity.x = 0
+		animated_sprite.stop()
+		move_and_slide()
+		return
+		
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_up") and is_on_floor():

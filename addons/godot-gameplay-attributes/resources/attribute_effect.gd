@@ -1,4 +1,4 @@
-@icon("res://addons/godot-gameplay-attributes/assets/effect_icon.png")
+@icon("res://addons/godot-gameplay-attributes/assets/AttributeEffect.svg")
 
 class_name AttributeEffect extends Resource
 

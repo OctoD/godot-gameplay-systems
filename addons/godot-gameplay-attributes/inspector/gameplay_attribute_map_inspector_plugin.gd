@@ -11,7 +11,6 @@ func _can_handle(object) -> bool:
 
 
 func _parse_property(object: Object, type, name: String, hint_type, hint_string: String, usage_flags, wide: bool) -> bool:
-	print(type)
 	if type == 28 and name == "attributes":
 		add_property_editor(name, attribute_editor.new(), true)
 		return true

@@ -27,6 +27,18 @@ var effects: Array[GameplayEffect] = []:
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
+		area_entered.connect(func (body: Area2D):
+			if should_apply_effect(body):
+				for effect in effects:
+					if remove_effects_on_apply:
+						remove_child(effect)
+						body.add_child(effect)
+					else:
+						body.add_child(effect.duplicate())
+				if remove_self_on_apply:
+					queue_free()
+		)
+		
 		body_entered.connect(func (body: Node2D):
 			if should_apply_effect(body):
 				for effect in effects:

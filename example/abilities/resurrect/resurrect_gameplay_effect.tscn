@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://ju157jt46c07"]
+
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="1_h8x4k"]
+[ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="2_jj4kj"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="3_okwb7"]
+
+[sub_resource type="Resource" id="Resource_aansh"]
+script = ExtResource("3_okwb7")
+life_time = 0
+apply_every_second = 0.0
+max_applications = 0
+attribute_name = "health"
+minimum_value = 1000.0
+maximum_value = 1000.0
+
+[node name="ResurrectGameplayEffect" type="Node"]
+script = ExtResource("1_h8x4k")
+table = ExtResource("2_jj4kj")
+attributes_affected = Array[ExtResource("3_okwb7")]([SubResource("Resource_aansh")])

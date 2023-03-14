@@ -1,16 +1,23 @@
 extends Control
 
 
-@onready var health = $HBoxContainer/Health
-@onready var score = $HBoxContainer/Score
+@onready var health: Label = $HBoxContainer/Health
+@onready var score: Label = $HBoxContainer/Score
+@onready var tags: Label = $"DebugTags"
 
 
-func initialize(map: GameplayAttributeMap) -> void:
+func initialize_abilities(container: AbilityContainer) -> void:
+	container.tags_updated.connect(func (list: Array[String]):
+		tags.text = str(list)
+	)
+
+
+func initialize_attributes(map: GameplayAttributeMap) -> void:
 	handle_attribute_changed(map.get_attribute_by_name("health"))
 	handle_attribute_changed(map.get_attribute_by_name("score"))
 
 
-func handle_attribute_changed(spec: GameplayAttributeMap.AttributeSpec) -> void:
+func handle_attribute_changed(spec: AttributeSpec) -> void:
 	match spec.attribute_name:
 		"health":
 			set_health(spec.current_value)

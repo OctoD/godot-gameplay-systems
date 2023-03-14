@@ -15,9 +15,9 @@ position = Vector2(683.268, 54.5339)
 curve = SubResource("Curve2D_4e4qh")
 
 [node name="HazardPathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(0.521198, -1.64763)
+position = Vector2(-0.0378061, -39.1077)
 rotation = -1.58572
-progress = 82.1426
+progress = 119.584
 script = ExtResource("1_6ahqf")
 speed = 50.0
 

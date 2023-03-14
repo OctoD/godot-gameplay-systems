@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="156px" height="156px" viewBox="0 0 156 156" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AttributeEffect</title>
+    <g id="gameplay-attributes-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AttributeEffect">
+            <g id="Attribute" fill="#CA93E3" fill-opacity="0.9" stroke="#670194" stroke-width="8">
+                <rect id="Rectangle" x="4" y="4" width="148" height="148" rx="8"></rect>
+            </g>
+            <g id="AttributeIcon" transform="translate(20.000000, 54.000000)" fill="#670194">
+                <circle id="Oval" cx="24" cy="24" r="24"></circle>
+                <rect id="Rectangle" x="55" y="12" width="60" height="24" rx="8"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

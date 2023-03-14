@@ -24,9 +24,23 @@ window/stretch/scale=4.0
 
 enabled=PackedStringArray("res://addons/godot-gameplay-attributes/plugin.cfg")
 
+[input]
+
+resurrect={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"echo":false,"script":null)
+]
+}
+fireball={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
+]
+}
+
 [layer_names]
 
 2d_physics/layer_1="terrain"
 2d_physics/layer_2="player"
 2d_physics/layer_3="hazard"
 2d_physics/layer_4="collectible"
+2d_physics/layer_5="projectile"

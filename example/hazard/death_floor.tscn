@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://daa2asutewogx"]
 
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/effected_area2d.gd" id="1_sm8hi"]
+[ext_resource type="Script" path="res://example/hazard/death_floor.gd" id="1_h7hlh"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="2_xg7xs"]
 [ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="3_ska1t"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="4_ybq36"]
@@ -18,7 +18,10 @@ minimum_value = -100000.0
 maximum_value = -100000.0
 
 [node name="death_floor" type="Area2D"]
-script = ExtResource("1_sm8hi")
+collision_mask = 2
+script = ExtResource("1_h7hlh")
+remove_self_on_apply = false
+remove_effects_on_apply = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ghexy")

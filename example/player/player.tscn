@@ -1,14 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://dlilmrpe4icgc"]
+[gd_scene load_steps=25 format=3 uid="uid://dlilmrpe4icgc"]
 
 [ext_resource type="Script" path="res://example/player/player.gd" id="1_uv2vo"]
 [ext_resource type="Script" path="res://example/player/hud.gd" id="2_ai5bq"]
 [ext_resource type="Texture2D" uid="uid://bj3wqaubjklhr" path="res://example/kenney_pixelplatformer/Tilemap/characters_packed.png" id="2_f43wi"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_map.gd" id="3_85ne8"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_map.gd" id="4_0gsm2"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute.gd" id="4_lwbis"]
 [ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="5_7fuph"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="6_fbded"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/stop_effect_if_0.gd" id="7_5dgle"]
 [ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="7_xp7iw"]
+[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/ability_container.gd" id="10_jenjb"]
+[ext_resource type="PackedScene" uid="uid://cmmib2gyts5kj" path="res://addons/godot-gameplay-attributes/debug/abilities_debugger.tscn" id="12_65g51"]
+[ext_resource type="Script" path="res://example/abilities/resurrect/resurrect.gd" id="12_i7ohy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2anqr"]
 size = Vector2(24, 24)
@@ -35,32 +38,32 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="Resource" id="Resource_1w78m"]
+[sub_resource type="Resource" id="Resource_lc6fg"]
 script = ExtResource("4_lwbis")
 attribute_name = "speed"
 minimum_value = 500.0
-maximum_value = 1.0
+maximum_value = 500.0
 current_value = 500.0
 
-[sub_resource type="Resource" id="Resource_kobx3"]
+[sub_resource type="Resource" id="Resource_gp60w"]
 script = ExtResource("4_lwbis")
 attribute_name = "jump_height"
 minimum_value = -500.0
-maximum_value = 0.0
+maximum_value = -500.0
 current_value = -500.0
 
-[sub_resource type="Resource" id="Resource_a6tcp"]
+[sub_resource type="Resource" id="Resource_dhrtk"]
 script = ExtResource("4_lwbis")
 attribute_name = "health"
 minimum_value = 0.0
 maximum_value = 5.0
 current_value = 5.0
 
-[sub_resource type="Resource" id="Resource_3u85c"]
+[sub_resource type="Resource" id="Resource_jcu10"]
 script = ExtResource("4_lwbis")
 attribute_name = "score"
 minimum_value = 0.0
-maximum_value = 100000.0
+maximum_value = 0.0
 current_value = 0.0
 
 [sub_resource type="Resource" id="Resource_42y1g"]
@@ -76,41 +79,42 @@ minimum_value = 1.0
 maximum_value = 1.0
 condition = SubResource("Resource_42y1g")
 
+[sub_resource type="Resource" id="Resource_xoj77"]
+script = ExtResource("12_i7ohy")
+health_added = 2.0
+score_removed = 5.0
+ui_name = "Resurrect"
+cooldown_duration = 5.0
+cooldown_continuos = false
+grant_automatic = true
+grant_tags = Array[String]([])
+grant_tags_required = Array[String]([])
+tags_activation = Array[String]([])
+tags_activation_required = Array[String](["dead", "resurrect.start"])
+tags_block = Array[String](["resurrect.cooldown"])
+tags_cancellation_required = Array[String]([])
+tags_cooldown_start = Array[String](["resurrect.cooldown"])
+tags_cooldown_end = Array[String]([])
+tags_end_blocking = Array[String]([])
+tags_to_remove_on_activation = Array[String](["dead"])
+tags_to_remove_on_block = Array[String]([])
+tags_to_remove_on_cancellation = Array[String]([])
+tags_to_remove_on_cooldown_start = Array[String](["resurrect.start"])
+tags_to_remove_on_cooldown_end = Array[String](["resurrect.cooldown"])
+tags_to_remove_on_end = Array[String]([])
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c23ob"]
+properties/0/path = NodePath("AbilityContainer:tags")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("GameplayAttributeMap:_attributes_dict")
+properties/1/spawn = true
+properties/1/sync = true
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_uv2vo")
-
-[node name="Hud" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_bottom = -40.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("2_ai5bq")
-
-[node name="HBoxContainer" type="VBoxContainer" parent="Hud"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Health" type="Label" parent="Hud/HBoxContainer"]
-layout_mode = 2
-text = "Health: 0"
-horizontal_alignment = 1
-
-[node name="Score" type="Label" parent="Hud/HBoxContainer"]
-layout_mode = 2
-text = "Score: 0"
-horizontal_alignment = 1
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2anqr")
@@ -120,9 +124,9 @@ sprite_frames = SubResource("SpriteFrames_n63lc")
 frame_progress = 0.844291
 
 [node name="GameplayAttributeMap" type="Node" parent="."]
-script = ExtResource("3_85ne8")
+script = ExtResource("4_0gsm2")
 owning_character = NodePath("..")
-attributes = Array[ExtResource("4_lwbis")]([SubResource("Resource_1w78m"), SubResource("Resource_kobx3"), SubResource("Resource_a6tcp"), SubResource("Resource_3u85c")])
+attributes = Array[ExtResource("4_lwbis")]([SubResource("Resource_lc6fg"), SubResource("Resource_gp60w"), SubResource("Resource_dhrtk"), SubResource("Resource_jcu10")])
 table = ExtResource("5_7fuph")
 
 [node name="HealthRegen" type="Node" parent="GameplayAttributeMap"]
@@ -131,3 +135,54 @@ table = ExtResource("5_7fuph")
 attributes_affected = Array[ExtResource("7_xp7iw")]([SubResource("Resource_h56y6")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Hud" type="Control" parent="Camera2D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_ai5bq")
+
+[node name="DebugTags" type="Label" parent="Camera2D/CanvasLayer/Hud"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="AbilitiesDebugger" parent="Camera2D/CanvasLayer/Hud" instance=ExtResource("12_65g51")]
+layout_mode = 1
+alignment = 2
+ability_container_path = NodePath("../../../../AbilityContainer")
+persist_messages_for = null
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Hud"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Health" type="Label" parent="Camera2D/CanvasLayer/Hud/HBoxContainer"]
+layout_mode = 2
+text = "Health: 0"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="Camera2D/CanvasLayer/Hud/HBoxContainer"]
+layout_mode = 2
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="AbilityContainer" type="Node" parent="."]
+script = ExtResource("10_jenjb")
+gameplay_attribute_map_path = NodePath("../GameplayAttributeMap")
+abilities = Array[Resource("res://addons/godot-gameplay-attributes/resources/ability.gd")]([SubResource("Resource_xoj77")])
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_c23ob")
