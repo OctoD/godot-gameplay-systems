@@ -1,10 +1,9 @@
-⚔️ Gameplay Attributes ⚔️
-=========================
+⚔️ GGS ⚔️
+=======
 
-Gameplay attributes are a set of nodes used to describe some
-characters attributes for both 2D and 3D games made with Godot.
+Godot Gameplay Systems (formerly godot gameplay attributes) is a set of nodes and resources which speed up development of skills and attribute based gameplay mechanisms.
 
-- [⚔️ Gameplay Attributes ⚔️](#️-gameplay-attributes-️)
+- [⚔️ GGS ⚔️](#️-ggs-️)
 - [Install](#install)
   - [How does it work?](#how-does-it-work)
 - [Networking Attributes, Effects and Abilities](#networking-attributes-effects-and-abilities)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpcerra7enco5"
-path="res://.godot/imported/TimedEffectOneShot.svg-65b59f3b36721db5041eaea7607d4c23.ctex"
+uid="uid://dn54fmpqnjrlm"
+path="res://.godot/imported/AbilityContainer.svg-055e9f498904d8de8c91ea25f79bd753.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot-gameplay-attributes/assets/TimedEffectOneShot.svg"
-dest_files=["res://.godot/imported/TimedEffectOneShot.svg-65b59f3b36721db5041eaea7607d4c23.ctex"]
+source_file="res://addons/godot_gameplay_systems/assets/AbilityContainer.svg"
+dest_files=["res://.godot/imported/AbilityContainer.svg-055e9f498904d8de8c91ea25f79bd753.ctex"]
 
 [params]
 

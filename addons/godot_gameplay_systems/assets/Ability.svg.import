@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2d8ar1vogsgq"
-path="res://.godot/imported/Ability.svg-54186ad6478a322791426f1807e26561.ctex"
+path="res://.godot/imported/Ability.svg-e0d7b30e4febf5ebd1b30c2234360bea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot-gameplay-attributes/assets/Ability.svg"
-dest_files=["res://.godot/imported/Ability.svg-54186ad6478a322791426f1807e26561.ctex"]
+source_file="res://addons/godot_gameplay_systems/assets/Ability.svg"
+dest_files=["res://.godot/imported/Ability.svg-e0d7b30e4febf5ebd1b30c2234360bea.ctex"]
 
 [params]
 

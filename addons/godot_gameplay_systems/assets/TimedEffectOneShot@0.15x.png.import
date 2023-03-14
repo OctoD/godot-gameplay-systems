@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnu24g4ay5c6t"
-path="res://.godot/imported/GameplayAttributeMap.svg-b28c054e4f14b89daa4eaab1c931d38d.ctex"
+uid="uid://qdrl51ys1mv7"
+path="res://.godot/imported/TimedEffectOneShot@0.15x.png-b6c8f13c21ab8f3ecf4c7318341a5131.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot-gameplay-attributes/assets/GameplayAttributeMap.svg"
-dest_files=["res://.godot/imported/GameplayAttributeMap.svg-b28c054e4f14b89daa4eaab1c931d38d.ctex"]
+source_file="res://addons/godot_gameplay_systems/assets/TimedEffectOneShot@0.15x.png"
+dest_files=["res://.godot/imported/TimedEffectOneShot@0.15x.png-b6c8f13c21ab8f3ecf4c7318341a5131.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

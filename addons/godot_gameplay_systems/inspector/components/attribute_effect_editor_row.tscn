@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5cggwk6dy8c2"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/inspector/components/attribute_effect_editor_row.gd" id="1_ntmni"]
-[ext_resource type="Texture2D" uid="uid://qdrl51ys1mv7" path="res://addons/godot-gameplay-attributes/assets/TimedEffectOneShot@0.15x.png" id="2_twl3n"]
-[ext_resource type="Texture2D" uid="uid://bbd35kb6frop4" path="res://addons/godot-gameplay-attributes/assets/TimedEffect@0.15x.png" id="3_iu2ar"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/inspector/components/attribute_effect_editor_row.gd" id="1_ntmni"]
+[ext_resource type="Texture2D" uid="uid://qdrl51ys1mv7" path="res://addons/godot_gameplay_systems/assets/TimedEffectOneShot@0.15x.png" id="2_twl3n"]
+[ext_resource type="Texture2D" uid="uid://bbd35kb6frop4" path="res://addons/godot_gameplay_systems/assets/TimedEffect@0.15x.png" id="3_iu2ar"]
 
 [node name="AttributeEffectRow" type="GridContainer"]
 offset_right = 262.0

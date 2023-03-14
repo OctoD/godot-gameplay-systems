@@ -1,16 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://dlilmrpe4icgc"]
+[gd_scene load_steps=25 format=3 uid="uid://bwopjmrbhy2il"]
 
 [ext_resource type="Script" path="res://example/player/player.gd" id="1_uv2vo"]
 [ext_resource type="Script" path="res://example/player/hud.gd" id="2_ai5bq"]
 [ext_resource type="Texture2D" uid="uid://bj3wqaubjklhr" path="res://example/kenney_pixelplatformer/Tilemap/characters_packed.png" id="2_f43wi"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_attribute_map.gd" id="4_0gsm2"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute.gd" id="4_lwbis"]
-[ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="5_7fuph"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="6_fbded"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/stop_effect_if_0.gd" id="7_5dgle"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="7_xp7iw"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/ability_container.gd" id="10_jenjb"]
-[ext_resource type="PackedScene" uid="uid://cmmib2gyts5kj" path="res://addons/godot-gameplay-attributes/debug/abilities_debugger.tscn" id="12_65g51"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/nodes/gameplay_attribute_map.gd" id="4_0gsm2"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/resources/attribute.gd" id="4_lwbis"]
+[ext_resource type="Resource" path="res://example/attributes.tres" id="5_7fuph"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/nodes/gameplay_effect.gd" id="6_fbded"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/resources/stop_effect_if_0.gd" id="7_5dgle"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/resources/attribute_effect.gd" id="7_xp7iw"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/nodes/ability_container.gd" id="10_jenjb"]
+[ext_resource type="PackedScene" path="res://addons/godot_gameplay_systems/debug/abilities_debugger.tscn" id="12_65g51"]
 [ext_resource type="Script" path="res://example/abilities/resurrect/resurrect.gd" id="12_i7ohy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2anqr"]
@@ -182,7 +182,7 @@ horizontal_alignment = 1
 [node name="AbilityContainer" type="Node" parent="."]
 script = ExtResource("10_jenjb")
 gameplay_attribute_map_path = NodePath("../GameplayAttributeMap")
-abilities = Array[Resource("res://addons/godot-gameplay-attributes/resources/ability.gd")]([SubResource("Resource_xoj77")])
+abilities = Array[Resource("res://addons/godot_gameplay_systems/resources/ability.gd")]([SubResource("Resource_xoj77")])
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_c23ob")

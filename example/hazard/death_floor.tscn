@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://daa2asutewogx"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://example/hazard/death_floor.gd" id="1_h7hlh"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="2_xg7xs"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/nodes/gameplay_effect.gd" id="2_xg7xs"]
 [ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="3_ska1t"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="4_ybq36"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/resources/attribute_effect.gd" id="4_ybq36"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghexy"]
 size = Vector2(5000, 200)

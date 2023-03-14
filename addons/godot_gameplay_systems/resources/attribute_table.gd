@@ -1,4 +1,4 @@
-@icon("res://addons/godot-gameplay-attributes/assets/AttributeTable.svg")
+@icon("res://addons/godot_gameplay_systems/assets/AttributeTable.svg")
 
 class_name AttributeTable extends Resource
 

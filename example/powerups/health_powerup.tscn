@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca8c533rhlpru"]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/effected_area2d.gd" id="1_b0y15"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/nodes/effected_area2d.gd" id="1_b0y15"]
 [ext_resource type="Texture2D" uid="uid://cklqasjk7chaj" path="res://example/kenney_pixelplatformer/Tiles/tile_0044.png" id="2_n7m8r"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="3_eufud"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/nodes/gameplay_effect.gd" id="3_eufud"]
 [ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="4_6dfu6"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="5_7c3oy"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/resources/attribute_effect.gd" id="5_7c3oy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8m1h"]
 size = Vector2(16, 16)

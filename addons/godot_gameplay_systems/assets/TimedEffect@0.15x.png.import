@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qdrl51ys1mv7"
-path="res://.godot/imported/TimedEffectOneShot@0.15x.png-8ae8bd25eafbe33028d6550ff2cd20d7.ctex"
+uid="uid://bbd35kb6frop4"
+path="res://.godot/imported/TimedEffect@0.15x.png-1c74898cff99b3b7201d8e2aa1568f08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot-gameplay-attributes/assets/TimedEffectOneShot@0.15x.png"
-dest_files=["res://.godot/imported/TimedEffectOneShot@0.15x.png-8ae8bd25eafbe33028d6550ff2cd20d7.ctex"]
+source_file="res://addons/godot_gameplay_systems/assets/TimedEffect@0.15x.png"
+dest_files=["res://.godot/imported/TimedEffect@0.15x.png-1c74898cff99b3b7201d8e2aa1568f08.ctex"]
 
 [params]
 

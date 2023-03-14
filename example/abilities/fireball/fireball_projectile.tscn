@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bo2qg4c07g8yj"]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://example/abilities/fireball/fireball_projectile.gd" id="1_55naj"]
 [ext_resource type="Texture2D" uid="uid://bv5hedfl2cdwj" path="res://example/abilities/fireball/fireball.png" id="2_h73q5"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/nodes/gameplay_effect.gd" id="3_7jbqa"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/nodes/gameplay_effect.gd" id="3_7jbqa"]
 [ext_resource type="Resource" uid="uid://cbv7qpyl1i4ac" path="res://example/attributes.tres" id="4_twg0r"]
-[ext_resource type="Script" path="res://addons/godot-gameplay-attributes/resources/attribute_effect.gd" id="5_0jf7t"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/resources/attribute_effect.gd" id="5_0jf7t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f8dav"]
 
