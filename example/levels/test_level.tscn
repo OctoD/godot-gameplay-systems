@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://vlimbdaohxgb"]
 
-[ext_resource type="PackedScene" uid="uid://bwopjmrbhy2il" path="res://example/player/player.tscn" id="1_0jjra"]
+[ext_resource type="PackedScene" path="res://example/player/player.tscn" id="1_0jjra"]
 [ext_resource type="Script" path="res://example/levels/test_level.gd" id="1_glbc1"]
 [ext_resource type="Script" path="res://example/coin/coin_spawn.gd" id="4_dg2cv"]
 [ext_resource type="PackedScene" path="res://example/coin/coin.tscn" id="5_o0j0s"]
@@ -17,49 +17,49 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="Curve2D" id="Curve2D_4k17p"]
+[sub_resource type="Curve2D" id="Curve2D_aphqx"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -0.268188, -55.5339, 0, 0, 0, 0, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339)
 }
 point_count = 3
 
-[sub_resource type="Curve2D" id="Curve2D_p2rfe"]
+[sub_resource type="Curve2D" id="Curve2D_1rqyo"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -101.55, 59.2393, 0, 0, 0, 0, 23.4496, 61.2393, 0, 0, 0, 0, -0.268005, -54.5339, 0, 0, 0, 0, -101.55, 59.2393)
 }
 point_count = 4
 
-[sub_resource type="Curve2D" id="Curve2D_mbeia"]
+[sub_resource type="Curve2D" id="Curve2D_w41jk"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 193.232, -36.6646, 0, 0, 0, 0, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339, 0, 0, 0, 0, 193.232, -36.6646)
 }
 point_count = 4
 
-[sub_resource type="Curve2D" id="Curve2D_3m7b8"]
+[sub_resource type="Curve2D" id="Curve2D_mg6gh"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 137.211, 29.794, 0, 0, 0, 0, 0.731812, 12.4661, 0, 0, 0, 0, -177.789, 49.794, 0, 0, 0, 0, -148.789, -26.206, 0, 0, 0, 0, 137.211, 29.794)
 }
 point_count = 5
 
-[sub_resource type="Curve2D" id="Curve2D_m4rgr"]
+[sub_resource type="Curve2D" id="Curve2D_dje8j"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -0.268188, -55.5339, -142.848, -6.49309, 142.848, 6.49309, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339)
 }
 point_count = 3
 
-[sub_resource type="Curve2D" id="Curve2D_8c7fq"]
+[sub_resource type="Curve2D" id="Curve2D_r82mj"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -0.268188, -55.5339, -142.848, -6.49309, 142.848, 6.49309, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339)
 }
 point_count = 3
 
-[sub_resource type="Curve2D" id="Curve2D_2ijjb"]
+[sub_resource type="Curve2D" id="Curve2D_ib8cw"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -0.268188, -55.5339, -142.848, -6.49309, 142.848, 6.49309, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339)
@@ -163,31 +163,31 @@ script = ExtResource("4_dg2cv")
 position = Vector2(0, 460)
 
 [node name="HazardOnPath" parent="hazards" instance=ExtResource("6_53bxr")]
-curve = SubResource("Curve2D_4k17p")
+curve = SubResource("Curve2D_aphqx")
 
 [node name="HazardOnPath2" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(790.55, 29.7607)
-curve = SubResource("Curve2D_p2rfe")
+curve = SubResource("Curve2D_1rqyo")
 
 [node name="HazardOnPath3" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1386.77, 1.66463)
-curve = SubResource("Curve2D_mbeia")
+curve = SubResource("Curve2D_w41jk")
 
 [node name="HazardOnPath4" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1167.79, -14.794)
-curve = SubResource("Curve2D_3m7b8")
+curve = SubResource("Curve2D_mg6gh")
 
 [node name="HazardOnPath5" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1690.66, -85.7457)
-curve = SubResource("Curve2D_m4rgr")
+curve = SubResource("Curve2D_dje8j")
 
 [node name="HazardOnPath6" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1722.66, -85.7457)
-curve = SubResource("Curve2D_8c7fq")
+curve = SubResource("Curve2D_r82mj")
 
 [node name="HazardOnPath7" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1754.66, -85.7457)
-curve = SubResource("Curve2D_2ijjb")
+curve = SubResource("Curve2D_ib8cw")
 
 [node name="power ups" type="Node2D" parent="."]
 

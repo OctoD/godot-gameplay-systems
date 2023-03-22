@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm1prlnq3noon"
-path="res://.godot/imported/AbilityContainer@0.15x.png-4beee69aee124f0a23038d906916b0bf.ctex"
+uid="uid://dico0si16oo6u"
+path="res://.godot/imported/AttributeEffect@0.15x.png-0ff52db701b052fdb134a2b52898e627.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot_gameplay_systems/assets/AbilityContainer@0.15x.png"
-dest_files=["res://.godot/imported/AbilityContainer@0.15x.png-4beee69aee124f0a23038d906916b0bf.ctex"]
+source_file="res://addons/godot_gameplay_systems/attributes_and_abilities/assets/AttributeEffect@0.15x.png"
+dest_files=["res://.godot/imported/AttributeEffect@0.15x.png-0ff52db701b052fdb134a2b52898e627.ctex"]
 
 [params]
 

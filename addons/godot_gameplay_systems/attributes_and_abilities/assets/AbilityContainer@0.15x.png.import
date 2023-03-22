@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpcerra7enco5"
-path="res://.godot/imported/TimedEffectOneShot.svg-701a57db607b9c3bba745e7d033ae716.ctex"
+uid="uid://cm1prlnq3noon"
+path="res://.godot/imported/AbilityContainer@0.15x.png-dbf25c66b7ab7c8127c14a3ef31b5f9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot_gameplay_systems/assets/TimedEffectOneShot.svg"
-dest_files=["res://.godot/imported/TimedEffectOneShot.svg-701a57db607b9c3bba745e7d033ae716.ctex"]
+source_file="res://addons/godot_gameplay_systems/attributes_and_abilities/assets/AbilityContainer@0.15x.png"
+dest_files=["res://.godot/imported/AbilityContainer@0.15x.png-dbf25c66b7ab7c8127c14a3ef31b5f9c.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/godot_gameplay_systems/inspector/components/attribute_editor_row.gd" id="1_ceu2s"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/inspector/components/attribute_editor_row.gd" id="1_ceu2s"]
 
 [node name="AttributeEditorRow" type="VBoxContainer"]
 offset_right = 1152.0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbd35kb6frop4"
-path="res://.godot/imported/TimedEffect@0.15x.png-1c74898cff99b3b7201d8e2aa1568f08.ctex"
+uid="uid://b8osbt147xfdt"
+path="res://.godot/imported/TimedEffect.svg-7e0221bc7c621cbe2da09d683aeade15.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot_gameplay_systems/assets/TimedEffect@0.15x.png"
-dest_files=["res://.godot/imported/TimedEffect@0.15x.png-1c74898cff99b3b7201d8e2aa1568f08.ctex"]
+source_file="res://addons/godot_gameplay_systems/attributes_and_abilities/assets/TimedEffect.svg"
+dest_files=["res://.godot/imported/TimedEffect.svg-7e0221bc7c621cbe2da09d683aeade15.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

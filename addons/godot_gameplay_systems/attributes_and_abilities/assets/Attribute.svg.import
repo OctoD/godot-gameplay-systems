@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmp3udx3jf0ut"
-path="res://.godot/imported/AttributeEffect.svg-a54690d57d0043ab4e950f4643ef0b3c.ctex"
+uid="uid://cp7geybwp22pi"
+path="res://.godot/imported/Attribute.svg-f7a91e28dba79614248d03df87724328.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot_gameplay_systems/assets/AttributeEffect.svg"
-dest_files=["res://.godot/imported/AttributeEffect.svg-a54690d57d0043ab4e950f4643ef0b3c.ctex"]
+source_file="res://addons/godot_gameplay_systems/attributes_and_abilities/assets/Attribute.svg"
+dest_files=["res://.godot/imported/Attribute.svg-f7a91e28dba79614248d03df87724328.ctex"]
 
 [params]
 

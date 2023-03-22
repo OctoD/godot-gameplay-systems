@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/godot_gameplay_systems/resources/attribute_table.gd" id="1_vjqjq"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/resources/attribute_table.gd" id="1_vjqjq"]
 
 [resource]
 script = ExtResource("1_vjqjq")

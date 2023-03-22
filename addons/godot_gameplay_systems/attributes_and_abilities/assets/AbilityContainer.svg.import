@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgfn647m855hg"
-path="res://.godot/imported/GameplayEffect.svg-330627ee447638dee17db68f397d3da5.ctex"
+uid="uid://dn54fmpqnjrlm"
+path="res://.godot/imported/AbilityContainer.svg-94a2d27656beadd249024abbd7dad512.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/godot_gameplay_systems/assets/GameplayEffect.svg"
-dest_files=["res://.godot/imported/GameplayEffect.svg-330627ee447638dee17db68f397d3da5.ctex"]
+source_file="res://addons/godot_gameplay_systems/attributes_and_abilities/assets/AbilityContainer.svg"
+dest_files=["res://.godot/imported/AbilityContainer.svg-94a2d27656beadd249024abbd7dad512.ctex"]
 
 [params]
 
