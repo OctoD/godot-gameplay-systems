@@ -195,7 +195,13 @@ func _ready() -> void:
 	
 	for a in abilities:
 		grant(a)
+	
+	# Removes from abilities array if it's there. This avoids duplication which could lead to bugs.
+	for ga in granted_abilities:
+		var ability_index = abilities.find(ga)
 
+		if ability_index >= 0:
+			abilities.remove_at(ga)
 
 ## Activates a single [Ability] calling [method Ability.try_activate].
 func activate_one(ability: Ability) -> void:
@@ -353,12 +359,6 @@ func grant(ability: Ability) -> void:
 	# Skips if cannot be granted
 	if not can_grant(ability):
 		return
-
-	# Removes from abilities array if it's there. This avoids duplication which could lead to bugs.
-	var ability_index = abilities.find(ability)
-
-	if ability_index >= 0:
-		abilities.remove_at(ability_index)
 
 	# Appends to abilities array
 	granted_abilities.append(ability)
