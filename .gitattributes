@@ -8,8 +8,10 @@
 CODE_OF_CONDUCT.md        export-ignore
 docs                      export-ignore
 example                   export-ignore
+addons/gut                export-ignore
 icon.svg                  export-ignore
 icon.svg.import           export-ignore
 icons.sketch              export-ignore
 LICENCE                   export-ignore
 README.md                 export-ignore
+test                      export-ignore
