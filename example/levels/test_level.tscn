@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://vlimbdaohxgb"]
+[gd_scene load_steps=16 format=3 uid="uid://vlimbdaohxgb"]
 
 [ext_resource type="PackedScene" path="res://example/player/player.tscn" id="1_0jjra"]
 [ext_resource type="Script" path="res://example/levels/test_level.gd" id="1_glbc1"]
@@ -6,10 +6,7 @@
 [ext_resource type="PackedScene" path="res://example/coin/coin.tscn" id="5_o0j0s"]
 [ext_resource type="PackedScene" uid="uid://oxqjai5t6fn1" path="res://example/hazard/hazard_on_path.tscn" id="6_53bxr"]
 [ext_resource type="PackedScene" path="res://example/hazard/death_floor.tscn" id="7_chd2m"]
-[ext_resource type="PackedScene" path="res://example/powerups/health_powerup.tscn" id="8_d28ho"]
 [ext_resource type="TileSet" uid="uid://08gchmn3t8ai" path="res://example/levels/tilemap.tres" id="8_rdiq1"]
-[ext_resource type="PackedScene" uid="uid://c307myd082rf8" path="res://example/abilities/ability_item.tscn" id="9_ok1k8"]
-[ext_resource type="Script" path="res://example/abilities/fireball/fireball_ability.gd" id="10_yy5gn"]
 
 [sub_resource type="Curve2D" id="Curve2D_dbkw0"]
 _data = {
@@ -65,30 +62,6 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -0.268188, -55.5339, -142.848, -6.49309, 142.848, 6.49309, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339)
 }
 point_count = 3
-
-[sub_resource type="Resource" id="Resource_bj1hx"]
-script = ExtResource("10_yy5gn")
-min_speed = 5.0
-max_speed = 10.0
-ui_name = "Fireball"
-cooldown_duration = 1.0
-cooldown_continuos = false
-grant_automatic = true
-grant_tags = Array[String]([])
-grant_tags_required = Array[String]([])
-tags_activation = Array[String]([])
-tags_activation_required = Array[String](["fireball.shoot"])
-tags_block = Array[String](["fireball.cooldown", "dead"])
-tags_cancellation_required = Array[String]([])
-tags_cooldown_start = Array[String](["fireball.cooldown"])
-tags_cooldown_end = Array[String]([])
-tags_end_blocking = Array[String]([])
-tags_to_remove_on_activation = Array[String]([])
-tags_to_remove_on_block = Array[String](["fireball.shoot"])
-tags_to_remove_on_cancellation = Array[String](["fireball.shoot"])
-tags_to_remove_on_cooldown_start = Array[String]([])
-tags_to_remove_on_cooldown_end = Array[String](["fireball.cooldown"])
-tags_to_remove_on_end = Array[String](["fireball.shoot"])
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_glbc1")
@@ -188,12 +161,3 @@ curve = SubResource("Curve2D_eagvc")
 [node name="HazardOnPath7" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1754.66, -85.7457)
 curve = SubResource("Curve2D_m4p12")
-
-[node name="power ups" type="Node2D" parent="."]
-
-[node name="AbilityItem" parent="power ups" instance=ExtResource("9_ok1k8")]
-position = Vector2(238.507, -9.28249)
-granted_ability = SubResource("Resource_bj1hx")
-
-[node name="HealthPowerup" parent="power ups" instance=ExtResource("8_d28ho")]
-position = Vector2(1095.24, 24.5845)
