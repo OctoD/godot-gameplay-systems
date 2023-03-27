@@ -54,8 +54,10 @@ func _input(event: InputEvent) -> void:
 		ability_container.activate_many()
 	
 	if event.is_action_pressed("fireball"):
-		ability_container.add_tag("fireball.shoot")
-		ability_container.activate_many()
+		var fireball = ability_container.find_by(func (x): return x is FireballAbility)
+	
+		if fireball:
+			ability_container.activate_one(fireball)
 
 
 func _physics_process(delta: float) -> void:

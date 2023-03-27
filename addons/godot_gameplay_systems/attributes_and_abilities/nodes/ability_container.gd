@@ -123,6 +123,9 @@ func _handle_ability_activated(ability: Ability, activation_event: ActivationEve
 	else:
 		ability_activated.emit(ability, activation_event)
 
+		if ability.can_end(activation_event):
+			ability.end_ability(activation_event)
+
 
 ## Handles the [signal Ability.blocked] signal.
 ## [br]It's called internally by the current [AbilityContainer], so you should not call it.
@@ -201,7 +204,7 @@ func _ready() -> void:
 func activate_one(ability: Ability) -> void:
 	if not active:
 		return
-	
+
 	if granted_abilities.has(ability):
 		ability.try_activate(ActivationEvent.new(self))
 
@@ -258,7 +261,7 @@ func can_revoke(ability: Ability) -> bool:
 	if not active:
 		return false
 	
-	return granted_abilities.has(ability)
+	return granted_abilities.has(ability) and ability.can_end(ActivationEvent.new(self))
 
 
 ## Cancels one [Ability] using [method Ability.can_cancel]

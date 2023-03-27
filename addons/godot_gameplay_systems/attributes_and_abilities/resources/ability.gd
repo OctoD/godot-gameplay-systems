@@ -86,9 +86,6 @@ func can_activate(activation_event: ActivationEvent) -> bool:
 	if tags_activation_required.size() > 0:
 		return has_all_tags(tags_activation_required, activation_event.tags)
 	
-	if has_cooldown and tags_cooldown_start.size() > 0:
-		return has_all_tags(tags_cooldown_start, activation_event.tags)
-	
 	return true
 
 
@@ -114,9 +111,9 @@ func can_cancel(activation_event: ActivationEvent) -> bool:
 ## [br]Always return: [code]true[/code] if [member Ability.tags_end_blocking] is empty.
 func can_end(activation_event: ActivationEvent) -> bool:
 	if tags_end_blocking.size() > 0:
-		return has_all_tags(tags_end_blocking, activation_event.tags)
-	
-	return false
+		return !has_some_tags(tags_end_blocking, activation_event.tags)
+
+	return true
 
 
 ## Cancels an ability forcefully. Remember to call [method Ability.can_cancel] first.
@@ -162,9 +159,3 @@ func try_activate(activation_event: ActivationEvent) -> void:
 
 	if can_activate(activation_event):
 		activate(activation_event)
-	
-	if can_cancel(activation_event):
-		cancel(activation_event)
-	
-	if can_end(activation_event):
-		end_ability(activation_event)

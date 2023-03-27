@@ -1,16 +1,16 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=24 format=3 uid="uid://8r25eu18f7l"]
 
 [ext_resource type="Script" path="res://example/player/player.gd" id="1_uv2vo"]
 [ext_resource type="Script" path="res://example/player/hud.gd" id="2_ai5bq"]
 [ext_resource type="Texture2D" uid="uid://bj3wqaubjklhr" path="res://example/kenney_pixelplatformer/Tilemap/characters_packed.png" id="2_f43wi"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/nodes/gameplay_attribute_map.gd" id="4_0gsm2"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/resources/attribute.gd" id="4_lwbis"]
-[ext_resource type="Resource" path="res://example/attributes.tres" id="5_7fuph"]
+[ext_resource type="Resource" uid="uid://dfts4bf8f1u8a" path="res://example/attributes.tres" id="5_7fuph"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/nodes/gameplay_effect.gd" id="6_fbded"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/resources/stop_effect_if_0.gd" id="7_5dgle"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/resources/attribute_effect.gd" id="7_xp7iw"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/nodes/ability_container.gd" id="10_jenjb"]
-[ext_resource type="PackedScene" path="res://addons/godot_gameplay_systems/attributes_and_abilities/debug/abilities_debugger.tscn" id="12_65g51"]
+[ext_resource type="PackedScene" uid="uid://cxh5dyttaogko" path="res://addons/godot_gameplay_systems/attributes_and_abilities/debug/abilities_debugger.tscn" id="12_65g51"]
 [ext_resource type="Script" path="res://example/abilities/resurrect/resurrect.gd" id="12_i7ohy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2anqr"]
@@ -79,7 +79,7 @@ minimum_value = 1.0
 maximum_value = 1.0
 condition = SubResource("Resource_42y1g")
 
-[sub_resource type="Resource" id="Resource_xoj77"]
+[sub_resource type="Resource" id="Resource_uod7a"]
 script = ExtResource("12_i7ohy")
 health_added = 2.0
 score_removed = 5.0
@@ -99,17 +99,9 @@ tags_end_blocking = Array[String]([])
 tags_to_remove_on_activation = Array[String](["dead"])
 tags_to_remove_on_block = Array[String]([])
 tags_to_remove_on_cancellation = Array[String]([])
-tags_to_remove_on_cooldown_start = Array[String](["resurrect.start"])
+tags_to_remove_on_cooldown_start = Array[String](["resurrect.cooldown"])
 tags_to_remove_on_cooldown_end = Array[String](["resurrect.cooldown"])
 tags_to_remove_on_end = Array[String]([])
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c23ob"]
-properties/0/path = NodePath("AbilityContainer:tags")
-properties/0/spawn = true
-properties/0/sync = true
-properties/1/path = NodePath("GameplayAttributeMap:_attributes_dict")
-properties/1/spawn = true
-properties/1/sync = true
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -182,7 +174,4 @@ horizontal_alignment = 1
 [node name="AbilityContainer" type="Node" parent="."]
 script = ExtResource("10_jenjb")
 gameplay_attribute_map_path = NodePath("../GameplayAttributeMap")
-abilities = Array[Resource("res://addons/godot_gameplay_systems/attributes_and_abilities/resources/ability.gd")]([SubResource("Resource_xoj77")])
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_c23ob")
+abilities = Array[Resource("res://addons/godot_gameplay_systems/attributes_and_abilities/resources/ability.gd")]([SubResource("Resource_uod7a")])
