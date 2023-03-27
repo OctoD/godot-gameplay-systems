@@ -8,21 +8,17 @@ const fireball_scene = preload("res://example/abilities/fireball/fireball_projec
 @export var min_speed := 5.0
 @export var max_speed := 10.0
 
+const cooldown_tag = "fireball.cooldown"
+
 
 func _init() -> void:
-	var activation_required_tag = "fireball.shoot"
-	var cooldown_tag = "fireball.cooldown"
-
 	ui_name = "Fireball"
 	cooldown_duration = 1.0
-	tags_activation_required.append(activation_required_tag)
 	tags_block.append(cooldown_tag)
-	tags_block.append("dead")
+	tags_block.append(ResurrectAbility.dead_tag)
+	tags_end_blocking.append(cooldown_tag)
 	tags_cooldown_start.append(cooldown_tag)
-	tags_to_remove_on_block.append(activation_required_tag)
-	tags_to_remove_on_cancellation.append(activation_required_tag)
 	tags_to_remove_on_cooldown_end.append(cooldown_tag)
-	tags_to_remove_on_end.append(activation_required_tag)
 
 
 func activate(event: ActivationEvent) -> void:

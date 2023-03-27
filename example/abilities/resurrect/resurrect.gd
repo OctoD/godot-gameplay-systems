@@ -6,6 +6,11 @@ class_name ResurrectAbility extends Ability
 @export var score_removed := 5.0
 
 
+const cooldown_tag = "resurrect.cooldown"
+const start_tag = "resurrect.start"
+const dead_tag = "dead"
+
+
 func _make_effect() -> GameplayEffect:
 	var effect = GameplayEffect.new()
 	var health_effect = AttributeEffect.new()
@@ -28,13 +33,12 @@ func _make_effect() -> GameplayEffect:
 func _init() -> void:
 	ui_name = "Resurrect"
 	cooldown_duration = 5.0
-	tags_activation_required.append("dead")
-	tags_activation_required.append("resurrect.start")
-	tags_block.append("resurrect.cooldown")
-	tags_cooldown_start.append("resurrect.cooldown")
-	tags_to_remove_on_activation.append("dead")
-	tags_to_remove_on_cooldown_start.append("resurrect.start")
-	tags_to_remove_on_cooldown_end.append("resurrect.cooldown")
+	tags_activation_required.append_array([dead_tag, start_tag])
+	tags_block.append(cooldown_tag)
+	tags_cooldown_start.append(cooldown_tag)
+	tags_to_remove_on_activation.append(dead_tag)
+	tags_to_remove_on_cooldown_start.append(cooldown_tag)
+	tags_to_remove_on_cooldown_end.append(cooldown_tag)
 
 
 func activate(event: ActivationEvent) -> void:
