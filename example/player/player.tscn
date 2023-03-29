@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://8r25eu18f7l"]
+[gd_scene load_steps=27 format=3 uid="uid://8r25eu18f7l"]
 
 [ext_resource type="Script" path="res://example/player/player.gd" id="1_uv2vo"]
 [ext_resource type="Script" path="res://example/player/hud.gd" id="2_ai5bq"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/nodes/ability_container.gd" id="10_jenjb"]
 [ext_resource type="PackedScene" uid="uid://cxh5dyttaogko" path="res://addons/godot_gameplay_systems/attributes_and_abilities/debug/abilities_debugger.tscn" id="12_65g51"]
 [ext_resource type="Script" path="res://example/abilities/resurrect/resurrect.gd" id="12_i7ohy"]
+[ext_resource type="Script" path="res://example/abilities/fireball/fireball_ability.gd" id="13_do80w"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/inventory.gd" id="14_ktwhj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2anqr"]
 size = Vector2(24, 24)
@@ -103,6 +105,30 @@ tags_to_remove_on_cooldown_start = Array[String](["resurrect.cooldown"])
 tags_to_remove_on_cooldown_end = Array[String](["resurrect.cooldown"])
 tags_to_remove_on_end = Array[String]([])
 
+[sub_resource type="Resource" id="Resource_10t7f"]
+script = ExtResource("13_do80w")
+min_speed = 5.0
+max_speed = 10.0
+ui_name = "Fireball"
+cooldown_duration = 1.0
+cooldown_continuos = false
+grant_automatic = true
+grant_tags = Array[String]([])
+grant_tags_required = Array[String]([])
+tags_activation = Array[String]([])
+tags_activation_required = Array[String]([])
+tags_block = Array[String](["fireball.cooldown", "dead"])
+tags_cancellation_required = Array[String]([])
+tags_cooldown_start = Array[String](["fireball.cooldown"])
+tags_cooldown_end = Array[String]([])
+tags_end_blocking = Array[String](["fireball.cooldown"])
+tags_to_remove_on_activation = Array[String]([])
+tags_to_remove_on_block = Array[String]([])
+tags_to_remove_on_cancellation = Array[String]([])
+tags_to_remove_on_cooldown_start = Array[String]([])
+tags_to_remove_on_cooldown_end = Array[String](["fireball.cooldown"])
+tags_to_remove_on_end = Array[String]([])
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 13
@@ -174,4 +200,9 @@ horizontal_alignment = 1
 [node name="AbilityContainer" type="Node" parent="."]
 script = ExtResource("10_jenjb")
 gameplay_attribute_map_path = NodePath("../GameplayAttributeMap")
-abilities = Array[Resource("res://addons/godot_gameplay_systems/attributes_and_abilities/resources/ability.gd")]([SubResource("Resource_uod7a")])
+abilities = Array[Resource("res://addons/godot_gameplay_systems/attributes_and_abilities/resources/ability.gd")]([SubResource("Resource_uod7a"), SubResource("Resource_10t7f")])
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("14_ktwhj")
+owner_path = NodePath("..")
+equipment_path = null

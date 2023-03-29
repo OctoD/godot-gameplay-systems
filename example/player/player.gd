@@ -18,9 +18,10 @@ var is_dead: bool:
 		return true
 
 @onready var ability_container: AbilityContainer = $AbilityContainer
+@onready var animated_sprite: AnimatedSprite2D = $CollisionShape2d/AnimatedSprite2D
 @onready var gameplay_attribute_map: GameplayAttributeMap = $GameplayAttributeMap
 @onready var hud = $Camera2D/CanvasLayer/Hud
-@onready var animated_sprite: AnimatedSprite2D = $CollisionShape2d/AnimatedSprite2D
+@onready var inventory: Inventory = $Inventory
 
 
 func _handle_attribute_changed(spec: AttributeSpec) -> void:
