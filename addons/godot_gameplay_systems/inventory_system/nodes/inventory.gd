@@ -40,6 +40,9 @@ signal refused_to_remove(item: Item)
 ## Tags associated to this [Inventory]
 @export var tags: Array[String] = []
 
+## Related [Equipment] node if any.
+var equipment: Equipment
+
 
 ## Internal method. Handles all life cycle events managing the tagging system.
 func _handle_lifecycle_tags(life_cycle: LifeCycle, item: Item) -> void:
@@ -59,6 +62,9 @@ func _handle_lifecycle_tags(life_cycle: LifeCycle, item: Item) -> void:
 
 ## Ready function. Adds all starting [member Item.tags_added_on_add] when the node is ready.
 func _ready() -> void:
+	if not equipment_path.is_empty():
+		equipment = get_node(equipment_path) as Equipment
+	
 	for i in items:
 		add_tags(i.tags_added_on_add)
 
@@ -158,6 +164,11 @@ func add_tags(_tags: Array[String]) -> void:
 
 ## Checks if an item can be activated with an optional activation id.
 func can_activate(item: Item, activation_type: int = 0) -> bool:
+	if item.tags_required_to_activate.size() > 0:
+		for tag in item.tags_required_to_activate:
+			if not tags.has(tag):
+				return false
+	
 	return item._can_activate(ItemActivationEvent.new(self, activation_type))
 
 

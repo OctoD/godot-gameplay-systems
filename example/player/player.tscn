@@ -205,4 +205,3 @@ abilities = Array[Resource("res://addons/godot_gameplay_systems/attributes_and_a
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("14_ktwhj")
 owner_path = NodePath("..")
-equipment_path = null

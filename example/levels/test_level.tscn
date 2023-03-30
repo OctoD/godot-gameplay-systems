@@ -10,49 +10,49 @@
 [ext_resource type="PackedScene" uid="uid://8r25eu18f7l" path="res://example/player/player.tscn" id="7_q3e81"]
 [ext_resource type="TileSet" uid="uid://08gchmn3t8ai" path="res://example/levels/tilemap.tres" id="8_rdiq1"]
 
-[sub_resource type="Curve2D" id="Curve2D_axl2h"]
+[sub_resource type="Curve2D" id="Curve2D_6iq54"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -0.268188, -55.5339, 0, 0, 0, 0, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339)
 }
 point_count = 3
 
-[sub_resource type="Curve2D" id="Curve2D_wf62r"]
+[sub_resource type="Curve2D" id="Curve2D_06633"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -101.55, 59.2393, 0, 0, 0, 0, 23.4496, 61.2393, 0, 0, 0, 0, -0.268005, -54.5339, 0, 0, 0, 0, -101.55, 59.2393)
 }
 point_count = 4
 
-[sub_resource type="Curve2D" id="Curve2D_aplcg"]
+[sub_resource type="Curve2D" id="Curve2D_xkt4g"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 193.232, -36.6646, 0, 0, 0, 0, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339, 0, 0, 0, 0, 193.232, -36.6646)
 }
 point_count = 4
 
-[sub_resource type="Curve2D" id="Curve2D_esang"]
+[sub_resource type="Curve2D" id="Curve2D_ooxtg"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 137.211, 29.794, 0, 0, 0, 0, 0.731812, 12.4661, 0, 0, 0, 0, -177.789, 49.794, 0, 0, 0, 0, -148.789, -26.206, 0, 0, 0, 0, 137.211, 29.794)
 }
 point_count = 5
 
-[sub_resource type="Curve2D" id="Curve2D_5q470"]
+[sub_resource type="Curve2D" id="Curve2D_yxtns"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -0.268188, -55.5339, -142.848, -6.49309, 142.848, 6.49309, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339)
 }
 point_count = 3
 
-[sub_resource type="Curve2D" id="Curve2D_4hcjt"]
+[sub_resource type="Curve2D" id="Curve2D_753ug"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -0.268188, -55.5339, -142.848, -6.49309, 142.848, 6.49309, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339)
 }
 point_count = 3
 
-[sub_resource type="Curve2D" id="Curve2D_p62pp"]
+[sub_resource type="Curve2D" id="Curve2D_jwspj"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -0.268188, -55.5339, -142.848, -6.49309, 142.848, 6.49309, 0.731812, 12.4661, 0, 0, 0, 0, -0.268005, -54.5339)
@@ -120,31 +120,31 @@ layer_2/tile_data = PackedInt32Array(-2293774, 1179649, 1, -2228238, 1179649, 1,
 position = Vector2(0, 460)
 
 [node name="HazardOnPath" parent="hazards" instance=ExtResource("6_53bxr")]
-curve = SubResource("Curve2D_axl2h")
+curve = SubResource("Curve2D_6iq54")
 
 [node name="HazardOnPath2" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(790.55, 29.7607)
-curve = SubResource("Curve2D_wf62r")
+curve = SubResource("Curve2D_06633")
 
 [node name="HazardOnPath3" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1386.77, 1.66463)
-curve = SubResource("Curve2D_aplcg")
+curve = SubResource("Curve2D_xkt4g")
 
 [node name="HazardOnPath4" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1167.79, -14.794)
-curve = SubResource("Curve2D_esang")
+curve = SubResource("Curve2D_ooxtg")
 
 [node name="HazardOnPath5" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1690.66, -85.7457)
-curve = SubResource("Curve2D_5q470")
+curve = SubResource("Curve2D_yxtns")
 
 [node name="HazardOnPath6" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1722.66, -85.7457)
-curve = SubResource("Curve2D_4hcjt")
+curve = SubResource("Curve2D_753ug")
 
 [node name="HazardOnPath7" parent="hazards" instance=ExtResource("6_53bxr")]
 position = Vector2(1754.66, -85.7457)
-curve = SubResource("Curve2D_p62pp")
+curve = SubResource("Curve2D_jwspj")
 
 [node name="Player" parent="." instance=ExtResource("7_q3e81")]
 position = Vector2(-1.39999, 0.700012)

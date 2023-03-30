@@ -1,8 +1,6 @@
 extends GutTest
 
 
-var inventory: Inventory = Inventory.new()
-
 # A test class. Tests activation.
 class SubItem extends Item:
 	enum SubItemActivation {
@@ -17,14 +15,19 @@ class SubItem extends Item:
 		return event.activation_type == SubItemActivation.OK
 
 
+func make_inventory() -> Inventory:
+	var instance = Inventory.new()
+	add_child_autofree(instance)
+	return instance
+
+
 func before_each() -> void:
-	# Cleaning up inventory and signals watchers each time
-	inventory = Inventory.new()
 	clear_signal_watcher()
 
 
 func test_add_item_to_inventory() -> void:
 	var item = Item.new()
+	var inventory = make_inventory()
 	item.name = "test"
 	inventory.add_item(item)
 	assert_eq(inventory.items.size(), 1, "Item has been added")
@@ -32,6 +35,7 @@ func test_add_item_to_inventory() -> void:
 
 
 func test_item_can_activate() -> void:
+	var inventory = make_inventory()
 	watch_signals(inventory)
 	
 	var item = SubItem.new()
@@ -49,6 +53,7 @@ func test_item_can_activate() -> void:
 
 
 func test_tagging() -> void:
+	var inventory = make_inventory()
 	var item = Item.new()
 	var tags_added_on_activation = "tags_added_on_activation"
 	var tags_added_on_add = "tags_added_on_add"
@@ -57,11 +62,11 @@ func test_tagging() -> void:
 	var tags_removed_on_add = "tags_removed_on_add"
 	var tags_removed_on_remove = "tags_removed_on_remove"
 	
-	inventory.tags = [
+	inventory.tags.append_array([
 		tags_removed_on_activation,
 		tags_removed_on_add,
 		tags_removed_on_remove,
-	]
+	])
 	
 	item.tags_added_on_activation.append(tags_added_on_activation)
 	item.tags_added_on_add.append(tags_added_on_add)
@@ -94,6 +99,7 @@ func test_tagging() -> void:
 
 
 func test_signals() -> void:
+	var inventory = make_inventory()
 	watch_signals(inventory)
 	
 	var item = Item.new()
@@ -108,6 +114,7 @@ func test_signals() -> void:
 
 
 func test_stacking() -> void:
+	var inventory = make_inventory()
 	watch_signals(inventory)
 	
 	var _make_item = func () -> Item:
@@ -160,6 +167,7 @@ class TestItem001 extends Item:
 
 
 func test_filter_by() -> void:
+	var inventory = make_inventory()
 	# Adds four TestItem000, which will result in a single stack of 4/4
 	inventory.add_item(TestItem000.new())
 	inventory.add_item(TestItem000.new())
@@ -182,6 +190,7 @@ func test_filter_by() -> void:
 	
 	
 func test_find_by() -> void:
+	var inventory = make_inventory()
 	# Adds four TestItem000, which will result in a single stack of 4/4
 	inventory.add_item(TestItem000.new())
 	inventory.add_item(TestItem000.new())
@@ -202,6 +211,7 @@ func test_find_by() -> void:
 
 
 func test_count() -> void:
+	var inventory = make_inventory()
 	# Adds four TestItem000, which will result in a single stack of 4/4
 	inventory.add_item(TestItem000.new())
 	inventory.add_item(TestItem000.new())
@@ -221,6 +231,7 @@ func test_count() -> void:
 
 
 func test_count_by() -> void:
+	var inventory = make_inventory()
 	# Adds four TestItem000, which will result in a single stack of 4/4
 	inventory.add_item(TestItem000.new())
 	inventory.add_item(TestItem000.new())
@@ -242,14 +253,13 @@ func test_count_by() -> void:
 
 # Tests _ready fn
 func test_ready() -> void:
-	var inventory = Inventory.new()
+	var inventory = make_inventory()
 	var item = Item.new()
 	var tags = ["hello", "world"]
-	
+
 	item.tags_added_on_add.append_array(tags)
-	
+
 	inventory.items.append(item)
 	inventory._ready()
-	
+
 	assert_eq_deep(inventory.tags, tags)
-	

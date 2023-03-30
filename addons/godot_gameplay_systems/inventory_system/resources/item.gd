@@ -25,32 +25,38 @@ class_name Item extends Resource
 @export var quantity_max: int = 1
 
 @export_group("Tags", "tags_")
-## Tags added on [Item] activation.
+## Tags added to [Inventory] and [Equipment] on [Item] activation.
 @export var tags_added_on_activation: Array[String] = []
-## Tags added on [Item] add.
+## Tags added to [Inventory] on [Item] add.
 ## [br]Note, if some [Item]s are added to an [Inventory] through the editor, these tags will be added inside
 ## the [method Inventory._ready] method.
 @export var tags_added_on_add: Array[String] = []
-## Tags added to the [Equipment] owner when the [Item] is equipped.
+## Tags added to [Equipment] when the [Item] is equipped.
 @export var tags_added_on_equip: Array[String] = []
-## Tags added on [Item] remove.
+## Tags added to [Inventory] and [Equipment] on [Item] remove.
 @export var tags_added_on_remove: Array[String] = []
+## Tags added to [Equipment] owner when the [Item] is unequipped.
+@export var tags_added_on_unequip: Array[String] = []
+## Requires an [Inventory] or [Equipment] to have all these tags before activating this [Item].
+@export var tags_required_to_activate: Array[String] = []
 ## Requires an [Inventory] to have all these tags before adding this [Item].
 @export var tags_required_to_add: Array[String] = []
 ## Requires an [Equipment] to have all these tags before equipping this [Item].
 @export var tags_required_to_equip: Array[String] = []
 ## Requires an [Inventory] to have all these tags before removing this [Item].
-@export var tags_required_to_unequip: Array[String] = []
-## Requires an [Equipment] to have all these tags before unequipping this [Item].
 @export var tags_required_to_remove: Array[String] = []
-## Tags removed on [Item] activation.
+## Requires an [Equipment] to have all these tags before unequipping this [Item].
+@export var tags_required_to_unequip: Array[String] = []
+## Tags removed from [Inventory] and [Equipment] on [Item] activation.
 @export var tags_removed_on_activation: Array[String] = []
-## Tags removed on [Item] add.
+## Tags removed from [Inventory] on [Item] add.
 @export var tags_removed_on_add: Array[String] = []
-## Tags removed to the [Equipment] owner when the [Item] is unequipped.
+## Tags removed from the [Equipment] when the [Item] is equipped.
 @export var tags_removed_on_equip: Array[String] = []
-## Tags removed on [Item] remove.
+## Tags removed from [Inventory] and [Equipment] on [Item] remove.
 @export var tags_removed_on_remove: Array[String] = []
+## Tags removed from the [Equipment] when the [Item] is unequipped.
+@export var tags_removed_on_unequip: Array[String] = []
 
 
 ## A virtual method called when the item is activated. Override it to determine how the item behaves on activation.

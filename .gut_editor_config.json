@@ -11,13 +11,13 @@
  "font_name": "CourierPrime",
  "font_size": 16,
  "gut_on_top": true,
- "hide_orphans": true,
+ "hide_orphans": false,
  "ignore_pause": false,
  "include_subdirs": true,
  "inner_class": null,
  "junit_xml_file": "",
  "junit_xml_timestamp": false,
- "log_level": 1,
+ "log_level": 2,
  "opacity": 100,
  "paint_after": 0.1,
  "panel_options": {
@@ -25,18 +25,18 @@
   "font_size": 30,
   "hide_output_text": false,
   "hide_result_tree": false,
-  "hide_settings": false,
+  "hide_settings": true,
   "use_colors": false
  },
  "post_run_script": "",
  "pre_run_script": "",
  "prefix": "test_",
- "selected": null,
+ "selected": "test_equipment.gd",
  "should_exit": true,
  "should_exit_on_success": false,
  "should_maximize": false,
  "show_help": false,
  "suffix": ".gd",
  "tests": [],
- "unit_test_name": null
+ "unit_test_name": "test_tagging_block_tags"
 }
