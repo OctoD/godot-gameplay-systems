@@ -9,7 +9,7 @@
 addons/gut                                              export-ignore
 CODE_OF_CONDUCT.md                                      export-ignore
 docs                                                    export-ignore
-example                                                 export-ignore
+examples                                                export-ignore
 icon.svg                                                export-ignore
 icon.svg.import                                         export-ignore
 icons.sketch                                            export-ignore

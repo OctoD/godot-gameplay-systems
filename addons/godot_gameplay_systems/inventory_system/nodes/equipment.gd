@@ -5,6 +5,8 @@ class_name Equipment extends Node
 ## Handles your equipped items.
 ##
 ## It uses slots to determine which item can be equippend and how.
+##
+## Note: an equipment should be unique for a character.
 
 
 enum LifeCycle {
@@ -30,6 +32,10 @@ signal refused_to_equip(item: Item, slot: EquipmentSlot)
 signal unequipped(item: Item, slot: EquipmentSlot)
 ## Emitted when the [Equipment] refuses to unequip an [Item] because of it's own tags requirements.
 signal refused_to_unequip(item: Item, slot: EquipmentSlot)
+## Emitted when any add tag method is called.
+signal tag_added(tag: String, tags: Array[String])
+## Emitted when any remove tag method is called.
+signal tag_removed(tag: String, tags: Array[String])
 
 
 @export_category("Equipment")
@@ -89,7 +95,12 @@ func _handle_life_cycle(life_cycle: LifeCycle, item: Item) -> void:
 func _ready() -> void:
 	if not inventory_path.is_empty():
 		inventory = get_node(inventory_path) as Inventory
-	
+
+	if not Engine.is_editor_hint() and not owner_path.is_empty():
+		var _owner = get_node(owner_path)
+		_owner.set_meta("ggsEquipment", self)
+
+
 	if inventory != null:
 		inventory.item_activated.connect(func (item: Item, activation_type: int) -> void:
 			_handle_life_cycle(LifeCycle.Activate, item)
@@ -138,6 +149,7 @@ func activate(item: Item, activation_type: int = 0) -> void:
 func add_tag(tag: String) -> void:
 	if not tags.has(tag):
 		tags.append(tag)
+		tag_added.emit(tag, tags)
 
 
 ## Adds many tags.
@@ -197,12 +209,16 @@ func equip(item: Item, skip_tags_check: bool = false) -> void:
 	if not slot:
 		refused_to_equip.emit(item, slot)
 		return
-		
+
 	if skip_tags_check:
+		if slot.has_equipped_item:
+			slot.unequip()
 		slot.equip(item)
 		return
 	else:
 		if can_equip(item):
+			if slot.has_equipped_item:
+				slot.unequip()
 			slot.equip(item)
 			return
 	
@@ -282,6 +298,7 @@ func remove_tag(tag: String) -> void:
 	
 	if index >= 0:
 		tags.remove_at(index)
+		tag_removed.emit(tags)
 
 
 ## Removes many tags.

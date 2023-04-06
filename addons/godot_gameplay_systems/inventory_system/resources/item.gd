@@ -16,6 +16,8 @@ class_name Item extends Resource
 @export var decrease_stack_on_use: bool = false
 ## The rendered (2D or 3D) item into the game world, or in front of the camera.
 @export var scene: PackedScene =  null
+## Tags used to categorize this [Item].
+@export var tags: Array[String] = []
 
 @export_group("Stacking", "quantity_")
 ## Current quantity.

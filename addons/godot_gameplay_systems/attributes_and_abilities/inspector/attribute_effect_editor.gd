@@ -4,7 +4,7 @@ extends EditorProperty
 var add_row_button := Button.new()
 var scroll_container := VBoxContainer.new()
 var resource_input := EditorResourcePicker.new()
-var row_editor_scene = preload("res://addons/godot_gameplay_systems/inspector/components/attribute_effect_editor_row.tscn")
+var row_editor_scene = preload("res://addons/godot_gameplay_systems/attributes_and_abilities/inspector/components/attribute_effect_editor_row.tscn")
 var vbox_container := VBoxContainer.new()
 
 

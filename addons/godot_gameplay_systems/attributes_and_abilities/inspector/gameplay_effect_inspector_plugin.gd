@@ -2,8 +2,8 @@
 extends EditorInspectorPlugin
 
 
-var attribute_editor = preload("res://addons/godot_gameplay_systems/inspector/attribute_editor.gd")
-var attribute_effect_editor = preload("res://addons/godot_gameplay_systems/inspector/attribute_effect_editor.gd")
+var attribute_editor = preload("res://addons/godot_gameplay_systems/attributes_and_abilities/inspector/attribute_editor.gd")
+var attribute_effect_editor = preload("res://addons/godot_gameplay_systems/attributes_and_abilities/inspector/attribute_effect_editor.gd")
 
 
 func _can_handle(object) -> bool:

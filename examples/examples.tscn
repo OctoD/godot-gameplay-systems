@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cml0q8o7ynipb"]
+
+[ext_resource type="Script" path="res://examples/examples.gd" id="1_pax2c"]
+[ext_resource type="PackedScene" uid="uid://f4ax0ctfqkgv" path="res://examples/examples_menu.tscn" id="2_h6qvp"]
+
+[node name="Examples" type="Node"]
+script = ExtResource("1_pax2c")
+
+[node name="RunningExample" type="Node" parent="."]
+
+[node name="ExamplesMenu" parent="." instance=ExtResource("2_h6qvp")]

@@ -3,6 +3,11 @@
 class_name Inventory extends Node
 
 
+## Represents an inventory.
+##
+## Note: an Inventory should be unique for a character.
+
+
 enum LifeCycle {
 	## An [Item] has been activated.
 	Activated = 0,
@@ -65,8 +70,13 @@ func _ready() -> void:
 	if not equipment_path.is_empty():
 		equipment = get_node(equipment_path) as Equipment
 	
+	if not Engine.is_editor_hint() and not owner_path.is_empty():
+		var _owner = get_node(owner_path)
+		_owner.set_meta("ggsInventory", self)
+
 	for i in items:
 		add_tags(i.tags_added_on_add)
+	
 
 
 ## Activates an [Item] with an optional [code]activation_type[/code].

@@ -1,4 +1,4 @@
-@icon("res://addons/godot_gameplay_systems/assets/GameplayAttributeMap.svg")
+@icon("res://addons/godot_gameplay_systems/attributes_and_abilities/assets/GameplayAttributeMap.svg")
 @tool
 class_name GameplayAttributeMap extends Node
 

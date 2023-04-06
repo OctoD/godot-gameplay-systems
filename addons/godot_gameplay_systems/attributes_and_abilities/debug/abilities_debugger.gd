@@ -5,21 +5,32 @@ extends Control
 @export var persist_messages_for := 15.0
 
 
-var ability_container: AbilityContainer
+@onready var ability_container: AbilityContainer
+@onready var labels: VBoxContainer = $Labels
+@onready var timer: Timer = $Timer
 
 
 func _ready() -> void:
 	ability_container = get_node(ability_container_path) as AbilityContainer
+	
+	timer.timeout.connect(func ():
+		var children = labels.get_children()
+		
+		if children:
+			labels.remove_child(children[0])
+	)
+	
 	assert(ability_container != null, "ability_container is null")
-	if ability_container:
-		ability_container.ability_activated.connect(_handle_activated)
-		ability_container.ability_blocked.connect(_handle_blocked)
-		ability_container.ability_cancelled.connect(_handle_cancelled)
-		ability_container.ability_ended.connect(_handle_ended)
-		ability_container.ability_granted.connect(_handle_granted)
-		ability_container.ability_revoked.connect(_handle_revoked)
-		ability_container.cooldown_started.connect(_handle_cooldown_started)
-		ability_container.cooldown_ended.connect(_handle_cooldown_ended)
+	
+	ability_container.ability_activated.connect(_handle_activated)
+	ability_container.ability_blocked.connect(_handle_blocked)
+	ability_container.ability_cancelled.connect(_handle_cancelled)
+	ability_container.ability_ended.connect(_handle_ended)
+	ability_container.ability_granted.connect(_handle_granted)
+	ability_container.ability_revoked.connect(_handle_revoked)
+	ability_container.cooldown_started.connect(_handle_cooldown_started)
+	ability_container.cooldown_ended.connect(_handle_cooldown_ended)
+
 
 func _handle_activated(ability: Ability, e: ActivationEvent) -> void:
 	_make_label("activated", ability, e)
@@ -66,12 +77,5 @@ func _make_label(event: String, ability: Ability, e: ActivationEvent) -> void:
 		"2": str(e.tags)
 	})
 	
-	timer.timeout.connect(func ():
-		remove_child(label)
-		remove_child(timer)
-	)
-	
-	add_child(label)
-	add_child(timer)
-	timer.start()
+	labels.add_child(label)
 	
