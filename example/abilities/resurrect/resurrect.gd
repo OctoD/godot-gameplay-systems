@@ -7,7 +7,6 @@ class_name ResurrectAbility extends Ability
 
 
 const cooldown_tag = "resurrect.cooldown"
-const start_tag = "resurrect.start"
 const dead_tag = "dead"
 
 
@@ -26,14 +25,14 @@ func _make_effect() -> GameplayEffect:
 	
 	effect.attributes_affected.append(health_effect)
 	effect.attributes_affected.append(score_effect)
-	
+
 	return effect
 	
 
 func _init() -> void:
 	ui_name = "Resurrect"
 	cooldown_duration = 5.0
-	tags_activation_required.append_array([dead_tag, start_tag])
+	tags_activation_required.append(dead_tag)
 	tags_block.append(cooldown_tag)
 	tags_cooldown_start.append(cooldown_tag)
 	tags_to_remove_on_activation.append(dead_tag)
