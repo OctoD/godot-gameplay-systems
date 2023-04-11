@@ -35,7 +35,7 @@ tags_removed_on_unequip = Array[String](["shotgun.equipped"])
 [sub_resource type="SphereShape3D" id="SphereShape3D_u4bui"]
 
 [node name="FpsPickableShotgun" type="Area3D"]
-transform = Transform3D(0.90544, 0, 0.444054, 0, 1, 0, -0.444052, 0, 0.905459, 0, 0, 0)
+transform = Transform3D(0.236623, 0, -0.98052, 0, 1, 0, 0.9805, 0, 0.236621, 0, 0, 0)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_7ihpl")

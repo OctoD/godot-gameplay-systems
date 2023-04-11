@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3]
+[gd_scene load_steps=27 format=3 uid="uid://cp8qdpp5ihmo0"]
 
 [ext_resource type="Script" path="res://examples/simple_2d_platformer/player/player.gd" id="1_nonhe"]
 [ext_resource type="Texture2D" uid="uid://bj3wqaubjklhr" path="res://examples/simple_2d_platformer/kenney_pixelplatformer/Tilemap/characters_packed.png" id="2_iquwb"]
@@ -81,30 +81,6 @@ minimum_value = 1.0
 maximum_value = 1.0
 condition = SubResource("Resource_42y1g")
 
-[sub_resource type="Resource" id="Resource_uod7a"]
-script = ExtResource("12_d4hl0")
-health_added = 2.0
-score_removed = 5.0
-ui_name = "Resurrect"
-cooldown_duration = 5.0
-cooldown_continuos = false
-grant_automatic = true
-grant_tags = Array[String]([])
-grant_tags_required = Array[String]([])
-tags_activation = Array[String]([])
-tags_activation_required = Array[String](["dead", "resurrect.start"])
-tags_block = Array[String](["resurrect.cooldown"])
-tags_cancellation_required = Array[String]([])
-tags_cooldown_start = Array[String](["resurrect.cooldown"])
-tags_cooldown_end = Array[String]([])
-tags_end_blocking = Array[String]([])
-tags_to_remove_on_activation = Array[String](["dead"])
-tags_to_remove_on_block = Array[String]([])
-tags_to_remove_on_cancellation = Array[String]([])
-tags_to_remove_on_cooldown_start = Array[String](["resurrect.cooldown"])
-tags_to_remove_on_cooldown_end = Array[String](["resurrect.cooldown"])
-tags_to_remove_on_end = Array[String]([])
-
 [sub_resource type="Resource" id="Resource_10t7f"]
 script = ExtResource("13_hqdb3")
 min_speed = 5.0
@@ -127,6 +103,30 @@ tags_to_remove_on_block = Array[String]([])
 tags_to_remove_on_cancellation = Array[String]([])
 tags_to_remove_on_cooldown_start = Array[String]([])
 tags_to_remove_on_cooldown_end = Array[String](["fireball.cooldown"])
+tags_to_remove_on_end = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_hvflv"]
+script = ExtResource("12_d4hl0")
+health_added = 2.0
+score_removed = 5.0
+ui_name = "Resurrect"
+cooldown_duration = 5.0
+cooldown_continuos = false
+grant_automatic = true
+grant_tags = Array[String]([])
+grant_tags_required = Array[String]([])
+tags_activation = Array[String]([])
+tags_activation_required = Array[String](["dead"])
+tags_block = Array[String](["resurrect.cooldown"])
+tags_cancellation_required = Array[String]([])
+tags_cooldown_start = Array[String](["resurrect.cooldown"])
+tags_cooldown_end = Array[String]([])
+tags_end_blocking = Array[String]([])
+tags_to_remove_on_activation = Array[String](["dead"])
+tags_to_remove_on_block = Array[String]([])
+tags_to_remove_on_cancellation = Array[String]([])
+tags_to_remove_on_cooldown_start = Array[String](["resurrect.cooldown"])
+tags_to_remove_on_cooldown_end = Array[String](["resurrect.cooldown"])
 tags_to_remove_on_end = Array[String]([])
 
 [node name="Player" type="CharacterBody2D"]
@@ -200,7 +200,7 @@ horizontal_alignment = 1
 [node name="AbilityContainer" type="Node" parent="."]
 script = ExtResource("11_5ampk")
 gameplay_attribute_map_path = NodePath("../GameplayAttributeMap")
-abilities = Array[Resource("res://addons/godot_gameplay_systems/attributes_and_abilities/resources/ability.gd")]([SubResource("Resource_uod7a"), SubResource("Resource_10t7f")])
+abilities = Array[Resource("res://addons/godot_gameplay_systems/attributes_and_abilities/resources/ability.gd")]([SubResource("Resource_10t7f"), SubResource("Resource_hvflv")])
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("14_lmfca")

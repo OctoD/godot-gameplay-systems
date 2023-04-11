@@ -28,6 +28,10 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	max_value.step = 0.01
+	min_value.step = 0.01
+	cur_value.step = 0.01
+	
 	max_value.value_changed.connect(func (value):
 		if not _updating_ui:
 			attribute_updated.emit("maximum_value", value)

@@ -1,3 +1,4 @@
+@icon("res://addons/godot_gameplay_systems/inventory_system/assets/EquipmentIcon.png")
 @tool
 class_name Equipment extends Node
 

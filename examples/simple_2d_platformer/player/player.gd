@@ -51,8 +51,10 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("resurrect"):
-		ability_container.add_tag("resurrect.start")
-		ability_container.activate_many()
+		var resurrect = ability_container.find_by(func (x): return x is ResurrectAbility)
+
+		if resurrect:
+			ability_container.activate_one(resurrect)
 	
 	if event.is_action_pressed("fireball"):
 		var fireball = ability_container.find_by(func (x): return x is FireballAbility)

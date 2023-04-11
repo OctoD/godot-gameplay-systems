@@ -13,8 +13,8 @@ func _enter_tree() -> void:
 	add_custom_type("Item", "Resource", item_script, preload("res://addons/godot_gameplay_systems/inventory_system/assets/ItemIcon.png"))
 	add_custom_type("ItemActivationEvent", "RefCounted", item_activation_event_script, null)
 	add_custom_type("Inventory", "Node", inventory_script, preload("res://addons/godot_gameplay_systems/inventory_system/assets/InventoryIcon.png"))
-	add_custom_type("Equipment", "Node", equipment_script, null)
-	add_custom_type("EquippedItem3D", "Node3D", equipped_item_3d, null)
+	add_custom_type("Equipment", "Node", equipment_script, preload("res://addons/godot_gameplay_systems/inventory_system/assets/EquipmentIcon.png"))
+	add_custom_type("EquippedItem3D", "Node3D", equipped_item_3d, preload("res://addons/godot_gameplay_systems/inventory_system/assets/Equipped3DIcon.png"))
 	add_custom_type("PickableArea3D", "Area3D", pickable_item_3d, null)
 
 

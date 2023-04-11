@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcb1m2p68x76k"]
+
+[ext_resource type="PackedScene" uid="uid://djknqcyrdgn2p" path="res://examples/diablo_like/player/diablo_like_player.tscn" id="1_y68yg"]
+[ext_resource type="TileSet" uid="uid://belqpw23pek2v" path="res://examples/simple_2d_platformer/levels/tilemap.tres" id="2_sgeqm"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_soqt2"]
+
+[node name="diablo_like_skill_tree" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_y68yg")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_soqt2")
+
+[node name="Map" type="TileMap" parent="."]
+tile_set = ExtResource("2_sgeqm")
+format = 2

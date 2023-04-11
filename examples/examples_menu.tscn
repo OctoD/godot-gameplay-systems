@@ -57,6 +57,12 @@ text = "Doom-Like fps"
 script = ExtResource("3_jxaps")
 scene_to_load = "res://examples/doom_like_fps/levels/test_level.tscn"
 
+[node name="DiabloLike" type="Button" parent="ExamplesMenu/ExampleButtons"]
+layout_mode = 2
+text = "Diablo-like"
+script = ExtResource("3_jxaps")
+scene_to_load = "res://examples/diablo_like/diablo_like.tscn"
+
 [node name="HSeparator" type="HSeparator" parent="ExamplesMenu"]
 custom_minimum_size = Vector2(2.08165e-12, 50)
 layout_mode = 2

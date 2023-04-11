@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp6ue1iiphlxa"]
+
+[ext_resource type="Script" path="res://examples/diablo_like/player/hud/in_game_bar/in_game_bar.gd" id="1_dc2xq"]
+
+[node name="InGameBar" type="HBoxContainer"]
+script = ExtResource("1_dc2xq")
