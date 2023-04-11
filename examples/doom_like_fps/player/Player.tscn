@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjwuhfb2wcj1x"]
+[gd_scene load_steps=11 format=3 uid="uid://bjwuhfb2wcj1x"]
 
 [ext_resource type="Script" path="res://examples/doom_like_fps/player/Player.gd" id="1_diqix"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/equipped_item_3d.gd" id="2_jwtl3"]
@@ -6,9 +6,6 @@
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/resources/attribute.gd" id="3_gseup"]
 [ext_resource type="Resource" uid="uid://2s6702ugdpni" path="res://examples/doom_like_fps/doom_like_pg_fps_attributes.tres" id="4_fxibq"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/equipment.gd" id="5_pje3c"]
-[ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/resources/equipment_slot.gd" id="6_atpux"]
-[ext_resource type="Script" path="res://examples/doom_like_fps/items/weapons/Shotgun/fps_shotgun.gd" id="7_mea1q"]
-[ext_resource type="Script" path="res://examples/doom_like_fps/items/weapons/SMG/fps_smg.gd" id="8_k16yi"]
 [ext_resource type="Script" path="res://examples/doom_like_fps/player/hud.gd" id="10_wtnkq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3660s"]
@@ -26,65 +23,6 @@ attribute_name = "armor"
 minimum_value = 0.0
 maximum_value = 100.0
 current_value = 0.0
-
-[sub_resource type="Resource" id="Resource_3tbp5"]
-script = ExtResource("7_mea1q")
-bullet_damage = 120.0
-bullet_speed = 40.0
-reload_time = 0.0
-name = &"shotgun"
-can_stack = false
-decrease_stack_on_use = false
-tags = Array[String]([])
-quantity_current = 1
-quantity_max = 1
-tags_added_on_activation = Array[String]([])
-tags_added_on_add = Array[String](["has.shotgun"])
-tags_added_on_equip = Array[String](["shotgun.equipped"])
-tags_added_on_remove = Array[String]([])
-tags_added_on_unequip = Array[String]([])
-tags_required_to_activate = Array[String](["can.shoot.shotgun", "has.shotgun", "shotgun.equipped"])
-tags_required_to_add = Array[String]([])
-tags_required_to_equip = Array[String](["has.shotgun"])
-tags_required_to_remove = Array[String]([])
-tags_required_to_unequip = Array[String]([])
-tags_removed_on_activation = Array[String]([])
-tags_removed_on_add = Array[String]([])
-tags_removed_on_equip = Array[String]([])
-tags_removed_on_remove = Array[String]([])
-tags_removed_on_unequip = Array[String](["shotgun.equipped"])
-
-[sub_resource type="Resource" id="Resource_e8yv5"]
-script = ExtResource("8_k16yi")
-bullet_damage = 15.0
-bullet_speed = 115.0
-reload_time = 0.0
-name = &"smg"
-can_stack = false
-decrease_stack_on_use = false
-tags = Array[String]([])
-quantity_current = 1
-quantity_max = 1
-tags_added_on_activation = Array[String]([])
-tags_added_on_add = Array[String](["has.smg"])
-tags_added_on_equip = Array[String](["smg.equipped"])
-tags_added_on_remove = Array[String]([])
-tags_added_on_unequip = Array[String]([])
-tags_required_to_activate = Array[String](["can.shoot.smg", "has.smg", "smg.equipped"])
-tags_required_to_add = Array[String]([])
-tags_required_to_equip = Array[String](["has.smg"])
-tags_required_to_remove = Array[String]([])
-tags_required_to_unequip = Array[String]([])
-tags_removed_on_activation = Array[String]([])
-tags_removed_on_add = Array[String]([])
-tags_removed_on_equip = Array[String]([])
-tags_removed_on_remove = Array[String]([])
-tags_removed_on_unequip = Array[String](["smg.equipped"])
-
-[sub_resource type="Resource" id="Resource_k0jqa"]
-script = ExtResource("6_atpux")
-name = "weapons"
-accepted_items = Array[Resource("res://addons/godot_gameplay_systems/inventory_system/resources/item.gd")]([SubResource("Resource_3tbp5"), SubResource("Resource_e8yv5")])
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -112,7 +50,6 @@ table = ExtResource("4_fxibq")
 [node name="Equipment" type="Node" parent="."]
 script = ExtResource("5_pje3c")
 owner_path = NodePath("..")
-slots = Array[ExtResource("6_atpux")]([SubResource("Resource_k0jqa")])
 gameplay_equip_automatically = true
 
 [node name="Hud" type="BoxContainer" parent="."]

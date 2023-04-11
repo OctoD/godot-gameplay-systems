@@ -7,5 +7,6 @@ func _init() -> void:
 	name = "shotgun"
 	bullet_damage = 120
 	bullet_speed  = 20
-	tags_removed_on_activation.append(_can_shoot_tag)
+	## one shot per second
+	reload_time = 1.0
 	super._init()

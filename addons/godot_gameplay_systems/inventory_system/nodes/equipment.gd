@@ -122,6 +122,7 @@ func _ready() -> void:
 	for slot in slots:
 		slot.item_equipped.connect(func (item: Item):
 			equipped.emit(item, slot)
+			item._equip(self, slot)
 			_handle_life_cycle(LifeCycle.Equip, item)
 		)
 		slot.item_refused_to_equip.connect(func (item: Item):
@@ -129,6 +130,7 @@ func _ready() -> void:
 		)
 		slot.item_unequipped.connect(func (item: Item):
 			unequipped.emit(item, slot)	
+			item._unequip(self, slot)
 			_handle_life_cycle(LifeCycle.Unequip, item)
 		)
 
@@ -206,7 +208,7 @@ func can_unequip(item: Item) -> bool:
 ## the check against [member Item.tags_required_to_equip] will be skipped.
 func equip(item: Item, skip_tags_check: bool = false) -> void:
 	var slot = find_slot_by_item(item)
-	
+
 	if not slot:
 		refused_to_equip.emit(item, slot)
 		return
@@ -281,6 +283,21 @@ func find_slot_by(predicate: Callable) -> EquipmentSlot:
 ## Finds the first [EquipmentSlot] that can equip the passed [Item].
 func find_slot_by_item(item: Item) -> EquipmentSlot:
 	return find_slot_by(func (x: EquipmentSlot): return x.can_equip(item))
+
+
+## Checks if a tag is contained in this [Equipment].
+func has_tag(tag: String) -> bool:
+	return tags.has(tag)
+
+
+
+## Checks if all these tags are contained in this [Equipment].
+func has_tags(_tags: Array[String]) -> bool:
+	for t in _tags:
+		if not tags.has(t):
+			return false
+	
+	return true
 
 
 ## Checks if the [Item] is equipped.

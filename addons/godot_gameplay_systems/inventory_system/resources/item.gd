@@ -70,3 +70,13 @@ func _activate(_activation_event: ItemActivationEvent) -> void:
 func _can_activate(_activation_event: ItemActivationEvent) -> bool:
 	return true
 
+
+## A virtual method called when this item is equipped.
+func _equip(_equipment: Equipment, _equipment_slot: EquipmentSlot) -> void:
+	pass
+
+
+## A virtual method called when this item is unequipped.
+func _unequip(_equipment: Equipment, _equipment_slot: EquipmentSlot) -> void:
+	pass
+

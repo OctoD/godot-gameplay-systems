@@ -18,15 +18,28 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 var equipped_weapon: DoomLikeFPSWeaponItem
+var shotgun: DoomLikeFPSShotgun
+var smg: DoomLikeFPSSMG
 
 
 func _ready() -> void:
+	# note: you can (and you should) add slots and accepted items using the editor's ui 
+	# I am doing programmatically because I prefer coding (it helps me iterate on this exampels faster when I change a resource's code)
+	shotgun = DoomLikeFPSShotgun.new()
+	smg = DoomLikeFPSSMG.new()
+	
+	equipment.slots.append(EquipmentSlot.new([shotgun, smg]))
+	equipment._ready()
+
 	equipment.tag_added.connect(func (tag, _tags):
 		hud.equipment_tag_added(tag)
 	)
 	
 	equipment.equipped.connect(func (weapon, _slot):
-		equipped_weapon = weapon	
+		# Since we can have only one equipped item in this scenario, we save
+		# the reference to it into the Player object.
+		# On other scenarioes, a good approach would consist in cycling all the Equipment.equipped_items and activate one by one
+		equipped_weapon = weapon
 	)
 
 
@@ -65,9 +78,9 @@ func _input(event: InputEvent):
 		camera_neck.rotation.x = clamp(camera_neck.rotation.x, -1.2, 1.2)
 	
 	if event.is_action_pressed("fps_weapon_1"):
-		if not equipment.is_equipped(DoomLikeFPSShotgun.new()):
-			equipment.equip(DoomLikeFPSShotgun.new())
+		if not equipment.is_equipped(shotgun):
+			equipment.equip(shotgun)
 
 	if event.is_action_pressed("fps_weapon_2"):
-		if not equipment.is_equipped(DoomLikeFPSSMG.new()):
-			equipment.equip(DoomLikeFPSSMG.new())
+		if not equipment.is_equipped(smg):
+			equipment.equip(smg)
