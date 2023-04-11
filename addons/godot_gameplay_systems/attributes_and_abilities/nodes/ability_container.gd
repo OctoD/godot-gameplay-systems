@@ -195,7 +195,7 @@ func _handle_lifecycle_tagging(lifecycle: LifeCycle, ability: Ability) -> void:
 ## The [method Node._ready] override
 func _ready() -> void:
 	gameplay_attribute_map = get_node(gameplay_attribute_map_path)
-
+	
 	for i in abilities.size():
 		var ability = abilities[i - 1]
 		grant(ability)
