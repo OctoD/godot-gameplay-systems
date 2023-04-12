@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgaeay7n64b62"]
+[gd_scene load_steps=11 format=3 uid="uid://dgaeay7n64b62"]
 
 [ext_resource type="PackedScene" uid="uid://bjwuhfb2wcj1x" path="res://examples/doom_like_fps/player/Player.tscn" id="1_2spe6"]
 [ext_resource type="PackedScene" uid="uid://dis1qkhjn8a7t" path="res://examples/doom_like_fps/items/weapons/Shotgun/fps_pickable_shotgun.tscn" id="1_twfyb"]
+[ext_resource type="Script" path="res://examples/doom_like_fps/enemies/enemy_spawner.gd" id="1_w06gf"]
 [ext_resource type="PackedScene" uid="uid://62pp3jtak44e" path="res://examples/doom_like_fps/items/weapons/SMG/fps_pickable_smg.tscn" id="2_u1x08"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_psm4n"]
@@ -51,13 +52,38 @@ size = Vector3(42.1387, 1, 37.8524)
 
 [node name="Enemies" type="Node3D" parent="."]
 
+[node name="DoomLikeEnemySpawner" type="Node3D" parent="Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29648, 0.266283, -4.72)
+script = ExtResource("1_w06gf")
+spawn_on_node_path = NodePath("..")
+
+[node name="DoomLikeEnemySpawner2" type="Node3D" parent="Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00807, 0.266283, -4.72)
+script = ExtResource("1_w06gf")
+spawn_on_node_path = NodePath("..")
+
+[node name="DoomLikeEnemySpawner3" type="Node3D" parent="Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00807, 0.266283, -2.1295)
+script = ExtResource("1_w06gf")
+spawn_on_node_path = NodePath("..")
+
+[node name="DoomLikeEnemySpawner4" type="Node3D" parent="Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48499, 0.266283, -2.1295)
+script = ExtResource("1_w06gf")
+spawn_on_node_path = NodePath("..")
+
+[node name="DoomLikeEnemySpawner5" type="Node3D" parent="Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48499, 0.266283, 0.13027)
+script = ExtResource("1_w06gf")
+spawn_on_node_path = NodePath("..")
+
 [node name="Items" type="Node3D" parent="."]
 
 [node name="FpsPickableShotgun" parent="Items" instance=ExtResource("1_twfyb")]
-transform = Transform3D(-0.845378, 0, 0.534155, 0, 1, 0, -0.534151, 0, -0.84538, -0.775278, -0.505122, -3.43428)
+transform = Transform3D(-0.836808, 0, -0.54771, 0, 1, 0, 0.547712, 0, -0.836812, -0.775278, -0.505122, -3.43428)
 
 [node name="FpsPickableSMG" parent="Items" instance=ExtResource("2_u1x08")]
-transform = Transform3D(-0.949332, 2.21507e-16, -0.314263, 3.48787e-16, 1, -3.48783e-16, 0.314264, -4.40726e-16, -0.949327, 1.894, -0.523851, -1.999)
+transform = Transform3D(-0.107859, -3.09174e-16, -0.99429, 3.48787e-16, 1, -3.48783e-16, 0.994286, -3.84416e-16, -0.107855, 1.894, -0.523851, -1.999)
 
 [node name="Player" parent="." instance=ExtResource("1_2spe6")]
 metadata/equipment = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"editor_description":"","script":Resource("res://addons/godot_gameplay_systems/inventory_system/nodes/equipment.gd"),"owner_path":NodePath(".."),"inventory_path":NodePath(""),"slots":Array[Resource("res://addons/godot_gameplay_systems/inventory_system/resources/equipment_slot.gd")]([null]),"tags":Array[String]([]),"gameplay_equip_automatically":false,"equipped_items":Array[Resource("res://addons/godot_gameplay_systems/inventory_system/resources/item.gd")]([]),"inventory":null)

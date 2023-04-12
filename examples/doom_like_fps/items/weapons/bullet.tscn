@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://examples/doom_like_fps/items/weapons/bullet.gd" id="1_pyx2s"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mw4rf"]
-radius = 0.05
+radius = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxa1g"]
 emission_enabled = true

@@ -11,12 +11,14 @@ func _ready() -> void:
 	var health_effect = AttributeEffect.new()
 	
 	health_effect.attribute_name = "health"
-	health_effect.maximum_value = damage
-	health_effect.maximum_value = damage
+	health_effect.maximum_value = -absf(damage)
+	health_effect.minimum_value = -absf(damage)
 	
 	effect.attributes_affected.append(health_effect)
-
+	
 	add_child(effect)
+
+	super._ready()
 
 
 func _physics_process(delta: float) -> void:
