@@ -249,7 +249,7 @@ func can_grant(ability: Ability) -> bool:
 		return false
 	
 	if ability.grant_tags_required.size() > 0:
-		if ability._includes_tags(ability.grant_tags_required, self.tags):
+		if ability.has_all_tags(ability.grant_tags_required, self.tags):
 			return !granted_abilities.has(ability)
 		else:
 			return false
