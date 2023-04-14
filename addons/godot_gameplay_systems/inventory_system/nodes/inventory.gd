@@ -22,9 +22,9 @@ enum LifeCycle {
 signal item_activated(item: Item, activation_type: int)
 ## Emitted when an [Item] has been added to this inventory.
 signal item_added(item: Item)
-## Emitted when an [Item] has been added activated and it's own stack has been consumed entirely.
+## Emitted when an [Item] has been activated and it's own stack has been consumed entirely.
 signal item_depleted(item: Item)
-## Emitted when an [Item] has been added removed from this inventory.
+## Emitted when an [Item] has been removed from this inventory.
 signal item_removed(item: Item)
 ## Emitted when the [Inventory] refuses to add an [Item] because of lacking tags.
 signal refused_to_add(item: Item)
@@ -116,19 +116,21 @@ func add_item(item: Item) -> Item:
 	# Check if there's another [Item] in the inventory and if is stackable.
 	if found and found.can_stack:
 		var new_quantity = found.quantity_current + item.quantity_current
-		print("new_quantity", new_quantity)
-		## It's stackable to an infinite value
+
+		# It's not stackable to an infinite value
 		if found.quantity_max != 0:
 			found.quantity_current = clampi(new_quantity, 0, found.quantity_max)
-			
+
 			if new_quantity > found.quantity_max:
 				var duplicated_item = found.duplicate() as Item
-				
+
 				duplicated_item.quantity_current = new_quantity - found.quantity_max
 
 				return add_item(duplicated_item)
+		# Stacking it to infinite value
 		else:
 			found.quantity_current = new_quantity
+		item_added.emit(found)
 		return found
 	
 	var item_to_return = item.duplicate()
@@ -267,7 +269,6 @@ func instantiate_item(item: Item) -> Node:
 		return instance
 	
 	return null
-
 
 	
 ## Removes an item from the inventory

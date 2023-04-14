@@ -137,6 +137,9 @@ func test_stacking() -> void:
 	# let's say we pickup 7 items of the same type, so we will find three items in total inside the inventory
 	# two with the full stack, one with a 1/3 of stack 
 	assert_eq(inventory.items.size(), 3, "issue with stacking")
+	assert_eq(inventory.items[0].quantity_current, 3, "first item quantity should be 3")
+	assert_eq(inventory.items[1].quantity_current, 3, "first item quantity should be 3")
+	assert_eq(inventory.items[2].quantity_current, 1, "first item quantity should be 1")
 	
 	# now let's say we want to use six of them, based on their array indexes (aka looping them), 
 	# we should find ourselves with just one stacked item with quantity_current set to 1
