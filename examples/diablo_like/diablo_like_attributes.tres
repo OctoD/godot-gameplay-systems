@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_wrhdf")
-attributes = Array[String](["strength", "dexterity", "intelligence", "mana", "health", "damage", "mana_regeneration", "health_regeneration", "armor"])
+attributes = Array[String](["strength", "dexterity", "intelligence", "mana", "health", "damage", "mana_regeneration_per_second", "health_regeneration_per_second", "armor", "pick_radius", "critical_damage_chance", "movement_speed", "movement_speed_bonus"])
