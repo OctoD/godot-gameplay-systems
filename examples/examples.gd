@@ -14,6 +14,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	
 	examples_menu.scene_selected.connect(func (scene):
 		examples_menu.hide_menu()
 		running_example.add_child(scene)

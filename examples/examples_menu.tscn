@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://f4ax0ctfqkgv"]
+[gd_scene load_steps=5 format=3 uid="uid://f4ax0ctfqkgv"]
 
 [ext_resource type="Script" path="res://examples/examples_menu.gd" id="1_erut4"]
 [ext_resource type="Texture2D" uid="uid://c7lgk28i4ps8i" path="res://icon.svg" id="2_340vx"]
 [ext_resource type="Script" path="res://examples/example_menu_button.gd" id="3_jxaps"]
+[ext_resource type="PackedScene" uid="uid://co2amclkdu4x6" path="res://examples/preferences/preferences.tscn" id="4_sr0v6"]
 
 [node name="ExamplesMenu" type="Node2D"]
 script = ExtResource("1_erut4")
@@ -67,6 +68,26 @@ scene_to_load = "res://examples/diablo_like/diablo_like.tscn"
 custom_minimum_size = Vector2(2.08165e-12, 50)
 layout_mode = 2
 
+[node name="PreferencesButton" type="Button" parent="ExamplesMenu"]
+layout_mode = 2
+text = "Preferences"
+
+[node name="HSeparator2" type="HSeparator" parent="ExamplesMenu"]
+custom_minimum_size = Vector2(2.08165e-12, 50)
+layout_mode = 2
+
 [node name="QuitButton" type="Button" parent="ExamplesMenu"]
 layout_mode = 2
 text = "Quit GGS"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Preferences" parent="CanvasLayer" instance=ExtResource("4_sr0v6")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
