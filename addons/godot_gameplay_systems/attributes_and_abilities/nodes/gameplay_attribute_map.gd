@@ -31,7 +31,11 @@ signal effect_applied(effect: GameplayEffect)
 @export var table: AttributeTable = null
 
 
+## A dictionary whose keys are attributes names and values are [AttributeSpec] instances.
 var _attributes_dict: Dictionary = {}
+## A dictionary whose keys are [Timer] id and values are integers representing how many times these timers got called.
+## [br]Once a timer is stopped, those key/value pair should be erased.
+var _timeouts_count_dict: Dictionary = {}
 ## Is the list of child GameplayEffect nodes
 var effects: Array[GameplayEffect] = []:
 	get:
@@ -91,16 +95,16 @@ func _setup_attributes() -> void:
 
 	for attribute in attributes:
 		var previous = get_attribute_by_name(attribute.attribute_name)
-		
+
 		if previous:
 			previous.free()
-		
+
 		var spec = AttributeSpec.from_attribute(attribute)
-		
+
 		spec.changed.connect(func (attribute): 
 			attribute_changed.emit(attribute)	
 		)
-		
+
 		_attributes_dict[spec.attribute_name] = spec
 
 
@@ -132,46 +136,49 @@ func apply_effect(effect: GameplayEffect) -> void:
 	if effect == null:
 		return
 
+
 	for attribute_affected in effect.attributes_affected:
 		if not attribute_affected.attribute_name in _attributes_dict:
 			return
-		
+
 		if attribute_affected.life_time == AttributeEffect.LIFETIME_ONE_SHOT:
 			var spec = _attributes_dict[attribute_affected.attribute_name]
 
 			if not attribute_affected.should_apply(effect, self):
 				continue
-			
+
 			_attributes_dict[attribute_affected.attribute_name].current_value += attribute_affected.get_current_value()
 			attribute_effect_applied.emit(attribute_affected, spec)
 			attribute_effect_removed.emit(attribute_affected, spec)
 		elif attribute_affected.life_time == AttributeEffect.LIFETIME_TIME_BASED:
-			var counts = 0
 			var timer = Timer.new()
+			var timer_id = timer.get_instance_id()
 			
-			add_child(timer)
-			
+			_timeouts_count_dict[timer_id] = 0
+
+			timer.autostart = true
 			timer.wait_time = attribute_affected.apply_every_second
+
 			timer.timeout.connect(func ():
 				var spec = _attributes_dict[attribute_affected.attribute_name]
 
 				if not attribute_affected.should_apply(effect, self):
-					counts += 1
 					return
-				
-				if attribute_affected.max_applications != 0 and attribute_affected.max_applications == counts:
+
+				if attribute_affected.max_applications != 0 and attribute_affected.max_applications == _timeouts_count_dict[timer_id]:
 					attribute_effect_removed.emit(attribute_affected, spec)
 					timer.stop()
+					_timeouts_count_dict.erase(timer_id)
 					remove_child(timer)
 				else:
 					spec.current_value += attribute_affected.get_current_value()
 					attribute_effect_applied.emit(attribute_affected, spec)
 
 					if attribute_affected.max_applications != 0:
-						counts += 1
+						_timeouts_count_dict[timer_id] += 1
 			)
 			
-			timer.start()
+			add_child(timer)
 
 	effect_applied.emit(effect)
 

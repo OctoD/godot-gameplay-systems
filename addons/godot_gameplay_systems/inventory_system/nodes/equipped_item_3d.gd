@@ -39,8 +39,6 @@ func _ready() -> void:
 	var equipment = get_node(equipment_path)
 	
 	equipment.equipped.connect(func (item: Item, _slot: EquipmentSlot):
-		print(item.scene)
-		
 		if item.scene and item.scene.can_instantiate():
 			current = item.scene.instantiate()
 			add_child(current)

@@ -7,11 +7,11 @@ class_name EquipmentSlot extends Resource
 
 ## Emitted when an [Item] is equipped.
 ## [br]Note, this will always be emitted after the [signal EquipmentSlot.unequipped_item] signal if a previous [Item] was equipped.
-signal item_equipped(item: Item)
+signal item_equipped(item: Item, slot: EquipmentSlot)
 ## Emitted if the [Item] passed to [method EquipmentSlot.equip] method is not acceptable.
-signal item_refused_to_equip(item: Item)
+signal item_refused_to_equip(item: Item, slot: EquipmentSlot)
 ## Emitted when an [Item] is unequipped.
-signal item_unequipped(item: Item)
+signal item_unequipped(item: Item, slot: EquipmentSlot)
 
 
 @export_category("Slot")
@@ -63,20 +63,20 @@ func equip(item: Item) -> void:
 		return
 
 	if not can_equip(item):
-		item_refused_to_equip.emit(item)
+		item_refused_to_equip.emit(item, self)
 		return
 
 	if has_equipped_item:
-		item_unequipped.emit(equipped)
+		item_unequipped.emit(equipped, self)
 		equipped = null
 
 	equipped = item
-	item_equipped.emit(item)
+	item_equipped.emit(item, self)
 
 
 ## Unequips an [Item] if any.
 ## [br]If there is an equipped item, the signal [signal EquipmentSlot.item_unequipped] will be emitted.
 func unequip() -> void:
 	if has_equipped_item:
-		item_unequipped.emit(equipped)
+		item_unequipped.emit(equipped, self)
 		equipped = null

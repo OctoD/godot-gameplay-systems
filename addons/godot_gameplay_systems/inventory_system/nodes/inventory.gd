@@ -67,15 +67,7 @@ func _handle_lifecycle_tags(life_cycle: LifeCycle, item: Item) -> void:
 
 ## Ready function. Adds all starting [member Item.tags_added_on_add] when the node is ready.
 func _ready() -> void:
-	if not equipment_path.is_empty():
-		equipment = get_node(equipment_path) as Equipment
-	
-	if not Engine.is_editor_hint() and not owner_path.is_empty():
-		var _owner = get_node(owner_path)
-		_owner.set_meta("ggsInventory", self)
-
-	for i in items:
-		add_tags(i.tags_added_on_add)
+	setup()
 	
 
 
@@ -277,7 +269,7 @@ func remove_item(item: Item, bypass_tag_check: bool = false) -> void:
 	if not can_remove(item) and not bypass_tag_check:
 		refused_to_remove.emit(item)
 		return
-	
+
 	var index = items.find(item)
 
 	if index >= 0:
@@ -312,3 +304,16 @@ func remove_tags(_tags: Array[String]) -> void:
 	for t in _tags:
 		if tags.has(t):
 			tags.erase(t)
+
+
+## Programmatically setups an [Inventory]
+func setup() -> void:
+	if not equipment_path.is_empty():
+		equipment = get_node(equipment_path) as Equipment
+	
+	if not Engine.is_editor_hint() and not owner_path.is_empty():
+		var _owner = get_node(owner_path)
+		_owner.set_meta("ggsInventory", self)
+
+	for i in items:
+		add_tags(i.tags_added_on_add)

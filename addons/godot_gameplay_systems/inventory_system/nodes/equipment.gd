@@ -72,6 +72,35 @@ var equipped_items: Array[Item]:
 var inventory: Inventory
 
 
+## Used internally to handle a [signal Inventory.item_activated] signal.
+func _handle_item_activated(item: Item, activation_type: int) -> void:
+	_handle_life_cycle(LifeCycle.Activate, item)
+	item_activated.emit(item, activation_type)
+		
+
+## Used internally to handle a [signal Inventory.item_added] signal.
+func _handle_item_added(item: Item) -> void:
+	if gameplay_equip_automatically:
+		var slot = find_slot_by_item(item)
+
+		if slot != null and not slot.has_equipped_item:
+			equip(item)
+
+
+## Used internally to handle a [signal EquipmentSlot.item_added] signal.
+func _handle_item_equipped(item: Item, slot: EquipmentSlot):
+	equipped.emit(item, slot)
+	item._equip(self, slot)
+	_handle_life_cycle(LifeCycle.Equip, item)
+		
+
+
+## Used internally to handle a [signal Inventory.item_removed] signal.
+func _handle_item_removed(item: Item) -> void:
+	unequip(item)
+	_handle_life_cycle(LifeCycle.Remove, item)
+
+
 ## Handles tags internally. Do not call it manually.
 func _handle_life_cycle(life_cycle: LifeCycle, item: Item) -> void:
 	match life_cycle:
@@ -92,47 +121,21 @@ func _handle_life_cycle(life_cycle: LifeCycle, item: Item) -> void:
 			return
 
 
+## Used internally to handle a [signal EquipmentSlot.refused_to_equip] signal.
+func _handle_item_refused_to_equip(item: Item, slot: EquipmentSlot):
+	refused_to_equip.emit(item, slot)	
+
+
+## Used internally to handle a [signal EquipmentSlot.item_unequipped] signal.
+func _handle_item_unequipped(item: Item, slot: EquipmentSlot):
+	unequipped.emit(item, slot)	
+	item._unequip(self, slot)
+	_handle_life_cycle(LifeCycle.Unequip, item)
+
+
 ## Binds slots signals
 func _ready() -> void:
-	if not inventory_path.is_empty():
-		inventory = get_node(inventory_path) as Inventory
-
-	if not Engine.is_editor_hint() and not owner_path.is_empty():
-		var _owner = get_node(owner_path)
-		_owner.set_meta("ggsEquipment", self)
-
-
-	if inventory != null:
-		inventory.item_activated.connect(func (item: Item, activation_type: int) -> void:
-			_handle_life_cycle(LifeCycle.Activate, item)
-			item_activated.emit(item, activation_type)
-		)
-		inventory.item_added.connect(func (item: Item) -> void:
-			if gameplay_equip_automatically:
-				var slot = find_slot_by_item(item)
-				
-				if slot != null and not slot.has_equipped_item:
-					equip(item)
-		)
-		inventory.item_removed.connect(func (item: Item) -> void:
-			unequip(item)
-			_handle_life_cycle(LifeCycle.Remove, item)
-		)
-	
-	for slot in slots:
-		slot.item_equipped.connect(func (item: Item):
-			equipped.emit(item, slot)
-			item._equip(self, slot)
-			_handle_life_cycle(LifeCycle.Equip, item)
-		)
-		slot.item_refused_to_equip.connect(func (item: Item):
-			refused_to_equip.emit(item, slot)	
-		)
-		slot.item_unequipped.connect(func (item: Item):
-			unequipped.emit(item, slot)	
-			item._unequip(self, slot)
-			_handle_life_cycle(LifeCycle.Unequip, item)
-		)
+	setup()
 
 
 ## Activates an [Item]. 
@@ -325,17 +328,51 @@ func remove_tags(_tags: Array[String]) -> void:
 		remove_tag(t)
 
 
+## Programmatically setups an [Equipment]
+func setup() -> void:
+	if not inventory_path.is_empty():
+		inventory = get_node(inventory_path) as Inventory
+
+	if not Engine.is_editor_hint() and not owner_path.is_empty():
+		var _owner = get_node(owner_path)
+		_owner.set_meta("ggsEquipment", self)
+
+	if inventory != null:
+		if not inventory.item_added.is_connected(_handle_item_activated):
+			inventory.item_activated.connect(_handle_item_activated)
+
+		if not inventory.item_added.is_connected(_handle_item_added):
+			inventory.item_added.connect(_handle_item_added)
+			
+		if not inventory.item_removed.is_connected(_handle_item_removed):
+			inventory.item_removed.connect(_handle_item_removed)
+	
+	for slot in slots:
+		if not slot.item_equipped.is_connected(_handle_item_equipped):
+			slot.item_equipped.connect(_handle_item_equipped)
+		
+		if not slot.item_refused_to_equip.is_connected(_handle_item_refused_to_equip):
+			slot.item_refused_to_equip.connect(_handle_item_refused_to_equip)
+
+		if not slot.item_unequipped.is_connected(_handle_item_unequipped):
+			slot.item_unequipped.connect(_handle_item_unequipped)
+			
+
+
 ## Finds the first slot whose equipped [member Item.name] equals to the passed [member Item.name] and unequips it.
 ## [br]Passing [code]skip_tags_check[/code] to [code]true[/code], 
 ## the check against [member Item.tags_required_to_equip] will be skipped.
 func unequip(item: Item, skip_tags_check: bool = false) -> void:
-	for slot in slots:
-		if slot.has_equipped_item and slot.equipped.name == item.name and skip_tags_check:
-			slot.unequip()
-			return
-		elif slot.has_equipped_item and slot.equipped.name == item.name and can_unequip(item):
-			slot.unequip()
-			return
+	var slot = find_slot_by_item(item)
+	
+	if slot == null:
+		return
+	elif slot.has_equipped_item and slot.equipped.name == item.name and skip_tags_check:
+		slot.unequip()
+		return
+	elif slot.has_equipped_item and slot.equipped.name == item.name and can_unequip(item):
+		slot.unequip()
+		return
 
 
 ## Unequips the first [EquipmentSlot] which satisfies the [Callable] predicate.
