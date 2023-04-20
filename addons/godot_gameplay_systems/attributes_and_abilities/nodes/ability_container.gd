@@ -67,7 +67,7 @@ var cooldowns: Dictionary = {}
 ## It's the related [GameplayAttributeMap] as specified by [member AbilityContainer.gameplay_attribute_map_path]
 var gameplay_attribute_map: GameplayAttributeMap
 ## It's a dictionary of granted abilities.
-var granted_abilities: Array[Ability]
+var granted_abilities: Array[Ability] = []
 
 
 ## Creates a cooldown [Timer] for an [Ability].
@@ -195,7 +195,7 @@ func _handle_lifecycle_tagging(lifecycle: LifeCycle, ability: Ability) -> void:
 ## The [method Node._ready] override
 func _ready() -> void:
 	gameplay_attribute_map = get_node(gameplay_attribute_map_path)
-	
+
 	for i in abilities.size():
 		var ability = abilities[i - 1]
 		grant(ability)
@@ -211,14 +211,20 @@ func activate_one(ability: Ability) -> void:
 
 
 ## Activates many [Ability] resources by tags calling [method Ability.try_activate]
-func activate_many() -> void:
+## [br]If parallel_execution is [code]true[/code], then the event passed is generated once for all abilities
+## otherwise the event will be regenerated for each iteration
+func activate_many(parallel_execution: bool = false) -> void:
 	if not active:
 		return
-	
-	var activation_event = ActivationEvent.new(self)
+		
+	if parallel_execution:
+		var activation_event = ActivationEvent.new(self)
 
-	for x in granted_abilities:
-		x.try_activate(activation_event)
+		for x in granted_abilities:
+			x.try_activate(activation_event)
+	else:
+		for x in granted_abilities:
+			x.try_activate(ActivationEvent.new(self))
 
 
 ## Adds a tag to an [AbilityContainer] avoiding duplicates
@@ -429,21 +435,21 @@ func revoke(ability: Ability, removes_completely: bool = false) -> void:
 		return
 	
 	var index = granted_abilities.find(ability)
+	var activation_event = ActivationEvent.new(self)
 
-	ability.ended.connect(func ():
+	if ability.can_end(activation_event):
+		ability.end_ability(activation_event)
+		
 		if _has_cooldown(ability):
 			cooldowns[ability].queue_free()
 			cooldowns.erase(ability)
-		
+
 		if index >= 0:
 			granted_abilities.remove_at(index)
 			ability_revoked.emit(ability)
 
 			if not removes_completely and not abilities.has(ability):
 				abilities.append(ability)
-	)
-
-	ability.end_ability(ActivationEvent.new(self))
 
 
 ## Stops an ability cooldown
