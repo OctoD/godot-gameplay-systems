@@ -400,6 +400,11 @@ func has_ability(predicate: Callable, includes_ungranted = false) -> bool:
 	return find_by(predicate, includes_ungranted) != null
 
 
+## Returns [code]true[/code] if the tag is contained in the tags of the specified [Ability] in the [AbilityContainer], [code]false[/code] otherwise.
+func has_tag(tag: String) -> bool:
+	return tags.has(tag)
+
+
 ## Removes a single tag
 func remove_tag(tag: String) -> void:
 	var index = tags.find(tag)

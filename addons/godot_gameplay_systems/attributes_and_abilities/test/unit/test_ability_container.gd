@@ -105,10 +105,14 @@ func test_tag_system() -> void:
 	assert_eq(container.tags.size(), 1, "duped tags should not be added")
 	
 	container.add_tag(tag001)
+	
+	assert_eq(container.has_tag(tag001), true, "should contain tag001 it")
 
 	assert_signal_emitted(container, "tags_updated", "signal tags_updated should have been emitted")
 	
 	container.remove_tag(tag000)
+	
+	assert_ne(container.has_tag(tag000), true, "should not contain tag000 anymore")
 
 	assert_signal_emitted(container, "tags_updated", "signal tags_updated should have been emitted")
 	
