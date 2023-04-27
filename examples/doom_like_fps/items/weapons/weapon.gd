@@ -2,6 +2,10 @@
 class_name DoomLikeFPSWeaponItem extends Item
 
 
+@export_category("UI")
+@export var icon: Texture = null
+
+
 @export_category("Bullets")
 @export var bullet_damage: float = 10.0
 @export var bullet_speed: float = 10.0

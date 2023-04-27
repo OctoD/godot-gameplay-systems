@@ -3,6 +3,7 @@ class_name DoomLikeFPSShotgun extends DoomLikeFPSWeaponItem
 
 
 func _init() -> void:
+	icon = preload("res://examples/doom_like_fps/items/weapons/Shotgun/assets/shotgun.png")
 	scene = preload("res://examples/doom_like_fps/items/weapons/Shotgun/fps_shotgun.tscn")
 	name = "shotgun"
 	bullet_damage = 120

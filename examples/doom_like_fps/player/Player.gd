@@ -14,6 +14,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var active_weapon: EquippedItem3D = $CameraNeck/Camera3D/EquippedItem3D
 @onready var camera_neck: Node3D = $CameraNeck
 @onready var equipment: Equipment = $Equipment
+@onready var gameplay_attribute_map: GameplayAttributeMap = $GameplayAttributeMap
 @onready var hud = $Hud
 
 
@@ -40,7 +41,13 @@ func _ready() -> void:
 		# the reference to it into the Player object.
 		# On other scenarioes, a good approach would consist in cycling all the Equipment.equipped_items and activate one by one
 		equipped_weapon = weapon
+		hud.handle_equipped(weapon)
 	)
+	
+	gameplay_attribute_map.attribute_changed.connect(hud.handle_attribute_changed)
+	
+	hud.handle_attribute_changed(gameplay_attribute_map.get_attribute_by_name("health"))
+	hud.handle_attribute_changed(gameplay_attribute_map.get_attribute_by_name("armor"))
 
 
 func _physics_process(delta: float) -> void:
