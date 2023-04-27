@@ -12,7 +12,7 @@ Godot Gameplay Systems (formerly godot gameplay attributes) is a set of nodes an
 
 # Install
 
-Clone this repo inside your `addons` directory.
+Clone this repo, copy the `addons` folder content inside your project's `addons` directory.
 
 Enable this plugin by going to `project settings/plugins`.
 
