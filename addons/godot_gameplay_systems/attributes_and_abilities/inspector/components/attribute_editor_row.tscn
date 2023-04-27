@@ -1,0 +1,77 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/inspector/components/attribute_editor_row.gd" id="1_ceu2s"]
+
+[node name="AttributeEditorRow" type="VBoxContainer"]
+offset_right = 1152.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_ceu2s")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+vertical_alignment = 1
+
+[node name="LabelSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 3
+
+[node name="MaximumValue" type="VBoxContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GridContainer/MaximumValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Maximum"
+clip_text = true
+
+[node name="SpinBox" type="SpinBox" parent="GridContainer/MaximumValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+allow_greater = true
+allow_lesser = true
+alignment = 2
+select_all_on_focus = true
+
+[node name="MinimumValue" type="VBoxContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GridContainer/MinimumValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Minimum"
+clip_text = true
+
+[node name="SpinBox" type="SpinBox" parent="GridContainer/MinimumValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+allow_greater = true
+allow_lesser = true
+alignment = 2
+select_all_on_focus = true
+
+[node name="CurrentValue" type="VBoxContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GridContainer/CurrentValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Current"
+clip_text = true
+
+[node name="SpinBox" type="SpinBox" parent="GridContainer/CurrentValue"]
+layout_mode = 2
+size_flags_horizontal = 3
+allow_greater = true
+allow_lesser = true
+alignment = 2
+select_all_on_focus = true

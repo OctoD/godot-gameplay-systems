@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxh5dyttaogko"]
+
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/debug/abilities_debugger.gd" id="1_lb3v4"]
+
+[node name="AbilitiesDebugger" type="BoxContainer"]
+offset_right = 1152.0
+script = ExtResource("1_lb3v4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Labels" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

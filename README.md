@@ -22,12 +22,15 @@ Enjoy!
 
 You can check some tutorials/doc/examples [here](./docs/readme.md)
 
-I am making also a small "game" to demonstrate how things work. You can check it out opening this repository using godot 4.x (stable) and pressing the play button.
+I am making also small "demos" to demonstrate how things work. You can check them out opening this repository using godot 4.x (stable), pressing the play button and choosing one.
+
+`Esc` key will always return you to the main menu.
 
 # Networking Attributes, Effects and Abilities
 
 Did not test too much, but abilities, effects and attributes could be simply replicated using the `MultiplayerSynchronizer` node provided by godot4.x.
 
+The same should apply to `Inventory` and `Equipment`.
 
 # Contribution
 
