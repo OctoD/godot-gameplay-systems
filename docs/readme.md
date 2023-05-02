@@ -11,3 +11,4 @@ Surely this will need some better docs. They are on the road to 1.0.0.
 
 [About equipment](inventory/equipment.md)
 
+[About items dropping](inventory/drop.md)
