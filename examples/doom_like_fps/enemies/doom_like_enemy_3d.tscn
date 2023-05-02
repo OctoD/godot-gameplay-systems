@@ -1,13 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bx7vb60ewnqle"]
+[gd_scene load_steps=12 format=3 uid="uid://bx7vb60ewnqle"]
 
 [ext_resource type="Script" path="res://examples/doom_like_fps/enemies/doom_like_enemy_3d.gd" id="1_sa71l"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/nodes/gameplay_attribute_map.gd" id="2_035xk"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/resources/attribute.gd" id="3_gpltv"]
 [ext_resource type="Resource" uid="uid://2s6702ugdpni" path="res://examples/doom_like_fps/doom_like_pg_fps_attributes.tres" id="4_i6swl"]
-[ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/inventory.gd" id="5_kti4o"]
-[ext_resource type="PackedScene" uid="uid://cyh225til26mt" path="res://examples/doom_like_fps/items/collectibles/armor/armor_item.tscn" id="6_x3d78"]
-[ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/resources/item.gd" id="7_rkhl6"]
-[ext_resource type="PackedScene" uid="uid://dbg66rqycep3u" path="res://examples/doom_like_fps/items/collectibles/health/health_item.tscn" id="8_amenr"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/drop.gd" id="9_agrhe"]
+[ext_resource type="Resource" uid="uid://cthqt5snrmof3" path="res://examples/doom_like_fps/doom_like_drop_table.tres" id="10_hxaav"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0q3i0"]
 
@@ -31,56 +29,6 @@ minimum_value = 0.0
 maximum_value = 0.0
 current_value = 0.0
 
-[sub_resource type="Resource" id="Resource_4g0lg"]
-script = ExtResource("7_rkhl6")
-name = &"armor"
-can_stack = false
-decrease_stack_on_use = false
-scene = ExtResource("6_x3d78")
-tags = Array[String]([])
-quantity_current = 1
-quantity_max = 1
-tags_added_on_activation = Array[String]([])
-tags_added_on_add = Array[String]([])
-tags_added_on_equip = Array[String]([])
-tags_added_on_remove = Array[String]([])
-tags_added_on_unequip = Array[String]([])
-tags_required_to_activate = Array[String]([])
-tags_required_to_add = Array[String]([])
-tags_required_to_equip = Array[String]([])
-tags_required_to_remove = Array[String]([])
-tags_required_to_unequip = Array[String]([])
-tags_removed_on_activation = Array[String]([])
-tags_removed_on_add = Array[String]([])
-tags_removed_on_equip = Array[String]([])
-tags_removed_on_remove = Array[String]([])
-tags_removed_on_unequip = Array[String]([])
-
-[sub_resource type="Resource" id="Resource_oegth"]
-script = ExtResource("7_rkhl6")
-name = &""
-can_stack = false
-decrease_stack_on_use = false
-scene = ExtResource("8_amenr")
-tags = Array[String]([])
-quantity_current = 1
-quantity_max = 1
-tags_added_on_activation = Array[String]([])
-tags_added_on_add = Array[String]([])
-tags_added_on_equip = Array[String]([])
-tags_added_on_remove = Array[String]([])
-tags_added_on_unequip = Array[String]([])
-tags_required_to_activate = Array[String]([])
-tags_required_to_add = Array[String]([])
-tags_required_to_equip = Array[String]([])
-tags_required_to_remove = Array[String]([])
-tags_required_to_unequip = Array[String]([])
-tags_removed_on_activation = Array[String]([])
-tags_removed_on_add = Array[String]([])
-tags_removed_on_equip = Array[String]([])
-tags_removed_on_remove = Array[String]([])
-tags_removed_on_unequip = Array[String]([])
-
 [node name="DoomLikeEnemy" type="CharacterBody3D"]
 collision_layer = 4
 collision_mask = 39
@@ -98,7 +46,7 @@ owning_character = NodePath("..")
 attributes = Array[ExtResource("3_gpltv")]([SubResource("Resource_el01r"), SubResource("Resource_6nl8h")])
 table = ExtResource("4_i6swl")
 
-[node name="Inventory" type="Node" parent="."]
-script = ExtResource("5_kti4o")
-owner_path = NodePath("..")
-items = Array[ExtResource("7_rkhl6")]([SubResource("Resource_4g0lg"), SubResource("Resource_oegth")])
+[node name="Drop" type="Node" parent="."]
+script = ExtResource("9_agrhe")
+drop_table = ExtResource("10_hxaav")
+owning_node_path = NodePath("..")
