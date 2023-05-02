@@ -41,6 +41,7 @@ func _drop(items: Array[Item]) -> void:
 
 			if nearest_drop:
 				nearest_drop.add_child(instance)
+				nearest_drop.item_dropped.emit(item, instance)
 
 
 ## It gets the droppable [Item]s from the [DropTable].
