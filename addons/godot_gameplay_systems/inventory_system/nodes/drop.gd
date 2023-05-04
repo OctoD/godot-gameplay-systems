@@ -66,20 +66,21 @@ func find_nearest_drop() -> Node:
 		return null
 
 	# gets all dropzones
-	var dropzones = get_tree().get_nodes_in_group("ggs.drop-node")
+	var dropzones = get_tree().get_nodes_in_group("ggs.drop-node").duplicate()
 	var position = owner_node.position
 	var is_2d = (owner_node as Node2D) != null
 	var is_3d = (owner_node as Node3D) != null
-
+	
 	if dropzones.size() == 0:
 		return null
+
 
 	# the sorting function, we will take the nearest [Drop2D] or [Drop3D] node.
 	dropzones.sort_custom(func (a: Variant, b: Variant) -> bool:
 		if a is Node2D and b is Node2D and is_2d:
-			return a.position.distance_to(position) > b.position.distance_to(position)
+			return b.position.distance_to(position) > a.position.distance_to(position)
 		elif a is Node3D and b is Node3D and is_3d:
-			return a.position.distance_to(position) > b.position.distance_to(position)
+			return b.position.distance_to(position) > a.position.distance_to(position)
 
 		return false
 	)
