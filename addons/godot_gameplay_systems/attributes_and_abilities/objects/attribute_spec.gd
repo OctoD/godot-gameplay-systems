@@ -13,6 +13,8 @@ signal maximum_value_changed(from: float, to: float)
 var __setup := false
 ## It's the attribute name
 var attribute_name := ""
+## It's the buff amount
+var buffing_value := 0.0
 ## It's the current attribute's value
 var current_value := 0.0:
 	get:
@@ -54,6 +56,10 @@ var minimum_value := 0.0:
 		
 		if not __setup:
 			minimum_value_changed.emit(previous_value, value)
+## The calculated attribute value with the [member AttributeSpec.buffing_value].
+var current_buffed_value: float = 0.0:
+	get:
+		return current_value + buffing_value
 
 
 ## Creates an instance of [AttributeSpec] starting from an [AttributeResource]

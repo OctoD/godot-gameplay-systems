@@ -41,6 +41,12 @@ enum {
 		emit_changed()
 
 @export_category("Attribute modifier")
+@export_enum("Value modification", "Value buff") var applies_as = 0:
+	get:
+		return applies_as
+	set(value):
+		applies_as = value
+		emit_changed()
 ## The attribute name to mutate
 @export var attribute_name := "":
 	get:

@@ -20,6 +20,7 @@ signal removed()
 		_redraw()
 
 @onready var application_count_spinbox: SpinBox = $VBoxContainer/TimerSetupContainer/ApplicationCountSpinBox
+@onready var applies_as: OptionButton = $AppliesAs/OptionButton
 @onready var attribute_option_button: OptionButton = $AttributeName/OptionButton
 @onready var life_time_option_button: OptionButton = $LifeTime/OptionButton
 @onready var minimum_value_spinbox: SpinBox = $MinimumValue/SpinBox
@@ -27,6 +28,8 @@ signal removed()
 @onready var timer_setup_container: VBoxContainer = $VBoxContainer
 @onready var timer_spinbox: SpinBox = $VBoxContainer/TimerSetupContainer/TimeoutSpinBox
 @onready var remove_button: Button = $AttributeName/RemoveButton
+
+
 var condition_resource_input := EditorResourcePicker.new()
 
 
@@ -38,6 +41,11 @@ func _inherit_from_resource() -> void:
 	if attribute_effect != null and attributes_table != null:
 		_populate_attribute_name_list()
 		_select_attribute_name()
+		applies_as.selected = attribute_effect.applies_as
+		
+		if applies_as.selected < 0:
+			applies_as.selected = 0
+		
 		attribute_option_button.text = attribute_effect.attribute_name
 		life_time_option_button.selected = attribute_effect.life_time
 		minimum_value_spinbox.value = attribute_effect.minimum_value
@@ -67,6 +75,10 @@ func _ready() -> void:
 	add_child(condition_resource_input)
 	
 	timer_setup_container.visible = false
+	
+	applies_as.item_selected.connect(func (index):
+		attribute_effect.applies_as = index	
+	)
 	
 	application_count_spinbox.value_changed.connect(func (value):
 		attribute_effect.max_applications = value	

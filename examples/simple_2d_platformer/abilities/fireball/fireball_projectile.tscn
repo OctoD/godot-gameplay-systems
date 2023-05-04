@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=9 format=3 uid="uid://d256wym8qchv0"]
 
 [ext_resource type="Script" path="res://examples/simple_2d_platformer/abilities/fireball/fireball_projectile.gd" id="1_55naj"]
 [ext_resource type="Texture2D" uid="uid://bv5hedfl2cdwj" path="res://examples/simple_2d_platformer/abilities/fireball/fireball.png" id="2_h73q5"]
@@ -15,6 +15,7 @@ script = ExtResource("5_0jf7t")
 life_time = 0
 apply_every_second = 0.0
 max_applications = 0
+applies_as = 0
 attribute_name = "health"
 minimum_value = -2.0
 maximum_value = -5.0

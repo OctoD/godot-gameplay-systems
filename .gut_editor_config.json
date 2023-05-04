@@ -3,8 +3,7 @@
  "compact_mode": false,
  "config_file": "res://.gutconfig.json",
  "dirs": [
-  "res://addons/godot_gameplay_systems/inventory_system/test",
-  "res://addons/godot_gameplay_systems/attributes_and_abilities/test"
+  "res://addons/godot_gameplay_systems"
  ],
  "disable_colors": false,
  "double_strategy": "partial",
@@ -32,12 +31,12 @@
  "post_run_script": "",
  "pre_run_script": "",
  "prefix": "test_",
- "selected": "test_drop.gd",
+ "selected": null,
  "should_exit": true,
  "should_exit_on_success": false,
  "should_maximize": false,
  "show_help": false,
  "suffix": ".gd",
  "tests": [],
- "unit_test_name": "test_drop"
+ "unit_test_name": null
 }
