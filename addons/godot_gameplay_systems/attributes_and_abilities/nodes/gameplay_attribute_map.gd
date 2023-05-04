@@ -147,7 +147,13 @@ func apply_effect(effect: GameplayEffect) -> void:
 			if not attribute_affected.should_apply(effect, self):
 				continue
 
-			_attributes_dict[attribute_affected.attribute_name].current_value += attribute_affected.get_current_value()
+			# Yup, it's a buff
+			if attribute_affected.applies_as == 1:
+				_attributes_dict[attribute_affected.attribute_name].buffing_value = attribute_affected.get_current_value()
+			# Modifies attributes as usual
+			else:
+				_attributes_dict[attribute_affected.attribute_name].current_value += attribute_affected.get_current_value()
+			
 			attribute_effect_applied.emit(attribute_affected, spec)
 			attribute_effect_removed.emit(attribute_affected, spec)
 		elif attribute_affected.life_time == AttributeEffect.LIFETIME_TIME_BASED:
@@ -171,7 +177,13 @@ func apply_effect(effect: GameplayEffect) -> void:
 					_timeouts_count_dict.erase(timer_id)
 					remove_child(timer)
 				else:
-					spec.current_value += attribute_affected.get_current_value()
+					# Applied as buff
+					if attribute_affected.applies_as == 1:
+						spec.buffing_value += attribute_affected.get_current_value()
+					# Applied as modifier
+					else:
+						spec.current_value += attribute_affected.get_current_value()
+
 					attribute_effect_applied.emit(attribute_affected, spec)
 
 					if attribute_affected.max_applications != 0:

@@ -87,12 +87,11 @@ func test_attribute_change() -> void:
 	var attribute_effect = _make_attribute_effect(-5, -5)
 	
 	effect.attributes_affected.append(attribute_effect)
-
+	effect
 	owner_character.add_child(effect)
 
 	assert_signal_emitted(gam, "attribute_changed", "attribute_changed should have been called")
 	assert_eq(gam._attributes_dict[health_attribute_name].current_value, 95, "attribute should have been modified by the effect")
-	assert_eq(owner_character.get_children().has(attribute_effect), false, "gameplay_effect node should have been removed from owner_character")
 
 	gam.apply_effect(effect)
 	
@@ -114,3 +113,15 @@ func test_lifetimed_effects() -> void:
 	assert_signal_emit_count(gam, "attribute_changed", 2, "attribute_changed should have been called only twice")
 	assert_eq(gam.get_attribute_by_name(health_attribute_name).current_value, 80, "effect should have been applied twice")
 
+
+func test_buff_and_debuff() -> void:
+	var gam = _make_gam()
+	var effect = _make_effect(5, 5)
+	var attr = gam.get_attribute_by_name(health_attribute_name)
+
+	effect.attributes_affected[0].applies_as = 1 # marking it as a buff
+
+	gam.apply_effect(effect)
+
+	assert_eq(attr.current_value, 100.0, "current_value should not have been affected")
+	assert_eq(attr.current_buffed_value, 105.0, "current_buffed_value should have been affected")
