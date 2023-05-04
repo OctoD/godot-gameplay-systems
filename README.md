@@ -28,7 +28,7 @@ I am making also small "demos" to demonstrate how things work. You can check the
 
 # Networking Attributes, Effects and Abilities
 
-Did not test too much, but abilities, effects and attributes could be simply replicated using the `MultiplayerSynchronizer` node provided by godot4.x.
+Did not test too much, but abilities, effects and attributes could be replicated using the `MultiplayerSynchronizer` node provided by godot4.x.
 
 The same should apply to `Inventory` and `Equipment`.
 
