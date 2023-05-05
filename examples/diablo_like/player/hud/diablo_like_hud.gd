@@ -28,7 +28,7 @@ func setup_ability_container(ability_container: AbilityContainer) -> void:
 	in_game_bar.setup_ability_container(ability_container)
 
 
-func setup_equipment(equipment: Equipment) -> void:
+func setup_equipment(_equipment: Equipment) -> void:
 	pass
 
 

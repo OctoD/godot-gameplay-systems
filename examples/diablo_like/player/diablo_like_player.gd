@@ -29,12 +29,12 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("diablo_like_move_to"):
 		next_position = cursor_position
 	elif event.is_action_pressed("diablo_like_add_gold"):
-		var gold = gold.duplicate()
-		gold.quantity_current = randi_range(1, 200)
-		inventory.add_item(gold)
+		var _gold = gold.duplicate()
+		_gold.quantity_current = randi_range(1, 200)
+		inventory.add_item(_gold)
 	
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if ability_container.tags.has(DiabloLikeSkill.DEAD_TAG):
 		# sorry, your character is dead, cannot move it anymore
 		return
@@ -57,5 +57,5 @@ func _ready() -> void:
 	)
 
 
-func go_to_position(position: Vector2) -> void:
+func go_to_position(_position: Vector2) -> void:
 	pass
