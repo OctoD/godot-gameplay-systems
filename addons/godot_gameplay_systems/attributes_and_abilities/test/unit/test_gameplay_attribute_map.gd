@@ -118,6 +118,7 @@ func test_buff_and_debuff() -> void:
 	var gam = _make_gam()
 	var effect = _make_effect(5, 5)
 	var attr = gam.get_attribute_by_name(health_attribute_name)
+	var damage_effect = _make_effect(-10, -10)
 
 	effect.attributes_affected[0].applies_as = 1 # marking it as a buff
 
@@ -125,3 +126,9 @@ func test_buff_and_debuff() -> void:
 
 	assert_eq(attr.current_value, 100.0, "current_value should not have been affected")
 	assert_eq(attr.current_buffed_value, 105.0, "current_buffed_value should have been affected")
+
+	gam.apply_effect(damage_effect)
+
+	assert_eq(attr.buffing_value, 0.0, "buffing value should be decreased before current_value")
+	assert_eq(attr.current_value, 95.0, "current_value should be correct")
+	assert_eq(attr.current_buffed_value, 95.0, "value should be correct")

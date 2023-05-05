@@ -62,6 +62,21 @@ var current_buffed_value: float = 0.0:
 		return current_value + buffing_value
 
 
+func apply_attribute_effect(attribute_effect: AttributeEffect) -> void:
+	var value = attribute_effect.get_current_value()
+	
+	if attribute_effect.applies_as == 1:
+		buffing_value += value
+	else:
+		if buffing_value > 0.0 and value < 0.0:
+			var diff = buffing_value + value
+			
+			buffing_value = clampf(diff, 0, buffing_value)
+			current_value += diff
+		else:
+			current_value += value
+
+
 ## Creates an instance of [AttributeSpec] starting from an [AttributeResource]
 static func from_attribute(attribute: AttributeResource) -> AttributeSpec:
 	var instance = AttributeSpec.new()

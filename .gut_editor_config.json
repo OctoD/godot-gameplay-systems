@@ -31,7 +31,7 @@
  "post_run_script": "",
  "pre_run_script": "",
  "prefix": "test_",
- "selected": null,
+ "selected": "test_gameplay_attribute_map.gd",
  "should_exit": true,
  "should_exit_on_success": false,
  "should_maximize": false,
