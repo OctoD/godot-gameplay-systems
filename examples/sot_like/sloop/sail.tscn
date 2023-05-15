@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvb0cdd3wv32j"]
+
+[ext_resource type="Script" path="res://examples/sot_like/sloop/sail.gd" id="1_1ehvn"]
+
+[node name="sail" type="Node3D"]
+script = ExtResource("1_1ehvn")
