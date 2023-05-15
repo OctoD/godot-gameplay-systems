@@ -130,12 +130,15 @@ func _update_attribute(index: int, key: String, value: float) -> void:
 
 ## Applies an effect on current GameplayAttributeMap
 func apply_effect(effect: GameplayEffect) -> void:
+	var _effect = effect.duplicate()
+	
+	effect.queue_free()
+	
 	if multiplayer and not multiplayer.is_server():
 		return
 
 	if effect == null:
 		return
-
 
 	for attribute_affected in effect.attributes_affected:
 		if not attribute_affected.attribute_name in _attributes_dict:
@@ -144,7 +147,7 @@ func apply_effect(effect: GameplayEffect) -> void:
 		if attribute_affected.life_time == AttributeEffect.LIFETIME_ONE_SHOT:
 			var spec = _attributes_dict[attribute_affected.attribute_name]
 
-			if not attribute_affected.should_apply(effect, self):
+			if not attribute_affected.should_apply(_effect, self):
 				continue
 
 			_attributes_dict[attribute_affected.attribute_name].apply_attribute_effect(attribute_affected)
@@ -163,7 +166,7 @@ func apply_effect(effect: GameplayEffect) -> void:
 			timer.timeout.connect(func ():
 				var spec = _attributes_dict[attribute_affected.attribute_name]
 
-				if not attribute_affected.should_apply(effect, self):
+				if not attribute_affected.should_apply(_effect, self):
 					return
 
 				if attribute_affected.max_applications != 0 and attribute_affected.max_applications == _timeouts_count_dict[timer_id]:
@@ -182,7 +185,7 @@ func apply_effect(effect: GameplayEffect) -> void:
 			
 			add_child(timer)
 
-	effect_applied.emit(effect)
+	effect_applied.emit(_effect)
 
 
 ## Gets an instance of AttributeSpec by it's attribute_name

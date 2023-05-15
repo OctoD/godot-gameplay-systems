@@ -132,3 +132,21 @@ func test_buff_and_debuff() -> void:
 	assert_eq(attr.buffing_value, 0.0, "buffing value should be decreased before current_value")
 	assert_eq(attr.current_value, 95.0, "current_value should be correct")
 	assert_eq(attr.current_buffed_value, 95.0, "value should be correct")
+	
+	var damage_effect_duplicate = damage_effect.duplicate()
+
+	owner_character.add_child(damage_effect_duplicate)	
+
+	assert_eq(attr.buffing_value, 0.0, "buffing value should be decreased before current_value")
+	assert_eq(attr.current_value, 85.0, "current_value should be correct")
+	assert_eq(attr.current_buffed_value, 85.0, "value should be correct")
+
+	assert_eq(damage_effect_duplicate.is_queued_for_deletion(), true, "the instant effect should have been removed from the tree")
+	
+	var child_nodes = owner_character.get_children()
+
+	await wait_for_signal(owner_character.child_exiting_tree, 100.0, "waiting for effect to be removed")
+
+	assert_eq(child_nodes.has(damage_effect_duplicate), false, "the node should have been removes")
+
+#	assert_freed(damage_effect_duplicate.is_queued_for_deletion(), "the instant effect should have been removed from the tree")
