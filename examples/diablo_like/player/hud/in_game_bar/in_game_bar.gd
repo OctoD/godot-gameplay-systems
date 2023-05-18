@@ -26,11 +26,11 @@ func activate_ability_on_slot(slot_number: int) -> void:
 		4: skill_1.activate()
 
 
-func handle_ability_activated(ability: Ability) -> void:
+func handle_ability_activated(_ability: Ability) -> void:
 	pass
 
 
-func handle_ability_granted(skill: Ability) -> void:
+func handle_ability_granted(_skill: Ability) -> void:
 	pass
 
 

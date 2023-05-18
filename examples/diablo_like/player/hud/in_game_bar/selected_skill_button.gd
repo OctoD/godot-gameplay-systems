@@ -31,7 +31,7 @@ func _ready() -> void:
 	pressed.connect(_on_pressed)
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		label.text = str(skill_number)
 		draw_ability()
