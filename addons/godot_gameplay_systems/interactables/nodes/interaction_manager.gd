@@ -60,7 +60,7 @@ var can_interact: bool:
 				if not tags.has(tag):
 					return false
 
-		return true
+		return focused_interactable != null
 ## Is the interacting owner. Usually a [CharacterBody2D] or [CharacterBody3D].
 var interacting_owner: Node:
 	get:
@@ -84,53 +84,62 @@ var interaction_raycast: Node:
 ## Is [code]true[/code] if the [InteractionManager]
 var is_interacting: bool:
 	get:
-		if focused_interactable == null:
+		if current_interactable == null:
 			return false
 
-		return has_tags(focused_interactable.interaction.tags_added_on_start)
+		if current_interactable.interaction == null:
+			return false
+
+		if current_interactable.interaction.tags_added_on_start.size() > 0:
+			return has_tags(current_interactable.interaction.tags_added_on_start)
+
+		return true
+## It's the current interactable [Node]. This variable is stored when you start an interaction and cleared when you end an interaction.
+var current_interactable: Node = null
 ## It's the current focused interactable [Node].
 var focused_interactable: Node = null
 ## It's the current focused interactable [Node]'s [Interaction].
 var interaction: Interaction:
 	get:
-		return focused_interactable.interaction if can_interact else null
+		if current_interactable == null:
+			return null
+
+		return current_interactable.interaction if is_interacting else null
+
+
+func _handle_focus_in(node: Node) -> void:
+	interactable_focus_in.emit(node)
+	focused_interactable = node
+
+
+func _handle_focus_out(node: Node) -> void:
+	interactable_focus_out.emit(node)
+	focused_interactable = null
 
 
 ## Overrides virtual and handles input events
 func _input(input: InputEvent) -> void:
 	if is_interacting and interaction_raycast != null:
-		focused_interactable.interaction.handle_input(input, self, focused_interactable)
+		current_interactable.interaction.handle_input(input, self, current_interactable)
 
 
 ## Overrides virtual and handles process
 func _process(delta: float) -> void:
 	if is_interacting and interaction_raycast != null:
-		focused_interactable.interaction.handle_process(delta, self, focused_interactable)
+		current_interactable.interaction.handle_process(delta, self, current_interactable)
 
 
 ## Overrides virtual and handles physics process
 func _physics_process(delta: float) -> void:
 	if is_interacting and interaction_raycast != null:
-		focused_interactable.interaction.handle_physics_process(delta, self, focused_interactable)
+		current_interactable.interaction.handle_physics_process(delta, self, current_interactable)
 
 
 func _ready() -> void:
-	var handle_raycast_detection = func (node: Node) -> void:
-		if focused_interactable != node and node != null:
-			interactable_focus_out.emit(node)
-			interactable_focus_in.emit(node)
-			focused_interactable = node
-		elif focused_interactable != node and node == null:
-			interactable_focus_out.emit(focused_interactable)
-			focused_interactable = null
-
 	if interaction_raycast != null:
-		interaction_raycast.interactable_focus_in.connect(handle_raycast_detection)
-
-	interacting_owner.child_entered_tree.connect(func (node: Node) -> void:
-		if node is InteractionRayCast2D or node is InteractionRayCast3D and node.interactable_focus_in.get_connection_count(handle_raycast_detection) == 0:
-			node.interactable_focus_in.connect(handle_raycast_detection)
-	)
+		interaction_raycast.interactable_detected.connect(_handle_focus_in)
+		interaction_raycast.interactable_focus_in.connect(_handle_focus_in)
+		interaction_raycast.interactable_focus_out.connect(_handle_focus_out)
 
 
 ## Adds a tag. 
@@ -157,21 +166,32 @@ func add_tags(tags: Array[String]) -> void:
 ## Returns [code]true[/code] if can ends interaction, [code]false[/code] otherwise.
 func can_end_interaction() -> bool:
 	if can_interact and interaction != null:
-		return has_tags(interaction.tags_required_to_end) and not has_tags(interaction.tags_required_to_block)
+		if interaction.tags_required_to_block.size() > 0:
+			return not has_tags(interaction.tags_required_to_block) and has_tags(interaction.tags_required_to_end)
+		else:
+			return has_tags(interaction.tags_required_to_end)
 	return true
 
 
 ## Returns [code]true[/code] if can starts interaction, [code]false[/code] otherwise.
 func can_start_interaction() -> bool:
-	if can_interact and interaction != null:
-		return not has_tags(interaction.tags_added_on_start, false) and has_tags(interaction.tags_required_to_start)
-	return false
+	return can_interact and focused_interactable.interaction != null
+
+
+## Ends an interaction with the currently focused node.
+func end_interaction() -> void:
+	if can_end_interaction():
+		add_tags(current_interactable.interaction.tags_added_on_end)
+		remove_tags(current_interactable.interaction.tags_removed_on_end)
+		current_interactable = null
 
 
 ## Starts an interaction with the currently focused node.
-func interact_start() -> void:
+func start_interaction() -> void:
 	if can_start_interaction():
-		focused_interactable.interaction
+		add_tags(focused_interactable.interaction.tags_added_on_start)
+		remove_tags(focused_interactable.interaction.tags_removed_on_start)
+		current_interactable = focused_interactable
 
 
 ## Checks if has a tag.

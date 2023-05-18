@@ -5,6 +5,8 @@ class_name InteractionRayCast2D extends RayCast2D
 
 ## Emitted when an [InteractableArea2D] is detected.
 signal interactable_detected(interactable: InteractableArea2D)
+signal interactable_focus_in(interactable: InteractableArea2D)
+signal interactable_focus_out(interactable: InteractableArea2D)
 
 
 @export_category("Interaction owner")
@@ -32,11 +34,9 @@ func _physics_process(delta: float) -> void:
 
 	if collider is InteractableArea2D:
 		interactable_detected.emit(collider)
-	
-	if manager != null and interacting:
-		manager.handle_interaction(self)
+		interactable_focus_in.emit(collider)
+	elif collider == null and previous_collider != null:
+		interactable_focus_out.emit(previous_collider)
+		previous_collider = null
 
-
-func interact() -> void:
-	manager.handle_interaction(self)
-	interacting = true
+	previous_collider = collider
