@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://fj00g4je1phk"]
+[gd_scene load_steps=10 format=3 uid="uid://fj00g4je1phk"]
 
 [ext_resource type="Script" path="res://examples/sot_like/sloop/sloop.gd" id="1_plc2v"]
 [ext_resource type="Shader" path="res://examples/sot_like/wood.gdshader" id="2_cveab"]
 [ext_resource type="PackedScene" uid="uid://cikpwe7tbyp7j" path="res://examples/sot_like/sloop/sail_control.tscn" id="3_f2nfh"]
+[ext_resource type="PackedScene" uid="uid://dvb0cdd3wv32j" path="res://examples/sot_like/sloop/sail.tscn" id="4_1pq8d"]
+[ext_resource type="Script" path="res://examples/sot_like/sloop/sail_control_res.gd" id="4_w2hhr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpl4r"]
 albedo_color = Color(0.584314, 0.278431, 0.0941176, 1)
@@ -16,6 +18,36 @@ shader_parameter/ring_scale = 4.4
 shader_parameter/wave_scale = 8.454
 shader_parameter/random_scale = 4.6
 shader_parameter/noise_scale = 0.03
+
+[sub_resource type="Resource" id="Resource_meeqp"]
+script = ExtResource("4_w2hhr")
+tags_added_on_start = Array[String]([])
+tags_added_on_block = Array[String]([])
+tags_added_on_cancel = Array[String]([])
+tags_added_on_end = Array[String]([])
+tags_required_to_start = Array[String]([])
+tags_required_to_block = Array[String]([])
+tags_required_to_cancel = Array[String]([])
+tags_required_to_end = Array[String]([])
+tags_removed_on_start = Array[String]([])
+tags_removed_on_block = Array[String]([])
+tags_removed_on_cancel = Array[String]([])
+tags_removed_on_end = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_ry28y"]
+script = ExtResource("4_w2hhr")
+tags_added_on_start = Array[String]([])
+tags_added_on_block = Array[String]([])
+tags_added_on_cancel = Array[String]([])
+tags_added_on_end = Array[String]([])
+tags_required_to_start = Array[String]([])
+tags_required_to_block = Array[String]([])
+tags_required_to_cancel = Array[String]([])
+tags_required_to_end = Array[String]([])
+tags_removed_on_start = Array[String]([])
+tags_removed_on_block = Array[String]([])
+tags_removed_on_cancel = Array[String]([])
+tags_removed_on_end = Array[String]([])
 
 [node name="sloop" type="Node3D"]
 script = ExtResource("1_plc2v")
@@ -37,14 +69,33 @@ material = SubResource("ShaderMaterial_csts3")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28253, 0.027051)
+use_collision = true
 size = Vector3(1, 1, 2.36585)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26767, 0.738634)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.739023, 0.738634)
+use_collision = true
+size = Vector3(1, 0.5, 2.366)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05723, 1.19411)
+use_collision = true
+size = Vector3(1, 0.5, 2.366)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31425, 1.69695)
+use_collision = true
 size = Vector3(1, 0.5, 2.366)
 
 [node name="sail_control" parent="." instance=ExtResource("3_f2nfh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15782, 3.80832, 1.94331)
+sail_path = NodePath("../sail")
+interaction = SubResource("Resource_meeqp")
 
 [node name="sail_control2" parent="." instance=ExtResource("3_f2nfh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98951, 3.80832, 1.94331)
+sail_path = NodePath("../sail")
+interaction = SubResource("Resource_ry28y")
+
+[node name="sail" parent="." instance=ExtResource("4_1pq8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5516, -4.28164)

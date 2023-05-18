@@ -66,7 +66,7 @@ scene_to_load = "res://examples/diablo_like/diablo_like.tscn"
 
 [node name="SotLike" type="Button" parent="ExamplesMenu/ExampleButtons"]
 layout_mode = 2
-text = "SOT-like"
+text = "SOT-like (sail management)"
 script = ExtResource("3_jxaps")
 scene_to_load = "res://examples/sot_like/sot_game.tscn"
 

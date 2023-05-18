@@ -24,6 +24,7 @@ fov = 78.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.197257)
 target_position = Vector3(2.08165e-12, 2.08165e-12, -2)
 collision_mask = 24
+collide_with_areas = true
 script = ExtResource("2_3wm4b")
 interaction_manager_path = NodePath("../../../InteractionManager")
 
@@ -44,6 +45,9 @@ shape = SubResource("CapsuleShape3D_b0i2f")
 
 [node name="InteractionManager" type="Node" parent="."]
 script = ExtResource("3_qgbfi")
+interacting_owner_path = NodePath("..")
+interaction_raycast_path = NodePath("../CameraNeck/Camera3D/InteractionRayCast3D")
+tags_blocking_interaction = Array[String](["dead"])
 
 [node name="Equipment" type="Node" parent="."]
 script = ExtResource("5_cwv7t")

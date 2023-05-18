@@ -1,7 +1,6 @@
 class_name SotLikePlayer extends CharacterBody3D
 
 
-const INTERACTING_TAG = "player.interacting"
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
@@ -18,26 +17,25 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 9
 @onready var interaction_explanation: Label = $BoxContainer/InteractionExplanation/ExplanationLabel
 
 
-var can_move: bool:
-	get:
-		return not interaction_manager.has_tag(INTERACTING_TAG)
-var is_interacting: bool:
-	get:
-		return interaction_manager.has_tag(INTERACTING_TAG)
-
-
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _handle_interaction(_delta: float) -> void:
-	pass
+	velocity.x = 0
+	velocity.z = 0
 
+	if Input.is_action_just_pressed("fps_interact"):
+		interaction_manager.end_interaction()
 
+	
 func _handle_movement(_delta: float) -> void:
 	# Handle Jump.
 	if Input.is_action_just_pressed("fps_jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+
+	if Input.is_action_just_pressed("fps_interact"):
+		interaction_manager.start_interaction()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -56,18 +54,13 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if Input.is_action_just_pressed("fps_interact"):
-		interaction_manager.handle_interaction(raycast)
-
-	if is_interacting:
-		_handle_interaction(delta)
-	else:
+	if not interaction_manager.is_interacting:
 		_handle_movement(delta)
+	else:
+		_handle_interaction(delta)
 
 	move_and_slide()
 	
-
-
 
 func _input(event: InputEvent):
 	if event is InputEventMouseMotion:

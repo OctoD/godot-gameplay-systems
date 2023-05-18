@@ -1,4 +1,4 @@
-extends InteractableArea3D
+class_name SailControl extends InteractableArea3D
 
 
 @export_node_path("Node3D") var sail_path := NodePath()
