@@ -153,7 +153,7 @@ func add_tag(tag: String) -> void:
 ## [br]Note: this will emit the [signal InteractionManager.tags_changed] only once.
 func add_tags(tags: Array[String]) -> void:
 	var updated = false
-	
+
 	for tag in tags:
 		if not self.tags.has(tag):
 			self.tags.append(tag)
@@ -181,6 +181,7 @@ func can_start_interaction() -> bool:
 ## Ends an interaction with the currently focused node.
 func end_interaction() -> void:
 	if can_end_interaction():
+		current_interactable.interaction.on_before_interaction_end(self, current_interactable)
 		add_tags(current_interactable.interaction.tags_added_on_end)
 		remove_tags(current_interactable.interaction.tags_removed_on_end)
 		current_interactable = null
@@ -189,6 +190,7 @@ func end_interaction() -> void:
 ## Starts an interaction with the currently focused node.
 func start_interaction() -> void:
 	if can_start_interaction():
+		focused_interactable.interaction.on_before_interaction_start(self, focused_interactable)
 		add_tags(focused_interactable.interaction.tags_added_on_start)
 		remove_tags(focused_interactable.interaction.tags_removed_on_start)
 		current_interactable = focused_interactable

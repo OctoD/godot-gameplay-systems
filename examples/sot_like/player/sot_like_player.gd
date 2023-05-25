@@ -15,6 +15,28 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 9
 @onready var raycast: InteractionRayCast3D = $CameraNeck/Camera3D/InteractionRayCast3D
 @onready var interaction_manager: InteractionManager = $InteractionManager
 @onready var interaction_explanation: Label = $BoxContainer/InteractionExplanation/ExplanationLabel
+@onready var right_equipped_item: EquippedItem3D = $CameraNeck/Camera3D/RightEquippedItem
+@onready var center_equipped_item: EquippedItem3D = $CameraNeck/Camera3D/CenterEquippedItem
+
+
+var is_dragging: bool = false:
+	get:
+		return interaction_manager.has_tag(DragInteraction.DRAG_INTERACTABLE_TAG)
+
+
+var is_sailing: bool = false:
+	get:
+		return interaction_manager.has_tag(SailInteraction.tag)
+
+
+var is_interacting: bool = false:
+	get:
+		return interaction_manager.is_interacting
+
+
+var is_blocked_from_moving_while_interacting: bool = false:
+	get:
+		return is_interacting and is_sailing
 
 
 func _ready() -> void:
@@ -37,6 +59,9 @@ func _handle_movement(_delta: float) -> void:
 	if Input.is_action_just_pressed("fps_interact"):
 		interaction_manager.start_interaction()
 
+	if Input.is_action_just_pressed("fps_drop") and is_dragging:
+		interaction_manager.end_interaction()
+
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("fps_strafe_left", "fps_strafe_right", "fps_move_forward", "fps_move_backward")
@@ -54,7 +79,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if not interaction_manager.is_interacting:
+	if not is_blocked_from_moving_while_interacting:
 		_handle_movement(delta)
 	else:
 		_handle_interaction(delta)

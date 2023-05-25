@@ -19,35 +19,35 @@ shader_parameter/wave_scale = 8.454
 shader_parameter/random_scale = 4.6
 shader_parameter/noise_scale = 0.03
 
-[sub_resource type="Resource" id="Resource_meeqp"]
+[sub_resource type="Resource" id="Resource_lk8as"]
 script = ExtResource("4_w2hhr")
-tags_added_on_start = Array[String]([])
+tags_added_on_start = Array[String](["sailing"])
 tags_added_on_block = Array[String]([])
 tags_added_on_cancel = Array[String]([])
 tags_added_on_end = Array[String]([])
 tags_required_to_start = Array[String]([])
 tags_required_to_block = Array[String]([])
 tags_required_to_cancel = Array[String]([])
-tags_required_to_end = Array[String]([])
+tags_required_to_end = Array[String](["sailing"])
 tags_removed_on_start = Array[String]([])
 tags_removed_on_block = Array[String]([])
 tags_removed_on_cancel = Array[String]([])
-tags_removed_on_end = Array[String]([])
+tags_removed_on_end = Array[String](["sailing"])
 
-[sub_resource type="Resource" id="Resource_ry28y"]
+[sub_resource type="Resource" id="Resource_e6nl8"]
 script = ExtResource("4_w2hhr")
-tags_added_on_start = Array[String]([])
+tags_added_on_start = Array[String](["sailing"])
 tags_added_on_block = Array[String]([])
 tags_added_on_cancel = Array[String]([])
 tags_added_on_end = Array[String]([])
 tags_required_to_start = Array[String]([])
 tags_required_to_block = Array[String]([])
 tags_required_to_cancel = Array[String]([])
-tags_required_to_end = Array[String]([])
+tags_required_to_end = Array[String](["sailing"])
 tags_removed_on_start = Array[String]([])
 tags_removed_on_block = Array[String]([])
 tags_removed_on_cancel = Array[String]([])
-tags_removed_on_end = Array[String]([])
+tags_removed_on_end = Array[String](["sailing"])
 
 [node name="sloop" type="Node3D"]
 script = ExtResource("1_plc2v")
@@ -90,12 +90,12 @@ size = Vector3(1, 0.5, 2.366)
 [node name="sail_control" parent="." instance=ExtResource("3_f2nfh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15782, 3.80832, 1.94331)
 sail_path = NodePath("../sail")
-interaction = SubResource("Resource_meeqp")
+interaction = SubResource("Resource_lk8as")
 
 [node name="sail_control2" parent="." instance=ExtResource("3_f2nfh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98951, 3.80832, 1.94331)
 sail_path = NodePath("../sail")
-interaction = SubResource("Resource_ry28y")
+interaction = SubResource("Resource_e6nl8")
 
 [node name="sail" parent="." instance=ExtResource("4_1pq8d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5516, -4.28164)

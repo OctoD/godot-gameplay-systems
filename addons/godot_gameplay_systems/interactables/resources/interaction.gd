@@ -37,14 +37,32 @@ class_name Interaction extends Resource
 @export var tags_removed_on_end: Array[String] = []
 
 
+## Invoked right before an interaction ends.
+## [br]It's a virtual method, so it can be overridden in a script.
+func on_before_interaction_end(manager: InteractionManager, interacted_node: Node) -> void:
+	pass
+
+
+## Invoked right before an interaction starts.
+## [br]It's a virtual method, so it can be overridden in a script.
+func on_before_interaction_start(manager: InteractionManager, interacted_node: Node) -> void:
+	pass
+
+
+## Invoked each time an input is received when the interaction is active.
+## [br]It's a virtual method, so it can be overridden in a script.
 func handle_input(input: InputEvent, manager: InteractionManager, interacted_node: Node) -> void:
 	pass
 
 
+## Invoked inside the physics process if the interaction is active.
+## [br]It's a virtual method, so it can be overridden in a script.
 func handle_physics_process(delta: float, manager: InteractionManager, interacted_node: Node) -> void:
 	pass
 
 
+## Invoked inside the process if the interaction is active.
+## [br]It's a virtual method, so it can be overridden in a script.
 func handle_process(delta: float, manager: InteractionManager, interacted_node: Node) -> void:
 	pass
 

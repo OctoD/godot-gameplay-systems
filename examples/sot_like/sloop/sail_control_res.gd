@@ -6,6 +6,7 @@ const tag = "sailing"
 
 
 func _init() -> void:
+	super._init()
 	tags_added_on_start.append(tag)
 	tags_required_to_end.append(tag)
 	tags_removed_on_end.append(tag)
