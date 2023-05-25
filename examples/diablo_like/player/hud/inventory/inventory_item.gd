@@ -7,7 +7,7 @@ extends TextureRect
 
 
 func set_item(_item: Item) -> void:
-	if item:
-		texture = item.ui_icon
-		label.text = str(item.quantity_current)
-		self.item = item
+	if _item:
+		texture = _item.ui_icon
+		label.text = str(_item.quantity_current)
+		self.item = _item

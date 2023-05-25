@@ -26,7 +26,7 @@ func _draw_items() -> void:
 
 
 func setup_inventory(_inventory: Inventory) -> void:
-	self.inventory = inventory
+	inventory = _inventory
 
 	inventory.item_added.connect(func (_item):
 		_draw_items()	
