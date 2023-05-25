@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://examples/sot_like/sloop/sail_control.gd" id="1_eb2iw"]
 [ext_resource type="Script" path="res://examples/sot_like/sloop/sail_control_res.gd" id="2_q18xp"]
 
-[sub_resource type="Resource" id="Resource_vw2u6"]
+[sub_resource type="Resource" id="Resource_k7xlb"]
 script = ExtResource("2_q18xp")
 tags_added_on_start = Array[String](["sailing"])
 tags_added_on_block = Array[String]([])
@@ -28,7 +28,7 @@ albedo_color = Color(1, 0.156863, 1, 1)
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("1_eb2iw")
-interaction = SubResource("Resource_vw2u6")
+interaction = SubResource("Resource_k7xlb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xwer2")

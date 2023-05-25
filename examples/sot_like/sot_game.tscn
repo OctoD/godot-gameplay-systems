@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b12xy6t4xe6qa"]
+[gd_scene load_steps=10 format=3 uid="uid://b12xy6t4xe6qa"]
 
 [ext_resource type="PackedScene" uid="uid://fj00g4je1phk" path="res://examples/sot_like/sloop/sloop.tscn" id="1_ilpwd"]
 [ext_resource type="PackedScene" uid="uid://c8cywrb5tgm6k" path="res://examples/sot_like/player/sot_like_player.tscn" id="2_r3cgc"]
 [ext_resource type="Shader" path="res://examples/sot_like/sea.gdshader" id="3_7is3y"]
+[ext_resource type="PackedScene" uid="uid://dpsi7ugdp24uw" path="res://examples/sot_like/crate/crate.tscn" id="3_eb14x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r63o1"]
 
@@ -36,6 +37,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.431996, 0)
 
 [node name="sot_like_player" parent="NotSoOpenWorld/sloop" instance=ExtResource("2_r3cgc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.91298, 3.75187)
+
+[node name="crate" parent="NotSoOpenWorld/sloop" instance=ExtResource("3_eb14x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42234, 2.6888, 5.07167)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bcdyy")

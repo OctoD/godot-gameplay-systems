@@ -29,13 +29,13 @@ script = ExtResource("2_3wm4b")
 interaction_manager_path = NodePath("../../../InteractionManager")
 
 [node name="RightEquippedItem" type="Node3D" parent="CameraNeck/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.08165e-12, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.283517, -1.08995)
 script = ExtResource("3_eihw1")
 equipment_path = NodePath("../../../Equipment")
 tags_to_display = Array[String](["equipped.center"])
 
 [node name="CenterEquippedItem" type="Node3D" parent="CameraNeck/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.283517, -1.08995)
 script = ExtResource("3_eihw1")
 equipment_path = NodePath("../../../Equipment")
 tags_to_display = Array[String](["equipped.right"])
@@ -47,7 +47,7 @@ shape = SubResource("CapsuleShape3D_b0i2f")
 script = ExtResource("3_qgbfi")
 interacting_owner_path = NodePath("..")
 interaction_raycast_path = NodePath("../CameraNeck/Camera3D/InteractionRayCast3D")
-tags_blocking_interaction = Array[String](["dead"])
+tags_blocking_interaction = Array[String](["dead", "dragging", "sailing"])
 
 [node name="Equipment" type="Node" parent="."]
 script = ExtResource("5_cwv7t")
