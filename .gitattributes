@@ -6,13 +6,16 @@
 .github                                                 export-ignore
 .gitignore                                              export-ignore
 .gut_editor_config.json                                 export-ignore
+.gut_editor_shortcuts.cfg                               export-ignore
 addons/gut                                              export-ignore
+CHANGELOG.md                                            export-ignore
 CODE_OF_CONDUCT.md                                      export-ignore
 docs                                                    export-ignore
 examples                                                export-ignore
 icon.svg                                                export-ignore
 icon.svg.import                                         export-ignore
 icons.sketch                                            export-ignore
+IDEAS.md                                                export-ignore
 LICENCE                                                 export-ignore
 README.md                                               export-ignore
 test                                                    export-ignore
