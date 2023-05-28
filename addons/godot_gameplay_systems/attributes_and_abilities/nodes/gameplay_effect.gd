@@ -1,4 +1,4 @@
-@icon("res://addons/godot_gameplay_systems/assets/GameplayEffect.svg")
+@icon("res://addons/godot_gameplay_systems/attributes_and_abilities/assets/GameplayEffect.svg")
 @tool
 class_name GameplayEffect extends Node
 
