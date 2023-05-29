@@ -4,6 +4,7 @@
 ## [br][Ability] resources can be activated, cancelled or finished under some circumstances and are used to apply 
 ## [GameplayEffect] resources to [GameplayAttributeMap] instances.
 
+@icon("res://addons/godot_gameplay_systems/attributes_and_abilities/assets/AbilityContainer.svg")
 
 class_name AbilityContainer extends Node
 
