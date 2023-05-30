@@ -1,3 +1,4 @@
+@icon("res://addons/godot_gameplay_systems/attributes_and_abilities/assets/Ability.svg")
 class_name Ability extends Resource
 
 ## Represents an ability or skill
