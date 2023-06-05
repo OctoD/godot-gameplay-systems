@@ -51,8 +51,8 @@ func pick(by: Node) -> void:
 	assert(item != null, "item should not be null")
 
 	if by is Inventory:
-		if by.can_add(by):
-			by.add_item(by)
+		if by.can_add(item):
+			by.add_item(item)
 			queue_free()
 	elif by is Equipment:
 		## Adds tags because it "picked" the item.
