@@ -39,6 +39,15 @@ func _ready() -> void:
 	var equipment = get_node(equipment_path)
 	
 	equipment.equipped.connect(func (item: Item, _slot: EquipmentSlot):
+		if tags_to_display.size() > 0:
+			var has_tags = true
+			for tag in tags_to_display:
+				if not item.tags.has(tag):
+					has_tags = false
+					break
+			if not has_tags:
+				return
+
 		if item.scene and item.scene.can_instantiate():
 			current = item.scene.instantiate()
 			add_child(current)
