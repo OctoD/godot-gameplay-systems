@@ -32,11 +32,17 @@ script = ExtResource("1_diqix")
 
 [node name="Camera3D" type="Camera3D" parent="CameraNeck"]
 
-[node name="EquippedItem3D" type="Node3D" parent="CameraNeck/Camera3D"]
+[node name="RightHand" type="Node3D" parent="CameraNeck/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.491126, -0.350933, -0.794641)
 script = ExtResource("2_jwtl3")
 equipment_path = NodePath("../../../Equipment")
 tags_to_display = Array[String](["right.handed"])
+
+[node name="LeftHand" type="Node3D" parent="CameraNeck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.630821, -0.350933, -0.794641)
+script = ExtResource("2_jwtl3")
+equipment_path = NodePath("../../../Equipment")
+tags_to_display = Array[String](["left.handed"])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_3660s")

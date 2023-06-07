@@ -11,3 +11,4 @@ func _init() -> void:
 	## four shots per second
 	reload_time = 0.25
 	super._init()
+	tags.append("left.handed")

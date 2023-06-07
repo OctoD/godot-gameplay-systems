@@ -37,7 +37,14 @@ func _activate(evt: ItemActivationEvent) -> void:
 
 	if player:
 		print("bullet fired from " + name)
-		bullet.transform = player.active_weapon.global_transform
+		
+		if player.active_weapon_0.current:
+			bullet.transform = player.active_weapon_0.global_transform
+		elif player.active_weapon_1.current:
+			bullet.transform = player.active_weapon_1.global_transform
+		else:
+			bullet.transform = player.global_transform
+
 		bullet.velocity = -bullet.transform.basis.z * bullet.speed
 
 		player.get_tree().root.add_child(bullet)

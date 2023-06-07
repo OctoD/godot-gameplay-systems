@@ -11,7 +11,8 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var mouse_sensitivity: float = 0.004
 
 
-@onready var active_weapon: EquippedItem3D = $CameraNeck/Camera3D/EquippedItem3D
+@onready var active_weapon_0: EquippedItem3D = $CameraNeck/Camera3D/LeftHand
+@onready var active_weapon_1: EquippedItem3D = $CameraNeck/Camera3D/RightHand
 @onready var camera_neck: Node3D = $CameraNeck
 @onready var equipment: Equipment = $Equipment
 @onready var gameplay_attribute_map: GameplayAttributeMap = $GameplayAttributeMap
