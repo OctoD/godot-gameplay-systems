@@ -196,10 +196,7 @@ func _handle_lifecycle_tagging(lifecycle: LifeCycle, ability: Ability) -> void:
 ## The [method Node._ready] override
 func _ready() -> void:
 	gameplay_attribute_map = get_node(gameplay_attribute_map_path)
-
-	for i in abilities.size():
-		var ability = abilities[-1]
-		grant(ability)
+	grant_all_abilities()
 
 
 ## Activates a single [Ability] calling [method Ability.try_activate].
@@ -352,18 +349,19 @@ func filter_abilities(predicate: Callable, includes_ungranted = false) -> Array[
 
 ## Gives an [Ability] at runtime
 ## If the [Ability] has already been granted, it will be ignored silently
-func grant(ability: Ability) -> void:
+## [br]Returns [code]true[/code] if the ability has been granted, [code]false[/code] otherwise
+func grant(ability: Ability) -> bool:
 	# It's not active, maybe the owner is dead or on holiday
 	if not active:
-		return
+		return false
 	
 	# Obviously skip granting if ability is null
 	if ability == null:
-		return
+		return false
 	
 	# Skips if cannot be granted
 	if not can_grant(ability):
-		return
+		return false
 
 	# Removes from abilities array if it's there. This avoids duplication which could lead to bugs.
 	var ability_index = abilities.find(ability)
@@ -394,6 +392,28 @@ func grant(ability: Ability) -> void:
 
 	# Emits grant signal, so UI/parent nodes can do stuff with it
 	ability_granted.emit(ability)
+
+	# Returns true, so the caller knows the ability has been granted
+	return true
+
+
+## Grants many [Ability] at runtime
+## If an [Ability] is granted, it is removed from the [member AbilityContainer.abilities] array and added to the [member AbilityContainer.granted_abilities] array.
+## If an [Ability] has already been granted, it will be ignored silently
+## [br]Returns [code]int[/code] the number of abilities granted
+func grant_all_abilities() -> int:
+	var granted = 0
+	var cursor = -1
+
+	for i in abilities.size():
+		var ability = abilities[cursor]
+
+		if grant(ability):
+			granted += 1
+		else:
+			cursor -= 1
+
+	return granted
 
 
 ## Returns [code]true[/code] if has an [Ability] which satisfies the [Callable] predicate, [code]false[/code] otherwise
