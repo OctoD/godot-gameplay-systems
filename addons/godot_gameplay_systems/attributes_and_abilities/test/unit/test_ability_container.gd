@@ -182,3 +182,43 @@ func test_activate_many() -> void:
 	b.activate_many(true)
 
 	assert_signal_emit_count(b, "ability_activated", 2, "ability_activated called twice")
+
+
+func test_granting_issue_23() -> void:
+	# refers to issue #23 https://github.com/OctoD/godot-gameplay-systems/issues/23
+	
+	var ability000 = Ability000.new("000")
+	var ability001 = Ability000.new("001")
+	var ability002 = Ability000.new("002")
+	var ability003 = Ability000.new("003")
+	var ability004 = Ability000.new("004")
+	var ability005 = Ability000.new("005")
+
+	ability001.grant_tags_required.append("cannot be granted at all")
+	ability004.grant_tags_required.append("cannot be granted at all")
+
+	var container = _make([ability000, ability001, ability002, ability003, ability004, ability005])
+
+	container.grant(ability000)
+	container.grant(ability001)
+	container.grant(ability002)
+	container.grant(ability003)
+	container.grant(ability004)
+	container.grant(ability005)
+
+	assert_eq(container.granted_abilities.has(ability000), true, "ability000 should have been granted")
+	assert_eq(container.granted_abilities.has(ability002), true, "ability002 should have been granted")
+	assert_eq(container.granted_abilities.has(ability001), false, "ability001 should not have been granted")
+	assert_eq(container.granted_abilities.has(ability003), true, "ability003 should have been granted")
+	assert_eq(container.granted_abilities.has(ability004), false, "ability004 should not have been granted")
+	assert_eq(container.granted_abilities.has(ability005), true, "ability005 should have been granted")
+
+	assert_eq(container.abilities.has(ability000), false, "ability000 should not be there since it's granted")
+	assert_eq(container.abilities.has(ability002), false, "ability002 should not be there since it's granted")
+	assert_eq(container.abilities.has(ability001), true, "ability001 should be there since it's not granted")
+	assert_eq(container.abilities.has(ability003), false, "ability003 should be there since it's not granted")
+	assert_eq(container.abilities.has(ability004), true, "ability004 should be there since it's not granted")
+	assert_eq(container.abilities.has(ability005), false, "ability005 should not be there since it's granted")
+
+
+	# it should reach this point to avoid that possible bug about not granting abilities at all if one is not grantable
