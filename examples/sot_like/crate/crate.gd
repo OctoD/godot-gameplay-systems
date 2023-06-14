@@ -6,7 +6,16 @@ class_name SotLikeCrate extends InteractableArea3D
 
 @onready var fell_raycast: RayCast3D = $RayCast3D
 
+
 var dragged := false
+
+
+func _on_interaction_started(_manager: InteractionManager) -> void:
+	dragged = true
+
+
+func _on_interaction_ended(_manager: InteractionManager) -> void:
+	dragged = false
 
 
 func _physics_process(delta: float) -> void:
