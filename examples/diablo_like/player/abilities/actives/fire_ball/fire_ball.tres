@@ -8,6 +8,7 @@
 script = ExtResource("2_ua1rb")
 cast_scene = ExtResource("1_abd4n")
 resource_cost = 30.0
+projectile_velocity = 1000.0
 ui_icon = ExtResource("3_fnvvl")
 ui_name = "fireball"
 cooldown_duration = 3.0
