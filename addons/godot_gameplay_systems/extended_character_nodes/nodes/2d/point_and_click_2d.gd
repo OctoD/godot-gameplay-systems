@@ -15,6 +15,14 @@ signal new_position_marked(position: Vector2)
 ## Is the [CharacterBody2D] child [NavigationAgent2D]. 
 ## Is used to determine the path in the world.
 @export var navigation_agent: NavigationAgent2D = null
+## If set to [code]true[/code] the [code]PointAndClick2D[/code] will move the [code]CharacterBody2D[/code] automatically.
+@export var automatic_movement: bool = true
+
+
+## Returns the mouse position in a 2D world.
+var mouse_position: Vector2:
+	get:
+		return character_2d.get_global_mouse_position()
 
 
 ## Handles movement
@@ -25,7 +33,7 @@ func _handle_velocity_computed(_velocity: Vector2) -> void:
 
 ## The physics process function
 func _physics_process(delta: float) -> void:
-	if not Engine.is_editor_hint():
+	if not Engine.is_editor_hint() and automatic_movement:
 		move_to_clicked_position()
 
 
@@ -70,7 +78,7 @@ func move_to_clicked_position() -> void:
 ## Sets the [code]navigation_agent[/code] target position to current click position.
 func set_new_movement_position() -> void:
 	if can_move():
-		navigation_agent.target_position = character_2d.get_global_mouse_position()
+		navigation_agent.target_position = mouse_position
 		new_position_marked.emit(navigation_agent.target_position)
 
 

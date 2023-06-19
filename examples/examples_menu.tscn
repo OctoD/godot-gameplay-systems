@@ -64,6 +64,12 @@ text = "Diablo-like"
 script = ExtResource("3_jxaps")
 scene_to_load = "res://examples/diablo_like/diablo_like.tscn"
 
+[node name="TopDown3D" type="Button" parent="ExamplesMenu/ExampleButtons"]
+layout_mode = 2
+text = "Top down 3D"
+script = ExtResource("3_jxaps")
+scene_to_load = "res://examples/top_down_3d/top_down_3d.tscn"
+
 [node name="SotLike" type="Button" parent="ExamplesMenu/ExampleButtons"]
 layout_mode = 2
 text = "SOT-like (sail management)"
