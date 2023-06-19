@@ -30,7 +30,7 @@ func activate(event: ActivationEvent) -> void:
 			scene.look_at(player.get_global_mouse_position())
 			scene.position = player.global_position
 			scene.speed = projectile_velocity
-			scene.velocity = Vector2.RIGHT.rotated(scene.rotation)
+			scene.velocity = (player.get_global_mouse_position() - player.position).normalized()
 		elif grant_tags.has("summon"):
 			scene.position = player.cursor_position
 		else:

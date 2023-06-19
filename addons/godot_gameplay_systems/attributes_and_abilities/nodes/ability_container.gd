@@ -39,7 +39,7 @@ signal cooldown_ended(ability: Ability)
 ## Emitted when an ability cooldown started
 signal cooldown_started(ability: Ability)
 ## Emitted when tags are updated
-signal tags_updated(updaated_tags: Array[String], previous_tags: Array[String])
+signal tags_updated(updated_tags: Array[String], previous_tags: Array[String])
 
 
 @export_category("Abilities")
