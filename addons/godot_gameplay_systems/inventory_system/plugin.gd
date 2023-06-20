@@ -13,6 +13,7 @@ const drop_table_script = preload("res://addons/godot_gameplay_systems/inventory
 const drop_script = preload("res://addons/godot_gameplay_systems/inventory_system/nodes/drop.gd")
 const drop_2d_script = preload("res://addons/godot_gameplay_systems/inventory_system/nodes/drop_2d.gd")
 const drop_3d_script = preload("res://addons/godot_gameplay_systems/inventory_system/nodes/drop_3d.gd")
+const radial_menu_script = preload("res://addons/godot_gameplay_systems/inventory_system/nodes/radial_menu_container.gd")
 
 
 func _enter_tree() -> void:
@@ -28,9 +29,11 @@ func _enter_tree() -> void:
 	add_custom_type("EquippedItem3D", "Node3D", equipped_item_3d, preload("res://addons/godot_gameplay_systems/inventory_system/assets/Equipped3DIcon.png"))
 	add_custom_type("PickableArea2D", "Area2D", pickable_item_2d, null)
 	add_custom_type("PickableArea3D", "Area3D", pickable_item_3d, null)
+	add_custom_type("RadialMenuContainer", "Container", radial_menu_script, null)
 
 
 func _exit_tree() -> void:
+	remove_custom_type("RadialMenuContainer")
 	remove_custom_type("PickableArea3D")
 	remove_custom_type("PickableArea2D")
 	remove_custom_type("EquippedItem3D")
