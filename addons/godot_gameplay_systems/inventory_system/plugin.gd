@@ -29,7 +29,7 @@ func _enter_tree() -> void:
 	add_custom_type("EquippedItem3D", "Node3D", equipped_item_3d, preload("res://addons/godot_gameplay_systems/inventory_system/assets/Equipped3DIcon.png"))
 	add_custom_type("PickableArea2D", "Area2D", pickable_item_2d, null)
 	add_custom_type("PickableArea3D", "Area3D", pickable_item_3d, null)
-	add_custom_type("RadialMenuContainer", "Container", radial_menu_script, null)
+	add_custom_type("RadialMenuContainer", "Container", radial_menu_script, preload("res://addons/godot_gameplay_systems/inventory_system/assets/RadialMenuIcon.png"))
 
 
 func _exit_tree() -> void:
