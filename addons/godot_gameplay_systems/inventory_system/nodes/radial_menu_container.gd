@@ -11,7 +11,6 @@ func _draw() -> void:
 		if child is Control:
 			# move child to a pie slice starting from the center of the container
 			var child_angle = child_index * pie_slice_radians
-			# var child_radius = min(size.x, size.y) / 2
 			var child_radius = min(size.x, size.y) / 2
 			var child_position = Vector2(
 				child_radius * cos(child_angle),
