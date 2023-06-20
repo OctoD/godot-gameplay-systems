@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8cywrb5tgm6k"]
+[gd_scene load_steps=9 format=3 uid="uid://c8cywrb5tgm6k"]
 
 [ext_resource type="Script" path="res://examples/sot_like/player/sot_like_player.gd" id="1_68dqe"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/interactables/nodes/3d/interaction_raycast_3d.gd" id="2_3wm4b"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/interactables/nodes/interaction_manager.gd" id="3_qgbfi"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/equipment.gd" id="5_cwv7t"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/inventory.gd" id="6_n2esb"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/radial_menu_container.gd" id="7_3hmpf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b0i2f"]
 
@@ -71,3 +72,49 @@ size_flags_vertical = 4
 
 [node name="ExplanationLabel" type="Label" parent="BoxContainer/InteractionExplanation"]
 layout_mode = 2
+
+[node name="RadialMenuContainer" type="Container" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_top = 32.0
+offset_right = -42.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("7_3hmpf")
+
+[node name="Button" type="Button" parent="RadialMenuContainer"]
+layout_mode = 2
+text = "test item"
+
+[node name="Button2" type="Button" parent="RadialMenuContainer"]
+layout_mode = 2
+text = "test item"
+
+[node name="Button3" type="Button" parent="RadialMenuContainer"]
+layout_mode = 2
+text = "test item"
+
+[node name="Button4" type="Button" parent="RadialMenuContainer"]
+layout_mode = 2
+text = "test item"
+
+[node name="Button5" type="Button" parent="RadialMenuContainer"]
+layout_mode = 2
+text = "test item"
+
+[node name="Button6" type="Button" parent="RadialMenuContainer"]
+layout_mode = 2
+text = "test item"
+
+[node name="Button7" type="Button" parent="RadialMenuContainer"]
+layout_mode = 2
+text = "test item"
+
+[node name="Button8" type="Button" parent="RadialMenuContainer"]
+layout_mode = 2
+text = "test item"

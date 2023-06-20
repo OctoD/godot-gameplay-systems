@@ -17,6 +17,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 9
 @onready var interaction_explanation: Label = $BoxContainer/InteractionExplanation/ExplanationLabel
 @onready var right_equipped_item: EquippedItem3D = $CameraNeck/Camera3D/RightEquippedItem
 @onready var center_equipped_item: EquippedItem3D = $CameraNeck/Camera3D/CenterEquippedItem
+@onready var radial_menu_container: Control = $RadialMenuContainer
 
 
 var is_dragging: bool = false:
@@ -41,6 +42,7 @@ var is_blocked_from_moving_while_interacting: bool = false:
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	radial_menu_container.visible = false
 
 
 func _handle_interaction(_delta: float) -> void:
@@ -61,6 +63,13 @@ func _handle_movement(_delta: float) -> void:
 
 	if Input.is_action_just_pressed("fps_drop") and is_dragging:
 		interaction_manager.end_interaction()
+
+	radial_menu_container.visible = Input.is_action_pressed("diablo_like_inventory")
+	
+	if radial_menu_container.visible:
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -88,7 +97,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func _input(event: InputEvent):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not radial_menu_container.visible:
 		var y = event.relative.x * mouse_sensitivity
 		var x = event.relative.y * mouse_sensitivity
 		rotate_y(-y)
