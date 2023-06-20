@@ -6,7 +6,7 @@ Godot Gameplay Systems (formerly godot gameplay attributes) is a set of nodes an
 - [⚔️ GGS ⚔️](#️-ggs-️)
 - [Install](#install)
   - [How does it work?](#how-does-it-work)
-- [Networking Attributes, Effects and Abilities](#networking-attributes-effects-and-abilities)
+- [Networking and multiplayer](#networking-attributes-effects-and-abilities)
 - [Contribution](#contribution)
 - [Licence](#licence)
 
@@ -26,7 +26,7 @@ I am making also small "demos" to demonstrate how things work. You can check the
 
 `Esc` key will always return you to the main menu.
 
-# Networking Attributes, Effects and Abilities
+# Networking and multiplayer
 
 Did not test too much, but abilities, effects and attributes could be replicated using the `MultiplayerSynchronizer` node provided by godot4.x.
 
