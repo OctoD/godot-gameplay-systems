@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjwuhfb2wcj1x"]
+[gd_scene load_steps=12 format=3 uid="uid://bjwuhfb2wcj1x"]
 
 [ext_resource type="Script" path="res://examples/doom_like_fps/player/Player.gd" id="1_diqix"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/equipped_item_3d.gd" id="2_jwtl3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/resources/attribute.gd" id="3_gseup"]
 [ext_resource type="Resource" uid="uid://2s6702ugdpni" path="res://examples/doom_like_fps/doom_like_pg_fps_attributes.tres" id="4_fxibq"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/equipment.gd" id="5_pje3c"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/camera_shake/nodes/camera_shake.gd" id="8_ofxhn"]
 [ext_resource type="Script" path="res://examples/doom_like_fps/player/hud.gd" id="10_wtnkq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3660s"]
@@ -97,3 +98,9 @@ layout_mode = 2
 
 [node name="WeaponIcon" type="TextureRect" parent="Hud/HBoxContainer/HBoxContainer/AspectRatioContainer"]
 layout_mode = 2
+
+[node name="CameraShake" type="Node" parent="."]
+script = ExtResource("8_ofxhn")
+camera_path = NodePath("../CameraNeck/Camera3D")
+max_strength = 1.0
+max_frequency = 10

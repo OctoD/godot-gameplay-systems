@@ -19,6 +19,7 @@ var is_dead: bool:
 
 @onready var ability_container: AbilityContainer = $AbilityContainer
 @onready var animated_sprite: AnimatedSprite2D = $CollisionShape2d/AnimatedSprite2D
+@onready var camera_shake: CameraShake = $CameraShake
 @onready var gameplay_attribute_map: GameplayAttributeMap = $GameplayAttributeMap
 @onready var hud = $Camera2D/CanvasLayer/Hud
 @onready var inventory: Inventory = $Inventory
@@ -36,6 +37,8 @@ func _handle_attribute_changed(spec: AttributeSpec) -> void:
 			if spec.current_value <= 0.0:
 				print("Added dead tag to player ability container")
 				ability_container.add_tag("dead")
+				## Shake for the death
+				camera_shake.shake(50.0, 1, 250)
 
 
 func _ready() -> void:
@@ -61,6 +64,9 @@ func _input(event: InputEvent) -> void:
 	
 		if fireball:
 			ability_container.activate_one(fireball)
+
+			if not is_dead:
+				camera_shake.shake(3.0, 0.5, 400)
 
 
 func _physics_process(delta: float) -> void:
