@@ -14,6 +14,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var active_weapon_0: EquippedItem3D = $CameraNeck/Camera3D/LeftHand
 @onready var active_weapon_1: EquippedItem3D = $CameraNeck/Camera3D/RightHand
 @onready var camera_neck: Node3D = $CameraNeck
+@onready var camera_shake: CameraShake = $CameraShake
 @onready var equipment: Equipment = $Equipment
 @onready var gameplay_attribute_map: GameplayAttributeMap = $GameplayAttributeMap
 @onready var hud = $Hud
@@ -44,9 +45,13 @@ func _ready() -> void:
 		equipped_weapon = weapon
 		hud.handle_equipped(weapon)
 	)
-	
+
+	equipment.item_activated.connect(func (weapon, _slot):
+		camera_shake.shake(weapon.recoil, 0.2, 10)	
+	)
+
 	gameplay_attribute_map.attribute_changed.connect(hud.handle_attribute_changed)
-	
+
 	hud.handle_attribute_changed(gameplay_attribute_map.get_attribute_by_name("health"))
 	hud.handle_attribute_changed(gameplay_attribute_map.get_attribute_by_name("armor"))
 

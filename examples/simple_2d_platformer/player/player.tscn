@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cp8qdpp5ihmo0"]
+[gd_scene load_steps=28 format=3 uid="uid://cp8qdpp5ihmo0"]
 
 [ext_resource type="Script" path="res://examples/simple_2d_platformer/player/player.gd" id="1_nonhe"]
 [ext_resource type="Texture2D" uid="uid://bj3wqaubjklhr" path="res://examples/simple_2d_platformer/kenney_pixelplatformer/Tilemap/characters_packed.png" id="2_iquwb"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://examples/simple_2d_platformer/abilities/resurrect/resurrect.gd" id="12_d4hl0"]
 [ext_resource type="Script" path="res://examples/simple_2d_platformer/abilities/fireball/fireball_ability.gd" id="13_hqdb3"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_systems/inventory_system/nodes/inventory.gd" id="14_lmfca"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_systems/camera_shake/nodes/camera_shake.gd" id="14_u231r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2anqr"]
 size = Vector2(24, 24)
@@ -76,6 +77,7 @@ script = ExtResource("8_l5u52")
 life_time = 1
 apply_every_second = 60.0
 max_applications = 0
+applies_as = 0
 attribute_name = "health"
 minimum_value = 1.0
 maximum_value = 1.0
@@ -201,6 +203,12 @@ horizontal_alignment = 1
 script = ExtResource("11_5ampk")
 gameplay_attribute_map_path = NodePath("../GameplayAttributeMap")
 abilities = Array[Resource("res://addons/godot_gameplay_systems/attributes_and_abilities/resources/ability.gd")]([SubResource("Resource_10t7f"), SubResource("Resource_hvflv")])
+
+[node name="CameraShake" type="Node" parent="."]
+script = ExtResource("14_u231r")
+camera_path = NodePath("../Camera2D")
+max_strength = 500.0
+max_frequency = 500
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("14_lmfca")

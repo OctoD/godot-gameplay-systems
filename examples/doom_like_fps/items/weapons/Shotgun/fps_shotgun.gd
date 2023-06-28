@@ -10,6 +10,7 @@ func _init() -> void:
 	bullet_speed  = 20
 	## one shot per second
 	reload_time = 1.0
+	recoil = 0.25
 	super._init()
 	tags.append("right.handed")
 

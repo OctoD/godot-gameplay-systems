@@ -11,6 +11,7 @@ icon = ExtResource("2_iai6e")
 bullet_damage = 120.0
 bullet_speed = 20.0
 reload_time = 1.0
+recoil = 0.1
 name = &"shotgun"
 can_stack = false
 decrease_stack_on_use = false
@@ -37,7 +38,7 @@ tags_removed_on_unequip = Array[String](["shotgun.equipped"])
 [sub_resource type="SphereShape3D" id="SphereShape3D_u4bui"]
 
 [node name="FpsPickableShotgun" type="Area3D"]
-transform = Transform3D(1.00813, 0, -0.0328844, 0, 1, 0, 0.0328772, 0, 1.00814, 0, 0, 0)
+transform = Transform3D(-0.872187, 0, -0.506675, 0, 1, 0, 0.506675, 0, -0.872201, 0, 0, 0)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_7ihpl")

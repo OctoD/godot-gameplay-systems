@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 window/stretch/aspect="keep_width"
 
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_gameplay_systems/plugin.cfg", "res://addons/gut/plugin.cfg")

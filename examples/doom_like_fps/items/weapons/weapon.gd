@@ -10,6 +10,7 @@ class_name DoomLikeFPSWeaponItem extends Item
 @export var bullet_damage: float = 10.0
 @export var bullet_speed: float = 10.0
 @export var reload_time: float = 0.0
+@export var recoil: float = 0.05
 
 
 const bullet_scene = preload("res://examples/doom_like_fps/items/weapons/bullet.tscn")
