@@ -222,3 +222,43 @@ func test_granting_issue_23() -> void:
 
 
 	# it should reach this point to avoid that possible bug about not granting abilities at all if one is not grantable
+
+
+class _test_Enemy_hairic95 extends Node2D:
+	var ability_container: AbilityContainer
+	
+	func _init(ability: Ability000) -> void:
+		ability_container = AbilityContainer.new()
+		add_child(ability_container)
+
+
+	func fire() -> void:
+		ability_container.activate_many()
+
+
+func test_hairic95_issue() -> void:
+	var ability000 = Ability000.new("000")
+	
+	ability000.tags_activation.append("started")
+	
+	var enemy000 = _test_Enemy_hairic95.new(ability000)
+	var enemy001 = _test_Enemy_hairic95.new(ability000)
+	var enemy002 = _test_Enemy_hairic95.new(ability000)
+	var enemies = [enemy000, enemy001, enemy002]
+	
+	add_child_autofree(enemy000)
+	add_child_autofree(enemy001)
+	add_child_autofree(enemy002)
+	
+	enemy000.get("fire").call()
+
+	assert_eq(enemy000.ability_container.tags.has("started") == true, "Ability container should have the tag")
+	assert_eq(enemy001.ability_container.tags.has("started") == false, "Ability container should have the tag")
+	assert_eq(enemy002.ability_container.tags.has("started") == false, "Ability container should have the tag")
+	
+	for e in enemies:
+		e.get("fire").call()
+		
+	assert_eq(enemy000.ability_container.tags.has("started") == true, "Ability container should have the tag")
+	assert_eq(enemy001.ability_container.tags.has("started") == true, "Ability container should have the tag")
+	assert_eq(enemy002.ability_container.tags.has("started") == true, "Ability container should have the tag")

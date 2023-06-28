@@ -108,7 +108,7 @@ func _get_cooldown_timer(ability: Ability) -> Timer:
 ## Handles the [signal Ability.activated] signal
 ## [br]It's called internally by the current [AbilityContainer], so you should not call it.
 func _handle_ability_activated(ability: Ability, activation_event: ActivationEvent) -> void:
-	if not active:
+	if not _is_eligible_for_operation(activation_event):
 		return
 
 	_handle_lifecycle_tagging(LifeCycle.Activated, ability)
@@ -131,7 +131,7 @@ func _handle_ability_activated(ability: Ability, activation_event: ActivationEve
 ## Handles the [signal Ability.blocked] signal.
 ## [br]It's called internally by the current [AbilityContainer], so you should not call it.
 func _handle_ability_blocked(ability: Ability, activation_event: ActivationEvent) -> void:
-	if not active:
+	if not _is_eligible_for_operation(activation_event):
 		return
 		
 	ability_blocked.emit(ability, activation_event)
@@ -141,7 +141,7 @@ func _handle_ability_blocked(ability: Ability, activation_event: ActivationEvent
 ## Handles the [signal Ability.cancelled] signal
 ## [br]It's called internally by the current [AbilityContainer], so you should not call it.
 func _handle_ability_cancelled(ability: Ability, activation_event: ActivationEvent) -> void:
-	if not active:
+	if not _is_eligible_for_operation(activation_event):
 		return
 	
 	_handle_lifecycle_tagging(LifeCycle.Cancelled, ability)
@@ -152,7 +152,7 @@ func _handle_ability_cancelled(ability: Ability, activation_event: ActivationEve
 ## Handles the [signal Ability.ended] signal
 ## [br]It's called internally by the current [AbilityContainer], so you should not call it.
 func _handle_ability_ended(ability: Ability, activation_event: ActivationEvent) -> void:
-	if not active:
+	if not _is_eligible_for_operation(activation_event):
 		return
 	
 	_handle_lifecycle_tagging(LifeCycle.Ended, ability)
@@ -191,6 +191,11 @@ func _handle_lifecycle_tagging(lifecycle: LifeCycle, ability: Ability) -> void:
 			add_tags(ability.tags_cooldown_end)
 			remove_tags(ability.tags_to_remove_on_cooldown_end)
 			return
+
+
+## Returns [code]true[/code] if the [AbilityContainer] can process and [ActivationEvent], [code]false[/code] otherwise.
+func _is_eligible_for_operation(activation_event: ActivationEvent) -> bool:
+	return activation_event.ability_container == self and active
 
 
 ## The [method Node._ready] override
