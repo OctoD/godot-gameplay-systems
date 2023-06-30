@@ -3,14 +3,23 @@ Some docs
 
 Surely this will need some better docs. They are on the road to 1.0.0.
 
-[About ability system](ability-system.md)
+## Abilities and attributes
 
-[About gameplay attributes](gameplay-attributes.md)
+- [About ability system](ability-system.md)
+- [About gameplay attributes](gameplay-attributes.md)
 
-[About inventory](inventory/inventory.md)
+## Inventory and equipment
 
-[About equipment](inventory/equipment.md)
+- [About inventory](inventory/inventory.md)
+- [About equipment](inventory/equipment.md)
+- [About items dropping](inventory/drop.md)
+- [About interacting with items](interactions-system.md)
 
-[About items dropping](inventory/drop.md)
+## Character related nodes
 
-[About interacting with items](interactions-system.md)
+- [About point and click](point-and-click.md)
+- [About camera shake](camera-shake.md)
+
+## Miscellaneous
+
+- [About intro screens](slide_show.md)
