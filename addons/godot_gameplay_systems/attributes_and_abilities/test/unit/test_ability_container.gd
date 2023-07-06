@@ -230,6 +230,7 @@ class _test_Enemy_hairic95 extends Node2D:
 	func _init(ability: Ability000) -> void:
 		ability_container = AbilityContainer.new()
 		add_child(ability_container)
+		ability_container.grant(ability)
 
 
 	func fire() -> void:
@@ -238,27 +239,27 @@ class _test_Enemy_hairic95 extends Node2D:
 
 func test_hairic95_issue() -> void:
 	var ability000 = Ability000.new("000")
-	
+
 	ability000.tags_activation.append("started")
-	
+
 	var enemy000 = _test_Enemy_hairic95.new(ability000)
 	var enemy001 = _test_Enemy_hairic95.new(ability000)
 	var enemy002 = _test_Enemy_hairic95.new(ability000)
 	var enemies = [enemy000, enemy001, enemy002]
-	
+
 	add_child_autofree(enemy000)
 	add_child_autofree(enemy001)
 	add_child_autofree(enemy002)
-	
+
 	enemy000.get("fire").call()
 
-	assert_eq(enemy000.ability_container.tags.has("started") == true, "Ability container should have the tag")
-	assert_eq(enemy001.ability_container.tags.has("started") == false, "Ability container should have the tag")
-	assert_eq(enemy002.ability_container.tags.has("started") == false, "Ability container should have the tag")
-	
+	assert_eq(enemy000.ability_container.tags.has("started"), true, "Ability container should have the tag")
+	assert_eq(enemy001.ability_container.tags.has("started"), false, "Ability container should have the tag")
+	assert_eq(enemy002.ability_container.tags.has("started"), false, "Ability container should have the tag")
+
 	for e in enemies:
 		e.get("fire").call()
-		
-	assert_eq(enemy000.ability_container.tags.has("started") == true, "Ability container should have the tag")
-	assert_eq(enemy001.ability_container.tags.has("started") == true, "Ability container should have the tag")
-	assert_eq(enemy002.ability_container.tags.has("started") == true, "Ability container should have the tag")
+
+	assert_eq(enemy000.ability_container.tags.has("started"), true, "Ability container should have the tag")
+	assert_eq(enemy001.ability_container.tags.has("started"), true, "Ability container should have the tag")
+	assert_eq(enemy002.ability_container.tags.has("started"), true, "Ability container should have the tag")
