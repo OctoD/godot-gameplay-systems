@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 window/stretch/aspect="keep_width"
 
+[dotnet]
+
+project/assembly_name="Godot-gameplay-attributes"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"

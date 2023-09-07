@@ -150,3 +150,10 @@ func test_buff_and_debuff() -> void:
 	assert_eq(child_nodes.has(damage_effect_duplicate), false, "the node should have been removes")
 
 #	assert_freed(damage_effect_duplicate.is_queued_for_deletion(), "the instant effect should have been removed from the tree")
+
+
+func test_get_attributes_dict() -> void:
+	var gam = _make_gam()
+
+	assert_true(gam.get_attributes_dict().has(health_attribute_name), "the dictionary should have the attribute")
+	assert_eq(gam.get_attributes_dict()[health_attribute_name], 100, "the dictionary should have the correct value")
