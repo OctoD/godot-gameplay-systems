@@ -195,3 +195,14 @@ func get_attribute_by_name(attribute_name: String) -> AttributeSpec:
 	
 	return null
 
+
+## Gets all attributes as a dictionary
+## [br]The dictionary keys are the attribute names and the values are the current buffed value of the attribute.
+func get_attributes_dict() -> Dictionary:
+	var keys = _attributes_dict.keys()
+	var out = {} as Dictionary
+
+	for key in keys:
+		var attr = get_attribute_by_name(key)
+		out[key] = attr.current_buffed_value
+	return out

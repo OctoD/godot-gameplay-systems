@@ -31,12 +31,12 @@
  "post_run_script": "",
  "pre_run_script": "",
  "prefix": "test_",
- "selected": "test_ability_container.gd",
+ "selected": "test_gameplay_attribute_map.gd",
  "should_exit": true,
  "should_exit_on_success": false,
  "should_maximize": false,
  "show_help": false,
  "suffix": ".gd",
  "tests": [],
- "unit_test_name": "test_granting_issue_23"
+ "unit_test_name": "test_get_attributes_dict"
 }
