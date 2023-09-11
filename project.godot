@@ -15,6 +15,10 @@ run/main_scene="res://examples/examples.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+TurnManager="*res://addons/godot_gameplay_systems/turn_based/autoloads/turn_manager.gd"
+
 [display]
 
 window/stretch/aspect="keep_width"

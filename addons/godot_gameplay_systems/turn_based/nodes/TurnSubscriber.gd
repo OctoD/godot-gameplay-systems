@@ -14,39 +14,41 @@ signal turn_round_ended()
 
 
 @export_group("Turn based game")
-## It gives this subscriber
+## Priority of this subscriber. The higher the priority, the sooner the turn starts.
 @export var priority: int = 0
 
 
-var game: TurnBasedGame:
-	get:
-		for child in get_tree().get_nodes_in_group("ggs.turnbased"):
-			if child is TurnBasedGame:
-				return child
-		return null
-
-
 func _enter_tree() -> void:
-	var _game = game
-	
-	if _game != null:
-		_game.add_subscriber(self)
+	if TurnManager.get_turn_based_game() != null:
+		TurnManager.get_turn_based_game().add_subscriber(self)
 
 
 func _exit_tree() -> void:
-	var _game = game
-	
-	if _game != null:
-		_game.remove_subscriber(self)
+	if TurnManager.get_turn_based_game() != null:
+		TurnManager.get_turn_based_game().remove_subscriber(self)
 
 
 func _ready() -> void:
 	add_to_group("ggs.turnbased")
 
+	if TurnManager.get_turn_based_game() != null:
+		TurnManager.get_turn_based_game().add_subscriber(self)
 
+
+## Called when the turn round ended
+## [br]It's a virtual method, it can be overrided
+func _turn_ended() -> void:
+	pass
+
+
+## Called when the turn round started
+## [br]It's a virtual method, it can be overrided
+func _turn_started() -> void:
+	pass
+
+
+## Ends the turn of this subscriber
 func end_turn() -> void:
-	var _game = game
-	
-	if _game != null:
-		_game.next_turn()
+	if TurnManager.get_turn_based_game() != null:
+		TurnManager.get_turn_based_game().next_turn()
 

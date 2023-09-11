@@ -7,19 +7,33 @@ signal turn_changed(manager: TurnBasedGame)
 signal turn_game_started()
 ## Emitted when the turn based game stops.
 signal turn_game_stopped()
+## Emitted when a subscriber is added.
+signal subscriber_added(subscriber: TurnSubscriber)
+## Emitted when a subscriber is removed.
+signal subscriber_removed(subscriber: TurnSubscriber)
 
 
-@export_category("Turn based configuration")
-## The turn duration. If set to [code]0[/code] the turn lasts until the current active turn is finished.
-@export_range(0.0, 1000.0, 1.0) var turn_duration: float = 0.0
-
-
+## The current turn.
 var current_turn: int = 0
+## The current turn subscriber.
+var current_turn_subscriber: TurnSubscriber:
+	get:
+		if subscribers.size() == 0:
+			return null
+
+		return subscribers[current_turn]
+## The turn subscribers.
 var subscribers: Array[TurnSubscriber] = []
 
 
 func _ready() -> void:
 	add_to_group("ggs.turnbased")
+
+
+func _sort_subscribers() -> void:
+	subscribers.sort_custom(func (a, b): 
+		return a.priority < b.priority
+	)
 
 
 ## Called when a [TurnSubscriber] is subscribed.
@@ -38,26 +52,51 @@ func _subscriber_removed(sub: TurnSubscriber) -> void:
 func add_subscriber(sub: TurnSubscriber) -> bool:
 	if subscribers.has(sub):
 		return false
-
-	_subscriber_added(sub)
-	
+		
 	subscribers.append(sub)
+	subscriber_added.emit(sub)
+
+	_sort_subscribers()
+	
 	return true
+
+
+## Ends the current turn
+func end_turn_sequence() -> void:
+	if subscribers.size() == 0:
+		return
+
+	subscribers[current_turn].end_turn()
+
+	current_turn += 1
+
+	if current_turn >= subscribers.size():
+		current_turn = 0
+
+	subscribers[current_turn].turn_started.emit()
+	subscribers[current_turn]._turn_started()
+
+	turn_game_stopped.emit()
 
 
 ## Calls next turn
 func next_turn() -> void:
 	var subscribers_count := subscribers.size()
-	
+
 	if current_turn < subscribers_count:
-		subscribers[current_turn].end_turn()
+		subscribers[current_turn].turn_ended.emit()
+		subscribers[current_turn]._turn_ended()
 
 	current_turn += 1
-	
-	if current_turn > subscribers_count:
+
+	if current_turn >= subscribers_count:
 		current_turn = 0
 
+	subscribers[current_turn].turn_started.emit()
+	subscribers[current_turn]._turn_started()
 
+
+## Removes a [TurnSubscriber]
 func remove_subscriber(sub: TurnSubscriber) -> bool:
 	if not subscribers.has(sub):
 		return false
@@ -65,7 +104,21 @@ func remove_subscriber(sub: TurnSubscriber) -> bool:
 	var sub_turn_index = subscribers.find(func (x): return x == sub)
 	
 	subscribers.remove_at(sub_turn_index)
-	
-	_subscriber_removed(sub)
+	subscriber_removed.emit(sub)
+
+	_sort_subscribers()
 
 	return true
+
+
+## Starts the turn based game.
+func start_turn_sequence() -> void:
+	if subscribers.size() == 0:
+		return
+
+	current_turn = 0
+
+	subscribers[current_turn]._turn_started()
+	subscribers[current_turn].turn_started.emit()
+
+	turn_game_started.emit()
