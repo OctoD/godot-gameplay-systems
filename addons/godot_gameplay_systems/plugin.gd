@@ -1,13 +1,13 @@
 @tool
 extends EditorPlugin
 
-const attributes_and_abilities_plugin_script = preload("res://addons/godot_gameplay_systems/attributes_and_abilities/plugin.gd")
-const camera_shake_plugin_script = preload("res://addons/godot_gameplay_systems/camera_shake/plugin.gd")
-const extended_character_nodes_script = preload("res://addons/godot_gameplay_systems/extended_character_nodes/plugin.gd")
-const inventory_system_script = preload("res://addons/godot_gameplay_systems/inventory_system/plugin.gd")
-const interactables_script = preload("res://addons/godot_gameplay_systems/interactables/plugin.gd")
-const slideshow_script = preload("res://addons/godot_gameplay_systems/slideshow/plugin.gd")
-const turn_based_script = preload("res://addons/godot_gameplay_systems/turn_based/plugin.gd")
+const attributes_and_abilities_plugin_script = preload("./attributes_and_abilities/plugin.gd")
+const camera_shake_plugin_script = preload("./camera_shake/plugin.gd")
+const extended_character_nodes_script = preload("./extended_character_nodes/plugin.gd")
+const inventory_system_script = preload("./inventory_system/plugin.gd")
+const interactables_script = preload("./interactables/plugin.gd")
+const slideshow_script = preload("./slideshow/plugin.gd")
+const turn_based_script = preload("./turn_based/plugin.gd")
 
 
 var attributes_and_abilities_plugin: EditorPlugin
