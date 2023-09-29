@@ -16,6 +16,8 @@ Clone this repo, copy the `addons` folder content inside your project's `addons`
 
 Enable this plugin by going to `project settings/plugins`.
 
+> Important: reload the project after activating the plugin
+
 Enjoy! 
 
 ## How does it work?
