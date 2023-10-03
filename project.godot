@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-TurnManager="*res://addons/godot_gameplay_systems/turn_based/autoloads/turn_manager.gd"
+TurnManager="*res://addons/godot_gameplay_systems/turn_based/./autoloads/turn_manager.gd"
 
 [display]
 

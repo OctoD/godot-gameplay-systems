@@ -1,7 +1,7 @@
 extends EditorPlugin
 
 
-const slideshow_script = preload("res://addons/godot_gameplay_systems/slideshow/slide_show.gd")
+const slideshow_script = preload("./slide_show.gd")
 
 
 func _enter_tree() -> void:
