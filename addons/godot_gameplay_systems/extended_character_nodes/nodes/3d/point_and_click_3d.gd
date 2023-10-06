@@ -7,7 +7,7 @@ signal new_position_marked(position: Vector3)
 
 
 @export_category("PointAndClick3D")
-## Tells if the [code]PointAndClick3D[/code] is active.
+## Activates the [PointAndClick3D].
 @export var active: bool = true
 ## The movement speed
 @export var movement_speed: float = 100.0
@@ -16,7 +16,7 @@ signal new_position_marked(position: Vector3)
 ## Is the [CharacterBody3D] child [NavigationAgent3D]. 
 ## Is used to determine the path in the world.
 @export var navigation_agent: NavigationAgent3D = null
-## If set to [code]true[/code] the [code]PointAndClick3D[/code] will move the [code]CharacterBody3D[/code] automatically.
+## If set to [code]true[/code] the [PointAndClick3D] will move the [CharacterBody3D] automatically.
 @export var automatic_movement: bool = true
 
 @export_flags_3d_physics var clickable_layer: int = 1
@@ -69,7 +69,7 @@ func is_navigation_finished() -> bool:
 	return false
 
 	
-## Moves the [code]CharacterBody3D[/code] to the clicked position.
+## Moves the [CharacterBody3D] to the clicked position.
 func move_to_clicked_position() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -106,5 +106,6 @@ func set_new_movement_position() -> void:
 		new_position_marked.emit(target_position)
 
 
+## Stops the [code]navigation_agent[/code] movement.
 func stop_movement() -> void:
 	navigation_agent.target_position = character_3d.position

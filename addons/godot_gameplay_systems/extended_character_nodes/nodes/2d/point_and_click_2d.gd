@@ -6,7 +6,7 @@ signal new_position_marked(position: Vector2)
 
 
 @export_category("PointAndClick2D")
-## Tells if the [code]PointAndClick2D[/code] is active.
+## Activates the [PointAndClick2D].
 @export var active: bool = true
 ## The movement speed
 @export var movement_speed: float = 100.0
@@ -15,7 +15,7 @@ signal new_position_marked(position: Vector2)
 ## Is the [CharacterBody2D] child [NavigationAgent2D]. 
 ## Is used to determine the path in the world.
 @export var navigation_agent: NavigationAgent2D = null
-## If set to [code]true[/code] the [code]PointAndClick2D[/code] will move the [code]CharacterBody2D[/code] automatically.
+## If set to [code]true[/code] the [code]PointAndClick2D[/code] will move the [CharacterBody2D] automatically.
 @export var automatic_movement: bool = true
 
 
@@ -80,7 +80,6 @@ func set_new_movement_position() -> void:
 	if can_move():
 		navigation_agent.target_position = mouse_position
 		new_position_marked.emit(navigation_agent.target_position)
-
 
 
 ## Stops the [code]navigation_agent[/code] movement.
