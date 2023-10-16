@@ -29,3 +29,6 @@ If applicable, add screenshots to help explain your problem.
 
 **Additional context**
 Add any other context about the problem here.
+
+**Reproducible project**
+Attach a reproducibile project. Otherwise I'll look into the issue when I can.
