@@ -153,6 +153,8 @@ The removal of `resurrect.start` inside `tags_to_remove_on_activate` and `dead`,
 
 Then, open the group `Cooldown` and set it to a value you like (use `3.0`, just for testing sake).
 
+> Important: cooldown will not be taken in consideration if the proper tags are not set.
+
 It's time to test it.
 
 #### Activating your first ability
