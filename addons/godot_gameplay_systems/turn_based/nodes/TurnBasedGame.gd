@@ -68,13 +68,7 @@ func end_turn_sequence() -> void:
 
 	subscribers[current_turn].end_turn()
 
-	current_turn += 1
-
-	if current_turn >= subscribers.size():
-		current_turn = 0
-
-	subscribers[current_turn].turn_started.emit()
-	subscribers[current_turn]._turn_started()
+	current_turn = 0
 
 	turn_game_stopped.emit()
 
@@ -101,7 +95,7 @@ func remove_subscriber(sub: TurnSubscriber) -> bool:
 	if not subscribers.has(sub):
 		return false
 	
-	var sub_turn_index = subscribers.find(func (x): return x == sub)
+	var sub_turn_index = subscribers.find(sub)
 	
 	subscribers.remove_at(sub_turn_index)
 	subscriber_removed.emit(sub)

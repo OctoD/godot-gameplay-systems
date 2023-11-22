@@ -78,7 +78,7 @@ scene_to_load = "res://examples/sot_like/sot_game.tscn"
 
 [node name="TurnBasedTopDown" type="Button" parent="ExamplesMenu/ExampleButtons"]
 layout_mode = 2
-text = "SOT-like (sail management)"
+text = "Turn based top down"
 script = ExtResource("3_jxaps")
 scene_to_load = "res://examples/turn_based_top_down/turn_based_top_down.tscn"
 
