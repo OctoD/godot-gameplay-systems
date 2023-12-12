@@ -11,30 +11,12 @@ config_version=5
 [application]
 
 config/name="Godot-gameplay-attributes"
-run/main_scene="res://examples/examples.tscn"
+run/main_scene="res://examples.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
-
-[autoload]
-
-TurnManager="*res://addons/godot_gameplay_systems/turn_based/./autoloads/turn_manager.gd"
 
 [display]
 
 window/stretch/aspect="keep_width"
-
-[dotnet]
-
-project/assembly_name="Godot-gameplay-attributes"
-
-[editor]
-
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/godot_gameplay_systems/plugin.cfg", "res://addons/gut/plugin.cfg")
 
 [input]
 
