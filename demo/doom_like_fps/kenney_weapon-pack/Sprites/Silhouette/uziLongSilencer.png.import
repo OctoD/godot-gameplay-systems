@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bt6u88hr22mpx"
-path="res://.godot/imported/uziLongSilencer.png-25ddfee4722b8aa857adbfe33ca3e019.ctex"
+path="res://.godot/imported/uziLongSilencer.png-9056e367c234d9b8314ed38984ab00e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Silhouette/uziLongSilencer.png"
-dest_files=["res://.godot/imported/uziLongSilencer.png-25ddfee4722b8aa857adbfe33ca3e019.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Silhouette/uziLongSilencer.png"
+dest_files=["res://.godot/imported/uziLongSilencer.png-9056e367c234d9b8314ed38984ab00e2.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmppthdbibal5"
-path="res://.godot/imported/Slots.png-70494c68422265899c7d0846e41879a6.ctex"
+path="res://.godot/imported/Slots.png-75c4266e529e2d5a7df8d967c57f8d8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/diablo_like/player/hud/inventory/Slots.png"
-dest_files=["res://.godot/imported/Slots.png-70494c68422265899c7d0846e41879a6.ctex"]
+source_file="res://diablo_like/player/hud/inventory/Slots.png"
+dest_files=["res://.godot/imported/Slots.png-75c4266e529e2d5a7df8d967c57f8d8b.ctex"]
 
 [params]
 

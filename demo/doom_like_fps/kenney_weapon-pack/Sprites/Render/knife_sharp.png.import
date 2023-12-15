@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cp4pp18h60mpb"
-path="res://.godot/imported/knife_sharp.png-1b81c6c27c10821b2179e17b35dfe629.ctex"
+path="res://.godot/imported/knife_sharp.png-0ffd01f11720da7bcfe32144d349b157.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Render/knife_sharp.png"
-dest_files=["res://.godot/imported/knife_sharp.png-1b81c6c27c10821b2179e17b35dfe629.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Render/knife_sharp.png"
+dest_files=["res://.godot/imported/knife_sharp.png-0ffd01f11720da7bcfe32144d349b157.ctex"]
 
 [params]
 

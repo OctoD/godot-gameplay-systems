@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://w3sqah0fa7o6"
-path="res://.godot/imported/pistolSilencer.obj-9cf1e1760b056b911dedd14ab284cde6.mesh"
+path="res://.godot/imported/pistolSilencer.obj-11514a8a59875b6ec580923784ef8239.mesh"
 
 [deps]
 
-files=["res://.godot/imported/pistolSilencer.obj-9cf1e1760b056b911dedd14ab284cde6.mesh"]
+files=["res://.godot/imported/pistolSilencer.obj-11514a8a59875b6ec580923784ef8239.mesh"]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Models/pistolSilencer.obj"
-dest_files=["res://.godot/imported/pistolSilencer.obj-9cf1e1760b056b911dedd14ab284cde6.mesh", "res://.godot/imported/pistolSilencer.obj-9cf1e1760b056b911dedd14ab284cde6.mesh"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Models/pistolSilencer.obj"
+dest_files=["res://.godot/imported/pistolSilencer.obj-11514a8a59875b6ec580923784ef8239.mesh", "res://.godot/imported/pistolSilencer.obj-11514a8a59875b6ec580923784ef8239.mesh"]
 
 [params]
 
@@ -19,3 +19,4 @@ generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
 optimize_mesh=true
+force_disable_mesh_compression=false

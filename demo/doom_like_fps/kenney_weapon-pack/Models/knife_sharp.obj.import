@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://1yvyqamr7ne2"
-path="res://.godot/imported/knife_sharp.obj-88c00856b4f73c887cc37d098551bbb5.mesh"
+path="res://.godot/imported/knife_sharp.obj-a3823e35c4af3b3d31fd233b7127045c.mesh"
 
 [deps]
 
-files=["res://.godot/imported/knife_sharp.obj-88c00856b4f73c887cc37d098551bbb5.mesh"]
+files=["res://.godot/imported/knife_sharp.obj-a3823e35c4af3b3d31fd233b7127045c.mesh"]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Models/knife_sharp.obj"
-dest_files=["res://.godot/imported/knife_sharp.obj-88c00856b4f73c887cc37d098551bbb5.mesh", "res://.godot/imported/knife_sharp.obj-88c00856b4f73c887cc37d098551bbb5.mesh"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Models/knife_sharp.obj"
+dest_files=["res://.godot/imported/knife_sharp.obj-a3823e35c4af3b3d31fd233b7127045c.mesh", "res://.godot/imported/knife_sharp.obj-a3823e35c4af3b3d31fd233b7127045c.mesh"]
 
 [params]
 
@@ -19,3 +19,4 @@ generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
 optimize_mesh=true
+force_disable_mesh_compression=false

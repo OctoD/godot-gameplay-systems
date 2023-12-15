@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bw4cwpquaiywh"
-path="res://.godot/imported/ammo_uzi.png-35ed485424257e1aec18ab6d23522218.ctex"
+path="res://.godot/imported/ammo_uzi.png-758bd44356fe6cc89c38c1d4bae44e98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Silhouette/ammo_uzi.png"
-dest_files=["res://.godot/imported/ammo_uzi.png-35ed485424257e1aec18ab6d23522218.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Silhouette/ammo_uzi.png"
+dest_files=["res://.godot/imported/ammo_uzi.png-758bd44356fe6cc89c38c1d4bae44e98.ctex"]
 
 [params]
 

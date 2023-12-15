@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 window/stretch/aspect="keep_width"
 
+[dotnet]
+
+project/assembly_name="Godot-gameplay-attributes"
+
 [input]
 
 resurrect={

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xhu41fqhq016"
-path="res://.godot/imported/ammo_rocketModern.png-eea62f222478855ce1075ae2b01b519c.ctex"
+path="res://.godot/imported/ammo_rocketModern.png-24c22d2307a0c16909510465cc929d71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Render/ammo_rocketModern.png"
-dest_files=["res://.godot/imported/ammo_rocketModern.png-eea62f222478855ce1075ae2b01b519c.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Render/ammo_rocketModern.png"
+dest_files=["res://.godot/imported/ammo_rocketModern.png-24c22d2307a0c16909510465cc929d71.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4f3jtyo8en3u"
-path="res://.godot/imported/flamethrower_short.png-2d62d5a0a5d40457e80842ee3995cc78.ctex"
+path="res://.godot/imported/flamethrower_short.png-4919ed8208bd9326fd715e5590d43a51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Render/flamethrower_short.png"
-dest_files=["res://.godot/imported/flamethrower_short.png-2d62d5a0a5d40457e80842ee3995cc78.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Render/flamethrower_short.png"
+dest_files=["res://.godot/imported/flamethrower_short.png-4919ed8208bd9326fd715e5590d43a51.ctex"]
 
 [params]
 

@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://c3242d14ruldm"
-path="res://.godot/imported/sniper.obj-255a19d54151a800aff63ebaaaae00c0.mesh"
+path="res://.godot/imported/sniper.obj-a72e25d502c7ac6ba84dc08a677ab4c8.mesh"
 
 [deps]
 
-files=["res://.godot/imported/sniper.obj-255a19d54151a800aff63ebaaaae00c0.mesh"]
+files=["res://.godot/imported/sniper.obj-a72e25d502c7ac6ba84dc08a677ab4c8.mesh"]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Models/sniper.obj"
-dest_files=["res://.godot/imported/sniper.obj-255a19d54151a800aff63ebaaaae00c0.mesh", "res://.godot/imported/sniper.obj-255a19d54151a800aff63ebaaaae00c0.mesh"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Models/sniper.obj"
+dest_files=["res://.godot/imported/sniper.obj-a72e25d502c7ac6ba84dc08a677ab4c8.mesh", "res://.godot/imported/sniper.obj-a72e25d502c7ac6ba84dc08a677ab4c8.mesh"]
 
 [params]
 
@@ -19,3 +19,4 @@ generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
 optimize_mesh=true
+force_disable_mesh_compression=false

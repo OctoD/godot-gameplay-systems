@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gcbg7quchgf2"
-path="res://.godot/imported/shotgunShort.png-15dca488c56b5d2a1327e85297ec3b13.ctex"
+path="res://.godot/imported/shotgunShort.png-50159597a4c023075aedd3305e3fcf1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Render/shotgunShort.png"
-dest_files=["res://.godot/imported/shotgunShort.png-15dca488c56b5d2a1327e85297ec3b13.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Render/shotgunShort.png"
+dest_files=["res://.godot/imported/shotgunShort.png-50159597a4c023075aedd3305e3fcf1c.ctex"]
 
 [params]
 

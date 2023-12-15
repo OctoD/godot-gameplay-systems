@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dc5x737yom6y6"
-path="res://.godot/imported/Preview_render.png-6be925e6d4f1c12054587af55cf5542b.ctex"
+path="res://.godot/imported/Preview_render.png-e773b09d6afebe3c0b85c8860b5f2451.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Preview_render.png"
-dest_files=["res://.godot/imported/Preview_render.png-6be925e6d4f1c12054587af55cf5542b.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Preview_render.png"
+dest_files=["res://.godot/imported/Preview_render.png-e773b09d6afebe3c0b85c8860b5f2451.ctex"]
 
 [params]
 

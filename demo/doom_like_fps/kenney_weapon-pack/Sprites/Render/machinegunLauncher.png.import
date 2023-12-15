@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bqtb7rejwyc25"
-path="res://.godot/imported/machinegunLauncher.png-5a03de00fc1da4367ae4291e80db5c81.ctex"
+path="res://.godot/imported/machinegunLauncher.png-02f7380f4b5f1908cd38cb23ed5729d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Render/machinegunLauncher.png"
-dest_files=["res://.godot/imported/machinegunLauncher.png-5a03de00fc1da4367ae4291e80db5c81.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Render/machinegunLauncher.png"
+dest_files=["res://.godot/imported/machinegunLauncher.png-02f7380f4b5f1908cd38cb23ed5729d7.ctex"]
 
 [params]
 

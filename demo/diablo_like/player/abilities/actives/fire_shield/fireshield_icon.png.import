@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cny4mo0p2eg21"
-path="res://.godot/imported/fireshield_icon.png-34eb1463e32a695f236e306d1bc152c6.ctex"
+path="res://.godot/imported/fireshield_icon.png-620dd10c024f2511f1b39c3ad6e048d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/diablo_like/player/abilities/actives/fire_shield/fireshield_icon.png"
-dest_files=["res://.godot/imported/fireshield_icon.png-34eb1463e32a695f236e306d1bc152c6.ctex"]
+source_file="res://diablo_like/player/abilities/actives/fire_shield/fireshield_icon.png"
+dest_files=["res://.godot/imported/fireshield_icon.png-620dd10c024f2511f1b39c3ad6e048d7.ctex"]
 
 [params]
 

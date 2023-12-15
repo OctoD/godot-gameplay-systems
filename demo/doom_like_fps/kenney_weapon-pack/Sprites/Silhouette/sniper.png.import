@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://srcbl46jwg1t"
-path="res://.godot/imported/sniper.png-facaeff41de45b85e66e8ca1316674e0.ctex"
+path="res://.godot/imported/sniper.png-d2c371fd8fc958051ca19a3c410a2ed6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Silhouette/sniper.png"
-dest_files=["res://.godot/imported/sniper.png-facaeff41de45b85e66e8ca1316674e0.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Silhouette/sniper.png"
+dest_files=["res://.godot/imported/sniper.png-d2c371fd8fc958051ca19a3c410a2ed6.ctex"]
 
 [params]
 

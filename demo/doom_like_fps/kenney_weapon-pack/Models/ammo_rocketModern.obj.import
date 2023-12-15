@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://byy6dgc56ouxi"
-path="res://.godot/imported/ammo_rocketModern.obj-4474d1c09ae8360af91e387812db52d8.mesh"
+path="res://.godot/imported/ammo_rocketModern.obj-4486c1597b2e4c61f6af2257ebdbc309.mesh"
 
 [deps]
 
-files=["res://.godot/imported/ammo_rocketModern.obj-4474d1c09ae8360af91e387812db52d8.mesh"]
+files=["res://.godot/imported/ammo_rocketModern.obj-4486c1597b2e4c61f6af2257ebdbc309.mesh"]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Models/ammo_rocketModern.obj"
-dest_files=["res://.godot/imported/ammo_rocketModern.obj-4474d1c09ae8360af91e387812db52d8.mesh", "res://.godot/imported/ammo_rocketModern.obj-4474d1c09ae8360af91e387812db52d8.mesh"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Models/ammo_rocketModern.obj"
+dest_files=["res://.godot/imported/ammo_rocketModern.obj-4486c1597b2e4c61f6af2257ebdbc309.mesh", "res://.godot/imported/ammo_rocketModern.obj-4486c1597b2e4c61f6af2257ebdbc309.mesh"]
 
 [params]
 
@@ -19,3 +19,4 @@ generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
 optimize_mesh=true
+force_disable_mesh_compression=false

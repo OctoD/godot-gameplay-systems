@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://if2fofmbm7xf"
-path="res://.godot/imported/octod.png-22d9524a61e39a295bf7abea21120bcc.ctex"
+path="res://.godot/imported/octod.png-a9b01650c46b74866c7f82d4c10500ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/intro/octod.png"
-dest_files=["res://.godot/imported/octod.png-22d9524a61e39a295bf7abea21120bcc.ctex"]
+source_file="res://intro/octod.png"
+dest_files=["res://.godot/imported/octod.png-a9b01650c46b74866c7f82d4c10500ea.ctex"]
 
 [params]
 

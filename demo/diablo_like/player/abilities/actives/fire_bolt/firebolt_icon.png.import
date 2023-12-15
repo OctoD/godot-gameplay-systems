@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1ottqk4m8kg5"
-path="res://.godot/imported/firebolt_icon.png-f86a12535a5ab45140130f18e6017488.ctex"
+path="res://.godot/imported/firebolt_icon.png-5dba50acbf9d552f9683083bcfc3f3ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/diablo_like/player/abilities/actives/fire_bolt/firebolt_icon.png"
-dest_files=["res://.godot/imported/firebolt_icon.png-f86a12535a5ab45140130f18e6017488.ctex"]
+source_file="res://diablo_like/player/abilities/actives/fire_bolt/firebolt_icon.png"
+dest_files=["res://.godot/imported/firebolt_icon.png-5dba50acbf9d552f9683083bcfc3f3ae.ctex"]
 
 [params]
 

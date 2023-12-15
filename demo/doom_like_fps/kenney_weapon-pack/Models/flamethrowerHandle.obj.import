@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://bl0xgd2ax1odx"
-path="res://.godot/imported/flamethrowerHandle.obj-5404ed45ee920a4a355b509bfd57c875.mesh"
+path="res://.godot/imported/flamethrowerHandle.obj-c3013a610d2d47c071da96e3c47e765c.mesh"
 
 [deps]
 
-files=["res://.godot/imported/flamethrowerHandle.obj-5404ed45ee920a4a355b509bfd57c875.mesh"]
+files=["res://.godot/imported/flamethrowerHandle.obj-c3013a610d2d47c071da96e3c47e765c.mesh"]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Models/flamethrowerHandle.obj"
-dest_files=["res://.godot/imported/flamethrowerHandle.obj-5404ed45ee920a4a355b509bfd57c875.mesh", "res://.godot/imported/flamethrowerHandle.obj-5404ed45ee920a4a355b509bfd57c875.mesh"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Models/flamethrowerHandle.obj"
+dest_files=["res://.godot/imported/flamethrowerHandle.obj-c3013a610d2d47c071da96e3c47e765c.mesh", "res://.godot/imported/flamethrowerHandle.obj-c3013a610d2d47c071da96e3c47e765c.mesh"]
 
 [params]
 
@@ -19,3 +19,4 @@ generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
 optimize_mesh=true
+force_disable_mesh_compression=false

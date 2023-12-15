@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cuh05whjxa7qs"
-path="res://.godot/imported/grenadeVintage.png-f762748ec419edc7c71158a2bc18208f.ctex"
+path="res://.godot/imported/grenadeVintage.png-5f93215a1c2f40b7701ec6c7a6133ec6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Silhouette/grenadeVintage.png"
-dest_files=["res://.godot/imported/grenadeVintage.png-f762748ec419edc7c71158a2bc18208f.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Silhouette/grenadeVintage.png"
+dest_files=["res://.godot/imported/grenadeVintage.png-5f93215a1c2f40b7701ec6c7a6133ec6.ctex"]
 
 [params]
 

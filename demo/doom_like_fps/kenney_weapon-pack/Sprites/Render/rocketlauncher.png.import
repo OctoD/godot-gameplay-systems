@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpgvj1om3l21h"
-path="res://.godot/imported/rocketlauncher.png-6554364116de5f4b56420a61d9e92c9f.ctex"
+path="res://.godot/imported/rocketlauncher.png-9d4b80280c52f8dc0298c2983a21d661.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Sprites/Render/rocketlauncher.png"
-dest_files=["res://.godot/imported/rocketlauncher.png-6554364116de5f4b56420a61d9e92c9f.ctex"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Sprites/Render/rocketlauncher.png"
+dest_files=["res://.godot/imported/rocketlauncher.png-9d4b80280c52f8dc0298c2983a21d661.ctex"]
 
 [params]
 

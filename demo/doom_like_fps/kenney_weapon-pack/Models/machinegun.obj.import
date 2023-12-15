@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://ccfq20hf1o8ps"
-path="res://.godot/imported/machinegun.obj-0c5993bc4448902d610e6ca5ce9d7a1e.mesh"
+path="res://.godot/imported/machinegun.obj-dda7f6886c1cff3659404f9816115d1f.mesh"
 
 [deps]
 
-files=["res://.godot/imported/machinegun.obj-0c5993bc4448902d610e6ca5ce9d7a1e.mesh"]
+files=["res://.godot/imported/machinegun.obj-dda7f6886c1cff3659404f9816115d1f.mesh"]
 
-source_file="res://examples/doom_like_fps/kenney_weapon-pack/Models/machinegun.obj"
-dest_files=["res://.godot/imported/machinegun.obj-0c5993bc4448902d610e6ca5ce9d7a1e.mesh", "res://.godot/imported/machinegun.obj-0c5993bc4448902d610e6ca5ce9d7a1e.mesh"]
+source_file="res://doom_like_fps/kenney_weapon-pack/Models/machinegun.obj"
+dest_files=["res://.godot/imported/machinegun.obj-dda7f6886c1cff3659404f9816115d1f.mesh", "res://.godot/imported/machinegun.obj-dda7f6886c1cff3659404f9816115d1f.mesh"]
 
 [params]
 
@@ -19,3 +19,4 @@ generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
 optimize_mesh=true
+force_disable_mesh_compression=false
