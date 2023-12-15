@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d2h7w1uw72paf"
+path="res://.godot/imported/grenade_vintage.obj-bd71161118e326e21d839995ce6cfed6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/grenade_vintage.obj-bd71161118e326e21d839995ce6cfed6.mesh"]
+
+source_file="res://doom_like_fps/kenney_weapon-pack/Models/grenade_vintage.obj"
+dest_files=["res://.godot/imported/grenade_vintage.obj-bd71161118e326e21d839995ce6cfed6.mesh", "res://.godot/imported/grenade_vintage.obj-bd71161118e326e21d839995ce6cfed6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
