@@ -10,6 +10,8 @@ Godot Gameplay Systems (formerly godot gameplay attributes) is a set of nodes an
 - [Contribution](#contribution)
 - [Licence](#licence)
 
+> Important! A full rewrite is going on (using gdextension). All old api will stay, but be aware that all hard references (like extends `res://`) in your custom classes will stop working with the approach of 1.0.0
+
 # Install
 
 Clone this repo, copy the `addons` folder content inside your project's `addons` directory.
