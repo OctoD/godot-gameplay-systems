@@ -1,0 +1,17 @@
+[configuration]
+
+entry_symbol = "ggs_library_init"
+compatibility_minimum = "4.2"
+
+[libraries]
+
+macos.debug = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.macos.debug.framework"
+macos.release = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.macos.release.framework"
+windows.debug.x86_64 = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.windows.debug.x86_64.dll"
+windows.release.x86_64 = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.windows.release.x86_64.dll"
+linux.debug.x86_64 = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.linux.debug.x86_64.so"
+linux.release.x86_64 = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.linux.release.x86_64.so"
+linux.debug.arm64 = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.linux.debug.arm64.so"
+linux.release.arm64 = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.linux.release.arm64.so"
+linux.debug.rv64 = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.linux.debug.rv64.so"
+linux.release.rv64 = "res://addons/godot-gameplay-systems/bin/libgodot-gameplay-systems.linux.release.rv64.so"
