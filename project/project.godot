@@ -22,6 +22,10 @@ window/stretch/aspect="keep_width"
 
 project/assembly_name="Godot-gameplay-attributes"
 
+[gameplay_systems]
+
+tagging_system/tag_dictionaries=PackedStringArray("res://new_tag_dictionary.tres", "res://another_tag_dictionary.tres")
+
 [input]
 
 resurrect={
