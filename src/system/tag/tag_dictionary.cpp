@@ -25,6 +25,7 @@ void TagDictionary::_bind_methods()
 	ClassDB::add_signal("TagDictionary", MethodInfo("tag_removed", PropertyInfo(Variant::OBJECT, "tag_dictionary"), PropertyInfo(Variant::STRING, "tag")));
 	ClassDB::add_signal("TagDictionary", MethodInfo("tag_replaced", PropertyInfo(Variant::OBJECT, "tag_dictionary"), PropertyInfo(Variant::STRING, "old_tag"), PropertyInfo(Variant::STRING, "new_tag")));
 	ClassDB::add_signal("TagDictionary", MethodInfo("tags_removed", PropertyInfo(Variant::PACKED_STRING_ARRAY, "previous_tags"), PropertyInfo(Variant::PACKED_STRING_ARRAY, "current_tags")));
+	ClassDB::add_signal("TagDictionary", MethodInfo("tags_replaced", PropertyInfo(Variant::PACKED_STRING_ARRAY, "previous_tags"), PropertyInfo(Variant::PACKED_STRING_ARRAY, "current_tags")));
 
 	// properties bindings
 	ClassDB::add_property("TagDictionary", PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags"), "set_tags", "get_tags");
@@ -79,10 +80,13 @@ TypedArray<PackedStringArray> TagDictionary::get_chunks() const
 Dictionary TagDictionary::get_tree() const
 {
 	Dictionary root = Dictionary();
+	PackedStringArray sorted = PackedStringArray(tags);
 
-	for (int i = 0; i < tags.size(); i++)
+	sorted.sort();
+
+	for (int i = 0; i < sorted.size(); i++)
 	{
-		PackedStringArray chunks = tags[i].split(TAG_DICTIONARY_DIVIDER, false);
+		PackedStringArray chunks = sorted[i].split(TAG_DICTIONARY_DIVIDER, false);
 		Dictionary current = root;
 
 		for (StringName chunk : chunks)
@@ -201,6 +205,26 @@ void TagDictionary::replace_tag(const StringName &old_tag, const StringName &new
 			tags.set(index, new_tag);
 			emit_signal("tag_replaced", this, old_tag, new_tag);
 		}
+	}
+}
+
+void TagDictionary::replace_tag_path(const StringName &old_path, const StringName &new_path)
+{
+	PackedStringArray copy = PackedStringArray(tags);
+
+	for (int i = tags.size() - 1; i >= 0; i--)
+	{
+		if (tags[i].begins_with(old_path))
+		{
+			StringName old_tag = tags[i];
+			tags.set(i, new_path + tags[i].substr(old_path.length()));
+			emit_signal("tag_replaced", this, old_tag, tags[i]);
+		}
+	}
+
+	if (copy.size() != tags.size())
+	{
+		emit_signal("tags_replaced", tags, copy);
 	}
 }
 

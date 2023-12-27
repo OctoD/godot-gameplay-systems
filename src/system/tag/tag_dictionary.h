@@ -67,9 +67,13 @@ public:
 	void replace_tag_at_index(int index, const StringName &tag);
 	/// @brief	Replaces a tag with a new tag.
 	void replace_tag(const StringName &old_tag, const StringName &new_tag);
-	/// @brief Sets the tags.
-	/// @param p_tags The tags.
-	void set_tags(PackedStringArray p_tags);
+    /// @brief Replaces a tag path with a new tag path.
+    /// @param old_path The old tag path.
+    /// @param new_path The new tag path.
+    void replace_tag_path(const StringName &old_path, const StringName &new_path);
+    /// @brief Sets the tags.
+    /// @param p_tags The tags.
+    void set_tags(PackedStringArray p_tags);
 
 protected:
 	static void _bind_methods();

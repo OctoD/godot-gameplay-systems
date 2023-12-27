@@ -21,6 +21,10 @@ void GGSTagMainScene::_bind_methods()
 	ClassDB::bind_method(D_METHOD("_handle_files_selected", "p_paths"), &GGSTagMainScene::_handle_files_selected);
 	ClassDB::bind_method(D_METHOD("_handle_remove_tag_dictionary_pressed", "p_dictionary"), &GGSTagMainScene::_handle_remove_tag_dictionary_pressed);
 	ClassDB::bind_method(D_METHOD("_handle_remove_tag_requested", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_remove_tag_requested);
+	ClassDB::bind_method(D_METHOD("_handle_tag_add_requested", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_tag_add_requested);
+	ClassDB::bind_method(D_METHOD("_handle_tag_edit_requested", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_tag_edit_requested);
+	ClassDB::bind_method(D_METHOD("_handle_add_tag", "p_dictionary", "p_tag_path_input"), &GGSTagMainScene::_handle_add_tag);
+	ClassDB::bind_method(D_METHOD("_handle_edit_tag", "p_dictionary", "p_tag_path_input", "old_path"), &GGSTagMainScene::_handle_edit_tag);
 }
 
 void GGSTagMainScene::render_tag_dictionaries()
@@ -52,6 +56,8 @@ void GGSTagMainScene::render_tag_dictionaries()
 
 		dict_container->connect("remove_tag_dictionary_pressed", Callable(this, "_handle_remove_tag_dictionary_pressed"));
 		dict_container->connect("remove_tag_requested", Callable(this, "_handle_remove_tag_requested"));
+		dict_container->connect("add_tag_requested", Callable(this, "_handle_tag_add_requested"));
+		dict_container->connect("edit_tag_requested", Callable(this, "_handle_tag_edit_requested"));
 		dict_container->set_tag_dictionary(cast_to<TagDictionary>(dictionaries->operator[](i)));
 		dict_container->render();
 	}
@@ -124,6 +130,35 @@ void GGSTagMainScene::_handle_files_selected(PackedStringArray p_paths)
 	render_tag_dictionaries();
 }
 
+void GGSTagMainScene::_handle_add_tag(TagDictionary *p_dictionary, LineEdit *p_tag_path_input)
+{
+	String tag_path = p_tag_path_input->get_text();
+
+	if (tag_path.is_empty())
+	{
+		return;
+	}
+
+	p_dictionary->add_tag(tag_path);
+	p_dictionary->save();
+
+	render_tag_dictionaries();
+}
+void GGSTagMainScene::_handle_edit_tag(TagDictionary *p_dictionary, LineEdit *p_tag_path_input, String old_path)
+{
+	String tag_path = p_tag_path_input->get_text();
+
+	if (tag_path.is_empty())
+	{
+		return;
+	}
+
+	p_dictionary->replace_tag_path(old_path, tag_path);
+	p_dictionary->save();
+
+	render_tag_dictionaries();
+}
+
 void GGSTagMainScene::_handle_delete_tag(TagDictionary *p_dictionary, String p_tag_path)
 {
 	p_dictionary->remove_tag_path(p_tag_path);
@@ -138,13 +173,61 @@ void GGSTagMainScene::_handle_remove_tag_dictionary_pressed(TagDictionary *p_dic
 	render_tag_dictionaries();
 }
 
+void GGSTagMainScene::_handle_tag_add_requested(TagDictionary *p_dictionary, String p_tag_path)
+{
+	if (_confirmation_dialog != nullptr)
+	{
+		_confirmation_dialog->queue_free();
+	}
+
+	LineEdit *tag_path_input = memnew(LineEdit);
+
+	tag_path_input->set_text(p_tag_path + TagDictionary::TAG_DICTIONARY_DIVIDER);
+
+	_confirmation_dialog = memnew(ConfirmationDialog);
+	_confirmation_dialog->set_title(tr("Add tag"));
+	_confirmation_dialog->add_child(tag_path_input);
+	_confirmation_dialog->get_ok_button()->connect("pressed", Callable(this, "_handle_add_tag").bind(p_dictionary, tag_path_input));
+	_confirmation_dialog->set_cancel_button_text(tr("Cancel"));
+	_confirmation_dialog->set_ok_button_text(tr("Add tag"));
+	_confirmation_dialog->set_visible(true);
+	_confirmation_dialog->popup_centered();
+	_confirmation_dialog->set_unparent_when_invisible(true);
+
+	add_child(_confirmation_dialog);
+}
+
+void GGSTagMainScene::_handle_tag_edit_requested(TagDictionary *p_dictionary, String p_tag_path)
+{
+	if (_confirmation_dialog != nullptr)
+	{
+		_confirmation_dialog->queue_free();
+	}
+
+	LineEdit *tag_path_input = memnew(LineEdit);
+
+	tag_path_input->set_text(p_tag_path);
+
+	_confirmation_dialog = memnew(ConfirmationDialog);
+	_confirmation_dialog->set_title(tr("Edit tag"));
+	_confirmation_dialog->add_child(tag_path_input);
+	_confirmation_dialog->get_ok_button()->connect("pressed", Callable(this, "_handle_edit_tag").bind(p_dictionary, tag_path_input, p_tag_path));
+	_confirmation_dialog->set_cancel_button_text(tr("Cancel"));
+	_confirmation_dialog->set_ok_button_text(tr("Edit tag"));
+	_confirmation_dialog->set_visible(true);
+	_confirmation_dialog->popup_centered();
+	_confirmation_dialog->set_unparent_when_invisible(true);
+
+	add_child(_confirmation_dialog);
+}
+
 void GGSTagMainScene::_handle_remove_tag_requested(TagDictionary *p_dictionary, String p_tag_path)
 {
 	if (_confirmation_dialog != nullptr)
 	{
 		_confirmation_dialog->queue_free();
 	}
-	
+
 	_confirmation_dialog = memnew(ConfirmationDialog);
 	_confirmation_dialog->set_title(tr("Remove tag"));
 	_confirmation_dialog->set_text(tr("Are you sure you want to remove the tag?"));
@@ -154,5 +237,6 @@ void GGSTagMainScene::_handle_remove_tag_requested(TagDictionary *p_dictionary, 
 	_confirmation_dialog->set_visible(true);
 	_confirmation_dialog->popup_centered();
 	_confirmation_dialog->set_unparent_when_invisible(true);
+
 	add_child(_confirmation_dialog);
 }
