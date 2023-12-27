@@ -411,7 +411,6 @@ void TagManager::remove_dictionary(TagDictionary *p_dictionary)
 
 			if (index > -1)
 			{
-				_unbind_dictionary_signals(p_dictionary);
 				dictionaries->remove_at(index);
 				emit_signal("dictionary_removed", p_dictionary);
 			}

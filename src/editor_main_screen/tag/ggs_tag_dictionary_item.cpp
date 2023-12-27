@@ -11,11 +11,12 @@ void GGSTagDictionaryItem::_bind_methods()
 {
     /// binds methods
     ClassDB::bind_method(D_METHOD("_handle_add_tag_button_pressed"), &GGSTagDictionaryItem::_handle_add_tag_button_pressed);
+    ClassDB::bind_method(D_METHOD("_handle_remove_tag_dictionary_button_pressed"), &GGSTagDictionaryItem::_handle_remove_tag_dictionary_button_pressed);
 
     /// binds signals
     ADD_SIGNAL(MethodInfo("tag_added"));
     ADD_SIGNAL(MethodInfo("tag_add_error"));
-    ADD_SIGNAL(MethodInfo("remove_tag_dictionary_pressed"));
+    ADD_SIGNAL(MethodInfo("remove_tag_dictionary_pressed", PropertyInfo(Variant::OBJECT, "tag_dictionary", PROPERTY_HINT_RESOURCE_TYPE, "TagDictionary")));
 }
 
 void GGSTagDictionaryItem::_ready()
@@ -77,6 +78,7 @@ void GGSTagDictionaryItem::render()
 
     dict_new_tag_button->connect("pressed", Callable(this, "_handle_add_tag_button_pressed"));
     dict_new_tag_button->set_text(tr("Add a new tag"));
+    remove_tag_dictionary_button->connect("pressed", Callable(this, "_handle_remove_tag_dictionary_button_pressed"));
     remove_tag_dictionary_button->set_text(tr("Remove tag dictionary"));
 
     dict_header->add_child(dict_path_label);
@@ -114,5 +116,5 @@ void GGSTagDictionaryItem::_handle_add_tag_button_pressed()
 
 void GGSTagDictionaryItem::_handle_remove_tag_dictionary_button_pressed()
 {
-    emit_signal("remove_tag_dictionary_pressed");
+    emit_signal("remove_tag_dictionary_pressed", dictionary);
 }

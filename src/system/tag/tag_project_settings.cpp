@@ -53,6 +53,7 @@ void TagProjectSettings::remove_resource(const String &p_file_path)
 		}
 
 		project_settings->set_setting(RESOURCE_PATHS_KEY, settings);
+		project_settings->save();
 	}
 }
 

@@ -33,6 +33,9 @@ private:
 	/// @brief Called when the user selects multiple files.
 	/// @param p_paths
 	void _handle_files_selected(PackedStringArray p_paths);
+    /// @brief Called when the user presses the remove tag dictionary button.
+    /// @param p_dictionary 
+    void _handle_remove_tag_dictionary_pressed(TagDictionary *p_dictionary);
 };
 
 #endif

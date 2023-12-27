@@ -17,6 +17,7 @@ void GGSTagMainScene::_bind_methods()
 	ClassDB::bind_method(D_METHOD("_handle_dir_selected", "p_path"), &GGSTagMainScene::_handle_dir_selected);
 	ClassDB::bind_method(D_METHOD("_handle_file_selected", "p_path"), &GGSTagMainScene::_handle_file_selected);
 	ClassDB::bind_method(D_METHOD("_handle_files_selected", "p_paths"), &GGSTagMainScene::_handle_files_selected);
+	ClassDB::bind_method(D_METHOD("_handle_remove_tag_dictionary_pressed", "p_dictionary"), &GGSTagMainScene::_handle_remove_tag_dictionary_pressed);
 }
 
 void GGSTagMainScene::render_tag_dictionaries()
@@ -46,6 +47,7 @@ void GGSTagMainScene::render_tag_dictionaries()
 
 		_dictionaries_container->add_child(dict_container);
 
+		dict_container->connect("remove_tag_dictionary_pressed", Callable(this, "_handle_remove_tag_dictionary_pressed"));
 		dict_container->set_tag_dictionary(cast_to<TagDictionary>(dictionaries->operator[](i)));
 		dict_container->render();
 	}
@@ -115,5 +117,12 @@ void GGSTagMainScene::_handle_files_selected(PackedStringArray p_paths)
 		TagProjectSettings::add_resource(p_paths[i]);
 	}
 
+	render_tag_dictionaries();
+}
+
+void GGSTagMainScene::_handle_remove_tag_dictionary_pressed(TagDictionary* p_dictionary)
+{
+	TagProjectSettings::remove_resource(p_dictionary->get_path());
+	TagManager::get_singleton()->remove_dictionary(p_dictionary);
 	render_tag_dictionaries();
 }

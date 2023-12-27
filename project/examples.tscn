@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6nbfkmvnw58y"]
-
-[ext_resource type="TagDictionary" uid="uid://dh8udsjb5navh" path="res://new_tag_dictionary.tres" id="1_61myl"]
+[gd_scene format=3 uid="uid://b6nbfkmvnw58y"]
 
 [node name="Examples" type="Control"]
 layout_mode = 3
@@ -13,7 +11,6 @@ grow_vertical = 2
 [node name="TheGameYouLost" type="SubViewport" parent="."]
 
 [node name="TagTree" type="TagTree" parent="."]
-tag_dictionary = ExtResource("1_61myl")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
