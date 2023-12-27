@@ -24,7 +24,7 @@ void TagDictionary::_bind_methods()
 	ClassDB::add_signal("TagDictionary", MethodInfo("tag_already_exists", PropertyInfo(Variant::OBJECT, "tag_dictionary"), PropertyInfo(Variant::STRING, "tag")));
 	ClassDB::add_signal("TagDictionary", MethodInfo("tag_removed", PropertyInfo(Variant::OBJECT, "tag_dictionary"), PropertyInfo(Variant::STRING, "tag")));
 	ClassDB::add_signal("TagDictionary", MethodInfo("tag_replaced", PropertyInfo(Variant::OBJECT, "tag_dictionary"), PropertyInfo(Variant::STRING, "old_tag"), PropertyInfo(Variant::STRING, "new_tag")));
-	ClassDB::add_signal("TagDictionary", MethodInfo("tags_removed"));
+	ClassDB::add_signal("TagDictionary", MethodInfo("tags_removed", PropertyInfo(Variant::PACKED_STRING_ARRAY, "previous_tags"), PropertyInfo(Variant::PACKED_STRING_ARRAY, "current_tags")));
 
 	// properties bindings
 	ClassDB::add_property("TagDictionary", PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags"), "set_tags", "get_tags");
@@ -59,8 +59,9 @@ void TagDictionary::add_tag(const StringName &tag)
 
 void TagDictionary::clear_tags()
 {
+	PackedStringArray copy = PackedStringArray(tags);
 	tags.clear();
-	emit_signal("tags_removed");
+	emit_signal("tags_removed", tags, copy);
 }
 
 TypedArray<PackedStringArray> TagDictionary::get_chunks() const
@@ -156,6 +157,26 @@ void TagDictionary::remove_tag(const StringName &tag)
 			tags.remove_at(index);
 			emit_signal("tag_removed", this, tag);
 		}
+	}
+}
+
+void TagDictionary::remove_tag_path(const StringName &tag_path)
+{
+	PackedStringArray copy = PackedStringArray(tags);
+
+	for (int i = tags.size() - 1; i >= 0; i--)
+	{
+		if (tags[i].begins_with(tag_path))
+		{
+			emit_signal("tag_removed", this, tags[i]);
+			tags.remove_at(i);
+			i--;
+		}
+	}
+
+	if (copy.size() != tags.size())
+	{
+		emit_signal("tags_removed", tags, copy);
 	}
 }
 

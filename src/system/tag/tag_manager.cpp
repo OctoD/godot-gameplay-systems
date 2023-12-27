@@ -153,12 +153,12 @@ TagManager::TagManager()
 {
 	if (singleton == nullptr)
 	{
-		this->dictionaries = memnew(TypedArray<TagDictionary>);
+		dictionaries = memnew(TypedArray<TagDictionary>);
 		singleton = this;
 	}
 	else
 	{
-		this->dictionaries = singleton->dictionaries;
+		dictionaries = singleton->dictionaries;
 	}
 }
 
@@ -216,9 +216,7 @@ void TagManager::add_tags(Node *p_node, const PackedStringArray &p_tags)
 
 TypedArray<Node> TagManager::get_all_tagged_nodes() const
 {
-	SceneTree *scene_tree = this->get_tree();
-
-	return scene_tree->get_nodes_in_group(GGS_TAG_MANAGER_TAGGED_GROUP_NAME);
+	return get_tree()->get_nodes_in_group(GGS_TAG_MANAGER_TAGGED_GROUP_NAME);
 }
 
 TypedArray<Node> TagManager::get_child_tagged_nodes(const Node *p_node) const

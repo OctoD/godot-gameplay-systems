@@ -12,11 +12,15 @@ void GGSTagDictionaryItem::_bind_methods()
     /// binds methods
     ClassDB::bind_method(D_METHOD("_handle_add_tag_button_pressed"), &GGSTagDictionaryItem::_handle_add_tag_button_pressed);
     ClassDB::bind_method(D_METHOD("_handle_remove_tag_dictionary_button_pressed"), &GGSTagDictionaryItem::_handle_remove_tag_dictionary_button_pressed);
+    ClassDB::bind_method(D_METHOD("_handle_tree_button_pressed", "p_item", "p_column", "p_id", "p_mouse_button_index"), &GGSTagDictionaryItem::_handle_tree_button_pressed);
 
     /// binds signals
-    ADD_SIGNAL(MethodInfo("tag_added"));
-    ADD_SIGNAL(MethodInfo("tag_add_error"));
+    ADD_SIGNAL(MethodInfo("add_tag_requested", PropertyInfo(Variant::OBJECT, "tag_dictionary", PROPERTY_HINT_RESOURCE_TYPE, "TagDictionary"), PropertyInfo(Variant::STRING, "tag")));
+    ADD_SIGNAL(MethodInfo("edit_tag_requested", PropertyInfo(Variant::OBJECT, "tag_dictionary", PROPERTY_HINT_RESOURCE_TYPE, "TagDictionary"), PropertyInfo(Variant::STRING, "tag")));
     ADD_SIGNAL(MethodInfo("remove_tag_dictionary_pressed", PropertyInfo(Variant::OBJECT, "tag_dictionary", PROPERTY_HINT_RESOURCE_TYPE, "TagDictionary")));
+    ADD_SIGNAL(MethodInfo("remove_tag_requested", PropertyInfo(Variant::OBJECT, "tag_dictionary", PROPERTY_HINT_RESOURCE_TYPE, "TagDictionary")));
+    ADD_SIGNAL(MethodInfo("tag_add_error"));
+    ADD_SIGNAL(MethodInfo("tag_added", PropertyInfo(Variant::STRING, "tag")));
 }
 
 void GGSTagDictionaryItem::_ready()
@@ -57,7 +61,11 @@ void GGSTagDictionaryItem::render()
     }
 
     tag_tree = memnew(TagTree);
+    tag_tree->connect("button_clicked", Callable(this, "_handle_tree_button_pressed"));
     tag_tree->set_tag_dictionary(dictionary);
+    tag_tree->set_can_add(true);
+    tag_tree->set_can_delete(true);
+    tag_tree->set_can_rename(true);
     tag_tree->render();
 
     new_tag_line_edit = memnew(LineEdit);
@@ -103,7 +111,9 @@ void GGSTagDictionaryItem::_handle_add_tag_button_pressed()
         return;
     }
 
-    dictionary->add_tag(new_tag_line_edit->get_text());
+    String tag_name = new_tag_line_edit->get_text();
+
+    dictionary->add_tag(tag_name);
     dictionary->save();
 
     new_tag_line_edit->set_text("");
@@ -111,10 +121,39 @@ void GGSTagDictionaryItem::_handle_add_tag_button_pressed()
     tag_tree->set_tag_dictionary(dictionary);
     tag_tree->render();
 
-    emit_signal("tag_added");
+    emit_signal("tag_added", tag_name);
 }
 
 void GGSTagDictionaryItem::_handle_remove_tag_dictionary_button_pressed()
 {
     emit_signal("remove_tag_dictionary_pressed", dictionary);
+}
+
+void GGSTagDictionaryItem::_handle_tree_button_pressed(TreeItem *p_item, int p_column, int p_id, int p_mouse_button_index)
+{
+    String tag_path = p_item->get_meta(TagTree::TAG_PATH_META_KEY);
+
+    if (tag_path == "")
+    {
+        return;
+    }
+
+    switch (p_id)
+    {
+        case TagTree::ButtonIndex::ADD_TAG:
+        {
+            emit_signal("add_tag_requested", dictionary, tag_path);
+            break;
+        }
+        case TagTree::ButtonIndex::EDIT_TAG:
+        {
+            emit_signal("edit_tag_requested", dictionary, tag_path);
+            break;
+        }
+        case TagTree::ButtonIndex::REMOVE_TAG:
+        {
+            emit_signal("remove_tag_requested", dictionary, tag_path);
+            break;
+        }
+    }
 }

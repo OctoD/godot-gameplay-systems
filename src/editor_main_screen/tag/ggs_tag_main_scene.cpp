@@ -1,4 +1,5 @@
 #include <godot_cpp/classes/button.hpp>
+#include <godot_cpp/classes/confirmation_dialog.hpp>
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/classes/line_edit.hpp>
 #include <godot_cpp/classes/h_box_container.hpp>
@@ -14,10 +15,12 @@
 
 void GGSTagMainScene::_bind_methods()
 {
+	ClassDB::bind_method(D_METHOD("_handle_delete_tag", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_delete_tag);
 	ClassDB::bind_method(D_METHOD("_handle_dir_selected", "p_path"), &GGSTagMainScene::_handle_dir_selected);
 	ClassDB::bind_method(D_METHOD("_handle_file_selected", "p_path"), &GGSTagMainScene::_handle_file_selected);
 	ClassDB::bind_method(D_METHOD("_handle_files_selected", "p_paths"), &GGSTagMainScene::_handle_files_selected);
 	ClassDB::bind_method(D_METHOD("_handle_remove_tag_dictionary_pressed", "p_dictionary"), &GGSTagMainScene::_handle_remove_tag_dictionary_pressed);
+	ClassDB::bind_method(D_METHOD("_handle_remove_tag_requested", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_remove_tag_requested);
 }
 
 void GGSTagMainScene::render_tag_dictionaries()
@@ -48,6 +51,7 @@ void GGSTagMainScene::render_tag_dictionaries()
 		_dictionaries_container->add_child(dict_container);
 
 		dict_container->connect("remove_tag_dictionary_pressed", Callable(this, "_handle_remove_tag_dictionary_pressed"));
+		dict_container->connect("remove_tag_requested", Callable(this, "_handle_remove_tag_requested"));
 		dict_container->set_tag_dictionary(cast_to<TagDictionary>(dictionaries->operator[](i)));
 		dict_container->render();
 	}
@@ -120,9 +124,35 @@ void GGSTagMainScene::_handle_files_selected(PackedStringArray p_paths)
 	render_tag_dictionaries();
 }
 
-void GGSTagMainScene::_handle_remove_tag_dictionary_pressed(TagDictionary* p_dictionary)
+void GGSTagMainScene::_handle_delete_tag(TagDictionary *p_dictionary, String p_tag_path)
+{
+	p_dictionary->remove_tag_path(p_tag_path);
+	p_dictionary->save();
+	render_tag_dictionaries();
+}
+
+void GGSTagMainScene::_handle_remove_tag_dictionary_pressed(TagDictionary *p_dictionary)
 {
 	TagProjectSettings::remove_resource(p_dictionary->get_path());
 	TagManager::get_singleton()->remove_dictionary(p_dictionary);
 	render_tag_dictionaries();
+}
+
+void GGSTagMainScene::_handle_remove_tag_requested(TagDictionary *p_dictionary, String p_tag_path)
+{
+	if (_confirmation_dialog != nullptr)
+	{
+		_confirmation_dialog->queue_free();
+	}
+	
+	_confirmation_dialog = memnew(ConfirmationDialog);
+	_confirmation_dialog->set_title(tr("Remove tag"));
+	_confirmation_dialog->set_text(tr("Are you sure you want to remove the tag?"));
+	_confirmation_dialog->get_ok_button()->connect("pressed", Callable(this, "_handle_delete_tag").bind(p_dictionary, p_tag_path));
+	_confirmation_dialog->set_cancel_button_text(tr("No, keep this tag"));
+	_confirmation_dialog->set_ok_button_text(tr("Yes, remove this tag"));
+	_confirmation_dialog->set_visible(true);
+	_confirmation_dialog->popup_centered();
+	_confirmation_dialog->set_unparent_when_invisible(true);
+	add_child(_confirmation_dialog);
 }

@@ -41,7 +41,7 @@ public:
 	/// @return
 	TypedArray<PackedStringArray> get_chunks() const;
 	/// @brief Gets the tag dictionary as a tree of dictionaries.
-	/// @return 
+	/// @return
 	Dictionary get_tree() const;
 	/// @brief Returns all tags as a packed string array.
 	/// @return
@@ -58,6 +58,9 @@ public:
 	/// @brief	Removes a tag from the tag dictionary.
 	/// @param tag	The tag to remove.
 	void remove_tag(const StringName &tag);
+	/// @brief	Removes all tags which include the tag path.
+	/// @param tag_path	The tag path to remove.
+	void remove_tag_path(const StringName &tag_path);
 	/// @brief	Replaces a tag at the index from the tag dictionary.
 	/// @param index	The index of the tag to remove.
 	/// @param tag 		The tag to remove.

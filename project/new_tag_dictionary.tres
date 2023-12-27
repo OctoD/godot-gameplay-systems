@@ -1,4 +1,4 @@
 [gd_resource type="TagDictionary" format=3 uid="uid://dh8udsjb5navh"]
 
 [resource]
-tags = PackedStringArray("foo.bar001.baz000", "foo.bar000.baz000", "foo.bar000.baz001", "foo.bar001.baz002")
+tags = PackedStringArray("status.idle", "status.active")
