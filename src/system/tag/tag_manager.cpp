@@ -188,7 +188,7 @@ void TagManager::add_tag(Node *p_node, const String &p_tag)
 
 		tags.push_back(p_tag);
 
-		p_node->add_to_group(GGS_TAG_MANAGER_TAGGED_GROUP_NAME);
+		p_node->add_to_group(GGS_TAG_MANAGER_TAGGED_GROUP_NAME, true);
 		p_node->set_meta(GGS_TAG_MANAGER_TAGGED_NODE_META, tags);
 
 		emit_signal("tag_added_to_node", p_node, p_tag);
@@ -209,7 +209,7 @@ void TagManager::add_tags(Node *p_node, const PackedStringArray &p_tags)
 			}
 		}
 
-		p_node->add_to_group(GGS_TAG_MANAGER_TAGGED_GROUP_NAME);
+		p_node->add_to_group(GGS_TAG_MANAGER_TAGGED_GROUP_NAME, true);
 		p_node->set_meta(GGS_TAG_MANAGER_TAGGED_NODE_META, tags);
 	}
 }
@@ -363,7 +363,7 @@ void TagManager::remove_tag(Node *p_node, const String &p_tag)
 			else
 			{
 				p_node->remove_from_group(GGS_TAG_MANAGER_TAGGED_GROUP_NAME);
-				p_node->set_meta(GGS_TAG_MANAGER_TAGGED_NODE_META, Variant());
+				p_node->remove_meta(GGS_TAG_MANAGER_TAGGED_NODE_META);
 			}
 
 			emit_signal("tag_removed_from_node", p_node, p_tag);
@@ -394,7 +394,7 @@ void TagManager::remove_tags(Node *p_node, const PackedStringArray &p_tags)
 		else
 		{
 			p_node->remove_from_group(GGS_TAG_MANAGER_TAGGED_GROUP_NAME);
-			p_node->set_meta(GGS_TAG_MANAGER_TAGGED_NODE_META, Variant());
+			p_node->remove_meta(GGS_TAG_MANAGER_TAGGED_NODE_META);
 		}
 	}
 }

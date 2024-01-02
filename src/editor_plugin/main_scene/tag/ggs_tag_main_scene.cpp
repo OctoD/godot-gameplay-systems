@@ -185,16 +185,18 @@ void GGSTagMainScene::_handle_tag_add_requested(TagDictionary *p_dictionary, Str
 	tag_path_input->set_text(p_tag_path + TagDictionary::TAG_DICTIONARY_DIVIDER);
 
 	_confirmation_dialog = memnew(ConfirmationDialog);
+
+	add_child(_confirmation_dialog);
+
 	_confirmation_dialog->set_title(tr("Add tag"));
 	_confirmation_dialog->add_child(tag_path_input);
 	_confirmation_dialog->get_ok_button()->connect("pressed", Callable(this, "_handle_add_tag").bind(p_dictionary, tag_path_input));
 	_confirmation_dialog->set_cancel_button_text(tr("Cancel"));
 	_confirmation_dialog->set_ok_button_text(tr("Add tag"));
 	_confirmation_dialog->set_visible(true);
-	_confirmation_dialog->popup_centered();
 	_confirmation_dialog->set_unparent_when_invisible(true);
 
-	add_child(_confirmation_dialog);
+	_confirmation_dialog->popup_centered();
 }
 
 void GGSTagMainScene::_handle_tag_edit_requested(TagDictionary *p_dictionary, String p_tag_path)
@@ -209,6 +211,9 @@ void GGSTagMainScene::_handle_tag_edit_requested(TagDictionary *p_dictionary, St
 	tag_path_input->set_text(p_tag_path);
 
 	_confirmation_dialog = memnew(ConfirmationDialog);
+
+	add_child(_confirmation_dialog);
+
 	_confirmation_dialog->set_title(tr("Edit tag"));
 	_confirmation_dialog->add_child(tag_path_input);
 	_confirmation_dialog->get_ok_button()->connect("pressed", Callable(this, "_handle_edit_tag").bind(p_dictionary, tag_path_input, p_tag_path));
@@ -217,8 +222,6 @@ void GGSTagMainScene::_handle_tag_edit_requested(TagDictionary *p_dictionary, St
 	_confirmation_dialog->set_visible(true);
 	_confirmation_dialog->popup_centered();
 	_confirmation_dialog->set_unparent_when_invisible(true);
-
-	add_child(_confirmation_dialog);
 }
 
 void GGSTagMainScene::_handle_remove_tag_requested(TagDictionary *p_dictionary, String p_tag_path)
@@ -229,6 +232,9 @@ void GGSTagMainScene::_handle_remove_tag_requested(TagDictionary *p_dictionary, 
 	}
 
 	_confirmation_dialog = memnew(ConfirmationDialog);
+
+	add_child(_confirmation_dialog);
+
 	_confirmation_dialog->set_title(tr("Remove tag"));
 	_confirmation_dialog->set_text(tr("Are you sure you want to remove the tag?"));
 	_confirmation_dialog->get_ok_button()->connect("pressed", Callable(this, "_handle_delete_tag").bind(p_dictionary, p_tag_path));
@@ -237,6 +243,4 @@ void GGSTagMainScene::_handle_remove_tag_requested(TagDictionary *p_dictionary, 
 	_confirmation_dialog->set_visible(true);
 	_confirmation_dialog->popup_centered();
 	_confirmation_dialog->set_unparent_when_invisible(true);
-
-	add_child(_confirmation_dialog);
 }

@@ -58,11 +58,49 @@ void TagDictionary::add_tag(const StringName &tag)
 	}
 }
 
+void TagDictionary::add_tags(const PackedStringArray &p_tags)
+{
+	PackedStringArray copy = PackedStringArray(tags);
+
+	for (int i = 0; i < p_tags.size(); i++)
+	{
+		if (!tags.has(p_tags[i]))
+		{
+			tags.push_back(p_tags[i]);
+		}
+	}
+
+	if (copy.size() != tags.size())
+	{
+		emit_signal("tags_added", tags, copy);
+	}
+}
+
+void TagDictionary::add_tags(const TagDictionary &p_tag_dictionary)
+{
+	if (p_tag_dictionary.get_path() == get_path())
+	{
+		ERR_PRINT("Cannot add tags from the same tag dictionary.");
+		return;
+	}
+
+	add_tags(p_tag_dictionary.get_tags());
+}
+
 void TagDictionary::clear_tags()
 {
 	PackedStringArray copy = PackedStringArray(tags);
 	tags.clear();
 	emit_signal("tags_removed", tags, copy);
+}
+
+void TagDictionary::from_many(const TypedArray<TagDictionary> *p_tag_dictionaries)
+{
+	for (int i = 0; i < p_tag_dictionaries->size(); i++)
+	{
+		TagDictionary *x = cast_to<TagDictionary>(p_tag_dictionaries->operator[](i));
+		add_tags(x->get_tags());
+	}
 }
 
 TypedArray<PackedStringArray> TagDictionary::get_chunks() const
@@ -110,6 +148,21 @@ Dictionary TagDictionary::get_tree() const
 PackedStringArray TagDictionary::get_tags() const
 {
 	return PackedStringArray(tags);
+}
+
+PackedStringArray TagDictionary::get_tags_from_path(const StringName &p_tag_path) const
+{
+	PackedStringArray out = PackedStringArray();
+
+	for (int i = 0; i < tags.size(); i++)
+	{
+		if (tags[i].begins_with(p_tag_path))
+		{
+			out.push_back(tags[i]);
+		}
+	}
+
+	return out;
 }
 
 bool TagDictionary::has_tag(const StringName &tag) const

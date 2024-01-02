@@ -35,17 +35,30 @@ public:
 	/// @brief	Adds a tag to the tag dictionary. It will not be added if it already exists.
 	/// @param tag The tag to add.
 	void add_tag(const StringName &tag);
+	/// @brief Adds as many tags as possible to the tag dictionary.
+	/// @param p_tags The tags to add.
+	void add_tags(const PackedStringArray &p_tags);
+	/// @brief Adds all tags from the tag dictionary.
+	/// @param p_tag_dictionary The tag dictionary to add.
+	void add_tags(const TagDictionary &p_tag_dictionary);
 	/// @brief Removes all tags from the tag dictionary.
 	void clear_tags();
-	/// @brief Returns all tags as an array of packed string arrays.
-	/// @return
-	TypedArray<PackedStringArray> get_chunks() const;
+    /// @brief Adds all tags from the tag dictionaries passed to this one.
+    /// @param p_tag_dictionaries 
+    void from_many(const TypedArray<TagDictionary> *p_tag_dictionaries);
+    /// @brief Returns all tags as an array of packed string arrays.
+    /// @return
+    TypedArray<PackedStringArray> get_chunks() const;
 	/// @brief Gets the tag dictionary as a tree of dictionaries.
 	/// @return
 	Dictionary get_tree() const;
 	/// @brief Returns all tags as a packed string array.
 	/// @return
 	PackedStringArray get_tags() const;
+	/// @brief Returns all tags which include the tag path.
+	/// @param p_tag_path The tag path to get.
+	/// @return 
+	PackedStringArray get_tags_from_path(const StringName &p_tag_path) const;
 	/// @brief Returns `true` if the tag dictionary has the tag.
 	/// @param tag The tag to check.
 	/// @return `true` if the tag dictionary has the tag.

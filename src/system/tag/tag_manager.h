@@ -89,6 +89,7 @@ public:
 	void _ready() override;
 
 protected:
+	friend class GGSTagDocks;
 	friend class GGSTagMainScene;
 
 	/// @brief Registers all methods that can be called from Godot.

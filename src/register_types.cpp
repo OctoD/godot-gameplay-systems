@@ -15,10 +15,11 @@
 #include "system/tag/tag_project_settings.h"
 
 /// ggs editor stuff
-#include "editor_main_screen/ggs_editor_plugin.h"
-#include "editor_main_screen/ggs_main_scene.h"
-#include "editor_main_screen/tag/ggs_tag_dictionary_item.h"
-#include "editor_main_screen/tag/ggs_tag_main_scene.h"
+#include "editor_plugin/docks/tag/tag_docks.h"
+#include "editor_plugin/ggs_editor_plugin.h"
+#include "editor_plugin/main_scene/ggs_main_scene.h"
+#include "editor_plugin/main_scene/tag/ggs_tag_dictionary_item.h"
+#include "editor_plugin/main_scene/tag/ggs_tag_main_scene.h"
 
 /// ggs scenes stuff
 #include "scene/tag/tag_tree.h"
@@ -47,6 +48,7 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 	}
 	else if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR)
 	{
+		ClassDB::register_internal_class<GGSTagDocks>();
 		ClassDB::register_internal_class<GGSTagDictionaryItem>();
 		ClassDB::register_internal_class<GGSTagMainScene>();
 		ClassDB::register_internal_class<GGSMainScene>();
