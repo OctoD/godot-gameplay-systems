@@ -8,7 +8,7 @@
 #include "ggs_tag_main_scene.h"
 #include "ggs_tag_dictionary_item.h"
 
-#include "scene/tag/tag_tree.h"
+#include "system/tag/tag_tree.h"
 #include "system/tag/tag_dictionary.h"
 #include "system/tag/tag_manager.h"
 #include "system/tag/tag_project_settings.h"

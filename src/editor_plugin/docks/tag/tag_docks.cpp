@@ -5,7 +5,7 @@
 #include <godot_cpp/classes/v_box_container.hpp>
 
 #include "tag_docks.h"
-#include "scene/tag/tag_tree.h"
+#include "system/tag/tag_tree.h"
 #include "system/tag/tag_manager.h"
 
 GGSTagDocks::GGSTagDocks()

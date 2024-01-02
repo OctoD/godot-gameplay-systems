@@ -4,7 +4,7 @@
 #include <godot_cpp/classes/h_box_container.hpp>
 
 #include "ggs_tag_dictionary_item.h"
-#include "scene/tag/tag_tree.h"
+#include "system/tag/tag_tree.h"
 #include "system/tag/tag_dictionary.h"
 
 void GGSTagDictionaryItem::_bind_methods()

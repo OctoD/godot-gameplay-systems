@@ -22,7 +22,7 @@
 #include "editor_plugin/main_scene/tag/ggs_tag_main_scene.h"
 
 /// ggs scenes stuff
-#include "scene/tag/tag_tree.h"
+#include "system/tag/tag_tree.h"
 
 /// implementation starts
 
