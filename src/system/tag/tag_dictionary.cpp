@@ -56,6 +56,7 @@ void TagDictionary::add_tag(const StringName &tag)
 	{
 		tags.push_back(tag);
 		emit_signal("tag_added", this, tag);
+		emit_changed();
 	}
 }
 
@@ -74,6 +75,7 @@ void TagDictionary::add_tags(const PackedStringArray &p_tags)
 	if (copy.size() != tags.size())
 	{
 		emit_signal("tags_added", tags, copy);
+		emit_changed();
 	}
 }
 
@@ -93,6 +95,7 @@ void TagDictionary::clear_tags()
 	PackedStringArray copy = PackedStringArray(tags);
 	tags.clear();
 	emit_signal("tags_removed", tags, copy);
+	emit_changed();
 }
 
 void TagDictionary::from_many(const TypedArray<TagDictionary> *p_tag_dictionaries)
@@ -214,6 +217,7 @@ void TagDictionary::remove_tag(const StringName &tag)
 		{
 			tags.remove_at(index);
 			emit_signal("tag_removed", this, tag);
+			emit_changed();
 		}
 	}
 }
@@ -235,6 +239,7 @@ void TagDictionary::remove_tag_path(const StringName &tag_path)
 	if (copy.size() != tags.size())
 	{
 		emit_signal("tags_removed", tags, copy);
+		emit_changed();
 	}
 }
 
@@ -245,6 +250,7 @@ void TagDictionary::replace_tag_at_index(int index, const StringName &tag)
 		StringName old_tag = tags[index];
 		tags.set(index, tag);
 		emit_signal("tag_replaced", this, old_tag, tag);
+		emit_changed();
 	}
 }
 
@@ -258,6 +264,7 @@ void TagDictionary::replace_tag(const StringName &old_tag, const StringName &new
 		{
 			tags.set(index, new_tag);
 			emit_signal("tag_replaced", this, old_tag, new_tag);
+			emit_changed();
 		}
 	}
 }
@@ -279,6 +286,7 @@ void TagDictionary::replace_tag_path(const StringName &old_path, const StringNam
 	if (copy.size() != tags.size())
 	{
 		emit_signal("tags_replaced", tags, copy);
+		emit_changed();
 	}
 }
 
