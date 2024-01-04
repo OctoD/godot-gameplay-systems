@@ -22,13 +22,13 @@ void GGSMainScene::_ready()
 
 	add_child(tab_container);
 
-	tab_container->add_child(ability_panel);
-	tab_container->add_child(attributes_panel);
 	tab_container->add_child(tag_manager_panel);
+	tab_container->add_child(attributes_panel);
+	tab_container->add_child(ability_panel);
 
-	ability_panel->set_name(ability_panel->tr("Ability"));
-	attributes_panel->set_name(attributes_panel->tr("Attributes"));
 	tag_manager_panel->set_name(tag_manager_panel->tr("Tag Manager"));
+	attributes_panel->set_name(attributes_panel->tr("Attributes"));
+	ability_panel->set_name(ability_panel->tr("Ability"));
 
 	GGSTagMainScene *tag_main_scene = memnew(GGSTagMainScene);
 
