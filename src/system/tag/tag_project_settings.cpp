@@ -5,7 +5,7 @@
 using namespace ggs;
 using namespace godot;
 
-const char *TagProjectSettings::RESOURCE_PATHS_KEY = "gameplay_systems/tagging_system/tag_dictionaries";
+const char *TagProjectSettings::RESOURCE_PATHS_KEY = "application/gameplay_systems/tagging_system/tag_dictionaries";
 
 // No bound methods. This class is only used to register settings and has to be used internally by the addon.
 void TagProjectSettings::_bind_methods()

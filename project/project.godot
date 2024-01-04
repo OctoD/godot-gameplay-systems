@@ -13,6 +13,7 @@ config_version=5
 config/name="Godot-gameplay-attributes"
 run/main_scene="res://examples.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+gameplay_systems/tagging_system/tag_dictionaries=PackedStringArray("res://another_tag_dictionary.tres", "res://new_tag_dictionary.tres")
 
 [display]
 
