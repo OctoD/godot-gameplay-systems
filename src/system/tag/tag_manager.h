@@ -134,8 +134,6 @@ namespace ggs
 		/// @param p_old_tag The old tag.
 		/// @param p_new_tag The new tag.
 		void _handle_dictionary_tag_replaced(const TagDictionary *p_tag_dictionary, const String &p_old_tag, const String &p_new_tag);
-		/// @brief Handles the project settings changed signal.
-		void _handle_settings_changed();
 		/// @brief Loads all dictionaries.
 		void load_dictionaries();
 	};

@@ -124,10 +124,6 @@ void TagManager::_handle_dictionary_tag_replaced(const TagDictionary *p_tag_dict
 	}
 }
 
-void TagManager::_handle_settings_changed()
-{
-}
-
 void TagManager::load_dictionaries()
 {
 	/// let's retrieve the settings' value
@@ -419,12 +415,5 @@ void TagManager::remove_dictionary(TagDictionary *p_dictionary)
 
 void TagManager::_ready()
 {
-	/// let's retrieve the settings' value
-	ProjectSettings *project_settings = ProjectSettings::get_singleton();
-
-	if (project_settings != nullptr)
-	{
-		project_settings->connect("settings_changed", Callable(this, "_handle_settings_changed"));
-		load_dictionaries();
-	}
+	load_dictionaries();
 }
