@@ -7,29 +7,32 @@
 
 using namespace godot;
 
-class GGSMainScene : public Control
+namespace ggs
 {
-	enum GGSMainSceneTab
+	class GGSMainScene : public Control
 	{
-		ABILITY,
-		ATTRIBUTES,
-		TAG_MANAGER,
+		enum GGSMainSceneTab
+		{
+			ABILITY,
+			ATTRIBUTES,
+			TAG_MANAGER,
+		};
+
+		GDCLASS(GGSMainScene, Control);
+
+	public:
+		GGSMainScene();
+		~GGSMainScene();
+
+		void _ready() override;
+
+	protected:
+		static void _bind_methods();
+		TabContainer *tab_container;
+		Panel *ability_panel;
+		Panel *attributes_panel;
+		Panel *tag_manager_panel;
 	};
-
-	GDCLASS(GGSMainScene, Control);
-
-public:
-	GGSMainScene();
-	~GGSMainScene();
-
-	void _ready() override;
-
-protected:
-	static void _bind_methods();
-	TabContainer *tab_container;
-	Panel *ability_panel;
-	Panel *attributes_panel;
-	Panel *tag_manager_panel;
-};
+}
 
 #endif

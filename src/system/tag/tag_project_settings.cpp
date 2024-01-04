@@ -2,6 +2,7 @@
 #include <godot_cpp/classes/project_settings.hpp>
 #include "tag_project_settings.h"
 
+using namespace ggs;
 using namespace godot;
 
 const char *TagProjectSettings::RESOURCE_PATHS_KEY = "gameplay_systems/tagging_system/tag_dictionaries";

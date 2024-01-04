@@ -7,6 +7,7 @@
 #include "tag_manager.h"
 #include "tag_project_settings.h"
 
+using namespace ggs;
 using namespace godot;
 
 TagManager *TagManager::singleton = nullptr;

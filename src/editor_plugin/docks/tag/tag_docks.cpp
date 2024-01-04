@@ -8,6 +8,8 @@
 #include "system/tag/tag_tree.h"
 #include "system/tag/tag_manager.h"
 
+using namespace ggs;
+
 GGSTagDocks::GGSTagDocks()
 {
 }

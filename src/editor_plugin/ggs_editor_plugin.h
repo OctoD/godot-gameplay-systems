@@ -7,22 +7,25 @@
 
 using namespace godot;
 
-class GGSEditorPlugin : public EditorPlugin
+namespace ggs
 {
-	GDCLASS(GGSEditorPlugin, EditorPlugin);
+	class GGSEditorPlugin : public EditorPlugin
+	{
+		GDCLASS(GGSEditorPlugin, EditorPlugin);
 
-public:
-	GGSEditorPlugin();
-	~GGSEditorPlugin();
+	public:
+		GGSEditorPlugin();
+		~GGSEditorPlugin();
 
-	void _enter_tree() override;
-	void _exit_tree() override;
-	bool _has_main_screen() const override;
-	void _make_visible(bool p_visible) override;
-	String _get_plugin_name() const override;
+		void _enter_tree() override;
+		void _exit_tree() override;
+		bool _has_main_screen() const override;
+		void _make_visible(bool p_visible) override;
+		String _get_plugin_name() const override;
 
-protected:
-	static void _bind_methods();
-};
+	protected:
+		static void _bind_methods();
+	};
+}
 
 #endif

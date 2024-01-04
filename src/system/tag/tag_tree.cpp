@@ -3,6 +3,8 @@
 #include "system/tag/tag_dictionary.h"
 #include "tag_tree.h"
 
+using namespace ggs;
+
 const char *TagTree::TAG_PATH_META_KEY = "GGS_TAG_PATH_META_KEY";
 
 void TagTree::_bind_methods()

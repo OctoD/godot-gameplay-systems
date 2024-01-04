@@ -32,28 +32,24 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 {
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE)
 	{
-		/// registering settings
-		TagProjectSettings::setup();
-
 		/// registering classes
-		ClassDB::register_class<TagDictionary>();
-		ClassDB::register_class<TagManager>();
-		ClassDB::register_class<TagTree>();
+		ClassDB::register_class<ggs::TagDictionary>();
+		ClassDB::register_class<ggs::TagManager>();
+		ClassDB::register_class<ggs::TagTree>();
 
-		/// initializing settings
-		TagProjectSettings::setup();
+		ggs::TagProjectSettings::setup();
 
 		/// enabling autoloads
-		Engine::get_singleton()->register_singleton("TagManager", memnew(TagManager));
+		Engine::get_singleton()->register_singleton("TagManager", memnew(ggs::TagManager));
 	}
 	else if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR)
 	{
-		ClassDB::register_internal_class<GGSTagDocks>();
-		ClassDB::register_internal_class<GGSTagDictionaryItem>();
-		ClassDB::register_internal_class<GGSTagMainScene>();
-		ClassDB::register_internal_class<GGSMainScene>();
-		ClassDB::register_internal_class<GGSEditorPlugin>();
-		EditorPlugins::add_by_type<GGSEditorPlugin>();
+		ClassDB::register_internal_class<ggs::GGSTagDocks>();
+		ClassDB::register_internal_class<ggs::GGSTagDictionaryItem>();
+		ClassDB::register_internal_class<ggs::GGSTagMainScene>();
+		ClassDB::register_internal_class<ggs::GGSMainScene>();
+		ClassDB::register_internal_class<ggs::GGSEditorPlugin>();
+		EditorPlugins::add_by_type<ggs::GGSEditorPlugin>();
 	}
 }
 
@@ -65,7 +61,7 @@ void uninitialize_ggs_module(ModuleInitializationLevel p_level)
 	}
 	else if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR)
 	{
-		EditorPlugins::remove_by_type<GGSEditorPlugin>();
+		EditorPlugins::remove_by_type<ggs::GGSEditorPlugin>();
 	}
 }
 

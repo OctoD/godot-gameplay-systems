@@ -13,6 +13,8 @@
 #include "system/tag/tag_manager.h"
 #include "system/tag/tag_project_settings.h"
 
+using namespace ggs;
+
 void GGSTagMainScene::_bind_methods()
 {
 	ClassDB::bind_method(D_METHOD("_handle_delete_tag", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_delete_tag);

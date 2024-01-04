@@ -3,6 +3,7 @@
 
 #include "tag_dictionary.h"
 
+using namespace ggs;
 using namespace godot;
 
 const char *TagDictionary::TAG_DICTIONARY_DIVIDER = ".";

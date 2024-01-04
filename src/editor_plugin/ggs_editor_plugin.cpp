@@ -7,6 +7,8 @@
 #include "main_scene/ggs_main_scene.h"
 #include "ggs_editor_plugin.h"
 
+using namespace ggs;
+
 static GGSMainScene *ggs_tag_main_scene = nullptr;
 static GGSTagDocks *ggs_tag_docks = nullptr;
 

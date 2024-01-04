@@ -1,6 +1,8 @@
 #include "tag/ggs_tag_main_scene.h"
 #include "ggs_main_scene.h"
 
+using namespace ggs;
+
 GGSMainScene::GGSMainScene()
 {
 }

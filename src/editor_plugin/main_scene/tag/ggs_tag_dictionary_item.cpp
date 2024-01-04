@@ -7,6 +7,8 @@
 #include "system/tag/tag_tree.h"
 #include "system/tag/tag_dictionary.h"
 
+using namespace ggs;
+
 void GGSTagDictionaryItem::_bind_methods()
 {
     /// binds methods
