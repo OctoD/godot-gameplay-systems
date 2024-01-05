@@ -62,17 +62,19 @@ void TagDictionary::add_tag(const StringName &tag)
 
 void TagDictionary::add_tags(const PackedStringArray &p_tags)
 {
-	PackedStringArray copy = PackedStringArray(tags);
+	PackedStringArray copy = tags.duplicate();
+	int affected = 0;
 
 	for (int i = 0; i < p_tags.size(); i++)
 	{
 		if (!tags.has(p_tags[i]))
 		{
 			tags.push_back(p_tags[i]);
+			affected++;
 		}
 	}
 
-	if (copy.size() != tags.size())
+	if (affected > 0)
 	{
 		emit_signal("tags_added", tags, copy);
 		emit_changed();
