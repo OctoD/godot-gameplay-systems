@@ -88,20 +88,10 @@ namespace ggs
 		void static _bind_methods();
 		/// @brief Handles the item_edited signal.
 		void _handle_item_edited();
-		/// @brief Clears and re-renders the tree when the TagDictionary resource changes.
-		void _handle_tag_dictionary_changed();
 		/// @brief Renders the tag tree starting from a dictionary.
 		/// @param p_dictionary The dictionary to render.
 		/// @param p_parent The parent tree item.
 		void render_dictionary(Dictionary p_dictionary, TreeItem *p_parent, String p_current_path);
-
-	private:
-		/// @brief Handles the button pressed.
-		/// @param p_item
-		/// @param p_column
-		/// @param p_id
-		/// @param p_mouse_button_index
-		void _handle_button_pressed(TreeItem *p_item, int p_column, int p_id, int p_mouse_button_index);
 	};
 }
 
