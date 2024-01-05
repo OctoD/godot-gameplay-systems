@@ -273,6 +273,8 @@ void TagDictionary::replace_tag_path(const StringName &old_path, const StringNam
 {
 	PackedStringArray copy = PackedStringArray(tags);
 
+	int affected = 0;
+
 	for (int i = tags.size() - 1; i >= 0; i--)
 	{
 		if (tags[i].begins_with(old_path))
@@ -280,10 +282,12 @@ void TagDictionary::replace_tag_path(const StringName &old_path, const StringNam
 			StringName old_tag = tags[i];
 			tags.set(i, new_path + tags[i].substr(old_path.length()));
 			emit_signal("tag_replaced", this, old_tag, tags[i]);
+
+			affected++;
 		}
 	}
 
-	if (copy.size() != tags.size())
+	if (affected > 0)
 	{
 		emit_signal("tags_replaced", tags, copy);
 		emit_changed();
