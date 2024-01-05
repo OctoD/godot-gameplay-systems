@@ -1,4 +1,4 @@
 [gd_resource type="TagDictionary" format=3 uid="uid://df1c4uh7v4201"]
 
 [resource]
-tags = PackedStringArray("rpg.attribute.health", "rpg.attribute.mana", "rpg.attribute.stamina", "rpg.attribute.dexterity", "rpg.attribute.strength")
+tags = PackedStringArray("attributes.health", "attributes.mana", "attributes.stamina", "attributes.dexterity", "attributes.strength", "attributes.speed")

@@ -1,3 +1,4 @@
+#include "attribute/ggs_attribute_main_scene.h"
 #include "tag/ggs_tag_main_scene.h"
 #include "ggs_main_scene.h"
 
@@ -30,8 +31,10 @@ void GGSMainScene::_ready()
 	attributes_panel->set_name(attributes_panel->tr("Attributes"));
 	ability_panel->set_name(ability_panel->tr("Ability"));
 
+	GGSAttributeMainScene *attribute_main_scene = memnew(GGSAttributeMainScene);
 	GGSTagMainScene *tag_main_scene = memnew(GGSTagMainScene);
 
+	attributes_panel->add_child(attribute_main_scene);
 	tag_manager_panel->add_child(tag_main_scene);
 }
 

@@ -93,6 +93,7 @@ namespace ggs
 	protected:
 		friend class GGSTagDocks;
 		friend class GGSTagMainScene;
+		friend class GGSAttributeMainScene;
 
 		/// @brief Registers all methods that can be called from Godot.
 		static void _bind_methods();

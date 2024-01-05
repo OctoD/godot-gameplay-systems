@@ -31,6 +31,7 @@ void TagManager::_bind_methods()
 	ClassDB::bind_method(D_METHOD("remove_tags", "node", "tags"), &TagManager::remove_tags);
 
 	/// signals binding
+	ClassDB::add_signal("TagManager", MethodInfo("dictionaries_loaded"));
 	ClassDB::add_signal("TagManager", MethodInfo("dictionary_added", PropertyInfo(Variant::OBJECT, "tag_dictionary")));
 	ClassDB::add_signal("TagManager", MethodInfo("dictionary_removed", PropertyInfo(Variant::OBJECT, "tag_dictionary")));
 	ClassDB::add_signal("TagManager", MethodInfo("dictionary_tag_added", PropertyInfo(Variant::OBJECT, "tag_dictionary"), PropertyInfo(Variant::STRING, "tag")));
@@ -144,6 +145,8 @@ void TagManager::load_dictionaries()
 			}
 		}
 	}
+
+	emit_signal("dictionaries_loaded");
 }
 
 TagManager::TagManager()

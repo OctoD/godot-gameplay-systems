@@ -1,4 +1,37 @@
-[gd_scene format=3 uid="uid://b6nbfkmvnw58y"]
+[gd_scene load_steps=7 format=3 uid="uid://b6nbfkmvnw58y"]
+
+[sub_resource type="Attribute" id="Attribute_pxxpf"]
+tag_name = &"attributes.health"
+
+[sub_resource type="Attribute" id="Attribute_bos0u"]
+tag_name = &"attributes.mana"
+value = 100.0
+initial_value = 100.0
+max_value = 100.0
+
+[sub_resource type="Attribute" id="Attribute_c47wh"]
+tag_name = &"attributes.stamina"
+value = 100.0
+initial_value = 100.0
+max_value = 100.0
+
+[sub_resource type="Attribute" id="Attribute_xhhaw"]
+tag_name = &"attributes.dexterity"
+value = 15.0
+initial_value = 15.0
+max_value = 15.0
+
+[sub_resource type="Attribute" id="Attribute_2r86q"]
+tag_name = &"attributes.strength"
+value = 15.0
+initial_value = 15.0
+max_value = 15.0
+
+[sub_resource type="Attribute" id="Attribute_alp3g"]
+tag_name = &"attributes.speed"
+value = 100.0
+initial_value = 100.0
+max_value = 100.0
 
 [node name="Examples" type="Control"]
 layout_mode = 3
@@ -10,11 +43,28 @@ grow_vertical = 2
 
 [node name="TheGameYouLost" type="SubViewport" parent="."]
 
-[node name="Hud" type="Control" parent="." groups=["GGS_TAG_MANAGER_TAGGED_GROUP_NAME"]]
+[node name="Hud" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/GGS_TAG_MANAGER_TAGGED_NODE_META = PackedStringArray("rpg.attribute.dexterity", "rpg.attribute.health", "rpg.attribute.mana")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hud"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Hud/HBoxContainer"]
+layout_mode = 2
+text = "lorem ipsum"
+
+[node name="Button" type="Button" parent="Hud/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "lorem ipsum"
+
+[node name="AttributeContainer" type="AttributeContainer" parent="."]
+attributes = Array[Attribute]([SubResource("Attribute_pxxpf"), SubResource("Attribute_bos0u"), SubResource("Attribute_c47wh"), SubResource("Attribute_xhhaw"), SubResource("Attribute_2r86q"), SubResource("Attribute_alp3g")])
