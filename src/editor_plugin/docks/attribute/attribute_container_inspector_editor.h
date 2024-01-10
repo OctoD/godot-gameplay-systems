@@ -4,6 +4,7 @@
 #include <godot_cpp/classes/tree.hpp>
 
 #include "system/attribute/attribute_container.h"
+#include "system/tag/tag_dictionary.h"
 
 using namespace godot;
 
@@ -17,7 +18,9 @@ namespace ggs
 		AttributeContainer *attribute_container;
 		void _handle_item_edited();
 
-	protected:
+        void _handle_dictionary_changed(TagDictionary *previous, TagDictionary *current);
+
+    protected:
 		static void _bind_methods();
 
 	public:

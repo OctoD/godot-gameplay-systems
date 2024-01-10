@@ -21,8 +21,11 @@ namespace ggs
 	{
 		GDCLASS(AttributeEffect, Resource);
 
+		friend class AttributeEffectCondition;
+
 	protected:
-		static void _bind_methods();
+		static void
+		_bind_methods();
 
 		/// @brief The type of application for this attribute effect.
 		int application_type;
@@ -45,8 +48,13 @@ namespace ggs
 
 		enum ApplicationType
 		{
-			INSTANT,
-			TIME_SCALED,
+			ADD_BUFF,
+			ADD_VALUE,
+			ADD_VALUE_OR_BUFF,
+			SUBTRACT_BUFF,
+			SUBTRACT_VALUE,
+			SET_BUFF,
+			SET_VALUE,
 		};
 
 		/// @brief The life cycle of the attribute effect.
@@ -54,14 +62,22 @@ namespace ggs
 		{
 			ONE_TIME,
 			TIME_BASED,
+			INFINITE_TIME_BASED,
 		};
 
+		/// @brief Returns whether or not this attribute effect should be removed from the container.
+		/// @param p_attribute_effect The attribute effect to check.
+		/// @param p_attribute_container The attribute container to check.
+		/// @return Returns true if the attribute effect can be applied, false otherwise.
+		virtual bool are_conditions_met(GameplayEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
+		/// @brief Calculates the affected amount of the attribute effect.
+		virtual float calculate_affected_amount();
 		/// @brief Returns the applications of this attribute effect. Each item in the array is how the attribute effect will be applied.
 		/// @return
 		PackedFloat32Array get_applications() const;
 		/// @brief Gets how much the attribute will be affected by this attribute effect.
 		/// @return
-		float get_affected_amount() const;
+		float get_affected_amount();
 		/// @brief Gets the attribute that will be affected by this attribute effect.
 		/// @return
 		StringName get_affected_attribute() const;
@@ -71,6 +87,11 @@ namespace ggs
 		/// @brief Returns how many times this attribute effect will be applied
 		/// @return
 		int get_applications_count() const;
+		/// @brief Returns whether or not this attribute effect should break.
+		/// @param p_attribute_effect The attribute effect to check.
+		/// @param p_attribute_container The attribute container to check.
+		/// @return The break type.
+		virtual int get_break(AttributeContainer *p_attribute_container);
 		/// @brief Gets the application type of this attribute effect.
 		/// @return
 		TypedArray<AttributeEffectCondition> get_conditions() const;
@@ -98,13 +119,7 @@ namespace ggs
 		/// @brief Sets the life cycle of this attribute effect.
 		/// @param p_life_cycle The life cycle to set.
 		void set_life_cycle(LifeCycle p_life_cycle);
-		/// @brief Returns whether or not this attribute effect is valid.
-		/// @param p_attribute_effect The attribute effect to check.
-		/// @param p_attribute_container The attribute container to check.
-		/// @return
-		virtual bool should_apply(GameplayEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
 	};
-
 }
 
 VARIANT_ENUM_CAST(ggs::AttributeEffect::ApplicationType);

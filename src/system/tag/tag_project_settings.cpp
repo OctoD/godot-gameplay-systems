@@ -1,3 +1,4 @@
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/classes/project_settings.hpp>
 #include "tag_project_settings.h"
@@ -22,39 +23,45 @@ TagProjectSettings::~TagProjectSettings()
 
 void TagProjectSettings::add_resource(const String &p_file_path)
 {
-	ProjectSettings *project_settings = ProjectSettings::get_singleton();
-
-	if (project_settings != nullptr)
+	if (Engine::get_singleton()->is_editor_hint())
 	{
-		PackedStringArray settings = project_settings->get_setting(RESOURCE_PATHS_KEY, PackedStringArray());
+		ProjectSettings *project_settings = ProjectSettings::get_singleton();
 
-		if (!settings.has(p_file_path))
+		if (project_settings != nullptr)
 		{
-			settings.append(p_file_path);
-		}
+			PackedStringArray settings = project_settings->get_setting(RESOURCE_PATHS_KEY, PackedStringArray());
 
-		project_settings->set_setting(RESOURCE_PATHS_KEY, settings);
-		project_settings->save();
+			if (!settings.has(p_file_path))
+			{
+				settings.append(p_file_path);
+			}
+
+			project_settings->set_setting(RESOURCE_PATHS_KEY, settings);
+			project_settings->save();
+		}
 	}
 }
 
 void TagProjectSettings::remove_resource(const String &p_file_path)
 {
-	ProjectSettings *project_settings = ProjectSettings::get_singleton();
-
-	if (project_settings != nullptr)
+	if (Engine::get_singleton()->is_editor_hint())
 	{
-		PackedStringArray settings = project_settings->get_setting(RESOURCE_PATHS_KEY, PackedStringArray());
+		ProjectSettings *project_settings = ProjectSettings::get_singleton();
 
-		int index = settings.find(p_file_path);
-
-		if (index > -1)
+		if (project_settings != nullptr)
 		{
-			settings.remove_at(index);
-		}
+			PackedStringArray settings = project_settings->get_setting(RESOURCE_PATHS_KEY, PackedStringArray());
 
-		project_settings->set_setting(RESOURCE_PATHS_KEY, settings);
-		project_settings->save();
+			int index = settings.find(p_file_path);
+
+			if (index > -1)
+			{
+				settings.remove_at(index);
+			}
+
+			project_settings->set_setting(RESOURCE_PATHS_KEY, settings);
+			project_settings->save();
+		}
 	}
 }
 
@@ -70,27 +77,30 @@ PackedStringArray TagProjectSettings::get_resource_file_paths()
 
 void TagProjectSettings::setup()
 {
-	ProjectSettings *project_settings = ProjectSettings::get_singleton();
-
-	if (project_settings != nullptr)
+	if (Engine::get_singleton()->is_editor_hint())
 	{
-		PackedStringArray value;
+		ProjectSettings *project_settings = ProjectSettings::get_singleton();
 
-		if (!project_settings->has_setting(RESOURCE_PATHS_KEY))
+		if (project_settings != nullptr)
 		{
-			project_settings->set_setting(RESOURCE_PATHS_KEY, value);
+			PackedStringArray value;
+
+			if (!project_settings->has_setting(RESOURCE_PATHS_KEY))
+			{
+				project_settings->set_setting(RESOURCE_PATHS_KEY, value);
+			}
+
+			Dictionary dictionary;
+
+			dictionary["name"] = RESOURCE_PATHS_KEY;
+			dictionary["default_value"] = Variant(value).get_type();
+			dictionary["hint"] = PropertyHint::PROPERTY_HINT_ARRAY_TYPE;
+			dictionary["hint_string"] = "*.tres,*.res,*.csv";
+
+			project_settings->add_property_info(dictionary);
+			project_settings->set_initial_value(RESOURCE_PATHS_KEY, value);
+			project_settings->set_restart_if_changed(RESOURCE_PATHS_KEY, false);
+			project_settings->save();
 		}
-
-		Dictionary dictionary;
-
-		dictionary["name"] = RESOURCE_PATHS_KEY;
-		dictionary["default_value"] = Variant(value).get_type();
-		dictionary["hint"] = PropertyHint::PROPERTY_HINT_ARRAY_TYPE;
-		dictionary["hint_string"] = "*.tres,*.res,*.csv";
-
-		project_settings->add_property_info(dictionary);
-		project_settings->set_initial_value(RESOURCE_PATHS_KEY, value);
-		project_settings->set_restart_if_changed(RESOURCE_PATHS_KEY, false);
-		project_settings->save();
 	}
 }

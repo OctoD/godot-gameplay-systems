@@ -32,6 +32,7 @@ void AttributeManager::_bind_methods()
 
 	/// signals binding
 	ADD_SIGNAL(MethodInfo("attributes_changed", PropertyInfo(Variant::PACKED_STRING_ARRAY, "previous_attributes"), PropertyInfo(Variant::PACKED_STRING_ARRAY, "current_attributes")));
+	ADD_SIGNAL(MethodInfo("attributes_dictionary_changed", PropertyInfo(Variant::OBJECT, "previous_dictionary"), PropertyInfo(Variant::OBJECT, "current_dictionary")));
 }
 
 AttributeManager::AttributeManager()
@@ -109,7 +110,9 @@ void AttributeManager::set_attributes(const PackedStringArray &p_attributes)
 {
 	if (Engine::get_singleton()->is_editor_hint())
 	{
+		PackedStringArray previous = attributes.duplicate();
 		attributes = p_attributes;
+		emit_signal("attributes_changed", previous, attributes);
 	}
 }
 
@@ -117,6 +120,8 @@ void AttributeManager::set_tag_dictionary(TagDictionary *p_tag_dictionary)
 {
 	if (Engine::get_singleton()->is_editor_hint())
 	{
+		TagDictionary *previous = tag_dictionary;
 		tag_dictionary = p_tag_dictionary;
+		emit_signal("attributes_dictionary_changed", previous, tag_dictionary);
 	}
 }

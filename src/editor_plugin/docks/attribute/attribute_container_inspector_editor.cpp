@@ -6,6 +6,7 @@ using namespace ggs;
 void GGSAttributeContainerInspectorEditor::_bind_methods()
 {
 	ClassDB::bind_method(D_METHOD("_handle_item_edited"), &GGSAttributeContainerInspectorEditor::_handle_item_edited);
+	ClassDB::bind_method(D_METHOD("_handle_dictionary_changed", "previous", "current"), &GGSAttributeContainerInspectorEditor::_handle_dictionary_changed);
 }
 
 void GGSAttributeContainerInspectorEditor::_handle_item_edited()
@@ -14,7 +15,7 @@ void GGSAttributeContainerInspectorEditor::_handle_item_edited()
 
 	if (item != nullptr)
 	{
-		Attribute *attribute = attribute_container->get_attribute(item->get_text(0));
+		Ref<Attribute> attribute = attribute_container->get_attribute(item->get_text(0));
 
 		ERR_FAIL_COND_MSG(attribute == nullptr, "Attribute \"" + item->get_text(0) + "\" not found, this is a bug so please report it. https://github.com/octoD/godot-gameplay-systems/issues/new?title=%5Bbug%5D%20attribute-container%20+%20GGSAttributeContainerInspectorEditor::_handle_item_edited");
 
@@ -27,6 +28,12 @@ void GGSAttributeContainerInspectorEditor::_handle_item_edited()
 	}
 }
 
+void GGSAttributeContainerInspectorEditor::_handle_dictionary_changed(TagDictionary *previous, TagDictionary *current)
+{
+	clear();
+	_ready();
+}
+
 void GGSAttributeContainerInspectorEditor::_ready()
 {
 	if (attribute_container == nullptr)
@@ -35,6 +42,11 @@ void GGSAttributeContainerInspectorEditor::_ready()
 	}
 
 	TypedArray<Attribute> attributes = attribute_container->get_attributes();
+
+	if (!AttributeManager::get_singleton()->is_connected("attributes_dictionary_changed", Callable(this, "_handle_dictionary_changed")))
+	{
+		AttributeManager::get_singleton()->connect("attributes_dictionary_changed", Callable(this, "_handle_dictionary_changed"));
+	}
 
 	attribute_container->ensure_attributes(AttributeManager::get_singleton()->get_attributes());
 

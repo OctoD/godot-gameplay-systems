@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://ej5mmalx1j5t"]
+
+[ext_resource type="Script" path="res://demos/attributes_test_ui/main.gd" id="1_pv55t"]
+
+[sub_resource type="Attribute" id="Attribute_6jopb"]
+tag_name = &"attributes.health"
+
+[sub_resource type="Attribute" id="Attribute_5ifnr"]
+initial_value = 100.0
+max_value = 100.0
+tag_name = &"attributes.mana"
+value = 100.0
+
+[sub_resource type="Attribute" id="Attribute_1pu4l"]
+initial_value = 100.0
+max_value = 100.0
+tag_name = &"attributes.stamina"
+value = 100.0
+
+[sub_resource type="Attribute" id="Attribute_whk4f"]
+initial_value = 10.0
+tag_name = &"attributes.dexterity"
+value = 10.0
+
+[sub_resource type="Attribute" id="Attribute_3rtvt"]
+initial_value = 10.0
+tag_name = &"attributes.strength"
+value = 10.0
+
+[sub_resource type="Attribute" id="Attribute_5ji4d"]
+max_value = 100.0
+tag_name = &"attributes.speed"
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pv55t")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 127.0
+grow_horizontal = 2
+text = "Press 1 to increase speed
+Press 2 to decrease speed
+Press q to increment stamina
+Press w to decrease stamina
+Press 0 to buff strenght and dexterity"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="AttributeContainer" type="AttributeContainer" parent="." node_paths=PackedStringArray("attributes_owner")]
+attributes_owner = NodePath("..")
+attributes = Array[Attribute]([SubResource("Attribute_6jopb"), SubResource("Attribute_5ifnr"), SubResource("Attribute_1pu4l"), SubResource("Attribute_whk4f"), SubResource("Attribute_3rtvt"), SubResource("Attribute_5ji4d")])

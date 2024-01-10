@@ -11,6 +11,7 @@ using namespace godot;
 
 namespace ggs
 {
+
 	class Attribute;
 	class AttributeContainer;
 	class AttributeEffect;
@@ -23,12 +24,28 @@ namespace ggs
 		static void _bind_methods();
 
 	public:
+		enum BreakType
+		{
+			NO_BREAK,
+			BREAK,
+			BREAK_REMOVE_ATTRIBUTE_EFFECT,
+			BREAK_REMOVE_ATTRIBUTE_EFFECT_OF_THIS_TYPE,
+			BREAK_REMOVE_ANY_ATTRIBUTE_EFFECT,
+		};
+
+		/// @brief Gets the break type of this attribute effect condition.
+		/// @param p_attribute_effect The attribute effect to apply.
+		/// @param p_attribute_container The attribute container to apply the effect to.
+		/// @return The break type of this attribute effect condition.
+		virtual AttributeEffectCondition::BreakType get_break_type(AttributeEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
 		/// @brief Returns whether or not this attribute effect condition is met.
-		/// @param p_attribute The attribute to apply the effect to.
 		/// @param p_attribute_effect The attribute effect to apply.
 		/// @param p_attribute_container The attribute container to apply the effect to.
 		/// @return
-		virtual bool should_apply(Attribute *p_attribute, AttributeEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
+		virtual bool should_apply_effect(AttributeEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
 	};
 }
+
+VARIANT_ENUM_CAST(ggs::AttributeEffectCondition::BreakType);
+
 #endif

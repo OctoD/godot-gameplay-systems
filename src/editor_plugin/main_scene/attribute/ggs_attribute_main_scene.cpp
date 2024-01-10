@@ -73,6 +73,8 @@ void GGSAttributeMainScene::_handle_dictionary_selected(int p_item_index)
 		selected_tags_tree->render();
 
 		AttributeProjectSettings::set_attribute_resource_path(tag_dictionary->get_path());
+		AttributeManager::get_singleton()->set_tag_dictionary(tag_dictionary);
+		AttributeManager::get_singleton()->set_attributes(tag_dictionary->get_tags());
 	}
 }
 

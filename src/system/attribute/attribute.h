@@ -42,6 +42,9 @@ namespace ggs
 		/// @brief Adds a value to this attribute.
 		/// @param p_value The value to add.
 		void add_value(float p_value);
+		/// @brief Adds a value or buff to this attribute.
+		/// @param p_value_or_buff The value or buff to add.
+		void add_value_or_buff(float p_value_or_buff);
 		/// @brief Checks if this attribute allows negative values (aka the min_value set to negative).
 		/// @param p_tag_name The tag name to check.
 		/// @return True if this attribute allows negative values, false otherwise.
