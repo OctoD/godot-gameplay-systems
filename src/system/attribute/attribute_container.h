@@ -40,6 +40,10 @@ namespace ggs
 		/// @param attribute_effect The attribute effect to apply.
 		/// @param attribute The attribute to apply the effect to.
 		void apply_attribute_effect(Ref<AttributeEffect> &attribute_effect, Ref<Attribute> &attribute);
+		/// @brief Checks if the attribute effect conditions are met.
+		/// @param attribute_effect The attribute effect to check.
+		/// @return True if the attribute effect conditions are met, false otherwise.
+		bool are_attribute_conditions_met(Ref<AttributeEffect> &attribute_effect);
 		/// @brief Counts the number of times the given effect has been applied.
 		/// @param p_id
 		int increase_attribute_effect_timer_count(int p_id);

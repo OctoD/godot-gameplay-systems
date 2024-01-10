@@ -64,6 +64,7 @@ void AttributeContainer::_bind_methods()
 	ADD_SIGNAL(MethodInfo("attribute_changed", PropertyInfo(Variant::OBJECT, "attribute", PROPERTY_HINT_RESOURCE_TYPE, "Attribute")));
 	ADD_SIGNAL(MethodInfo("attribute_effect_applied", PropertyInfo(Variant::OBJECT, "attribute_effect", PROPERTY_HINT_RESOURCE_TYPE, "AttributeEffect")));
 	ADD_SIGNAL(MethodInfo("attribute_effect_blocked", PropertyInfo(Variant::OBJECT, "attribute_effect", PROPERTY_HINT_RESOURCE_TYPE, "AttributeEffect")));
+	ADD_SIGNAL(MethodInfo("attribute_effect_conditions_not_met", PropertyInfo(Variant::OBJECT, "attribute_effect", PROPERTY_HINT_RESOURCE_TYPE, "AttributeEffect")));
 	ADD_SIGNAL(MethodInfo("attribute_effect_removed", PropertyInfo(Variant::OBJECT, "attribute_effect", PROPERTY_HINT_RESOURCE_TYPE, "AttributeEffect")));
 	ADD_SIGNAL(MethodInfo("attribute_value_added", PropertyInfo(Variant::OBJECT, "attribute", PROPERTY_HINT_RESOURCE_TYPE, "Attribute"), PropertyInfo(Variant::FLOAT, "value_amount")));
 	ADD_SIGNAL(MethodInfo("attribute_value_set", PropertyInfo(Variant::OBJECT, "attribute", PROPERTY_HINT_RESOURCE_TYPE, "Attribute"), PropertyInfo(Variant::FLOAT, "value_amount")));
@@ -72,6 +73,12 @@ void AttributeContainer::_bind_methods()
 
 void AttributeContainer::apply_attribute_effect(Ref<AttributeEffect> &attribute_effect, Ref<Attribute> &attribute)
 {
+	if (!are_attribute_conditions_met(attribute_effect))
+	{
+		emit_signal("attribute_effect_conditions_not_met", Ref<Attribute>(attribute_effect));
+		return;
+	}
+
 	switch (attribute_effect->get_application_type())
 	{
 	case AttributeEffect::ApplicationType::ADD_BUFF:
@@ -117,6 +124,25 @@ void AttributeContainer::apply_attribute_effect(Ref<AttributeEffect> &attribute_
 		break;
 	}
 	}
+}
+
+bool AttributeContainer::are_attribute_conditions_met(Ref<AttributeEffect> &attribute_effect)
+{
+	if (attribute_effect->get_conditions().size() > 0)
+	{
+		for (int i = 0; i < attribute_effect->get_conditions().size(); i++)
+		{
+			Variant condition = attribute_effect->get_conditions()[i];
+			Ref<AttributeEffectCondition> attribute_effect_condition = Ref<AttributeEffectCondition>(condition);
+
+			if (!attribute_effect_condition->should_apply_effect(attribute_effect.ptr(), this))
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
 }
 
 int AttributeContainer::increase_attribute_effect_timer_count(int p_id)

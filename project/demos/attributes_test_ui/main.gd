@@ -88,7 +88,7 @@ func print_attribute(attribute: Attribute) -> String:
 	if (attribute == null):
 		return ""
 	
-	return "{0} value: {1}/max: {2}/buff: {3}".format({
+	return "tag_name: {0}; value: {1}; maximum_value: {2}; buff: {3};".format({
 		0: attribute.tag_name,
 		1: attribute.value,
 		2: attribute.max_value,
