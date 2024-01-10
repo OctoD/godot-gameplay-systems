@@ -58,7 +58,7 @@ AttributeEffect::~AttributeEffect()
 {
 }
 
-bool AttributeEffect::are_conditions_met(GameplayEffect *p_attribute_effect, AttributeContainer *p_attribute_container)
+bool AttributeEffect::are_conditions_met(AttributeContainer *p_attribute_container)
 {
     if (conditions.size() == 0)
     {

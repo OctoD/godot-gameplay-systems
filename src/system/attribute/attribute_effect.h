@@ -66,10 +66,9 @@ namespace ggs
 		};
 
 		/// @brief Returns whether or not this attribute effect should be removed from the container.
-		/// @param p_attribute_effect The attribute effect to check.
 		/// @param p_attribute_container The attribute container to check.
 		/// @return Returns true if the attribute effect can be applied, false otherwise.
-		virtual bool are_conditions_met(GameplayEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
+		virtual bool are_conditions_met(AttributeContainer *p_attribute_container);
 		/// @brief Calculates the affected amount of the attribute effect.
 		virtual float calculate_affected_amount();
 		/// @brief Returns the applications of this attribute effect. Each item in the array is how the attribute effect will be applied.
