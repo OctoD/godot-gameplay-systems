@@ -7,11 +7,11 @@ void AttributeEffectCondition::_bind_methods()
 	ClassDB::bind_method(D_METHOD("get_break_type", "attribute_effect", "attribute_container"), &AttributeEffectCondition::get_break_type);
 	ClassDB::bind_method(D_METHOD("should_apply_effect", "attribute_effect", "attribute_container"), &AttributeEffectCondition::should_apply_effect);
 
-	BIND_ENUM_CONSTANT(BreakType::NO_BREAK);
-	BIND_ENUM_CONSTANT(BreakType::BREAK);
-	BIND_ENUM_CONSTANT(BreakType::BREAK_REMOVE_ATTRIBUTE_EFFECT);
-	BIND_ENUM_CONSTANT(BreakType::BREAK_REMOVE_ATTRIBUTE_EFFECT_OF_THIS_TYPE);
-	BIND_ENUM_CONSTANT(BreakType::BREAK_REMOVE_ANY_ATTRIBUTE_EFFECT);
+	BIND_ENUM_CONSTANT(NO_BREAK);
+	BIND_ENUM_CONSTANT(BREAK);
+	BIND_ENUM_CONSTANT(BREAK_REMOVE_ATTRIBUTE_EFFECT);
+	BIND_ENUM_CONSTANT(BREAK_REMOVE_ATTRIBUTE_EFFECT_OF_THIS_TYPE);
+	BIND_ENUM_CONSTANT(BREAK_REMOVE_ANY_ATTRIBUTE_EFFECT);
 }
 
 AttributeEffectCondition::BreakType AttributeEffectCondition::get_break_type(AttributeEffect *p_attribute_effect, AttributeContainer *p_attribute_container)
