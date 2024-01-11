@@ -135,7 +135,7 @@ bool AttributeContainer::are_attribute_conditions_met(Ref<AttributeEffect> &attr
 			Variant condition = attribute_effect->get_conditions()[i];
 			Ref<AttributeEffectCondition> attribute_effect_condition = Ref<AttributeEffectCondition>(condition);
 
-			if (!attribute_effect_condition->should_apply_effect(attribute_effect.ptr(), this))
+			if (!attribute_effect_condition->_should_apply_effect(attribute_effect.ptr(), this))
 			{
 				return false;
 			}

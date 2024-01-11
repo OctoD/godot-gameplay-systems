@@ -9,11 +9,13 @@ class BuffDex extends AttributeEffect:
 		application_type = AttributeEffect.ADD_BUFF
 		affected_attribute = "attributes.dexterity"
 		
+		
 class BuffStr extends AttributeEffect:
 	func _init() -> void:
 		affected_amount = 5
 		application_type = AttributeEffect.ADD_BUFF
 		affected_attribute = "attributes.strength"
+
 
 class SpeedDecrease extends AttributeEffect:
 	func _init() -> void:
@@ -21,11 +23,13 @@ class SpeedDecrease extends AttributeEffect:
 		application_type = AttributeEffect.SUBTRACT_VALUE
 		affected_attribute = "attributes.speed"
 
+
 class SpeedIncrease extends AttributeEffect:
 	func _init() -> void:
 		affected_amount = 5
 		application_type = AttributeEffect.ADD_BUFF
 		affected_attribute = "attributes.speed"
+
 
 class StaminaDecrease extends AttributeEffect:
 	func _init() -> void:
@@ -33,21 +37,31 @@ class StaminaDecrease extends AttributeEffect:
 		application_type = AttributeEffect.SUBTRACT_VALUE
 		affected_attribute = "attributes.stamina"
 
+
 class StaminaIncrease extends AttributeEffect:
 	func _init() -> void:
 		affected_amount = 5
 		application_type = AttributeEffect.ADD_VALUE_OR_BUFF
 		affected_attribute = "attributes.stamina"
 		
+		
+class DebuffCondition extends AttributeEffectCondition:
+	func get_break_type(attribute_effect: AttributeEffect, attribute_container: AttributeContainer) -> AttributeEffectCondition.BreakType:
+		var attribute = attribute_container.get_attribute(attribute_effect.affected_attribute)
+		
+		if attribute != null and attribute.buff == 0:
+			return AttributeEffectCondition.BREAK 
+		
+		return AttributeEffectCondition.NO_BREAK
+
+
 class DebuffDex extends AttributeEffect:
 	func _init() -> void:
 		affected_amount = 1
-		application_type = AttributeEffect.SUBTRACT_VALUE
+		application_type = AttributeEffect.SUBTRACT_BUFF
 		affected_attribute = "attributes.dexterity"
 		life_cycle = AttributeEffect.INFINITE_TIME_BASED
-		
-	func _are_conditions_met(x, y) -> bool:
-		return true
+		conditions.append(DebuffCondition.new())
 
 
 func make_gameplay_effect(attribute_effect: AttributeEffect) -> GameplayEffect:
@@ -61,6 +75,7 @@ func make_gameplay_effect(attribute_effect: AttributeEffect) -> GameplayEffect:
 
 func _ready() -> void:
 	print_label()
+	add_child((make_gameplay_effect(DebuffDex.new())))
 
 
 func _input(event: InputEvent) -> void:

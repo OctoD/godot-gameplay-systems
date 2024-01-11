@@ -37,12 +37,12 @@ namespace ggs
 		/// @param p_attribute_effect The attribute effect to apply.
 		/// @param p_attribute_container The attribute container to apply the effect to.
 		/// @return The break type of this attribute effect condition.
-		virtual AttributeEffectCondition::BreakType get_break_type(AttributeEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
+		virtual AttributeEffectCondition::BreakType _get_break_type(AttributeEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
 		/// @brief Returns whether or not this attribute effect condition is met.
 		/// @param p_attribute_effect The attribute effect to apply.
 		/// @param p_attribute_container The attribute container to apply the effect to.
 		/// @return
-		virtual bool should_apply_effect(AttributeEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
+		virtual bool _should_apply_effect(AttributeEffect *p_attribute_effect, AttributeContainer *p_attribute_container);
 	};
 }
 

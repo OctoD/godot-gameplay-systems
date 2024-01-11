@@ -5,8 +5,10 @@ using namespace ggs;
 void AttributeEffect::_bind_methods()
 {
     /// binds methods
+    /// TODO: remember to change it once godot-cpp will allow virtual methods for gdscript
+    ClassDB::bind_method(D_METHOD("_calculate_affected_amount"), &AttributeEffect::_calculate_affected_amount);
+    /// 
     ClassDB::bind_method(D_METHOD("are_conditions_met", "attribute_container"), &AttributeEffect::are_conditions_met);
-    ClassDB::bind_method(D_METHOD("calculate_affected_amount"), &AttributeEffect::calculate_affected_amount);
     ClassDB::bind_method(D_METHOD("get_affected_amount"), &AttributeEffect::get_affected_amount);
     ClassDB::bind_method(D_METHOD("get_affected_attribute"), &AttributeEffect::get_affected_attribute);
     ClassDB::bind_method(D_METHOD("get_application_type"), &AttributeEffect::get_application_type);
@@ -79,7 +81,7 @@ bool AttributeEffect::are_conditions_met(AttributeContainer *p_attribute_contain
 
         if (condition != nullptr)
         {
-            if (!condition->should_apply_effect(this, p_attribute_container))
+            if (!condition->_should_apply_effect(this, p_attribute_container))
             {
                 return false;
             }
@@ -89,8 +91,13 @@ bool AttributeEffect::are_conditions_met(AttributeContainer *p_attribute_contain
     return true;
 }
 
-float AttributeEffect::calculate_affected_amount()
+float AttributeEffect::_calculate_affected_amount()
 {
+    if (has_method("calculate_affected_amount"))
+    {
+        return call("calculate_affected_amount");
+    }
+
     return affected_amount;
 }
 
@@ -126,7 +133,7 @@ PackedFloat32Array AttributeEffect::get_applications() const
 
 float AttributeEffect::get_affected_amount()
 {
-    return calculate_affected_amount();
+    return _calculate_affected_amount();
 }
 
 StringName AttributeEffect::get_affected_attribute() const
@@ -205,7 +212,7 @@ int AttributeEffect::get_break(AttributeContainer *p_attribute_container)
 
         if (condition != nullptr)
         {
-            AttributeEffectCondition::BreakType break_type = condition->get_break_type(this, p_attribute_container);
+            AttributeEffectCondition::BreakType break_type = condition->_get_break_type(this, p_attribute_container);
 
             if (break_type != AttributeEffectCondition::BreakType::NO_BREAK)
             {
