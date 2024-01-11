@@ -5,7 +5,7 @@ using namespace ggs;
 void AttributeEffect::_bind_methods()
 {
     /// binds methods
-    ClassDB::bind_method(D_METHOD("are_conditions_met", "attribute_effect", "attribute_container"), &AttributeEffect::are_conditions_met);
+    ClassDB::bind_method(D_METHOD("are_conditions_met", "attribute_container"), &AttributeEffect::are_conditions_met);
     ClassDB::bind_method(D_METHOD("calculate_affected_amount"), &AttributeEffect::calculate_affected_amount);
     ClassDB::bind_method(D_METHOD("get_affected_amount"), &AttributeEffect::get_affected_amount);
     ClassDB::bind_method(D_METHOD("get_affected_attribute"), &AttributeEffect::get_affected_attribute);
