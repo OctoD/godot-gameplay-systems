@@ -89,9 +89,12 @@ namespace ggs
 		/// @brief Gets the ongoing attributes' effects of the container.
 		/// @return The ongoing attributes' effects of the container.
 		TypedArray<AttributeEffect> get_ongoing_effects() const;
-		/// @brief Gets the owner of the attributes.
-		/// @return The owner of the attributes.
-		Node *get_attributes_owner() const;
+        /// @brief Returns the attributes as a dictionary. It is a dictionary where keys are the Attribute's tag_name and the value is the Attribute value.
+        /// @return The attributes as a dictionary.
+        Dictionary get_attributes_as_dictionary() const;
+        /// @brief Gets the owner of the attributes.
+        /// @return The owner of the attributes.
+        Node *get_attributes_owner() const;
 		/// @brief Get the attributes of the container.
 		/// @return The attributes of the container.
 		TypedArray<Attribute> get_attributes() const;

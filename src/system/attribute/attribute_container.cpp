@@ -31,6 +31,7 @@ void AttributeContainer::_bind_methods()
 	ClassDB::bind_method(D_METHOD("count_timeouts", "attribute_effect"), &AttributeContainer::count_timeouts);
 	ClassDB::bind_method(D_METHOD("ensure_attributes", "attributes"), &AttributeContainer::ensure_attributes);
 	ClassDB::bind_method(D_METHOD("get_attribute", "attribute_name"), &AttributeContainer::get_attribute);
+	ClassDB::bind_method(D_METHOD("get_attributes_as_dictionary"), &AttributeContainer::get_attributes_as_dictionary);
 	ClassDB::bind_method(D_METHOD("get_attributes_owner"), &AttributeContainer::get_attributes_owner);
 	ClassDB::bind_method(D_METHOD("get_attributes"), &AttributeContainer::get_attributes);
 	ClassDB::bind_method(D_METHOD("get_ongoing_effects"), &AttributeContainer::get_ongoing_effects);
@@ -382,6 +383,24 @@ Ref<Attribute> AttributeContainer::get_attribute(StringName p_attribute_name) co
 TypedArray<AttributeEffect> AttributeContainer::get_ongoing_effects() const
 {
 	return ongoing_effects.duplicate(true);
+}
+
+Dictionary AttributeContainer::get_attributes_as_dictionary() const 
+{
+	Dictionary attributes_dictionary;
+
+	for (int i = 0; i < attributes.size(); i++)
+	{
+		Variant attribute_variant = attributes[i];
+		Attribute *attribute = cast_to<Attribute>(attribute_variant);
+
+		if (attribute != nullptr)
+		{
+			attributes_dictionary[attribute->get_tag_name()] = attribute->get_value();
+		}
+	}
+
+	return attributes_dictionary;
 }
 
 Node *AttributeContainer::get_attributes_owner() const
