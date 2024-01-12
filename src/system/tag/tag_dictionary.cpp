@@ -13,6 +13,7 @@ void TagDictionary::_bind_methods()
 	ClassDB::bind_method(D_METHOD("add_tag", "tag"), &TagDictionary::add_tag);
 	ClassDB::bind_method(D_METHOD("clear_tags"), &TagDictionary::clear_tags);
 	ClassDB::bind_method(D_METHOD("get_tags"), &TagDictionary::get_tags);
+	ClassDB::bind_method(D_METHOD("has_all", "tags"), &TagDictionary::has_all);
 	ClassDB::bind_method(D_METHOD("has_tag_path", "tag_path"), &TagDictionary::has_tag_path);
 	ClassDB::bind_method(D_METHOD("has_tag", "tag"), &TagDictionary::has_tag);
 	ClassDB::bind_method(D_METHOD("remove_tag_path", "tag_path"), &TagDictionary::remove_tag_path);
@@ -171,6 +172,19 @@ PackedStringArray TagDictionary::get_tags_from_path(const StringName &p_tag_path
 	}
 
 	return out;
+}
+
+bool TagDictionary::has_all(const PackedStringArray p_tags) const
+{
+    for (StringName tag : p_tags)
+	{
+		if (!tags.has(tag))
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 bool TagDictionary::has_tag(const StringName &tag) const

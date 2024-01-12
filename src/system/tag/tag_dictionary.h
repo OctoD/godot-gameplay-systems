@@ -61,6 +61,10 @@ namespace ggs
 		/// @param p_tag_path The tag path to get.
 		/// @return
 		PackedStringArray get_tags_from_path(const StringName &p_tag_path) const;
+		/// @brief Checks if the tag dictionary has all the tags.
+		/// @param tags The tags to check.
+		/// @return True if the tag dictionary has all the tags, false otherwise.
+		bool has_all(const PackedStringArray p_tags) const;
 		/// @brief Returns `true` if the tag dictionary has the tag.
 		/// @param tag The tag to check.
 		/// @return `true` if the tag dictionary has the tag.
