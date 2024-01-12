@@ -5,6 +5,7 @@
 #include <godot_cpp/classes/v_box_container.hpp>
 
 #include "tag_docks.h"
+#include "system/attribute/attribute_manager.h"
 #include "system/tag/tag_tree.h"
 #include "system/tag/tag_manager.h"
 
@@ -53,8 +54,10 @@ void GGSTagDocks::render()
 
 	TypedArray<Node> selected_nodes = EditorInterface::get_singleton()->get_selection()->get_selected_nodes();
 	TagDictionary *all_tags = memnew(TagDictionary);
+	AttributeManager *attribute_manager = AttributeManager::get_singleton();
 
 	all_tags->from_many(TagManager::get_singleton()->dictionaries);
+	all_tags->remove_tags(attribute_manager->get_attributes());
 
 	for (int i = 0; i < selected_nodes.size(); i++)
 	{
@@ -107,7 +110,7 @@ void GGSTagDocks::_on_selection_changed()
 void GGSTagDocks::_set_tags_selected(PackedStringArray p_tags, bool selected)
 {
 	TypedArray<Node> selected_nodes = EditorInterface::get_singleton()->get_selection()->get_selected_nodes();
-	EditorInterface* editor_interface = EditorInterface::get_singleton();
+	EditorInterface *editor_interface = EditorInterface::get_singleton();
 
 	for (int i = 0; i < selected_nodes.size(); i++)
 	{

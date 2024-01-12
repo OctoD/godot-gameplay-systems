@@ -15,7 +15,9 @@ void TagDictionary::_bind_methods()
 	ClassDB::bind_method(D_METHOD("get_tags"), &TagDictionary::get_tags);
 	ClassDB::bind_method(D_METHOD("has_tag_path", "tag_path"), &TagDictionary::has_tag_path);
 	ClassDB::bind_method(D_METHOD("has_tag", "tag"), &TagDictionary::has_tag);
+	ClassDB::bind_method(D_METHOD("remove_tag_path", "tag_path"), &TagDictionary::remove_tag_path);
 	ClassDB::bind_method(D_METHOD("remove_tag", "tag"), &TagDictionary::remove_tag);
+	ClassDB::bind_method(D_METHOD("remove_tags", "tags"), &TagDictionary::remove_tags);
 	ClassDB::bind_method(D_METHOD("replace_tag_at_index", "index", "tag"), &TagDictionary::replace_tag_at_index);
 	ClassDB::bind_method(D_METHOD("replace_tag", "old_tag", "new_tag"), &TagDictionary::replace_tag);
 	ClassDB::bind_method(D_METHOD("set_tags", "tags"), &TagDictionary::set_tags);
@@ -221,6 +223,29 @@ void TagDictionary::remove_tag(const StringName &tag)
 			emit_signal("tag_removed", this, tag);
 			emit_changed();
 		}
+	}
+}
+
+void TagDictionary::remove_tags(const PackedStringArray &p_tags)
+{
+	PackedStringArray removed_tags = PackedStringArray();
+	PackedStringArray copy = PackedStringArray(tags);
+	
+	for (StringName tag : p_tags)
+	{
+		int index = tags.find(tag);
+
+		if (index >= 0)
+		{
+			tags.remove_at(index);
+			removed_tags.push_back(tag);
+		}
+	}
+
+	if (removed_tags.size() > 0)
+	{
+		emit_signal("tags_removed", removed_tags, copy);
+		emit_changed();
 	}
 }
 

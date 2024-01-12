@@ -73,6 +73,9 @@ namespace ggs
 		/// @brief	Removes a tag from the tag dictionary.
 		/// @param tag	The tag to remove.
 		void remove_tag(const StringName &tag);
+		/// @brief Removes as many tags as possible from the tag dictionary.
+		/// @param p_tags The tags to remove.
+		void remove_tags(const PackedStringArray &p_tags);
 		/// @brief	Removes all tags which include the tag path.
 		/// @param tag_path	The tag path to remove.
 		void remove_tag_path(const StringName &tag_path);
