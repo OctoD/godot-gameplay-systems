@@ -10,6 +10,10 @@
 #include <godot_cpp/godot.hpp>
 
 /// ggs stuff
+#include "system/ability/ability.h"
+#include "system/ability/ability_container.h"
+#include "system/ability/ability_grant.h"
+#include "system/ability/ability_queue.h"
 #include "system/attribute/attribute.h"
 #include "system/attribute/attribute_container.h"
 #include "system/attribute/attribute_effect.h"
@@ -44,6 +48,9 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE)
 	{
 		/// registering classes
+		ClassDB::register_class<ggs::Ability>();
+		ClassDB::register_class<ggs::AbilityContainer>();
+		ClassDB::register_class<ggs::AbilityGrant>();
 		ClassDB::register_class<ggs::AttributeManager>();
 		ClassDB::register_class<ggs::Attribute>();
 		ClassDB::register_class<ggs::AttributeContainer>();
@@ -55,6 +62,8 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 		ClassDB::register_class<ggs::TagDictionary>();
 		ClassDB::register_class<ggs::TagManager>();
 		ClassDB::register_class<ggs::TagTree>();
+		ClassDB::register_internal_class<ggs::AbilityQueueItem>();
+		ClassDB::register_internal_class<ggs::AbilityQueue>();
 
 		/// registering settings
 		ggs::AttributeProjectSettings::setup();
