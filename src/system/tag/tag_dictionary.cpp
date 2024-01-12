@@ -14,6 +14,7 @@ void TagDictionary::_bind_methods()
 	ClassDB::bind_method(D_METHOD("clear_tags"), &TagDictionary::clear_tags);
 	ClassDB::bind_method(D_METHOD("get_tags"), &TagDictionary::get_tags);
 	ClassDB::bind_method(D_METHOD("has_all", "tags"), &TagDictionary::has_all);
+	ClassDB::bind_method(D_METHOD("has_some", "tags"), &TagDictionary::has_some);
 	ClassDB::bind_method(D_METHOD("has_tag_path", "tag_path"), &TagDictionary::has_tag_path);
 	ClassDB::bind_method(D_METHOD("has_tag", "tag"), &TagDictionary::has_tag);
 	ClassDB::bind_method(D_METHOD("remove_tag_path", "tag_path"), &TagDictionary::remove_tag_path);
@@ -176,7 +177,7 @@ PackedStringArray TagDictionary::get_tags_from_path(const StringName &p_tag_path
 
 bool TagDictionary::has_all(const PackedStringArray p_tags) const
 {
-    for (StringName tag : p_tags)
+	for (StringName tag : p_tags)
 	{
 		if (!tags.has(tag))
 		{
@@ -185,6 +186,19 @@ bool TagDictionary::has_all(const PackedStringArray p_tags) const
 	}
 
 	return true;
+}
+
+bool TagDictionary::has_some(const PackedStringArray p_tags) const
+{
+	for (StringName tag : p_tags)
+	{
+		if (tags.has(tag))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 bool TagDictionary::has_tag(const StringName &tag) const
@@ -244,7 +258,7 @@ void TagDictionary::remove_tags(const PackedStringArray &p_tags)
 {
 	PackedStringArray removed_tags = PackedStringArray();
 	PackedStringArray copy = PackedStringArray(tags);
-	
+
 	for (StringName tag : p_tags)
 	{
 		int index = tags.find(tag);
