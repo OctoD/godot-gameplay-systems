@@ -60,6 +60,11 @@ void AttributeContainer::_bind_methods()
 
 void AttributeContainer::apply_attribute_effect(AttributeEffect *attribute_effect, Ref<Attribute> &attribute)
 {
+	if (get_multiplayer_authority() != 1)
+	{
+		return;
+	}
+
 	float affected_amount = attribute_effect->_calculate_affected_amount(this);
 
 	switch (attribute_effect->get_application_type())
@@ -280,6 +285,11 @@ void AttributeContainer::_ready()
 
 void AttributeContainer::apply_effect(GameplayEffect *p_game_effect)
 {
+	if (get_multiplayer_authority() != 1)
+	{
+		return;
+	}
+
 	TypedArray<AttributeEffect> effects = p_game_effect->get_attribute_effects_applied();
 
 	for (int i = 0; i < effects.size(); i++)
@@ -385,7 +395,7 @@ TypedArray<AttributeEffect> AttributeContainer::get_ongoing_effects() const
 	return ongoing_effects.duplicate(true);
 }
 
-Dictionary AttributeContainer::get_attributes_as_dictionary() const 
+Dictionary AttributeContainer::get_attributes_as_dictionary() const
 {
 	Dictionary attributes_dictionary;
 
