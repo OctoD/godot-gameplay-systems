@@ -23,26 +23,12 @@ void AttributeContainer::_handle_attribute_owner_received_node(Node *p_node)
 	}
 }
 
-void AttributeContainer::_handle_timer_timeout(Timer *timer, Ref<AttributeEffect> &attribute_effect, Ref<Attribute> &attribute)
-{
-	int count = increase_attribute_effect_timer_count(timer->get_instance_id());
-
-	if ((attribute_effect->get_life_cycle() == AttributeEffect::LifeCycle::INFINITE_TIME_BASED && should_break_attribute_effect(attribute_effect)) || (should_break_attribute_effect(attribute_effect) || count >= attribute_effect->get_applications_count()))
-	{
-		timeouts_count.erase(timer->get_instance_id());
-		timer->stop();
-		timer->call_deferred("queue_free");
-		return;
-	}
-
-	apply_attribute_effect(attribute_effect, attribute);
-}
-
 void AttributeContainer::_bind_methods()
 {
 	/// methods binding
 	ClassDB::bind_method(D_METHOD("_handle_attribute_owner_received_node", "node"), &AttributeContainer::_handle_attribute_owner_received_node);
 	ClassDB::bind_method(D_METHOD("apply_effect", "effect"), &AttributeContainer::apply_effect);
+	ClassDB::bind_method(D_METHOD("count_timeouts", "attribute_effect"), &AttributeContainer::count_timeouts);
 	ClassDB::bind_method(D_METHOD("ensure_attributes", "attributes"), &AttributeContainer::ensure_attributes);
 	ClassDB::bind_method(D_METHOD("get_attribute", "attribute_name"), &AttributeContainer::get_attribute);
 	ClassDB::bind_method(D_METHOD("get_attributes_owner"), &AttributeContainer::get_attributes_owner);
@@ -71,62 +57,65 @@ void AttributeContainer::_bind_methods()
 	ADD_SIGNAL(MethodInfo("attribute_value_subtracted", PropertyInfo(Variant::OBJECT, "attribute", PROPERTY_HINT_RESOURCE_TYPE, "Attribute"), PropertyInfo(Variant::FLOAT, "value_amount")));
 }
 
-void AttributeContainer::apply_attribute_effect(Ref<AttributeEffect> &attribute_effect, Ref<Attribute> &attribute)
+void AttributeContainer::apply_attribute_effect(AttributeEffect *attribute_effect, Ref<Attribute> &attribute)
 {
-	if (!are_attribute_conditions_met(attribute_effect))
-	{
-		emit_signal("attribute_effect_conditions_not_met", Ref<Attribute>(attribute_effect));
-		return;
-	}
+	float affected_amount = attribute_effect->_calculate_affected_amount(this);
 
 	switch (attribute_effect->get_application_type())
 	{
 	case AttributeEffect::ApplicationType::ADD_BUFF:
 	{
-		attribute->add_buff(attribute_effect->get_affected_amount());
-		emit_signal("attribute_buff_added", Ref<Attribute>(attribute), attribute_effect->get_affected_amount());
+		attribute->add_buff(affected_amount);
+		emit_signal("attribute_buff_added", Ref<Attribute>(attribute), affected_amount);
+		emit_signal("attribute_changed", Ref<Attribute>(attribute));
 		break;
 	}
 	case AttributeEffect::ApplicationType::ADD_VALUE:
 	{
-		attribute->add_value(attribute_effect->get_affected_amount());
-		emit_signal("attribute_value_added", Ref<Attribute>(attribute), attribute_effect->get_affected_amount());
+		attribute->add_value(affected_amount);
+		emit_signal("attribute_value_added", Ref<Attribute>(attribute), affected_amount);
+		emit_signal("attribute_changed", Ref<Attribute>(attribute));
 		break;
 	}
 	case AttributeEffect::ApplicationType::ADD_VALUE_OR_BUFF:
 	{
-		attribute->add_value_or_buff(attribute_effect->get_affected_amount());
-		emit_signal("attribute_value_added", Ref<Attribute>(attribute), attribute_effect->get_affected_amount());
+		attribute->add_value_or_buff(affected_amount);
+		emit_signal("attribute_value_added", Ref<Attribute>(attribute), affected_amount);
+		emit_signal("attribute_changed", Ref<Attribute>(attribute));
 		break;
 	}
 	case AttributeEffect::ApplicationType::SUBTRACT_BUFF:
 	{
-		attribute->subtract_buff(attribute_effect->get_affected_amount());
-		emit_signal("attribute_buff_subtracted", Ref<Attribute>(attribute), attribute_effect->get_affected_amount());
+		attribute->subtract_buff(affected_amount);
+		emit_signal("attribute_buff_subtracted", Ref<Attribute>(attribute), affected_amount);
+		emit_signal("attribute_changed", Ref<Attribute>(attribute));
 		break;
 	}
 	case AttributeEffect::ApplicationType::SUBTRACT_VALUE:
 	{
-		attribute->subtract_value(attribute_effect->get_affected_amount());
-		emit_signal("attribute_value_subtracted", Ref<Attribute>(attribute), attribute_effect->get_affected_amount());
+		attribute->subtract_value(affected_amount);
+		emit_signal("attribute_value_subtracted", Ref<Attribute>(attribute), affected_amount);
+		emit_signal("attribute_changed", Ref<Attribute>(attribute));
 		break;
 	}
 	case AttributeEffect::ApplicationType::SET_BUFF:
 	{
-		attribute->set_buff(attribute_effect->get_affected_amount());
-		emit_signal("attribute_buff_set", Ref<Attribute>(attribute), attribute_effect->get_affected_amount());
+		attribute->set_buff(affected_amount);
+		emit_signal("attribute_buff_set", Ref<Attribute>(attribute), affected_amount);
+		emit_signal("attribute_changed", Ref<Attribute>(attribute));
 		break;
 	}
 	case AttributeEffect::ApplicationType::SET_VALUE:
 	{
-		attribute->set_value(attribute_effect->get_affected_amount());
-		emit_signal("attribute_value_set", Ref<Attribute>(attribute), attribute_effect->get_affected_amount());
+		attribute->set_value(affected_amount);
+		emit_signal("attribute_value_set", Ref<Attribute>(attribute), affected_amount);
+		emit_signal("attribute_changed", Ref<Attribute>(attribute));
 		break;
 	}
 	}
 }
 
-bool AttributeContainer::are_attribute_conditions_met(Ref<AttributeEffect> &attribute_effect)
+bool AttributeContainer::are_attribute_conditions_met(AttributeEffect *attribute_effect)
 {
 	if (attribute_effect->get_conditions().size() > 0)
 	{
@@ -135,7 +124,7 @@ bool AttributeContainer::are_attribute_conditions_met(Ref<AttributeEffect> &attr
 			Variant condition = attribute_effect->get_conditions()[i];
 			Ref<AttributeEffectCondition> attribute_effect_condition = Ref<AttributeEffectCondition>(condition);
 
-			if (!attribute_effect_condition->_should_apply_effect(attribute_effect.ptr(), this))
+			if (!attribute_effect_condition->_should_apply_effect(attribute_effect, this))
 			{
 				return false;
 			}
@@ -145,8 +134,10 @@ bool AttributeContainer::are_attribute_conditions_met(Ref<AttributeEffect> &attr
 	return true;
 }
 
-int AttributeContainer::increase_attribute_effect_timer_count(int p_id)
+int AttributeContainer::increase_attribute_effect_timer_count(AttributeEffect *p_attribute_effect)
 {
+	int p_id = p_attribute_effect->get_instance_id();
+
 	if (timeouts_count.has(p_id))
 	{
 		int count = timeouts_count[p_id];
@@ -159,76 +150,6 @@ int AttributeContainer::increase_attribute_effect_timer_count(int p_id)
 	}
 
 	return timeouts_count[p_id];
-}
-
-Timer *AttributeContainer::setup_attribute_effect_timer(Ref<AttributeEffect> &attribute_effect, Ref<Attribute> &attribute)
-{
-	Timer *timer = memnew(Timer);
-
-	timer->set_autostart(false);
-	timer->set_one_shot(false);
-	timer->set_wait_time(1.0f);
-
-	add_child(timer);
-
-	Callable callable = Callable(this, "_handle_timer_timeout");
-	Array arguments = Array();
-
-	arguments.append(timer);
-	arguments.append(attribute_effect);
-	arguments.append(attribute);
-
-	callable.bindv(arguments);
-
-	timer->connect("timeout", callable);
-
-	return timer;
-}
-
-bool AttributeContainer::should_break_attribute_effect(Ref<AttributeEffect> &attribute_effect)
-{
-	switch (attribute_effect->get_break(this))
-	{
-	case AttributeEffectCondition::BreakType::BREAK:
-	{
-		emit_signal("attribute_effect_blocked", Ref<AttributeEffect>(attribute_effect));
-		return true;
-	}
-	case AttributeEffectCondition::BreakType::BREAK_REMOVE_ATTRIBUTE_EFFECT:
-	{
-		ongoing_effects.erase(attribute_effect);
-		emit_signal("attribute_effect_removed", Ref<AttributeEffect>(attribute_effect));
-		return true;
-	}
-	case AttributeEffectCondition::BreakType::BREAK_REMOVE_ATTRIBUTE_EFFECT_OF_THIS_TYPE:
-	{
-		for (int x = ongoing_effects.size() - 1; x >= 0; x--)
-		{
-			Variant ongoing_effect_variant = ongoing_effects.operator[](x);
-			AttributeEffect *ongoing_effect = cast_to<AttributeEffect>(ongoing_effect_variant);
-
-			if (ongoing_effect != nullptr && ongoing_effect->get_class() == attribute_effect->get_class())
-			{
-				ongoing_effects.erase(ongoing_effect);
-				emit_signal("attribute_effect_removed", Ref<AttributeEffect>(ongoing_effect));
-			}
-		}
-
-		return true;
-	}
-	case AttributeEffectCondition::BreakType::BREAK_REMOVE_ANY_ATTRIBUTE_EFFECT:
-	{
-		ongoing_effects.clear();
-		emit_signal("all_effects_removed");
-		return true;
-	}
-	case AttributeEffectCondition::BreakType::NO_BREAK:
-	{
-		return false;
-	}
-	}
-
-	return false;
 }
 
 AttributeContainer::AttributeContainer()
@@ -256,6 +177,96 @@ AttributeContainer::~AttributeContainer()
 {
 }
 
+void AttributeContainer::_process(float delta)
+{
+	if (Engine::get_singleton()->is_editor_hint())
+	{
+		return;
+	}
+
+	_process_delta += delta;
+
+	/// get if a second has passed since the last process
+	/// note: this will have to be balanced once multiplayer api will kick in. The check should be made taking in consideration the average ping of the players.
+	if (_process_delta - 1.0f >= 0.05f)
+	{
+		_process_delta = 0.0f;
+
+		for (int i = ongoing_effects.size() - 1; i >= 0; i--)
+		{
+			Variant effect_variant = ongoing_effects[i];
+			AttributeEffect *attribute_effect = cast_to<AttributeEffect>(effect_variant);
+
+			if (attribute_effect == nullptr)
+			{
+				WARN_PRINT("ERR/GGS/S/A/AC::_p_000");
+				continue;
+			}
+
+			Ref<AttributeEffect> attribute_effect_ref = Ref<AttributeEffect>(attribute_effect);
+			Ref<Attribute> attribute_ref = get_attribute(attribute_effect->get_affected_attribute());
+
+			int attribute_effect_application_count = increase_attribute_effect_timer_count(attribute_effect);
+
+			if (attribute_effect->get_life_cycle() == AttributeEffect::LifeCycle::TIME_BASED && attribute_effect_application_count >= attribute_effect->get_applications_count())
+			{
+				ongoing_effects.remove_at(i);
+				emit_signal("attribute_effect_removed", attribute_effect);
+				continue;
+			}
+
+			switch (attribute_effect->get_break(this))
+			{
+			case AttributeEffectCondition::BreakType::NO_BREAK:
+			{
+				if (are_attribute_conditions_met(attribute_effect))
+				{
+					apply_attribute_effect(attribute_effect, attribute_ref);
+				}
+				else
+				{
+					emit_signal("attribute_effect_conditions_not_met", attribute_effect);
+				}
+				break;
+			}
+			case AttributeEffectCondition::BreakType::BREAK:
+			{
+				emit_signal("attribute_effect_blocked", attribute_effect);
+				break;
+			}
+			case AttributeEffectCondition::BreakType::BREAK_RESET_COUNTER:
+			{
+				emit_signal("attribute_effect_blocked", attribute_effect);
+				timeouts_count[attribute_effect->get_instance_id()] = 0;
+				break;
+			}
+			case AttributeEffectCondition::BreakType::BREAK_REMOVE_ANY_ATTRIBUTE_EFFECT:
+			{
+				for (int j = ongoing_effects.size() - 1; j >= 0; j--)
+				{
+					Variant ongoing_effect_variant = ongoing_effects[j];
+					AttributeEffect *ongoing_effect = cast_to<AttributeEffect>(ongoing_effect_variant);
+
+					if (ongoing_effect != nullptr && ongoing_effect->get_rid() == attribute_effect->get_rid())
+					{
+						ongoing_effects.erase(ongoing_effect);
+					}
+				}
+				emit_signal("attribute_effect_removed", attribute_effect);
+				break;
+			}
+			case AttributeEffectCondition::BreakType::BREAK_REMOVE_ATTRIBUTE_EFFECT:
+			{
+				emit_signal("attribute_effect_blocked", attribute_effect);
+				ongoing_effects.remove_at(i);
+				emit_signal("attribute_effect_removed", attribute_effect);
+				break;
+			}
+			}
+		}
+	}
+}
+
 void AttributeContainer::_ready()
 {
 	if (attributes_owner == nullptr)
@@ -275,33 +286,48 @@ void AttributeContainer::apply_effect(GameplayEffect *p_game_effect)
 		Variant effect_variant = effects[i];
 		AttributeEffect *attribute_effect = cast_to<AttributeEffect>(effect_variant);
 
-		if (attribute_effect != nullptr)
+		if (attribute_effect == nullptr)
 		{
-			ongoing_effects.push_back(attribute_effect);
+			WARN_PRINT("ERR/GGS/S/A/AC::AE_000");
+			continue;
 		}
 
 		if (!has_attribute(attribute_effect->get_affected_attribute()))
 		{
+			WARN_PRINT("ERR/GGS/S/A/AC::AE_001");
 			continue;
 		}
 
 		Ref<Attribute> attribute_ref = get_attribute(attribute_effect->get_affected_attribute());
-		Ref<AttributeEffect> attribute_effect_ref = Ref<AttributeEffect>(attribute_effect);
 
-		if (should_break_attribute_effect(attribute_effect_ref))
+		if (attribute_effect->get_life_cycle() == AttributeEffect::LifeCycle::ONE_TIME)
 		{
-			continue;
-		}
-
-		if (attribute_effect_ref->get_life_cycle() == AttributeEffect::LifeCycle::ONE_TIME)
-		{
-			apply_attribute_effect(attribute_effect_ref, attribute_ref);
+			if (are_attribute_conditions_met(attribute_effect))
+			{
+				apply_attribute_effect(attribute_effect, attribute_ref);
+			}
+			else
+			{
+				emit_signal("attribute_effect_conditions_not_met", attribute_effect);
+			}
 		}
 		else
 		{
-			setup_attribute_effect_timer(attribute_effect_ref, attribute_ref)->start();
+			ongoing_effects.push_back(attribute_effect);
 		}
 	}
+}
+
+int AttributeContainer::count_timeouts(AttributeEffect *p_effect)
+{
+	int p_id = p_effect->get_instance_id();
+
+	if (timeouts_count.has(p_id))
+	{
+		return timeouts_count[p_id];
+	}
+
+	return 0;
 }
 
 void AttributeContainer::ensure_attributes(PackedStringArray p_attributes)

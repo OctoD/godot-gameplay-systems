@@ -70,7 +70,7 @@ namespace ggs
 		/// @return Returns true if the attribute effect can be applied, false otherwise.
 		bool are_conditions_met(AttributeContainer *p_attribute_container);
 		/// @brief Calculates the affected amount of the attribute effect.
-		virtual float _calculate_affected_amount();
+		virtual float _calculate_affected_amount(AttributeContainer *attribute_container);
 		/// @brief Returns the applications of this attribute effect. Each item in the array is how the attribute effect will be applied.
 		/// @return
 		PackedFloat32Array get_applications() const;

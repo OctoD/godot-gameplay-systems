@@ -17,12 +17,11 @@ namespace ggs
 		GDCLASS(AttributeContainer, Node);
 
 	private:
+		float _process_delta;
+
 		/// @brief Handles the given gampeplay effect.
 		/// @param p_node The node that received the gampeplay effect.
 		void _handle_attribute_owner_received_node(Node *p_node);
-		/// @brief Called when the timer used to count the number of times the given effect has been applied times out.
-		/// @param p_id The timer id.
-		void _handle_timer_timeout(Timer *timer, Ref<AttributeEffect> &attribute_effect, Ref<Attribute> &attribute);
 
 	protected:
 		friend class GGSAttributeContainerInspectorEditor;
@@ -39,23 +38,14 @@ namespace ggs
 		/// @brief Applies the given attribute effect.
 		/// @param attribute_effect The attribute effect to apply.
 		/// @param attribute The attribute to apply the effect to.
-		void apply_attribute_effect(Ref<AttributeEffect> &attribute_effect, Ref<Attribute> &attribute);
+		void apply_attribute_effect(AttributeEffect *attribute_effect, Ref<Attribute> &attribute);
 		/// @brief Checks if the attribute effect conditions are met.
 		/// @param attribute_effect The attribute effect to check.
 		/// @return True if the attribute effect conditions are met, false otherwise.
-		bool are_attribute_conditions_met(Ref<AttributeEffect> &attribute_effect);
+		bool are_attribute_conditions_met(AttributeEffect *attribute_effect);
 		/// @brief Counts the number of times the given effect has been applied.
-		/// @param p_id
-		int increase_attribute_effect_timer_count(int p_id);
-		/// @brief Setups the timer used to count the number of times the given effect has been applied.
-		/// @return The timer used to count the number of times the given effect has been applied.
-		Timer *setup_attribute_effect_timer(Ref<AttributeEffect> &attribute_effect, Ref<Attribute> &attribute);
-		/// @brief Returns true if the attribute effect should be broken, false otherwise.
-		/// @param attribute_effect The attribute effect to check.
-		/// @param p_game_effect The gameplay effect that contains the attribute effect.
-		/// @param break_effect The boolean that will be set to true if the effect should be broken.
-		/// @return
-		bool should_break_attribute_effect(Ref<AttributeEffect> &attribute_effect);
+		/// @param p_id The id of the attribute effect.
+		int increase_attribute_effect_timer_count(AttributeEffect *p_attribute_effect);
 
 	public:
 		/// @brief Default constructor.
@@ -72,12 +62,19 @@ namespace ggs
 		/// @brief Destructor.
 		~AttributeContainer();
 
+		/// @brief Handles the process of the node.
+		/// @param delta
+		void _process(float delta);
 		/// @brief Called when the node enters the scene tree for the first time.
 		void _ready() override;
 
 		/// @brief Applies the given effect.
 		/// @param p_effect The effect to activate.
 		void apply_effect(GameplayEffect *p_effect);
+		/// @brief Returns how many times the given effect has been applied.
+		/// @param p_effect The effect to count.
+		/// @return The number of times the given effect has been applied.
+		int count_timeouts(AttributeEffect *p_effect);
 		/// @brief Ensures that the container has the attributes defined in the given array.
 		/// @param p_attributes The attributes to ensure.
 		void ensure_attributes(PackedStringArray p_attributes);

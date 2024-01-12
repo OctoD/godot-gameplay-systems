@@ -8,8 +8,8 @@ class BuffDex extends AttributeEffect:
 		affected_amount = 10
 		application_type = AttributeEffect.ADD_BUFF
 		affected_attribute = "attributes.dexterity"
-		
-		
+
+
 class BuffStr extends AttributeEffect:
 	func _init() -> void:
 		affected_amount = 5
@@ -47,21 +47,43 @@ class StaminaIncrease extends AttributeEffect:
 		
 class DebuffCondition extends AttributeEffectCondition:
 	func get_break_type(attribute_effect: AttributeEffect, attribute_container: AttributeContainer) -> AttributeEffectCondition.BreakType:
-		var attribute = attribute_container.get_attribute(attribute_effect.affected_attribute)
-		
-		if attribute != null and attribute.buff == 0:
-			return AttributeEffectCondition.BREAK 
-		
-		return AttributeEffectCondition.NO_BREAK
+		# if the effect lasted for more than 2 seconds, we will start to debuff it
+		if attribute_container.count_timeouts(attribute_effect) > 2:
+			if (attribute_container.get_attribute(attribute_effect.affected_attribute).buff > 0):
+				return AttributeEffectCondition.NO_BREAK
+
+		return AttributeEffectCondition.BREAK_RESET_COUNTER
 
 
 class DebuffDex extends AttributeEffect:
 	func _init() -> void:
-		affected_amount = 1
+		affected_amount = 5
 		application_type = AttributeEffect.SUBTRACT_BUFF
 		affected_attribute = "attributes.dexterity"
 		life_cycle = AttributeEffect.INFINITE_TIME_BASED
 		conditions.append(DebuffCondition.new())
+
+
+class DebuffStr extends AttributeEffect:
+	func _init() -> void:
+		application_type = AttributeEffect.SUBTRACT_BUFF
+		affected_attribute = "attributes.strength"
+		life_cycle = AttributeEffect.INFINITE_TIME_BASED
+		conditions.append(DebuffCondition.new())
+	
+	func calculate_affected_amount(container: AttributeContainer) -> float:
+		var attribute = container.get_attribute(affected_attribute)
+		
+		if attribute != null:
+			## loses 5% each second
+			var value_to_debuff = (attribute.value / 100) * 5
+			
+			if value_to_debuff > 0:
+				return value_to_debuff
+			else:
+				return 1.0
+		
+		return affected_amount
 
 
 func make_gameplay_effect(attribute_effect: AttributeEffect) -> GameplayEffect:
@@ -73,16 +95,21 @@ func make_gameplay_effect(attribute_effect: AttributeEffect) -> GameplayEffect:
 	return x
 
 
+func _handle_attribute_changed(attribute: Attribute) -> void:
+	print(attribute.tag_name + " has changed")
+	print_label()
+
+
 func _ready() -> void:
 	print_label()
 	add_child((make_gameplay_effect(DebuffDex.new())))
+	add_child((make_gameplay_effect(DebuffStr.new())))
+	attribute_container.attribute_changed.connect(_handle_attribute_changed)
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
 		var k = event.as_text_keycode()
-		var m = false
-		var x = Node.new()
 		
 		if k == "1":
 			add_child(make_gameplay_effect(SpeedIncrease.new()))
@@ -105,9 +132,9 @@ func print_attribute(attribute: Attribute) -> String:
 	
 	return "tag_name: {0}; value: {1}; maximum_value: {2}; buff: {3};".format({
 		0: attribute.tag_name,
-		1: attribute.value,
-		2: attribute.max_value,
-		3: attribute.buff
+		1: int(attribute.value),
+		2: int(attribute.max_value),
+		3: int(attribute.buff)
 	})
 
 
