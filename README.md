@@ -1,3 +1,6 @@
+> [!WARNING] 
+> A full rewrite is going on (using gdextension). Some old api will change and be aware that all hard references (like extends `res://`) in your custom classes will stop working with the approach of 1.0.0
+
 ⚔️ GGS ⚔️
 =======
 
@@ -9,8 +12,6 @@ Godot Gameplay Systems (formerly godot gameplay attributes) is a set of nodes an
 - [Networking and multiplayer](#networking-attributes-effects-and-abilities)
 - [Contribution](#contribution)
 - [Licence](#licence)
-
-> Important! A full rewrite is going on (using gdextension). Some old api will change and be aware that all hard references (like extends `res://`) in your custom classes will stop working with the approach of 1.0.0
 
 # Install
 
