@@ -39,9 +39,11 @@ void AbilityContainer::_bind_methods()
 	ClassDB::bind_method(D_METHOD("_get_abilities"), &AbilityContainer::_get_abilities);
 	ClassDB::bind_method(D_METHOD("_set_abilities", "abilities"), &AbilityContainer::_set_abilities);
 	ClassDB::bind_method(D_METHOD("activate_by_name", "ability_name"), &AbilityContainer::activate_by_name);
+	ClassDB::bind_method(D_METHOD("activate_many"), &AbilityContainer::activate_many);
 	ClassDB::bind_method(D_METHOD("activate", "ability"), &AbilityContainer::activate);
 	ClassDB::bind_method(D_METHOD("add_ability", "ability"), &AbilityContainer::add_ability);
 	ClassDB::bind_method(D_METHOD("block_by_name", "ability_name"), &AbilityContainer::block_by_name);
+	ClassDB::bind_method(D_METHOD("block_many"), &AbilityContainer::block_many);
 	ClassDB::bind_method(D_METHOD("block", "ability"), &AbilityContainer::block);
 	ClassDB::bind_method(D_METHOD("can_activate_by_name", "ability_name"), &AbilityContainer::can_activate_by_name);
 	ClassDB::bind_method(D_METHOD("can_activate", "ability"), &AbilityContainer::can_activate);
@@ -50,20 +52,25 @@ void AbilityContainer::_bind_methods()
 	ClassDB::bind_method(D_METHOD("can_cancel_by_name", "ability_name"), &AbilityContainer::can_cancel_by_name);
 	ClassDB::bind_method(D_METHOD("can_cancel", "ability"), &AbilityContainer::can_cancel);
 	ClassDB::bind_method(D_METHOD("can_grant", "ability"), &AbilityContainer::can_grant);
+	ClassDB::bind_method(D_METHOD("can_revoke", "ability"), &AbilityContainer::can_revoke);
 	ClassDB::bind_method(D_METHOD("cancel_by_name", "ability_name"), &AbilityContainer::cancel_by_name);
+	ClassDB::bind_method(D_METHOD("cancel_many"), &AbilityContainer::cancel_many);
 	ClassDB::bind_method(D_METHOD("cancel", "ability"), &AbilityContainer::cancel);
 	ClassDB::bind_method(D_METHOD("get_abilities"), &AbilityContainer::get_abilities);
 	ClassDB::bind_method(D_METHOD("get_ability_owner"), &AbilityContainer::get_ability_owner);
 	ClassDB::bind_method(D_METHOD("get_ability", "ability_name"), &AbilityContainer::get_ability);
+	ClassDB::bind_method(D_METHOD("get_activatable_abilities"), &AbilityContainer::get_activatable_abilities);
+	ClassDB::bind_method(D_METHOD("get_blockable_abilities"), &AbilityContainer::get_blockable_abilities);
+	ClassDB::bind_method(D_METHOD("get_cancellable_abilities"), &AbilityContainer::get_cancellable_abilities);
 	ClassDB::bind_method(D_METHOD("grant_abilities"), &AbilityContainer::grant_abilities);
 	ClassDB::bind_method(D_METHOD("grant_ability", "ability"), &AbilityContainer::grant_ability);
 	ClassDB::bind_method(D_METHOD("has_ability_owner"), &AbilityContainer::has_ability_owner);
 	ClassDB::bind_method(D_METHOD("has_ability", "ability"), &AbilityContainer::has_ability);
-	ClassDB::bind_method(D_METHOD("set_abilities", "abilities"), &AbilityContainer::set_abilities);
-	ClassDB::bind_method(D_METHOD("set_ability_owner", "ability_owner"), &AbilityContainer::set_ability_owner);
+	ClassDB::bind_method(D_METHOD("revoke_all"), &AbilityContainer::revoke_all);
 	ClassDB::bind_method(D_METHOD("revoke_by_name", "ability_name"), &AbilityContainer::revoke_by_name);
 	ClassDB::bind_method(D_METHOD("revoke", "ability"), &AbilityContainer::revoke);
-	ClassDB::bind_method(D_METHOD("revoke_all"), &AbilityContainer::revoke_all);
+	ClassDB::bind_method(D_METHOD("set_abilities", "abilities"), &AbilityContainer::set_abilities);
+	ClassDB::bind_method(D_METHOD("set_ability_owner", "ability_owner"), &AbilityContainer::set_ability_owner);
 
 	ClassDB::bind_method(D_METHOD("_handle_ability_enqueued", "ability"), &AbilityContainer::_handle_ability_enqueued);
 	ClassDB::bind_method(D_METHOD("_handle_ability_dequeued", "ability"), &AbilityContainer::_handle_ability_dequeued);
@@ -177,6 +184,19 @@ void AbilityContainer::activate(Ability *p_ability)
 	}
 }
 
+void AbilityContainer::activate_many()
+{
+	TypedArray<Ability> activatable_abilities = get_activatable_abilities();
+
+	for (int i = 0; i < activatable_abilities.size(); i++)
+	{
+		Variant variant = activatable_abilities[i];
+		Ability *ability = cast_to<Ability>(variant);
+		
+		activate(ability);
+	}
+}
+
 void AbilityContainer::activate_by_name(const StringName &p_ability_name)
 {
 	AbilityGrant *ability_grant = get_ability_grant(p_ability_name);
@@ -238,6 +258,19 @@ void AbilityContainer::block(Ability *p_ability)
 	if (p_ability != nullptr)
 	{
 		block_by_name(p_ability->get_ability_name());
+	}
+}
+
+void AbilityContainer::block_many()
+{
+	TypedArray<Ability> blockable_abilities = get_blockable_abilities();
+
+	for (int i = 0; i < blockable_abilities.size(); i++)
+	{
+		Variant variant = blockable_abilities[i];
+		Ability *ability = cast_to<Ability>(variant);
+		
+		block(ability);
 	}
 }
 
@@ -374,6 +407,19 @@ void AbilityContainer::cancel(Ability *p_ability)
 	}
 }
 
+void AbilityContainer::cancel_many()
+{
+	TypedArray<Ability> cancellable_abilities = get_cancellable_abilities();
+
+	for (int i = 0; i < cancellable_abilities.size(); i++)
+	{
+		Variant variant = cancellable_abilities[i];
+		Ability *ability = cast_to<Ability>(variant);
+		
+		cancel(ability);
+	}
+}
+
 void AbilityContainer::cancel_by_name(const StringName &p_ability_name)
 {
 	if (can_cancel_by_name(p_ability_name))
@@ -463,6 +509,78 @@ TypedArray<Ability> AbilityContainer::get_abilities() const
 	}
 
 	return output;
+}
+
+TypedArray<Ability> AbilityContainer::get_activatable_abilities() const
+{
+	TypedArray<Ability> out = TypedArray<Ability>();
+
+	for (int i = 0; i < abilities.size(); i++)
+	{
+		Variant variant = abilities[i];
+		AbilityGrant *ability_grant = cast_to<AbilityGrant>(variant);
+
+		if (ability_grant != nullptr)
+		{
+			Ref<Ability> ability = Ref<Ability>(ability_grant->get_ability());
+			Ability *ability_ptr = ability.ptr();
+
+			if (ability != nullptr && ability.is_valid() && can_activate(ability_ptr))
+			{
+				out.append(ability_ptr);
+			}
+		}
+	}
+
+	return out;
+}
+
+TypedArray<Ability> AbilityContainer::get_blockable_abilities() const
+{
+	TypedArray<Ability> out = TypedArray<Ability>();
+
+	for (int i = 0; i < abilities.size(); i++)
+	{
+		Variant variant = abilities[i];
+		AbilityGrant *ability_grant = cast_to<AbilityGrant>(variant);
+
+		if (ability_grant != nullptr)
+		{
+			Ref<Ability> ability = Ref<Ability>(ability_grant->get_ability());
+			Ability *ability_ptr = ability.ptr();
+
+			if (ability != nullptr && ability.is_valid() && can_block(ability_ptr))
+			{
+				out.append(ability_ptr);
+			}
+		}
+	}
+
+	return out;
+}
+
+TypedArray<Ability> AbilityContainer::get_cancellable_abilities() const
+{
+	TypedArray<Ability> out = TypedArray<Ability>();
+
+	for (int i = 0; i < abilities.size(); i++)
+	{
+		Variant variant = abilities[i];
+		AbilityGrant *ability_grant = cast_to<AbilityGrant>(variant);
+
+		if (ability_grant != nullptr)
+		{
+			Ref<Ability> ability = Ref<Ability>(ability_grant->get_ability());
+			Ability *ability_ptr = ability.ptr();
+
+			if (ability != nullptr && ability.is_valid() && can_cancel(ability_ptr))
+			{
+				out.append(ability_ptr);
+			}
+		}
+	}
+
+	return out;
 }
 
 Node *AbilityContainer::get_ability_owner() const

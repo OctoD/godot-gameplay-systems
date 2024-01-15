@@ -62,18 +62,22 @@ namespace ggs
 		/// @brief Activates an ability.
 		/// @param p_ability The ability to activate.
 		void activate(Ability *p_ability);
+		/// @brief Activates all abilities which meet their own requirements.
+		void activate_many();
 		/// @brief Activates an ability by name.
 		/// @param p_ability_name The name of the ability to activate.
 		void activate_by_name(const StringName &p_ability_name);
-		/// @brief Blocks an ability.
-		/// @param p_ability The ability to block.
-		void block(Ability *p_ability);
-		/// @brief Blocks an ability by name.
-		/// @param p_ability_name The name of the ability to block.
-		void block_by_name(const StringName &p_ability_name);
 		/// @brief Adds an ability.
 		/// @param p_ability The ability to add.
 		void add_ability(Ability *p_ability);
+		/// @brief Blocks an ability.
+		/// @param p_ability The ability to block.
+		void block(Ability *p_ability);
+		/// @brief Blocks all abilities which meet their own requirements.
+		void block_many();
+		/// @brief Blocks an ability by name.
+		/// @param p_ability_name The name of the ability to block.
+		void block_by_name(const StringName &p_ability_name);
 		/// @brief Returns if the container can activate an ability.
 		/// @param p_ability The ability to check for.
 		/// @return True if the container can activate the ability, false otherwise.
@@ -109,6 +113,8 @@ namespace ggs
 		/// @brief Cancels an ability.
 		/// @param p_ability The ability to cancel.
 		void cancel(Ability *p_ability);
+		/// @brief Cancels all abilities which meet their own requirements.
+		void cancel_many();
 		/// @brief Cancels an ability by name.
 		/// @param p_ability_name The name of the ability to cancel.
 		void cancel_by_name(const StringName &p_ability_name);
@@ -126,6 +132,15 @@ namespace ggs
 		/// @brief Gets the abilities.
 		/// @return The abilities.
 		TypedArray<Ability> get_abilities() const;
+		/// @brief Gets all the activatable abilities.
+		/// @return The activatable abilities.
+		TypedArray<Ability> get_activatable_abilities() const;
+		/// @brief Gets the blockable abilities.
+		/// @return The blockable abilities.
+		TypedArray<Ability> get_blockable_abilities() const;
+		/// @brief Gets the cancellable abilities.
+		/// @return The cancellable abilities.
+		TypedArray<Ability> get_cancellable_abilities() const;
 		/// @brief Returns the owner of the abilities.
 		/// @return The owner of the abilities.
 		Node *get_ability_owner() const;
