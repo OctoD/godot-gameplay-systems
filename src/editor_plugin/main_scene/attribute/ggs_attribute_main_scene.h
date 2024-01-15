@@ -10,14 +10,13 @@
 #include "system/tag/tag_tree.h"
 
 using namespace godot;
+using namespace ggs;
 
-namespace ggs
+namespace ggs::editor_plugin
 {
-	class TagDictionary;
-
-	class GGSAttributeMainScene : public VBoxContainer
+	class AttributeMainScene : public VBoxContainer
 	{
-		GDCLASS(GGSAttributeMainScene, VBoxContainer)
+		GDCLASS(AttributeMainScene, VBoxContainer)
 
 	protected:
 		static void _bind_methods();
@@ -27,8 +26,8 @@ namespace ggs
 		TagTree *selected_tags_tree;
 
 	public:
-		GGSAttributeMainScene();
-		~GGSAttributeMainScene();
+		AttributeMainScene();
+		~AttributeMainScene();
 
 		void _ready() override;
         void _handle_dictionary_selected(int p_item_index);

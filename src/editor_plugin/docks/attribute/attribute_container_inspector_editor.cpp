@@ -2,14 +2,15 @@
 #include "system/attribute/attribute_manager.h"
 
 using namespace ggs;
+using namespace ggs::editor_plugin;
 
-void GGSAttributeContainerInspectorEditor::_bind_methods()
+void AttributeContainerInspectorEditor::_bind_methods()
 {
-	ClassDB::bind_method(D_METHOD("_handle_item_edited"), &GGSAttributeContainerInspectorEditor::_handle_item_edited);
-	ClassDB::bind_method(D_METHOD("_handle_dictionary_changed", "previous", "current"), &GGSAttributeContainerInspectorEditor::_handle_dictionary_changed);
+	ClassDB::bind_method(D_METHOD("_handle_item_edited"), &AttributeContainerInspectorEditor::_handle_item_edited);
+	ClassDB::bind_method(D_METHOD("_handle_dictionary_changed", "previous", "current"), &AttributeContainerInspectorEditor::_handle_dictionary_changed);
 }
 
-void GGSAttributeContainerInspectorEditor::_handle_item_edited()
+void AttributeContainerInspectorEditor::_handle_item_edited()
 {
 	TreeItem *item = get_edited();
 
@@ -28,13 +29,13 @@ void GGSAttributeContainerInspectorEditor::_handle_item_edited()
 	}
 }
 
-void GGSAttributeContainerInspectorEditor::_handle_dictionary_changed(TagDictionary *previous, TagDictionary *current)
+void AttributeContainerInspectorEditor::_handle_dictionary_changed(TagDictionary *previous, TagDictionary *current)
 {
 	clear();
 	_ready();
 }
 
-void GGSAttributeContainerInspectorEditor::_ready()
+void AttributeContainerInspectorEditor::_ready()
 {
 	if (attribute_container == nullptr)
 	{
@@ -91,7 +92,7 @@ void GGSAttributeContainerInspectorEditor::_ready()
 	}
 }
 
-void GGSAttributeContainerInspectorEditor::set_attribute_container(AttributeContainer *p_attribute_container)
+void AttributeContainerInspectorEditor::set_attribute_container(AttributeContainer *p_attribute_container)
 {
 	attribute_container = p_attribute_container;
 }

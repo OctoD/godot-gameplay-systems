@@ -8,11 +8,11 @@
 
 using namespace godot;
 
-namespace ggs
+namespace ggs::editor_plugin
 {
-	class GGSAttributeContainerInspectorEditor : public Tree
+	class AttributeContainerInspectorEditor : public Tree
 	{
-		GDCLASS(GGSAttributeContainerInspectorEditor, Tree);
+		GDCLASS(AttributeContainerInspectorEditor, Tree);
 
 	private:
 		AttributeContainer *attribute_container;

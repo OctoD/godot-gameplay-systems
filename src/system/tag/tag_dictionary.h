@@ -8,6 +8,12 @@ using namespace godot;
 
 namespace ggs
 {
+	namespace editor_plugin
+	{
+		class TagMainScene;
+		class TagDictionaryItem;
+	}
+
 	/// @brief The tag dictionary resource.
 	class TagDictionary : public Resource
 	{
@@ -108,8 +114,8 @@ namespace ggs
 		PackedStringArray tags;
 
 	private:
-		friend class GGSTagMainScene;
-		friend class GGSTagDictionaryItem;
+		friend class editor_plugin::TagMainScene;
+		friend class editor_plugin::TagDictionaryItem;
 		/// @brief Saves the tag dictionary.
 		Error save();
 	};

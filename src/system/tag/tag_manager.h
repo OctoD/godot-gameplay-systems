@@ -10,6 +10,13 @@ using namespace godot;
 
 namespace ggs
 {
+	namespace editor_plugin
+	{
+		class AttributeMainScene;
+		class TagDocks;
+		class TagMainScene;
+	}
+
 	/// @brief The tag manager node. It is used to manage tags.
 	class TagManager : public Node
 	{
@@ -91,9 +98,9 @@ namespace ggs
 		void _ready() override;
 
 	protected:
-		friend class GGSTagDocks;
-		friend class GGSTagMainScene;
-		friend class GGSAttributeMainScene;
+		friend class editor_plugin::AttributeMainScene;
+		friend class editor_plugin::TagDocks;
+		friend class editor_plugin::TagMainScene;
 
 		/// @brief Registers all methods that can be called from Godot.
 		static void _bind_methods();

@@ -10,16 +10,17 @@
 #include "system/tag/tag_manager.h"
 
 using namespace ggs;
+using namespace ggs::editor_plugin;
 
-GGSTagDocks::GGSTagDocks()
+TagDocks::TagDocks()
 {
 }
 
-GGSTagDocks::~GGSTagDocks()
+TagDocks::~TagDocks()
 {
 }
 
-void GGSTagDocks::_ready()
+void TagDocks::_ready()
 {
 	/// the hardest part:
 	set_name("Tag Manager");
@@ -38,14 +39,14 @@ void GGSTagDocks::_ready()
 	render();
 }
 
-void GGSTagDocks::_bind_methods()
+void TagDocks::_bind_methods()
 {
-	ClassDB::bind_method(D_METHOD("_on_selection_changed"), &GGSTagDocks::_on_selection_changed);
-	ClassDB::bind_method(D_METHOD("_handle_tags_deselected"), &GGSTagDocks::_handle_tags_deselected);
-	ClassDB::bind_method(D_METHOD("_handle_tags_selected"), &GGSTagDocks::_handle_tags_selected);
+	ClassDB::bind_method(D_METHOD("_on_selection_changed"), &TagDocks::_on_selection_changed);
+	ClassDB::bind_method(D_METHOD("_handle_tags_deselected"), &TagDocks::_handle_tags_deselected);
+	ClassDB::bind_method(D_METHOD("_handle_tags_selected"), &TagDocks::_handle_tags_selected);
 }
 
-void GGSTagDocks::render()
+void TagDocks::render()
 {
 	for (int i = 0; i < tag_trees_container->get_child_count(); i++)
 	{
@@ -68,7 +69,7 @@ void GGSTagDocks::render()
 	}
 }
 
-VBoxContainer *GGSTagDocks::render_node_tags(Node *p_node, TagDictionary *p_all_tags)
+VBoxContainer *TagDocks::render_node_tags(Node *p_node, TagDictionary *p_all_tags)
 {
 	VBoxContainer *container = memnew(VBoxContainer);
 	PackedStringArray tags_used_by = TagManager::get_singleton()->get_tags(p_node);
@@ -92,22 +93,22 @@ VBoxContainer *GGSTagDocks::render_node_tags(Node *p_node, TagDictionary *p_all_
 	return container;
 }
 
-void GGSTagDocks::_handle_tags_deselected(PackedStringArray p_tags)
+void TagDocks::_handle_tags_deselected(PackedStringArray p_tags)
 {
 	_set_tags_selected(p_tags, false);
 }
 
-void GGSTagDocks::_handle_tags_selected(PackedStringArray p_tags)
+void TagDocks::_handle_tags_selected(PackedStringArray p_tags)
 {
 	_set_tags_selected(p_tags, true);
 }
 
-void GGSTagDocks::_on_selection_changed()
+void TagDocks::_on_selection_changed()
 {
 	render();
 }
 
-void GGSTagDocks::_set_tags_selected(PackedStringArray p_tags, bool selected)
+void TagDocks::_set_tags_selected(PackedStringArray p_tags, bool selected)
 {
 	TypedArray<Node> selected_nodes = EditorInterface::get_singleton()->get_selection()->get_selected_nodes();
 	EditorInterface *editor_interface = EditorInterface::get_singleton();
@@ -130,7 +131,7 @@ void GGSTagDocks::_set_tags_selected(PackedStringArray p_tags, bool selected)
 	editor_interface->save_scene();
 }
 
-void GGSTagDocks::_handle_check_propagated_to_item(TreeItem *p_tree_item, int column)
+void TagDocks::_handle_check_propagated_to_item(TreeItem *p_tree_item, int column)
 {
 	WARN_PRINT("GGSTagDocks::_handle_check_propagated_to_item() is not implemented yet.");
 }

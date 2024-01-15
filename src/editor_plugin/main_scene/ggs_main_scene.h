@@ -7,9 +7,9 @@
 
 using namespace godot;
 
-namespace ggs
+namespace ggs::editor_plugin
 {
-	class GGSMainScene : public Control
+	class MainScene : public Control
 	{
 		enum GGSMainSceneTab
 		{
@@ -18,11 +18,11 @@ namespace ggs
 			TAG_MANAGER,
 		};
 
-		GDCLASS(GGSMainScene, Control);
+		GDCLASS(MainScene, Control);
 
 	public:
-		GGSMainScene();
-		~GGSMainScene();
+		MainScene();
+		~MainScene();
 
 		void _ready() override;
 

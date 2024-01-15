@@ -7,7 +7,7 @@
 
 using namespace godot;
 
-namespace ggs
+namespace ggs::editor_plugin
 {
 	class GGSEditorPlugin : public EditorPlugin
 	{

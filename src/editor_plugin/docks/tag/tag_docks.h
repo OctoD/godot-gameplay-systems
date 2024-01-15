@@ -8,15 +8,15 @@
 
 using namespace godot;
 
-namespace ggs
+namespace ggs::editor_plugin
 {
-	class GGSTagDocks : public VBoxContainer
+	class TagDocks : public VBoxContainer
 	{
-		GDCLASS(GGSTagDocks, VBoxContainer);
+		GDCLASS(TagDocks, VBoxContainer);
 
 	public:
-		GGSTagDocks();
-		~GGSTagDocks();
+		TagDocks();
+		~TagDocks();
 
 		void _ready() override;
 

@@ -5,11 +5,11 @@
 
 using namespace godot;
 
-namespace ggs
+namespace ggs::editor_plugin
 {
-	class GGSAttributeContainerInspector : public EditorInspectorPlugin
+	class AttributeContainerInspector : public EditorInspectorPlugin
 	{
-		GDCLASS(GGSAttributeContainerInspector, EditorInspectorPlugin);
+		GDCLASS(AttributeContainerInspector, EditorInspectorPlugin);
 
 	protected:
 		static void _bind_methods();

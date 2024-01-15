@@ -14,22 +14,23 @@
 #include "system/tag/tag_project_settings.h"
 
 using namespace ggs;
+using namespace ggs::editor_plugin;
 
-void GGSTagMainScene::_bind_methods()
+void TagMainScene::_bind_methods()
 {
-	ClassDB::bind_method(D_METHOD("_handle_delete_tag", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_delete_tag);
-	ClassDB::bind_method(D_METHOD("_handle_dir_selected", "p_path"), &GGSTagMainScene::_handle_dir_selected);
-	ClassDB::bind_method(D_METHOD("_handle_file_selected", "p_path"), &GGSTagMainScene::_handle_file_selected);
-	ClassDB::bind_method(D_METHOD("_handle_files_selected", "p_paths"), &GGSTagMainScene::_handle_files_selected);
-	ClassDB::bind_method(D_METHOD("_handle_remove_tag_dictionary_pressed", "p_dictionary"), &GGSTagMainScene::_handle_remove_tag_dictionary_pressed);
-	ClassDB::bind_method(D_METHOD("_handle_remove_tag_requested", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_remove_tag_requested);
-	ClassDB::bind_method(D_METHOD("_handle_tag_add_requested", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_tag_add_requested);
-	ClassDB::bind_method(D_METHOD("_handle_tag_edit_requested", "p_dictionary", "p_tag_path"), &GGSTagMainScene::_handle_tag_edit_requested);
-	ClassDB::bind_method(D_METHOD("_handle_add_tag", "p_dictionary", "p_tag_path_input"), &GGSTagMainScene::_handle_add_tag);
-	ClassDB::bind_method(D_METHOD("_handle_edit_tag", "p_dictionary", "p_tag_path_input", "old_path"), &GGSTagMainScene::_handle_edit_tag);
+	ClassDB::bind_method(D_METHOD("_handle_delete_tag", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_delete_tag);
+	ClassDB::bind_method(D_METHOD("_handle_dir_selected", "p_path"), &TagMainScene::_handle_dir_selected);
+	ClassDB::bind_method(D_METHOD("_handle_file_selected", "p_path"), &TagMainScene::_handle_file_selected);
+	ClassDB::bind_method(D_METHOD("_handle_files_selected", "p_paths"), &TagMainScene::_handle_files_selected);
+	ClassDB::bind_method(D_METHOD("_handle_remove_tag_dictionary_pressed", "p_dictionary"), &TagMainScene::_handle_remove_tag_dictionary_pressed);
+	ClassDB::bind_method(D_METHOD("_handle_remove_tag_requested", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_remove_tag_requested);
+	ClassDB::bind_method(D_METHOD("_handle_tag_add_requested", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_tag_add_requested);
+	ClassDB::bind_method(D_METHOD("_handle_tag_edit_requested", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_tag_edit_requested);
+	ClassDB::bind_method(D_METHOD("_handle_add_tag", "p_dictionary", "p_tag_path_input"), &TagMainScene::_handle_add_tag);
+	ClassDB::bind_method(D_METHOD("_handle_edit_tag", "p_dictionary", "p_tag_path_input", "old_path"), &TagMainScene::_handle_edit_tag);
 }
 
-void GGSTagMainScene::render_tag_dictionaries()
+void TagMainScene::render_tag_dictionaries()
 {
 	ERR_FAIL_NULL_MSG(_dictionaries_container, "Dictionaries container is null.");
 
@@ -52,7 +53,7 @@ void GGSTagMainScene::render_tag_dictionaries()
 
 	for (int i = 0; i < dictionaries->size(); i++)
 	{
-		GGSTagDictionaryItem *dict_container = memnew(GGSTagDictionaryItem);
+		TagDictionaryItem *dict_container = memnew(TagDictionaryItem);
 
 		_dictionaries_container->add_child(dict_container);
 
@@ -65,7 +66,7 @@ void GGSTagMainScene::render_tag_dictionaries()
 	}
 }
 
-void GGSTagMainScene::_ready()
+void TagMainScene::_ready()
 {
 	VBoxContainer *wrapper = memnew(VBoxContainer);
 
@@ -106,7 +107,7 @@ void GGSTagMainScene::_ready()
 	render_tag_dictionaries();
 }
 
-void GGSTagMainScene::_handle_dir_selected(String p_path)
+void TagMainScene::_handle_dir_selected(String p_path)
 {
 	// todo:
 	//	- read dir files
@@ -116,13 +117,13 @@ void GGSTagMainScene::_handle_dir_selected(String p_path)
 	//	- add them
 }
 
-void GGSTagMainScene::_handle_file_selected(String p_path)
+void TagMainScene::_handle_file_selected(String p_path)
 {
 	TagProjectSettings::add_resource(p_path);
 	render_tag_dictionaries();
 }
 
-void GGSTagMainScene::_handle_files_selected(PackedStringArray p_paths)
+void TagMainScene::_handle_files_selected(PackedStringArray p_paths)
 {
 	for (int i = 0; i < p_paths.size(); i++)
 	{
@@ -132,7 +133,7 @@ void GGSTagMainScene::_handle_files_selected(PackedStringArray p_paths)
 	render_tag_dictionaries();
 }
 
-void GGSTagMainScene::_handle_add_tag(TagDictionary *p_dictionary, LineEdit *p_tag_path_input)
+void TagMainScene::_handle_add_tag(TagDictionary *p_dictionary, LineEdit *p_tag_path_input)
 {
 	String tag_path = p_tag_path_input->get_text();
 
@@ -146,7 +147,7 @@ void GGSTagMainScene::_handle_add_tag(TagDictionary *p_dictionary, LineEdit *p_t
 
 	render_tag_dictionaries();
 }
-void GGSTagMainScene::_handle_edit_tag(TagDictionary *p_dictionary, LineEdit *p_tag_path_input, String old_path)
+void TagMainScene::_handle_edit_tag(TagDictionary *p_dictionary, LineEdit *p_tag_path_input, String old_path)
 {
 	String tag_path = p_tag_path_input->get_text();
 
@@ -161,21 +162,21 @@ void GGSTagMainScene::_handle_edit_tag(TagDictionary *p_dictionary, LineEdit *p_
 	render_tag_dictionaries();
 }
 
-void GGSTagMainScene::_handle_delete_tag(TagDictionary *p_dictionary, String p_tag_path)
+void TagMainScene::_handle_delete_tag(TagDictionary *p_dictionary, String p_tag_path)
 {
 	p_dictionary->remove_tag_path(p_tag_path);
 	p_dictionary->save();
 	render_tag_dictionaries();
 }
 
-void GGSTagMainScene::_handle_remove_tag_dictionary_pressed(TagDictionary *p_dictionary)
+void TagMainScene::_handle_remove_tag_dictionary_pressed(TagDictionary *p_dictionary)
 {
 	TagProjectSettings::remove_resource(p_dictionary->get_path());
 	TagManager::get_singleton()->remove_dictionary(p_dictionary);
 	render_tag_dictionaries();
 }
 
-void GGSTagMainScene::_handle_tag_add_requested(TagDictionary *p_dictionary, String p_tag_path)
+void TagMainScene::_handle_tag_add_requested(TagDictionary *p_dictionary, String p_tag_path)
 {
 	if (_confirmation_dialog != nullptr)
 	{
@@ -201,7 +202,7 @@ void GGSTagMainScene::_handle_tag_add_requested(TagDictionary *p_dictionary, Str
 	_confirmation_dialog->popup_centered();
 }
 
-void GGSTagMainScene::_handle_tag_edit_requested(TagDictionary *p_dictionary, String p_tag_path)
+void TagMainScene::_handle_tag_edit_requested(TagDictionary *p_dictionary, String p_tag_path)
 {
 	if (_confirmation_dialog != nullptr)
 	{
@@ -226,7 +227,7 @@ void GGSTagMainScene::_handle_tag_edit_requested(TagDictionary *p_dictionary, St
 	_confirmation_dialog->set_unparent_when_invisible(true);
 }
 
-void GGSTagMainScene::_handle_remove_tag_requested(TagDictionary *p_dictionary, String p_tag_path)
+void TagMainScene::_handle_remove_tag_requested(TagDictionary *p_dictionary, String p_tag_path)
 {
 	if (_confirmation_dialog != nullptr)
 	{

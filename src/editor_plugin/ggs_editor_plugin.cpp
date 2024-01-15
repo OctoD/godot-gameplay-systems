@@ -9,10 +9,11 @@
 #include "ggs_editor_plugin.h"
 
 using namespace ggs;
+using namespace ggs::editor_plugin;
 
-static GGSMainScene *ggs_tag_main_scene = nullptr;
-static GGSTagDocks *ggs_tag_docks = nullptr;
-static GGSAttributeContainerInspector *ggs_attribute_container_inspector = nullptr;
+static MainScene *ggs_tag_main_scene = nullptr;
+static TagDocks *ggs_tag_docks = nullptr;
+static AttributeContainerInspector *ggs_attribute_container_inspector = nullptr;
 
 GGSEditorPlugin::GGSEditorPlugin()
 {
@@ -25,9 +26,9 @@ GGSEditorPlugin::~GGSEditorPlugin()
 
 void GGSEditorPlugin::_enter_tree()
 {
-	ggs_tag_main_scene = memnew(GGSMainScene);
-	ggs_tag_docks = memnew(GGSTagDocks);
-	ggs_attribute_container_inspector = memnew(GGSAttributeContainerInspector);
+	ggs_tag_main_scene = memnew(MainScene);
+	ggs_tag_docks = memnew(TagDocks);
+	ggs_attribute_container_inspector = memnew(AttributeContainerInspector);
 
 	EditorInterface::get_singleton()->get_editor_main_screen()->add_child(ggs_tag_main_scene);
 

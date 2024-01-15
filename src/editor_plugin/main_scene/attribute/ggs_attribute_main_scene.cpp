@@ -10,24 +10,25 @@
 #include "system/tag/tag_manager.h"
 
 using namespace ggs;
+using namespace ggs::editor_plugin;
 
-void GGSAttributeMainScene::_bind_methods()
+void AttributeMainScene::_bind_methods()
 {
 	/// binds methods
-	ClassDB::bind_method(D_METHOD("_handle_dictionary_selected", "p_item_index"), &GGSAttributeMainScene::_handle_dictionary_selected);
-	ClassDB::bind_method(D_METHOD("render"), &GGSAttributeMainScene::render);
+	ClassDB::bind_method(D_METHOD("_handle_dictionary_selected", "p_item_index"), &AttributeMainScene::_handle_dictionary_selected);
+	ClassDB::bind_method(D_METHOD("render"), &AttributeMainScene::render);
 }
 
-GGSAttributeMainScene::GGSAttributeMainScene()
+AttributeMainScene::AttributeMainScene()
 {
 	tag_dictionary = memnew(TagDictionary);
 }
 
-GGSAttributeMainScene::~GGSAttributeMainScene()
+AttributeMainScene::~AttributeMainScene()
 {
 }
 
-void GGSAttributeMainScene::_ready()
+void AttributeMainScene::_ready()
 {
 	set_anchors_and_offsets_preset(PRESET_FULL_RECT);
 
@@ -61,7 +62,7 @@ void GGSAttributeMainScene::_ready()
 	add_child(selected_tags_tree);
 }
 
-void GGSAttributeMainScene::_handle_dictionary_selected(int p_item_index)
+void AttributeMainScene::_handle_dictionary_selected(int p_item_index)
 {
 	TypedArray<TagDictionary> *items = TagManager::get_singleton()->dictionaries;
 	Variant variant = items->operator[](p_item_index);
@@ -78,7 +79,7 @@ void GGSAttributeMainScene::_handle_dictionary_selected(int p_item_index)
 	}
 }
 
-void GGSAttributeMainScene::render()
+void AttributeMainScene::render()
 {
 	TypedArray<TagDictionary> *items = TagManager::get_singleton()->dictionaries;
 	String current_value = AttributeProjectSettings::get_attribute_resource_path();
