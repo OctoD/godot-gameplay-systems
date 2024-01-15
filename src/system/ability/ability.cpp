@@ -42,15 +42,15 @@ void Ability::_bind_methods()
 	ADD_PROPERTY(PropertyInfo(Variant::STRING_NAME, "ability_name"), "set_ability_name", "get_ability_name");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "cooldown"), "set_cooldown", "get_cooldown");
 	ADD_GROUP("Tags", "tags_");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_added_on_activation"), "set_tags_added_on_activation", "get_tags_added_on_activation");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_added_on_cooldown_end"), "set_tags_added_on_cooldown_end", "get_tags_added_on_cooldown_end");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_added_on_cooldown_start"), "set_tags_added_on_cooldown_start", "get_tags_added_on_cooldown_start");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_added_on_grant"), "set_tags_added_on_grant", "get_tags_added_on_grant");
-	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_added_on_activation"), "set_tags_added_on_activation", "get_tags_added_on_activation");
-	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_removed_on_cooldown_end"), "set_tags_removed_on_cooldown_end", "get_tags_removed_on_cooldown_end");
-	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_removed_on_cooldown_start"), "set_tags_removed_on_cooldown_start", "get_tags_removed_on_cooldown_start");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_removed_on_activation"), "set_tags_removed_on_activation", "get_tags_removed_on_activation");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_removed_on_block"), "set_tags_removed_on_block", "get_tags_removed_on_block");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_removed_on_cancel"), "set_tags_removed_on_cancel", "get_tags_removed_on_cancel");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_removed_on_cooldown_end"), "set_tags_removed_on_cooldown_end", "get_tags_removed_on_cooldown_end");
+	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_removed_on_cooldown_start"), "set_tags_removed_on_cooldown_start", "get_tags_removed_on_cooldown_start");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_required_to_activate"), "set_tags_required_to_activate", "get_tags_required_to_activate");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_required_to_block"), "set_tags_required_to_block", "get_tags_required_to_block");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags_required_to_cancel"), "set_tags_required_to_cancel", "get_tags_required_to_cancel");

@@ -27,6 +27,8 @@
 #include "system/tag/tag_project_settings.h"
 
 /// ggs editor stuff
+#include "editor_plugin/docks/ability/ability_inspector_plugin_editor.h"
+#include "editor_plugin/docks/ability/ability_inspector_plugin.h"
 #include "editor_plugin/docks/attribute/attribute_container_inspector_editor.h"
 #include "editor_plugin/docks/attribute/attribute_container_inspector.h"
 #include "editor_plugin/docks/tag/tag_docks.h"
@@ -75,6 +77,8 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 	}
 	else if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR)
 	{
+		ClassDB::register_internal_class<ggs::editor_plugin::AbilityInspectorPluginEditor>();
+		ClassDB::register_internal_class<ggs::editor_plugin::AbilityInspectorPlugin>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeContainerInspectorEditor>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeContainerInspector>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeMainScene>();

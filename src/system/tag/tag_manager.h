@@ -13,6 +13,7 @@ namespace ggs
 	namespace editor_plugin
 	{
 		class AttributeMainScene;
+		class AbilityInspectorPluginEditor;
 		class TagDocks;
 		class TagMainScene;
 	}
@@ -99,6 +100,7 @@ namespace ggs
 
 	protected:
 		friend class editor_plugin::AttributeMainScene;
+		friend class editor_plugin::AbilityInspectorPluginEditor;
 		friend class editor_plugin::TagDocks;
 		friend class editor_plugin::TagMainScene;
 

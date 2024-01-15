@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://ye6lunjs1ns2"]
+[gd_scene load_steps=3 format=3 uid="uid://ye6lunjs1ns2"]
 
 [ext_resource type="Script" path="res://demos/ability_test_ui/main.gd" id="1_8w5uo"]
+
+[sub_resource type="Ability" id="Ability_o615e"]
+tags_added_on_activation = PackedStringArray("enemy.ai.combat.chasing", "enemy.ai.combat.low_health", "enemy.ai.combat.panic")
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -12,3 +15,4 @@ grow_vertical = 2
 script = ExtResource("1_8w5uo")
 
 [node name="AbilityContainer" type="AbilityContainer" parent="."]
+abilities = Array[Ability]([SubResource("Ability_o615e")])
