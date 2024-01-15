@@ -187,9 +187,13 @@ void AbilityContainer::activate_by_name(const StringName &p_ability_name)
 
 		if (ability != nullptr && ability.is_valid() && can_activate_by_name(p_ability_name))
 		{
-			if (ability->has_method("activate"))
+			if (ability->has_method("can_activate"))
 			{
-				ability->call("activate", this, ability_owner);
+				if (!ability->call("can_activate", this, ability_owner))
+				{
+					emit_signal("ability_activation_fail", ability);
+					return;
+				}
 			}
 
 			tags.add_tags(ability->get_tags_added_on_activation());
@@ -204,6 +208,11 @@ void AbilityContainer::activate_by_name(const StringName &p_ability_name)
 			{
 				ability_queue->enqueue(ability_ptr);
 				emit_signal("ability_enqueued", ability);
+			}
+
+			if (ability->has_method("on_activate"))
+			{
+				ability->call("on_activate", this, ability_owner);
 			}
 		}
 		else
@@ -242,9 +251,13 @@ void AbilityContainer::block_by_name(const StringName &p_ability_name)
 
 		if (ability != nullptr && ability.is_valid() && can_block_by_name(p_ability_name))
 		{
-			if (ability->has_method("block"))
+			if (ability->has_method("can_block"))
 			{
-				ability->call("block", this, ability_owner);
+				if (!ability->call("can_block", this, ability_owner))
+				{
+					emit_signal("ability_block_fail", ability);
+					return;
+				}
 			}
 
 			emit_signal("ability_blocked", ability);
@@ -258,6 +271,11 @@ void AbilityContainer::block_by_name(const StringName &p_ability_name)
 			}
 
 			tags.remove_tags(ability->get_tags_removed_on_block());
+
+			if (ability_ptr->has_method("on_block"))
+			{
+				ability_ptr->call("on_block", this, ability_owner);
+			}
 		}
 		else
 		{
@@ -368,9 +386,13 @@ void AbilityContainer::cancel_by_name(const StringName &p_ability_name)
 
 			if (ability != nullptr && ability.is_valid() && can_cancel_by_name(p_ability_name))
 			{
-				if (ability->has_method("cancel"))
+				if (ability->has_method("can_cancel"))
 				{
-					ability->call("cancel", this, ability_owner);
+					if (!ability->call("can_cancel", this, ability_owner))
+					{
+						emit_signal("ability_cancellation_failed", ability);
+						return;
+					}
 				}
 
 				Ability *ability_ptr = ability.ptr();
@@ -384,6 +406,11 @@ void AbilityContainer::cancel_by_name(const StringName &p_ability_name)
 				emit_signal("ability_cancelled", ability);
 
 				tags.remove_tags(ability->get_tags_removed_on_cancel());
+
+				if (ability_ptr->has_method("on_cancel"))
+				{
+					ability_ptr->call("on_cancel", this, ability_owner);
+				}
 			}
 			else
 			{
@@ -451,6 +478,11 @@ void AbilityContainer::grant_ability(Ability *p_ability)
 
 		if (ability_grant != nullptr)
 		{
+			if (p_ability->has_method("can_grant") && !p_ability->call("can_grant", this, ability_owner))
+			{
+				return;
+			}
+
 			ability_grant->set_grant(true);
 			emit_signal("ability_granted", Ref<Ability>(p_ability));
 			tags.add_tags(ability_grant->get_ability()->get_tags_added_on_grant());

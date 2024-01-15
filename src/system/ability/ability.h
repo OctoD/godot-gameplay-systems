@@ -7,6 +7,17 @@ using namespace godot;
 
 namespace ggs
 {
+	/// @brief The Ability class.
+	/// @details This class is used to represent an ability. 
+	/// It contains all the information needed to use an ability.
+	/// You can set (in gdscript) the methods:
+	///		- can_activate(ability_owner, ability_container) -> bool;
+	///		- can_block(ability_owner, ability_container) -> bool;
+	///		- can_cancel(ability_owner, ability_container) -> bool;
+	///		- can_grant(ability_owner, ability_container) -> bool;
+	///		- on_activate(ability_owner, ability_container) -> void;
+	///		- on_block(ability_owner, ability_container) -> void;
+	///		- on_cancel(ability_owner, ability_container) -> void;
 	class Ability : public Resource
 	{
 		GDCLASS(Ability, Resource);
