@@ -1,1 +1,1 @@
-extends Ability
+class_name TestAbilityScript extends Ability

@@ -26,11 +26,13 @@ void MainScene::_ready()
 
 	tab_container->add_child(tag_manager_panel);
 	tab_container->add_child(attributes_panel);
-	tab_container->add_child(ability_panel);
+	// commented. Will come with a visual ability designer in the future.
+	// tab_container->add_child(ability_panel);
 
 	tag_manager_panel->set_name(tag_manager_panel->tr("Tag Manager"));
 	attributes_panel->set_name(attributes_panel->tr("Attributes"));
-	ability_panel->set_name(ability_panel->tr("Ability"));
+	// commented. Will come with a visual ability designer in the future.
+	// ability_panel->set_name(ability_panel->tr("Ability"));
 
 	AttributeMainScene *attribute_main_scene = memnew(AttributeMainScene);
 	TagMainScene *tag_main_scene = memnew(TagMainScene);

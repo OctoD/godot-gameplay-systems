@@ -1,0 +1,5 @@
+[gd_resource type="Ability" format=3 uid="uid://bt7jgvhdfhsqc"]
+
+[resource]
+ability_name = &"test_ability_resource"
+tags_added_on_activation = PackedStringArray("enemy.ai.combat.chasing", "enemy.ai.combat.low_health", "enemy.ai.combat.panic")
