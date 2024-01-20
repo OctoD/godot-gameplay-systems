@@ -1,0 +1,6 @@
+[gd_resource type="ItemSettings" format=3 uid="uid://bcdwpcf5776td"]
+
+[resource]
+decrease_quantity_on_use = true
+is_stackable = true
+max_quantity = 10

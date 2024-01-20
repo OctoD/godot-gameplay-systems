@@ -1,0 +1,6 @@
+[gd_resource type="Item" load_steps=2 format=3 uid="uid://cmuoe6r8lr7g"]
+
+[ext_resource type="ItemSettings" uid="uid://bcdwpcf5776td" path="res://demos/item_test_ui/items/test_item_settings.tres" id="1_xmfv7"]
+
+[resource]
+item_settings = ExtResource("1_xmfv7")
