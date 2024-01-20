@@ -46,7 +46,7 @@ void TagManager::_bind_methods()
 
 void TagManager::_bind_dictionary_signals(TagDictionary *p_tag_dictionary)
 {
-	if (p_tag_dictionary == nullptr)
+	if (p_tag_dictionary != nullptr)
 	{
 		/// let's bind all signals
 		p_tag_dictionary->connect("tag_added", Callable(this, "_handle_dictionary_tag_added"));
