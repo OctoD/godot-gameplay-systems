@@ -9,11 +9,18 @@ using namespace godot;
 
 namespace ggs
 {
+	namespace editor_plugin
+	{
+		class EquipmentSlotScene;
+	}
+
 	class EquipmentManager : public Node
 	{
 		GDCLASS(EquipmentManager, Node)
 
 	protected:
+		friend class ggs::editor_plugin::EquipmentSlotScene;
+
 		/// @brief The singleton instance.
 		static EquipmentManager *singleton;
 		/// @brief Binds methods to Godot.
