@@ -43,6 +43,7 @@
 #include "editor_plugin/ggs_editor_plugin.h"
 #include "editor_plugin/main_scene/ggs_main_scene.h"
 #include "editor_plugin/main_scene/attribute/ggs_attribute_main_scene.h"
+#include "editor_plugin/main_scene/item/ggs_equipment_slot_scene.h"
 #include "editor_plugin/main_scene/item/ggs_item_main_scene.h"
 #include "editor_plugin/main_scene/tag/ggs_tag_dictionary_item.h"
 #include "editor_plugin/main_scene/tag/ggs_tag_main_scene.h"
@@ -109,6 +110,7 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeContainerInspector>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeContainerInspectorEditor>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeMainScene>();
+		ClassDB::register_internal_class<ggs::editor_plugin::EquipmentSlotScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::GGSEditorPlugin>();
 		ClassDB::register_internal_class<ggs::editor_plugin::ItemMainScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::MainScene>();
