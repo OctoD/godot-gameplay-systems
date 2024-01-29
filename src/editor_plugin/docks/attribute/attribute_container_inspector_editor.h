@@ -25,8 +25,9 @@ namespace ggs::editor_plugin
 
 	public:
 		void _ready() override;
-		void set_attribute_container(AttributeContainer *p_attribute_container);
-	};
+        void render();
+        void set_attribute_container(AttributeContainer *p_attribute_container);
+    };
 }
 
 #endif

@@ -1,0 +1,5 @@
+[gd_resource type="TagDictionary" format=3 uid="uid://c8n0bmn1osem2"]
+
+[resource]
+tags = PackedStringArray("stamina", "strength", "dexterity", "intelligence", "willpower", "constitution", "health", "mana")
+resource_name = "New Tag Dictionary"

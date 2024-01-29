@@ -3,6 +3,8 @@
 
 #include "tag_dictionary.h"
 
+#include "resource_manager/resource_manager.h"
+
 using namespace ggs;
 using namespace godot;
 
@@ -347,46 +349,6 @@ void TagDictionary::replace_tag_path(const StringName &old_path, const StringNam
 		emit_signal("tags_replaced", tags, copy);
 		emit_changed();
 	}
-}
-
-TagDictionary::Error TagDictionary::save()
-{
-	if (Engine::get_singleton()->is_editor_hint())
-	{
-		if (!get_path().is_empty())
-		{
-			switch (ResourceSaver::get_singleton()->save(this, get_path()))
-			{
-			case godot::Error::OK:
-				return TagDictionary::Error::OK;
-			case godot::Error::FAILED:
-				ERR_PRINT("Failed to save tag dictionary.");
-				return TagDictionary::Error::CANT_WRITE_FILE;
-			case godot::Error::ERR_UNAVAILABLE:
-				ERR_PRINT("Tag dictionary saving is unavailable.");
-				return TagDictionary::Error::CANT_WRITE_FILE;
-			case godot::Error::ERR_FILE_UNRECOGNIZED:
-				ERR_PRINT("Tag dictionary file is unrecognized.");
-				return TagDictionary::Error::CANT_WRITE_FILE;
-			case godot::Error::ERR_FILE_CORRUPT:
-				ERR_PRINT("Tag dictionary file is corrupted.");
-				return TagDictionary::Error::FILE_CORRUPTED;
-			case godot::Error::ERR_TIMEOUT:
-				ERR_PRINT("Tag dictionary file saving timed out.");
-				return TagDictionary::Error::TIMEOUT;
-			default:
-				ERR_PRINT("Tag dictionary file saving failed with an unknown error. Please report.");
-				return TagDictionary::Error::RESOURCE_UNHANDLED_ERROR_REPORT_THIS_AS_A_BUG;
-			}
-		}
-		else
-		{
-			ERR_PRINT("Tag dictionary file path is empty.");
-			return TagDictionary::Error::EMPTY_PATH_WHILE_SAVING;
-		}
-	}
-
-	return TagDictionary::Error::NOT_IN_EDITOR_HINT;
 }
 
 void TagDictionary::set_tags(PackedStringArray p_tags)

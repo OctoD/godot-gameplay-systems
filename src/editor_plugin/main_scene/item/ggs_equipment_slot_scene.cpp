@@ -15,6 +15,7 @@ using namespace ggs::editor_plugin;
 
 void EquipmentSlotScene::_handle_add_button_pressed()
 {
+    EquipmentManager::get_singleton()->add_slot(memnew(EquipmentSlot));
 }
 
 void EquipmentSlotScene::_handle_slot_item_selected()
@@ -107,19 +108,25 @@ void EquipmentSlotScene::_ready()
     selected_slot = memnew(VBoxContainer);
     slots_tree = memnew(Tree);
 
+    add_child(header);
+    add_child(content);
+
     add_button->connect("pressed", Callable(this, "_handle_add_button_pressed"));
     add_button->set_text(tr("Add slot"));
     name_label->set_text(tr("Equipment Slots"));
+
+    header->add_child(name_label);
+    header->add_child(add_button);
 
     slots_tree->connect("item_selected", Callable(this, "_handle_slot_item_selected"));
     slots_tree->set_columns(4);
     slots_tree->set_column_title(0, tr("Slot name"));
     slots_tree->set_column_title(1, tr("Accepts items with tags"));
     slots_tree->set_column_title(2, tr("Denies items with tags"));
+    slots_tree->set_size(get_size());
 
     content->add_child(slots_tree);
     content->add_child(selected_slot);
 
-    add_child(header);
-    add_child(content);
+    _render_slots_tree();
 }

@@ -2,6 +2,7 @@
 #define GGS_ITEM_MAIN_SCENE_H
 
 #include <godot_cpp/classes/h_box_container.hpp>
+#include <godot_cpp/classes/v_box_container.hpp>
 
 using namespace godot;
 
@@ -17,7 +18,9 @@ namespace ggs::editor_plugin
 	protected:
 		/// @brief Bind methods to Godot.
 		static void _bind_methods();
-		/// @brief Called when the node enters the scene tree for the first time.
+		/// @brief The container for the "tabs".
+		VBoxContainer *tabs_container;
+
 	public:
 		void _ready() override;
 	};

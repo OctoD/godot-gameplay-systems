@@ -1,11 +1,11 @@
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/variant/typed_array.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
-#include <godot_cpp/classes/project_settings.hpp>
 
 #include "tag_dictionary.h"
 #include "tag_manager.h"
-#include "tag_project_settings.h"
+
+#include "resource_manager/resource_manager.h"
 
 using namespace ggs;
 using namespace godot;
@@ -127,22 +127,15 @@ void TagManager::_handle_dictionary_tag_replaced(const TagDictionary *p_tag_dict
 
 void TagManager::load_dictionaries()
 {
-	/// let's retrieve the settings' value
-	PackedStringArray resource_file_paths = TagProjectSettings::get_resource_file_paths();
-	/// let's get the resource loader instance
-	ResourceLoader *resource_loader = ResourceLoader::get_singleton();
+	TypedArray<TagDictionary> tag_dictionaries = GGSResourceManager::get_singleton()->get_tag_resources();
 
-	if (resource_loader != nullptr)
+	for (int i = 0; i < tag_dictionaries.size(); i++)
 	{
-		for (int i = 0; i < resource_file_paths.size(); i++)
-		{
-			String resource_file_path = resource_file_paths[i];
-			Ref<Resource> resource = resource_loader->load(resource_file_path);
+		Ref<TagDictionary> dict = tag_dictionaries[i];
 
-			if (resource.is_valid())
-			{
-				add_dictionary(cast_to<TagDictionary>(resource.ptr()));
-			}
+		if (dict.is_valid())
+		{
+			add_dictionary(cast_to<TagDictionary>(dict.ptr()));
 		}
 	}
 

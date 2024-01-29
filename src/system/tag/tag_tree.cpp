@@ -140,6 +140,7 @@ void TagTree::_ready()
 
 	if (tag_dictionary != nullptr)
 	{
+		tag_dictionary->connect("changed", Callable(this, "render"));
 		render();
 	}
 }

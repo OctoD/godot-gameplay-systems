@@ -1,0 +1,5 @@
+[gd_resource type="TagDictionary" format=3 uid="uid://dqcwj5qs8prk0"]
+
+[resource]
+tags = PackedStringArray("rarity.common", "rarity.magic", "rarity.legendary")
+resource_name = "New Tag Dictionary"

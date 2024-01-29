@@ -27,18 +27,11 @@ namespace ggs
             /// @brief Renders the tag dictionaries.
             void render_tag_dictionaries();
 
+            void _handle_add_tag_dictionary_requested(String p_name);
+
         private:
             VBoxContainer *_dictionaries_container;
             ConfirmationDialog *_confirmation_dialog;
-            /// @brief Called when the user selects a directory.
-            /// @param p_path
-            void _handle_dir_selected(String p_path);
-            /// @brief Called when the user selects a file.
-            /// @param p_path
-            void _handle_file_selected(String p_path);
-            /// @brief Called when the user selects multiple files.
-            /// @param p_paths
-            void _handle_files_selected(PackedStringArray p_paths);
             /// @brief Called when the user presses the add tag dictionary button.
             /// @param p_dictionary The dictionary to add the tag to.
             /// @param p_tag_path_input The line edit containing the tag path.

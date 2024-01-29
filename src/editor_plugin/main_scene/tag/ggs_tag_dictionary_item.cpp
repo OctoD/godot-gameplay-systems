@@ -4,6 +4,9 @@
 #include <godot_cpp/classes/h_box_container.hpp>
 
 #include "ggs_tag_dictionary_item.h"
+
+#include "resource_manager/resource_manager.h"
+
 #include "system/tag/tag_tree.h"
 #include "system/tag/tag_dictionary.h"
 
@@ -117,7 +120,8 @@ void TagDictionaryItem::_handle_add_tag_button_pressed()
     String tag_name = new_tag_line_edit->get_text();
 
     dictionary->add_tag(tag_name);
-    dictionary->save();
+
+    GGSResourceManager::get_singleton()->save_resource(dictionary);
 
     new_tag_line_edit->set_text("");
     tag_tree->clear();
@@ -143,20 +147,20 @@ void TagDictionaryItem::_handle_tree_button_pressed(TreeItem *p_item, int p_colu
 
     switch (p_id)
     {
-        case TagTree::ButtonIndex::ADD_TAG:
-        {
-            emit_signal("add_tag_requested", dictionary, tag_path);
-            break;
-        }
-        case TagTree::ButtonIndex::EDIT_TAG:
-        {
-            emit_signal("edit_tag_requested", dictionary, tag_path);
-            break;
-        }
-        case TagTree::ButtonIndex::REMOVE_TAG:
-        {
-            emit_signal("remove_tag_requested", dictionary, tag_path);
-            break;
-        }
+    case TagTree::ButtonIndex::ADD_TAG:
+    {
+        emit_signal("add_tag_requested", dictionary, tag_path);
+        break;
+    }
+    case TagTree::ButtonIndex::EDIT_TAG:
+    {
+        emit_signal("edit_tag_requested", dictionary, tag_path);
+        break;
+    }
+    case TagTree::ButtonIndex::REMOVE_TAG:
+    {
+        emit_signal("remove_tag_requested", dictionary, tag_path);
+        break;
+    }
     }
 }

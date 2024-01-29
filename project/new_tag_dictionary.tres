@@ -1,4 +1,0 @@
-[gd_resource type="TagDictionary" format=3 uid="uid://dh8udsjb5navh"]
-
-[resource]
-tags = PackedStringArray("enemy.ai.idle", "enemy.ai.roam", "enemy.ai.roam.end", "enemy.ai.roam.start", "enemy.ai.roam.idle", "enemy.ai.combat.chasing", "enemy.ai.combat.low_health", "enemy.ai.combat.panic", "enemy.factions", "enemy.factions.enemies", "enemy.factions.neutrals", "enemy.factions.friends")

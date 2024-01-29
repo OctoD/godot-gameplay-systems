@@ -10,6 +10,7 @@
 #include <godot_cpp/godot.hpp>
 
 /// ggs stuff
+#include "resource_manager/resource_manager.h"
 #include "system/ability/ability.h"
 #include "system/ability/ability_container.h"
 #include "system/ability/ability_grant.h"
@@ -32,7 +33,6 @@
 #include "system/item/inventory.h"
 #include "system/tag/tag_dictionary.h"
 #include "system/tag/tag_manager.h"
-#include "system/tag/tag_project_settings.h"
 
 /// ggs editor stuff
 #include "editor_plugin/docks/ability/ability_inspector_plugin_editor.h"
@@ -42,9 +42,11 @@
 #include "editor_plugin/docks/tag/tag_docks.h"
 #include "editor_plugin/ggs_editor_plugin.h"
 #include "editor_plugin/main_scene/ggs_main_scene.h"
+#include "editor_plugin/main_scene/ggs_new_resource_modal.h"
 #include "editor_plugin/main_scene/attribute/ggs_attribute_main_scene.h"
 #include "editor_plugin/main_scene/item/ggs_equipment_slot_scene.h"
 #include "editor_plugin/main_scene/item/ggs_item_main_scene.h"
+#include "editor_plugin/main_scene/item/ggs_item_equipment_settings_scene.h"
 #include "editor_plugin/main_scene/tag/ggs_tag_dictionary_item.h"
 #include "editor_plugin/main_scene/tag/ggs_tag_main_scene.h"
 
@@ -95,7 +97,6 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 		ggs::AttributeProjectSettings::setup();
 		ggs::EquipmentProjectSettings::setup();
 		ggs::ItemProjectSettings::setup();
-		ggs::TagProjectSettings::setup();
 
 		/// enabling autoloads
 		Engine::get_singleton()->register_singleton("AttributeManager", ggs::AttributeManager::get_singleton());
@@ -105,6 +106,10 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 	}
 	else if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR)
 	{
+		ClassDB::register_internal_class<ggs::GGSResourceManager>();
+
+		Engine::get_singleton()->register_singleton("GGSResourceManager", ggs::GGSResourceManager::get_singleton());
+
 		ClassDB::register_internal_class<ggs::editor_plugin::AbilityInspectorPlugin>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AbilityInspectorPluginEditor>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeContainerInspector>();
@@ -112,11 +117,14 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeMainScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::EquipmentSlotScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::GGSEditorPlugin>();
+		ClassDB::register_internal_class<ggs::editor_plugin::ItemEquipmentSettingsScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::ItemMainScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::MainScene>();
+		ClassDB::register_internal_class<ggs::editor_plugin::NewResourceModal>();
 		ClassDB::register_internal_class<ggs::editor_plugin::TagDictionaryItem>();
 		ClassDB::register_internal_class<ggs::editor_plugin::TagDocks>();
 		ClassDB::register_internal_class<ggs::editor_plugin::TagMainScene>();
+
 		EditorPlugins::add_by_type<ggs::editor_plugin::GGSEditorPlugin>();
 	}
 }
@@ -133,6 +141,9 @@ void uninitialize_ggs_module(ModuleInitializationLevel p_level)
 	else if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR)
 	{
 		EditorPlugins::remove_by_type<ggs::editor_plugin::GGSEditorPlugin>();
+		/// this must be the last
+		/// todo: ask the dev if the .ggs folder should be deleted with all the files
+		Engine::get_singleton()->unregister_singleton("GGSResourceManager");
 	}
 }
 

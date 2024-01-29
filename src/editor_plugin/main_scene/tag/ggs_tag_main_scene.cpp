@@ -8,20 +8,20 @@
 #include "ggs_tag_main_scene.h"
 #include "ggs_tag_dictionary_item.h"
 
+#include "resource_manager/resource_manager.h"
+#include "editor_plugin/main_scene/ggs_new_resource_modal.h"
+
 #include "system/tag/tag_tree.h"
 #include "system/tag/tag_dictionary.h"
 #include "system/tag/tag_manager.h"
-#include "system/tag/tag_project_settings.h"
 
 using namespace ggs;
 using namespace ggs::editor_plugin;
 
 void TagMainScene::_bind_methods()
 {
+	ClassDB::bind_method(D_METHOD("_handle_add_tag_dictionary_requested", "p_name"), &TagMainScene::_handle_add_tag_dictionary_requested);
 	ClassDB::bind_method(D_METHOD("_handle_delete_tag", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_delete_tag);
-	ClassDB::bind_method(D_METHOD("_handle_dir_selected", "p_path"), &TagMainScene::_handle_dir_selected);
-	ClassDB::bind_method(D_METHOD("_handle_file_selected", "p_path"), &TagMainScene::_handle_file_selected);
-	ClassDB::bind_method(D_METHOD("_handle_files_selected", "p_paths"), &TagMainScene::_handle_files_selected);
 	ClassDB::bind_method(D_METHOD("_handle_remove_tag_dictionary_pressed", "p_dictionary"), &TagMainScene::_handle_remove_tag_dictionary_pressed);
 	ClassDB::bind_method(D_METHOD("_handle_remove_tag_requested", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_remove_tag_requested);
 	ClassDB::bind_method(D_METHOD("_handle_tag_add_requested", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_tag_add_requested);
@@ -66,6 +66,16 @@ void TagMainScene::render_tag_dictionaries()
 	}
 }
 
+void TagMainScene::_handle_add_tag_dictionary_requested(String p_name)
+{
+	GGSResourceManager *resource_manager = GGSResourceManager::get_singleton();
+	resource_manager->save_resource(resource_manager->create_tag_resource(p_name));
+
+	TagManager::get_singleton()->load_dictionaries();
+
+	render_tag_dictionaries();
+}
+
 void TagMainScene::_ready()
 {
 	VBoxContainer *wrapper = memnew(VBoxContainer);
@@ -74,26 +84,22 @@ void TagMainScene::_ready()
 
 	wrapper->set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
 
-	EditorFileDialog *select_file_dialog = memnew(EditorFileDialog);
-	select_file_dialog->add_filter("*.tres", "Load TagDictionary resource(s)");
-	select_file_dialog->connect("file_selected", Callable(this, "_handle_file_selected"));
-	select_file_dialog->connect("files_selected", Callable(this, "_handle_files_selected"));
-	select_file_dialog->set_file_mode(EditorFileDialog::FILE_MODE_OPEN_FILES);
-	select_file_dialog->set_title(tr("Select a TagDictionary"));
+	NewResourceModal *new_resource_modal = memnew(NewResourceModal);
 
-	add_child(select_file_dialog);
+	new_resource_modal->connect("create_requested", Callable(this, "_handle_add_tag_dictionary_requested"));
+
+	add_child(new_resource_modal);
 
 	Label *panel_title = memnew(Label);
 	panel_title->set_text(tr("Tag management"));
 
-	Button *select_file_button = memnew(Button);
-	select_file_button->set_text(tr("Select a TagDictionary"));
-	select_file_button->set_anchor(Side::SIDE_RIGHT, 1);
-	select_file_button->connect("pressed", Callable(select_file_dialog, "popup_centered"));
+	Button *add_tag_dictionary_button = memnew(Button);
+	add_tag_dictionary_button->set_text(tr("Create a TagDictionary"));
+	add_tag_dictionary_button->connect("pressed", Callable(new_resource_modal, "popup_centered"));
 
 	HBoxContainer *header = memnew(HBoxContainer);
 	header->add_child(panel_title);
-	header->add_child(select_file_button);
+	header->add_child(add_tag_dictionary_button);
 	header->set_anchors_and_offsets_preset(LayoutPreset::PRESET_TOP_WIDE);
 
 	_dictionaries_container = memnew(VBoxContainer);
@@ -103,32 +109,6 @@ void TagMainScene::_ready()
 	wrapper->add_child(_dictionaries_container);
 
 	add_child(wrapper);
-
-	render_tag_dictionaries();
-}
-
-void TagMainScene::_handle_dir_selected(String p_path)
-{
-	// todo:
-	//	- read dir files
-	//	- select all resources files
-	//	- open them
-	//	- check if they are TagDictionary resources
-	//	- add them
-}
-
-void TagMainScene::_handle_file_selected(String p_path)
-{
-	TagProjectSettings::add_resource(p_path);
-	render_tag_dictionaries();
-}
-
-void TagMainScene::_handle_files_selected(PackedStringArray p_paths)
-{
-	for (int i = 0; i < p_paths.size(); i++)
-	{
-		TagProjectSettings::add_resource(p_paths[i]);
-	}
 
 	render_tag_dictionaries();
 }
@@ -143,7 +123,8 @@ void TagMainScene::_handle_add_tag(TagDictionary *p_dictionary, LineEdit *p_tag_
 	}
 
 	p_dictionary->add_tag(tag_path);
-	p_dictionary->save();
+
+	GGSResourceManager::get_singleton()->save_resource(p_dictionary);
 
 	render_tag_dictionaries();
 }
@@ -157,7 +138,8 @@ void TagMainScene::_handle_edit_tag(TagDictionary *p_dictionary, LineEdit *p_tag
 	}
 
 	p_dictionary->replace_tag_path(old_path, tag_path);
-	p_dictionary->save();
+
+	GGSResourceManager::get_singleton()->save_resource(p_dictionary);
 
 	render_tag_dictionaries();
 }
@@ -165,13 +147,14 @@ void TagMainScene::_handle_edit_tag(TagDictionary *p_dictionary, LineEdit *p_tag
 void TagMainScene::_handle_delete_tag(TagDictionary *p_dictionary, String p_tag_path)
 {
 	p_dictionary->remove_tag_path(p_tag_path);
-	p_dictionary->save();
+
+	GGSResourceManager::get_singleton()->save_resource(p_dictionary);
+
 	render_tag_dictionaries();
 }
 
 void TagMainScene::_handle_remove_tag_dictionary_pressed(TagDictionary *p_dictionary)
 {
-	TagProjectSettings::remove_resource(p_dictionary->get_path());
 	TagManager::get_singleton()->remove_dictionary(p_dictionary);
 	render_tag_dictionaries();
 }

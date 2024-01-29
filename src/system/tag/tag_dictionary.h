@@ -8,29 +8,12 @@ using namespace godot;
 
 namespace ggs
 {
-	namespace editor_plugin
-	{
-		class TagMainScene;
-		class TagDictionaryItem;
-	}
-
 	/// @brief The tag dictionary resource.
 	class TagDictionary : public Resource
 	{
 		GDCLASS(TagDictionary, Resource)
 
 	public:
-		enum Error
-		{
-			OK,
-			CANT_WRITE_FILE,
-			CANT_CLOSE_FILE,
-			FILE_CORRUPTED,
-			NOT_IN_EDITOR_HINT,
-			TIMEOUT,
-			EMPTY_PATH_WHILE_SAVING,
-			RESOURCE_UNHANDLED_ERROR_REPORT_THIS_AS_A_BUG,
-		};
 		/// @brief The tag dictionary divider.
 		static const char *TAG_DICTIONARY_DIVIDER;
 		/// @brief Default constructor.
@@ -112,15 +95,7 @@ namespace ggs
 		/// @brief Sets the tags.
 		/// @param p_tags The tags.
 		PackedStringArray tags;
-
-	private:
-		friend class editor_plugin::TagMainScene;
-		friend class editor_plugin::TagDictionaryItem;
-		/// @brief Saves the tag dictionary.
-		Error save();
 	};
 }
-
-VARIANT_ENUM_CAST(ggs::TagDictionary::Error);
 
 #endif

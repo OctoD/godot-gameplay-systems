@@ -8,6 +8,7 @@
 #include "docks/tag/tag_docks.h"
 #include "main_scene/ggs_main_scene.h"
 #include "ggs_editor_plugin.h"
+#include "resource_manager/resource_manager.h"
 
 using namespace ggs;
 using namespace ggs::editor_plugin;
@@ -39,6 +40,8 @@ void GGSEditorPlugin::_enter_tree()
 	add_inspector_plugin(ggs_attribute_container_inspector);
 
 	ggs_tag_main_scene->set_visible(false);
+
+	GGSResourceManager::get_singleton()->ensure_directories();
 }
 
 void GGSEditorPlugin::_exit_tree()

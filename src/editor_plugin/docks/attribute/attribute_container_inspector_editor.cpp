@@ -67,6 +67,15 @@ void AttributeContainerInspectorEditor::_ready()
 	set_column_titles_visible(true);
 	set_custom_minimum_size(Size2(0, 400));
 
+	render();
+}
+
+void AttributeContainerInspectorEditor::render()
+{
+	clear();
+	
+	TypedArray<Attribute> attributes = attribute_container->get_attributes();
+
 	for (int i = 0; i < attributes.size(); i++)
 	{
 		Variant attribute_variant = attributes[i];
