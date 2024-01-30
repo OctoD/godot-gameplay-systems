@@ -18,6 +18,8 @@ namespace ggs::editor_plugin
 		AttributeContainer *attribute_container;
 		void _handle_item_edited();
 
+        void _handle_item_selected();
+
         void _handle_dictionary_changed(TagDictionary *previous, TagDictionary *current);
 
     protected:

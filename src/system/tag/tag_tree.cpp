@@ -1,4 +1,5 @@
 #include <godot_cpp/classes/label.hpp>
+#include <godot_cpp/classes/display_server.hpp>
 
 #include "system/tag/tag_dictionary.h"
 #include "tag_tree.h"
@@ -37,6 +38,8 @@ void TagTree::_handle_item_edited()
 	{
 		String tag_path = item->get_meta(TAG_PATH_META_KEY);
 
+		DisplayServer::get_singleton()->clipboard_set(tag_path);
+
 		bool checked = item->is_checked(0);
 
 		item->set_checked(0, !checked);
@@ -71,6 +74,10 @@ void TagTree::_handle_item_edited()
 		{
 			emit_signal("tags_selected", tags);
 		}
+	}
+	else
+	{
+		DisplayServer::get_singleton()->clipboard_set(item->get_meta(TAG_PATH_META_KEY));
 	}
 }
 

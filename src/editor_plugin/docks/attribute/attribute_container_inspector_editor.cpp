@@ -1,3 +1,5 @@
+#include <godot_cpp/classes/display_server.hpp>
+
 #include "attribute_container_inspector_editor.h"
 #include "system/attribute/attribute_manager.h"
 
@@ -7,6 +9,7 @@ using namespace ggs::editor_plugin;
 void AttributeContainerInspectorEditor::_bind_methods()
 {
 	ClassDB::bind_method(D_METHOD("_handle_item_edited"), &AttributeContainerInspectorEditor::_handle_item_edited);
+	ClassDB::bind_method(D_METHOD("_handle_item_selected"), &AttributeContainerInspectorEditor::_handle_item_selected);
 	ClassDB::bind_method(D_METHOD("_handle_dictionary_changed", "previous", "current"), &AttributeContainerInspectorEditor::_handle_dictionary_changed);
 }
 
@@ -26,6 +29,16 @@ void AttributeContainerInspectorEditor::_handle_item_edited()
 			attribute->set_min_value(item->get_text(2).to_float());
 			attribute->set_max_value(item->get_text(3).to_float());
 		}
+	}
+}
+
+void AttributeContainerInspectorEditor::_handle_item_selected()
+{
+	TreeItem *item = get_selected();
+
+	if (item)
+	{
+		DisplayServer::get_singleton()->clipboard_set(item->get_text(0));
 	}
 }
 
@@ -55,11 +68,17 @@ void AttributeContainerInspectorEditor::_ready()
 
 	attribute_container->ensure_attributes(attrs);
 
-	Callable callable = Callable(this, "_handle_item_edited");
+	Callable handle_item_edited_callable = Callable(this, "_handle_item_edited");
+	Callable handle_item_selected_callable = Callable(this, "_handle_item_selected");
 
-	if (!is_connected("item_edited", callable))
+	if (!is_connected("item_edited", handle_item_edited_callable))
 	{
-		connect("item_edited", callable);
+		connect("item_edited", handle_item_edited_callable);
+	}
+
+	if (!is_connected("item_selected", handle_item_selected_callable))
+	{
+		connect("item_selected", handle_item_selected_callable);
 	}
 
 	set_columns(4);
