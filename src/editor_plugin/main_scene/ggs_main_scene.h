@@ -1,13 +1,13 @@
 #ifndef GGS_MAIN_SCENE_H
 #define GGS_MAIN_SCENE_H
 
-#include <godot_cpp/classes/control.hpp>
+#include <godot_cpp/classes/v_box_container.hpp>
 
 using namespace godot;
 
 namespace ggs::editor_plugin
 {
-	class MainScene : public Control
+	class MainScene : public VBoxContainer
 	{
 		enum GGSMainSceneTab
 		{
@@ -16,7 +16,7 @@ namespace ggs::editor_plugin
 			TAG_MANAGER,
 		};
 
-		GDCLASS(MainScene, Control);
+		GDCLASS(MainScene, VBoxContainer);
 
 	public:
 		MainScene();

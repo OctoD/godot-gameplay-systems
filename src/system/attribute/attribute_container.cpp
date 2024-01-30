@@ -345,7 +345,11 @@ void AttributeContainer::ensure_attributes(PackedStringArray p_attributes)
 {
 	if (Engine::get_singleton()->is_editor_hint())
 	{
-		for (StringName tagname : p_attributes)
+		PackedStringArray copy = p_attributes.duplicate();
+
+		copy.sort();
+		
+		for (StringName tagname : copy)
 		{
 			if (!has_attribute(tagname))
 			{
@@ -353,6 +357,16 @@ void AttributeContainer::ensure_attributes(PackedStringArray p_attributes)
 
 				attribute->set_tag_name(tagname);
 				attributes.push_back(attribute);
+			}
+		}
+
+		for (int i = 0; i < attributes.size(); i++)
+		{
+			Ref<Attribute> attribute = cast_to<Attribute>(attributes[i]);
+
+			if (attribute.is_valid() && !attribute.is_null() && !p_attributes.has(attribute->get_tag_name()))
+			{
+				attributes.remove_at(i);
 			}
 		}
 	}

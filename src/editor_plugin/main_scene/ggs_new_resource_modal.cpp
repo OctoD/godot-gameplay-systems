@@ -37,7 +37,7 @@ void NewResourceModal::_handle_create_button_pressed()
 
 void NewResourceModal::_handle_line_edit_text_changed(String text)
 {
-	resource_name_label->set_text(text.replace(" ", "_").to_lower() + ".tres");
+	resource_name_label->set_text(GGSResourceManager::get_resource_name_from_name(text));
 }
 
 void NewResourceModal::_ready()
@@ -49,7 +49,9 @@ void NewResourceModal::_ready()
 	Label *title_label = memnew(Label);
 
 	resource_name_label = memnew(Label);
+
 	resource_name_line_edit = memnew(LineEdit);
+	resource_name_line_edit->set_h_size_flags(Control::SIZE_EXPAND_FILL);
 
 	HBoxContainer *h_box_container = memnew(HBoxContainer);
 	VBoxContainer *v_box_container = memnew(VBoxContainer);
@@ -59,13 +61,22 @@ void NewResourceModal::_ready()
 	add_child(v_box_container);
 
 	v_box_container->set_alignment(BoxContainer::ALIGNMENT_CENTER);
+	v_box_container->set_anchors_and_offsets_preset(Control::PRESET_FULL_RECT);
+	v_box_container->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+
+	title_label->set_horizontal_alignment(HorizontalAlignment::HORIZONTAL_ALIGNMENT_CENTER);
+	title_label->set_h_size_flags(Control::SIZE_EXPAND_FILL);
 
 	v_box_container->add_child(title_label);
 	v_box_container->add_child(resource_name_label);
 	v_box_container->add_child(resource_name_line_edit);
 
+	close_button->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+	create_button->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+
 	h_box_container->add_child(close_button);
 	h_box_container->add_child(create_button);
+	h_box_container->set_h_size_flags(Control::SIZE_EXPAND_FILL);
 
 	v_box_container->add_child(h_box_container);
 
@@ -82,4 +93,5 @@ void NewResourceModal::_ready()
 	connect("close_requested", Callable(this, "_handle_close_button_pressed"));
 
 	set_min_size(Size2(320, 240));
+	set_max_size(Size2(480, 320));
 }

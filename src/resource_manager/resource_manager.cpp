@@ -23,7 +23,7 @@ void GGSResourceManager::_bind_methods()
 Ref<EquipmentSlot> GGSResourceManager::create_equipment_slot_resource(String p_file_name) const
 {
 	Ref<EquipmentSlot> resource = memnew(EquipmentSlot);
-	resource->set_name("New Equipment Slot");
+	resource->set_name(p_file_name);
 	resource->set_path(String(EQUIPMENT_DIR) + "/" + p_file_name);
 	return resource;
 }
@@ -31,7 +31,7 @@ Ref<EquipmentSlot> GGSResourceManager::create_equipment_slot_resource(String p_f
 Ref<ItemsPool> GGSResourceManager::create_item_resource(String p_file_name) const
 {
 	Ref<ItemsPool> resource = memnew(ItemsPool);
-	resource->set_name("New Items Pool");
+	resource->set_name(p_file_name);
 	resource->set_path(String(ITEMS_DIR) + "/" + p_file_name);
 	return resource;
 }
@@ -39,7 +39,7 @@ Ref<ItemsPool> GGSResourceManager::create_item_resource(String p_file_name) cons
 Ref<TagDictionary> GGSResourceManager::create_tag_resource(String p_file_name) const
 {
 	Ref<TagDictionary> resource = memnew(TagDictionary);
-	resource->set_name("New Tag Dictionary");
+	resource->set_name(p_file_name);
 	resource->set_path(String(TAGS_DIR) + "/" + p_file_name);
 	return resource;
 }
@@ -141,6 +141,18 @@ GGSResourceManager *GGSResourceManager::get_singleton()
 	}
 
 	return instance;
+}
+
+String GGSResourceManager::get_resource_name_from_name(const String &p_string)
+{
+	String normalized = p_string.replace(" ", "_").to_lower();
+
+	if (normalized.ends_with(".tres"))
+	{
+		return normalized;
+	}
+
+	return normalized + ".tres";
 }
 
 TypedArray<EquipmentSlot> GGSResourceManager::get_equipment_slot_resources() const

@@ -15,9 +15,9 @@ namespace ggs
 
     namespace editor_plugin
     {
-        class TagMainScene : public Control
+        class TagMainScene : public VBoxContainer
         {
-            GDCLASS(TagMainScene, Control);
+            GDCLASS(TagMainScene, VBoxContainer);
 
         public:
             void _ready() override;
@@ -43,9 +43,6 @@ namespace ggs
             void _handle_edit_tag(TagDictionary *p_dictionary, LineEdit *p_tag_path_input, String old_path);
             /// @brief Called when the user presses the add tag dictionary button.
             void _handle_delete_tag(TagDictionary *p_dictionary, String p_tag_path);
-            /// @brief Called when the user presses the remove tag dictionary button.
-            /// @param p_dictionary
-            void _handle_remove_tag_dictionary_pressed(TagDictionary *p_dictionary);
             /// @brief Called when the user presses the add tag button on the line.
             /// @param p_dictionary the dictionary to add the tag to.
             /// @param p_tag_path the path of the tag to add.

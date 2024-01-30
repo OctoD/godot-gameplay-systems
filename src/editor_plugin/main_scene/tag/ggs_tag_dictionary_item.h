@@ -2,6 +2,7 @@
 #define GGS_TAG_DICTIONARY_ITEM_H
 
 #include <godot_cpp/classes/v_box_container.hpp>
+#include <godot_cpp/classes/button.hpp>
 #include <godot_cpp/classes/line_edit.hpp>
 #include <godot_cpp/classes/tree.hpp>
 
@@ -32,17 +33,18 @@ namespace ggs
 
 		protected:
 			/// @brief The tag dictionary.
+			Button *dict_hide_tree_button;
 			TagDictionary *dictionary;
 			TagTree *tag_tree;
 			LineEdit *new_tag_line_edit;
 			/// @brief Binds the methods to Godot.
 			static void _bind_methods();
+			/// @brief Handles the toggle button pressed.
+			void _handle_toggle_button_pressed();
 
 		private:
 			/// @brief Handles the add tag button pressed.
 			void _handle_add_tag_button_pressed();
-			/// @brief Handles the remove tag dictionary button pressed.
-			void _handle_remove_tag_dictionary_button_pressed();
 			/// @brief Handles the button pressed.
 			/// @param p_item
 			/// @param p_column

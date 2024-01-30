@@ -64,6 +64,8 @@ namespace ggs
 		/// @return The singleton instance of the resource manager.
 		static GGSResourceManager *get_singleton();
 
+		static String get_resource_name_from_name(const String &p_string);
+
 		/// @brief Gets all the resources in the abilities directory.
 		/// @return The resources in the abilities directory.
 		TypedArray<EquipmentSlot> get_equipment_slot_resources() const;

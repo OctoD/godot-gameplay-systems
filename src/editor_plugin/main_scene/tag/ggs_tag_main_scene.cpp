@@ -22,7 +22,6 @@ void TagMainScene::_bind_methods()
 {
 	ClassDB::bind_method(D_METHOD("_handle_add_tag_dictionary_requested", "p_name"), &TagMainScene::_handle_add_tag_dictionary_requested);
 	ClassDB::bind_method(D_METHOD("_handle_delete_tag", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_delete_tag);
-	ClassDB::bind_method(D_METHOD("_handle_remove_tag_dictionary_pressed", "p_dictionary"), &TagMainScene::_handle_remove_tag_dictionary_pressed);
 	ClassDB::bind_method(D_METHOD("_handle_remove_tag_requested", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_remove_tag_requested);
 	ClassDB::bind_method(D_METHOD("_handle_tag_add_requested", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_tag_add_requested);
 	ClassDB::bind_method(D_METHOD("_handle_tag_edit_requested", "p_dictionary", "p_tag_path"), &TagMainScene::_handle_tag_edit_requested);
@@ -78,17 +77,12 @@ void TagMainScene::_handle_add_tag_dictionary_requested(String p_name)
 
 void TagMainScene::_ready()
 {
-	VBoxContainer *wrapper = memnew(VBoxContainer);
-
 	set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
-
-	wrapper->set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
+	set_h_size_flags(Control::SIZE_EXPAND_FILL);
+	set_v_size_flags(Control::SIZE_EXPAND_FILL);
 
 	NewResourceModal *new_resource_modal = memnew(NewResourceModal);
-
 	new_resource_modal->connect("create_requested", Callable(this, "_handle_add_tag_dictionary_requested"));
-
-	add_child(new_resource_modal);
 
 	Label *panel_title = memnew(Label);
 	panel_title->set_text(tr("Tag management"));
@@ -105,9 +99,13 @@ void TagMainScene::_ready()
 	_dictionaries_container = memnew(VBoxContainer);
 	_dictionaries_container->set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
 
+	VBoxContainer *wrapper = memnew(VBoxContainer);
+	wrapper->set_v_size_flags(Control::SIZE_EXPAND_FILL);
+	wrapper->set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
 	wrapper->add_child(header);
 	wrapper->add_child(_dictionaries_container);
 
+	add_child(new_resource_modal);
 	add_child(wrapper);
 
 	render_tag_dictionaries();
@@ -150,12 +148,6 @@ void TagMainScene::_handle_delete_tag(TagDictionary *p_dictionary, String p_tag_
 
 	GGSResourceManager::get_singleton()->save_resource(p_dictionary);
 
-	render_tag_dictionaries();
-}
-
-void TagMainScene::_handle_remove_tag_dictionary_pressed(TagDictionary *p_dictionary)
-{
-	TagManager::get_singleton()->remove_dictionary(p_dictionary);
 	render_tag_dictionaries();
 }
 

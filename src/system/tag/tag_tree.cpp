@@ -134,7 +134,9 @@ void TagTree::_ready()
 {
 	set_display_folded(true);
 	set_hide_root(true);
+	set_h_size_flags(SIZE_EXPAND_FILL);
 	set_v_size_flags(SIZE_EXPAND_FILL);
+	set_anchors_and_offsets_preset(Control::PRESET_FULL_RECT);
 
 	connect("item_selected", Callable(this, "_handle_item_edited"));
 

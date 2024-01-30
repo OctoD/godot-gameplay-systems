@@ -1,37 +1,43 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6nbfkmvnw58y"]
+[gd_scene load_steps=11 format=3 uid="uid://b6nbfkmvnw58y"]
 
 [sub_resource type="Attribute" id="Attribute_jte0n"]
 tag_name = &"stamina"
 
 [sub_resource type="Attribute" id="Attribute_lpe5r"]
+max_value = 20.0
 tag_name = &"strength"
 
 [sub_resource type="Attribute" id="Attribute_2aunq"]
+max_value = 20.0
 tag_name = &"dexterity"
 
 [sub_resource type="Attribute" id="Attribute_f01w3"]
+max_value = 20.0
 tag_name = &"intelligence"
 
 [sub_resource type="Attribute" id="Attribute_w4d4e"]
+max_value = 20.0
 tag_name = &"willpower"
 
 [sub_resource type="Attribute" id="Attribute_ll68d"]
+max_value = 20.0
 tag_name = &"constitution"
 
 [sub_resource type="Attribute" id="Attribute_m5i1m"]
+max_value = 20.0
 tag_name = &"health"
 
 [sub_resource type="Attribute" id="Attribute_uqjyq"]
+max_value = 20.0
 tag_name = &"mana"
 
-[sub_resource type="Attribute" id="Attribute_b00s2"]
-tag_name = &"rarity.common"
+[sub_resource type="Attribute" id="Attribute_6acnh"]
+max_value = 10.0
+tag_name = &"movement.speed"
 
-[sub_resource type="Attribute" id="Attribute_66uay"]
-tag_name = &"rarity.magic"
-
-[sub_resource type="Attribute" id="Attribute_7q04n"]
-tag_name = &"rarity.legendary"
+[sub_resource type="Attribute" id="Attribute_4poip"]
+max_value = 10.0
+tag_name = &"movement.jump-height"
 
 [node name="Examples" type="Control"]
 layout_mode = 3
@@ -69,4 +75,4 @@ text = "lorem ipsum"
 
 [node name="AttributeContainer" type="AttributeContainer" parent="." node_paths=PackedStringArray("attributes_owner")]
 attributes_owner = NodePath("..")
-attributes = Array[Attribute]([SubResource("Attribute_jte0n"), SubResource("Attribute_lpe5r"), SubResource("Attribute_2aunq"), SubResource("Attribute_f01w3"), SubResource("Attribute_w4d4e"), SubResource("Attribute_ll68d"), SubResource("Attribute_m5i1m"), SubResource("Attribute_uqjyq"), SubResource("Attribute_b00s2"), SubResource("Attribute_66uay"), SubResource("Attribute_7q04n")])
+attributes = Array[Attribute]([SubResource("Attribute_jte0n"), SubResource("Attribute_lpe5r"), SubResource("Attribute_2aunq"), SubResource("Attribute_f01w3"), SubResource("Attribute_w4d4e"), SubResource("Attribute_ll68d"), SubResource("Attribute_m5i1m"), SubResource("Attribute_uqjyq"), SubResource("Attribute_6acnh"), SubResource("Attribute_4poip")])

@@ -30,10 +30,13 @@ AttributeMainScene::~AttributeMainScene()
 
 void AttributeMainScene::_ready()
 {
+	set_h_size_flags(Control::SIZE_EXPAND_FILL);
+	set_v_size_flags(Control::SIZE_EXPAND_FILL);
 	set_anchors_and_offsets_preset(PRESET_FULL_RECT);
 
 	HBoxContainer *toolbar = memnew(HBoxContainer);
 	toolbar->set_anchors_and_offsets_preset(PRESET_LEFT_WIDE);
+	toolbar->set_h_size_flags(Control::SIZE_EXPAND_FILL);
 
 	tag_select = memnew(OptionButton);
 	tag_select->connect("item_selected", Callable(this, "_handle_dictionary_selected"));
@@ -41,6 +44,8 @@ void AttributeMainScene::_ready()
 	tag_select->set_visible(false);
 
 	Label *label = memnew(Label);
+	label->set_anchors_and_offsets_preset(PRESET_LEFT_WIDE);
+	label->set_h_size_flags(Control::SIZE_EXPAND_FILL);
 	label->set_text(tr("Attributes management"));
 
 	toolbar->add_child(label);

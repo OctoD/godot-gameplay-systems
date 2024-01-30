@@ -6,6 +6,7 @@
 
 #include <godot_cpp/classes/panel.hpp>
 #include <godot_cpp/classes/tab_container.hpp>
+#include <godot_cpp/classes/scroll_container.hpp>
 
 using namespace ggs;
 using namespace ggs::editor_plugin;
@@ -20,11 +21,28 @@ MainScene::~MainScene()
 
 void MainScene::_ready()
 {
+	set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
+	set_h_size_flags(Control::SIZE_EXPAND_FILL);
+	set_v_size_flags(Control::SIZE_EXPAND_FILL);
+
 	Panel *ability_panel = memnew(Panel);
-	Panel *attributes_panel = memnew(Panel);
 	Panel *item_panel = memnew(Panel);
+
+	ScrollContainer *attributes_panel = memnew(ScrollContainer);
+	attributes_panel->set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
+	attributes_panel->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+	attributes_panel->set_v_size_flags(Control::SIZE_EXPAND_FILL);
+
 	TabContainer *tab_container = memnew(TabContainer);
-	Panel *tag_manager_panel = memnew(Panel);
+	tab_container->set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
+	tab_container->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+	tab_container->set_v_size_flags(Control::SIZE_EXPAND_FILL);
+
+	ScrollContainer *tag_manager_panel = memnew(ScrollContainer);
+	tag_manager_panel->set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
+	tag_manager_panel->set_follow_focus(true);
+	tag_manager_panel->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+	tag_manager_panel->set_v_size_flags(Control::SIZE_EXPAND_FILL);
 
 	tab_container->set_anchors_and_offsets_preset(LayoutPreset::PRESET_FULL_RECT);
 
@@ -43,12 +61,13 @@ void MainScene::_ready()
 	// ability_panel->set_name(ability_panel->tr("Ability"));
 
 	AttributeMainScene *attribute_main_scene = memnew(AttributeMainScene);
-	TagMainScene *tag_main_scene = memnew(TagMainScene);
-	ItemMainScene *item_main_scene = memnew(ItemMainScene);
-
 	attributes_panel->add_child(attribute_main_scene);
-	tag_manager_panel->add_child(tag_main_scene);
+
+	ItemMainScene *item_main_scene = memnew(ItemMainScene);
 	item_panel->add_child(item_main_scene);
+
+	TagMainScene *tag_main_scene = memnew(TagMainScene);
+	tag_manager_panel->add_child(tag_main_scene);
 }
 
 void MainScene::_bind_methods()

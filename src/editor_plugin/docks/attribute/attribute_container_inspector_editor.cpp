@@ -49,9 +49,18 @@ void AttributeContainerInspectorEditor::_ready()
 		AttributeManager::get_singleton()->connect("attributes_dictionary_changed", Callable(this, "_handle_dictionary_changed"));
 	}
 
-	attribute_container->ensure_attributes(AttributeManager::get_singleton()->get_attributes());
+	PackedStringArray attrs = AttributeManager::get_singleton()->get_attributes();
 
-	connect("item_edited", Callable(this, "_handle_item_edited"));
+	attrs.sort();
+
+	attribute_container->ensure_attributes(attrs);
+
+	Callable callable = Callable(this, "_handle_item_edited");
+
+	if (!is_connected("item_edited", callable))
+	{
+		connect("item_edited", callable);
+	}
 
 	set_columns(4);
 	set_hide_root(true);
@@ -73,7 +82,7 @@ void AttributeContainerInspectorEditor::_ready()
 void AttributeContainerInspectorEditor::render()
 {
 	clear();
-	
+
 	TypedArray<Attribute> attributes = attribute_container->get_attributes();
 
 	for (int i = 0; i < attributes.size(); i++)
