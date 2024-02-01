@@ -1,5 +1,8 @@
 #include "equipment_manager.h"
 #include "equipment_project_settings.h"
+
+#include "resource_manager/resource_manager.h"
+
 #include "system/tag/tag_dictionary.h"
 
 #include <godot_cpp/classes/resource_loader.hpp>
@@ -19,7 +22,7 @@ void EquipmentManager::_bind_methods()
 	ADD_SIGNAL(MethodInfo("slot_renamed", PropertyInfo(Variant::STRING, "slot"), PropertyInfo(Variant::STRING, "new_slot")));
 }
 
-void EquipmentManager::add_slot(EquipmentSlot *p_slot)
+void EquipmentManager::add_slot(Ref<EquipmentSlot> p_slot)
 {
 	if (!has_slot_by_instance(p_slot))
 	{
@@ -28,14 +31,14 @@ void EquipmentManager::add_slot(EquipmentSlot *p_slot)
 	}
 }
 
-bool EquipmentManager::has_slot_by_instance(EquipmentSlot *p_slot) const
+bool EquipmentManager::has_slot_by_instance(Ref<EquipmentSlot> p_slot) const
 {
-	if (p_slot == nullptr)
+	if (p_slot != nullptr && p_slot.is_valid())
 	{
-		return false;
+		return has_slot(p_slot->get_slot_name());
 	}
 
-	return has_slot(p_slot->get_slot_name());
+	return false;
 }
 
 void EquipmentManager::remove_slot(EquipmentSlot *p_slot)
@@ -69,26 +72,7 @@ void EquipmentManager::remove_slot(EquipmentSlot *p_slot)
 
 void EquipmentManager::load_slots()
 {
-	PackedStringArray slots_paths = EquipmentProjectSettings::get_resource_file_paths();
-	ResourceLoader *resource_loader = ResourceLoader::get_singleton();
-
-	if (resource_loader != nullptr)
-	{
-		for (StringName slot_path : slots_paths)
-		{
-			Ref<Resource> resource = resource_loader->load(slot_path);
-
-			if (resource.is_valid())
-			{
-				EquipmentSlot *slots_ptr = cast_to<EquipmentSlot>(resource.ptr());
-
-				if (slots_ptr != nullptr)
-				{
-					slots.append(slots_ptr);
-				}
-			}
-		}
-	}
+	slots = GGSResourceManager::get_singleton()->get_equipment_slot_resources();
 }
 
 EquipmentManager::EquipmentManager()

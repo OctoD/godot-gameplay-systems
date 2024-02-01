@@ -29,11 +29,11 @@ namespace ggs
 		TypedArray<EquipmentSlot> slots;
 		/// @brief Adds a slot.
 		/// @param p_slot The slot to add.
-		void add_slot(EquipmentSlot *p_slot);
+		void add_slot(Ref<EquipmentSlot> p_slot);
 		/// @brief Checks if a slot exists.
 		/// @param p_slot The slot to check.
 		/// @return True if the slot exists, false otherwise.
-		bool has_slot_by_instance(EquipmentSlot *p_slot) const;
+		bool has_slot_by_instance(Ref<EquipmentSlot> p_slot) const;
 		/// @brief Removes a slot.
 		/// @param p_slot
 		void remove_slot(EquipmentSlot *p_slot);

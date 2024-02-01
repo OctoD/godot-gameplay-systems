@@ -21,6 +21,7 @@ void TagTree::_bind_methods()
 
 	/// adds signals
 	ADD_SIGNAL(MethodInfo("tag_dictionary_changed"));
+	ADD_SIGNAL(MethodInfo("tags_changed", PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags")));
 	ADD_SIGNAL(MethodInfo("tags_deselected", PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags")));
 	ADD_SIGNAL(MethodInfo("tags_selected", PropertyInfo(Variant::PACKED_STRING_ARRAY, "tags")));
 }

@@ -37,9 +37,21 @@ namespace ggs
 		/// @brief Gets the items' tags that the slot denies.
 		/// @return The items' tags that the slot denies.
 		PackedStringArray get_denies_items_with_tags() const;
-		/// @brief Sets the slot name.
-		/// @param p_slot_name The slot name.
-		void set_slot_name(StringName p_slot_name);
+        /// @brief Adds the items' tags that the slot accepts.
+        /// @param p_accepts_items_with_tags The items' tags that the slot accepts.
+        void add_accepts_items_with_tags(PackedStringArray p_accepts_items_with_tags);
+        /// @brief Adds the items' tags that the slot denies.
+        /// @param p_denies_items_with_tags The items' tags that the slot denies.
+        void add_denies_items_with_tags(PackedStringArray p_denies_items_with_tags);
+        /// @brief Removes the items' tags that the slot accepts.
+        /// @param p_accepts_items_with_tags
+        void remove_accepts_items_with_tags(PackedStringArray p_accepts_items_with_tags);
+		/// @brief Removes the items' tags that the slot denies.
+		/// @param p_denies_items_with_tags The items' tags that the slot denies.
+		void remove_denies_items_with_tags(PackedStringArray p_denies_items_with_tags);
+        /// @brief Sets the slot name.
+        /// @param p_slot_name The slot name.
+        void set_slot_name(StringName p_slot_name);
 		/// @brief Sets the items' tags that the slot accepts.
 		/// @param p_accepts_items_with_tags The items' tags that the slot accepts.
 		void set_accepts_items_with_tags(PackedStringArray p_accepts_items_with_tags);

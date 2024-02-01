@@ -13,6 +13,7 @@ namespace ggs
 {
 	namespace editor_plugin
 	{
+		class EquipmentSlotScene;
 		class GGSEditorPlugin;
 		class TagMainScene;
 	}
@@ -26,6 +27,7 @@ namespace ggs
 		static const char *TAGS_DIR;
 
 	protected:
+		friend class editor_plugin::EquipmentSlotScene;
 		friend class editor_plugin::GGSEditorPlugin;
 		friend class editor_plugin::TagMainScene;
 

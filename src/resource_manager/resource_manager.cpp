@@ -24,6 +24,7 @@ Ref<EquipmentSlot> GGSResourceManager::create_equipment_slot_resource(String p_f
 {
 	Ref<EquipmentSlot> resource = memnew(EquipmentSlot);
 	resource->set_name(p_file_name);
+	resource->set_slot_name(p_file_name.replace(".tres", ""));
 	resource->set_path(String(EQUIPMENT_DIR) + "/" + p_file_name);
 	return resource;
 }

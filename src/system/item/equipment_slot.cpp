@@ -37,8 +37,8 @@ bool EquipmentSlot::can_accept(Item *p_item) const
 			return false;
 		}
 	}
-	
-    return true;
+
+	return true;
 }
 
 StringName EquipmentSlot::get_slot_name() const
@@ -56,10 +56,90 @@ PackedStringArray EquipmentSlot::get_denies_items_with_tags() const
 	return PackedStringArray(denies_items_with_tags);
 }
 
+void EquipmentSlot::add_accepts_items_with_tags(PackedStringArray p_accepts_items_with_tags)
+{
+	int affected = 0;
+	
+	for (StringName tag : p_accepts_items_with_tags)
+	{
+		if (!accepts_items_with_tags.has(tag))
+		{
+			accepts_items_with_tags.append(tag);
+			affected++;
+		}
+	}
+
+	if (Engine::get_singleton()->is_editor_hint() && affected > 0)
+	{
+		emit_changed();
+	}
+}
+
+void EquipmentSlot::add_denies_items_with_tags(PackedStringArray p_denies_items_with_tags)
+{
+	int affected = 0;
+	
+	for (StringName tag : p_denies_items_with_tags)
+	{
+		if (!denies_items_with_tags.has(tag))
+		{
+			denies_items_with_tags.append(tag);
+			affected++;
+		}
+	}
+
+	if (Engine::get_singleton()->is_editor_hint() && affected > 0)
+	{
+		emit_changed();
+	}
+}
+
+void EquipmentSlot::remove_accepts_items_with_tags(PackedStringArray p_accepts_items_with_tags)
+{
+	int affected = 0;
+	
+	for (StringName tag : p_accepts_items_with_tags)
+	{
+		int index = accepts_items_with_tags.find(tag);
+
+		if (index != -1)
+		{
+			accepts_items_with_tags.remove_at(index);
+			affected++;
+		}
+	}
+
+	if (Engine::get_singleton()->is_editor_hint() && affected > 0)
+	{
+		emit_changed();
+	}
+}
+
+void EquipmentSlot::remove_denies_items_with_tags(PackedStringArray p_denies_items_with_tags)
+{
+	int affected = 0;
+	
+	for (StringName tag : p_denies_items_with_tags)
+	{
+		int index = denies_items_with_tags.find(tag);
+
+		if (index != -1)
+		{
+			denies_items_with_tags.remove_at(index);
+			affected++;
+		}
+	}
+
+	if (Engine::get_singleton()->is_editor_hint() && affected > 0)
+	{
+		emit_changed();
+	}
+}
+
 void EquipmentSlot::set_slot_name(StringName p_slot_name)
 {
 	slot_name = p_slot_name;
-	
+
 	if (Engine::get_singleton()->is_editor_hint())
 	{
 		emit_changed();
@@ -69,7 +149,7 @@ void EquipmentSlot::set_slot_name(StringName p_slot_name)
 void EquipmentSlot::set_accepts_items_with_tags(PackedStringArray p_accepts_items_with_tags)
 {
 	accepts_items_with_tags = p_accepts_items_with_tags;
-	
+
 	if (Engine::get_singleton()->is_editor_hint())
 	{
 		emit_changed();
@@ -79,7 +159,7 @@ void EquipmentSlot::set_accepts_items_with_tags(PackedStringArray p_accepts_item
 void EquipmentSlot::set_denies_items_with_tags(PackedStringArray p_denies_items_with_tags)
 {
 	denies_items_with_tags = p_denies_items_with_tags;
-	
+
 	if (Engine::get_singleton()->is_editor_hint())
 	{
 		emit_changed();

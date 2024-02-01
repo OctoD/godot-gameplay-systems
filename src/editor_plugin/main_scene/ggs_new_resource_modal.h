@@ -19,13 +19,15 @@ namespace ggs::editor_plugin
 		static void _bind_methods();
 		void _handle_close_button_pressed();
 		void _handle_create_button_pressed();
-		void _handle_line_edit_text_changed(String text);
+		void _handle_line_edit_text_changed(String popup_exclusive_centered);
 		Button *create_button;
 		Label *resource_name_label;
 		LineEdit *resource_name_line_edit;
 
 	public:
 		void _ready() override;
+		void set_create_button_text(String p_text);
+		void toggle_visibility();
 	};
 }
 

@@ -46,7 +46,6 @@
 #include "editor_plugin/main_scene/attribute/ggs_attribute_main_scene.h"
 #include "editor_plugin/main_scene/item/ggs_equipment_slot_scene.h"
 #include "editor_plugin/main_scene/item/ggs_item_main_scene.h"
-#include "editor_plugin/main_scene/item/ggs_item_equipment_settings_scene.h"
 #include "editor_plugin/main_scene/tag/ggs_tag_dictionary_item.h"
 #include "editor_plugin/main_scene/tag/ggs_tag_main_scene.h"
 
@@ -110,6 +109,7 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 
 		Engine::get_singleton()->register_singleton("GGSResourceManager", ggs::GGSResourceManager::get_singleton());
 
+		ClassDB::register_internal_class<ggs::editor_plugin::NewResourceModal>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AbilityInspectorPlugin>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AbilityInspectorPluginEditor>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeContainerInspector>();
@@ -117,10 +117,8 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 		ClassDB::register_internal_class<ggs::editor_plugin::AttributeMainScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::EquipmentSlotScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::GGSEditorPlugin>();
-		ClassDB::register_internal_class<ggs::editor_plugin::ItemEquipmentSettingsScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::ItemMainScene>();
 		ClassDB::register_internal_class<ggs::editor_plugin::MainScene>();
-		ClassDB::register_internal_class<ggs::editor_plugin::NewResourceModal>();
 		ClassDB::register_internal_class<ggs::editor_plugin::TagDictionaryItem>();
 		ClassDB::register_internal_class<ggs::editor_plugin::TagDocks>();
 		ClassDB::register_internal_class<ggs::editor_plugin::TagMainScene>();

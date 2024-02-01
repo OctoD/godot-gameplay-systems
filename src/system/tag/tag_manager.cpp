@@ -31,6 +31,7 @@ void TagManager::_bind_methods()
 	ClassDB::bind_method(D_METHOD("remove_tags", "node", "tags"), &TagManager::remove_tags);
 
 	/// signals binding
+	ClassDB::add_signal("TagManager", MethodInfo("dictionaries_changed"));
 	ClassDB::add_signal("TagManager", MethodInfo("dictionaries_loaded"));
 	ClassDB::add_signal("TagManager", MethodInfo("dictionary_added", PropertyInfo(Variant::OBJECT, "tag_dictionary")));
 	ClassDB::add_signal("TagManager", MethodInfo("dictionary_removed", PropertyInfo(Variant::OBJECT, "tag_dictionary")));
@@ -72,6 +73,7 @@ void TagManager::_handle_dictionary_tag_added(const TagDictionary *p_tag_diction
 {
 	if (p_tag_dictionary != nullptr)
 	{
+		emit_signal("dictionaries_changed");
 		emit_signal("dictionary_tag_added", p_tag_dictionary, p_tag);
 	}
 }
@@ -100,6 +102,7 @@ void TagManager::_handle_dictionary_tag_removed(const TagDictionary *p_tag_dicti
 			}
 		}
 
+		emit_signal("dictionaries_changed");
 		emit_signal("dictionary_tag_removed", p_tag_dictionary, p_tag);
 	}
 }
@@ -121,6 +124,7 @@ void TagManager::_handle_dictionary_tag_replaced(const TagDictionary *p_tag_dict
 			}
 		}
 
+		emit_signal("dictionaries_changed");
 		emit_signal("dictionary_tag_replaced", p_tag_dictionary, p_old_tag, p_new_tag);
 	}
 }
@@ -139,6 +143,7 @@ void TagManager::load_dictionaries()
 		}
 	}
 
+	emit_signal("dictionaries_changed");
 	emit_signal("dictionaries_loaded");
 }
 
@@ -251,6 +256,7 @@ int TagManager::add_dictionary(TagDictionary *p_dictionary)
 		dictionaries->append(p_dictionary);
 
 		emit_signal("dictionary_added", p_dictionary);
+		emit_signal("dictionaries_changed");
 
 		_bind_dictionary_signals(p_dictionary);
 
@@ -404,6 +410,7 @@ void TagManager::remove_dictionary(TagDictionary *p_dictionary)
 			{
 				dictionaries->remove_at(index);
 				emit_signal("dictionary_removed", p_dictionary);
+				emit_signal("dictionaries_changed");
 			}
 		}
 	}

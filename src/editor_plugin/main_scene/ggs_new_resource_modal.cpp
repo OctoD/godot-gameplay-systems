@@ -18,6 +18,9 @@ void NewResourceModal::_bind_methods()
 	ClassDB::bind_method(D_METHOD("_handle_close_button_pressed"), &NewResourceModal::_handle_close_button_pressed);
 	ClassDB::bind_method(D_METHOD("_handle_create_button_pressed"), &NewResourceModal::_handle_create_button_pressed);
 	ClassDB::bind_method(D_METHOD("_handle_line_edit_text_changed"), &NewResourceModal::_handle_line_edit_text_changed);
+	ClassDB::bind_method(D_METHOD("set_create_button_text", "p_button_text"), &NewResourceModal::set_create_button_text);
+	ClassDB::bind_method(D_METHOD("toggle_visibility"), &NewResourceModal::toggle_visibility);
+
 	/// signals binding
 	ADD_SIGNAL(MethodInfo("create_requested", PropertyInfo(Variant::STRING, "resource_name")));
 }
@@ -94,4 +97,21 @@ void NewResourceModal::_ready()
 
 	set_min_size(Size2(320, 240));
 	set_max_size(Size2(480, 320));
+}
+
+void NewResourceModal::set_create_button_text(String p_text)
+{
+	create_button->set_text(p_text);
+}
+
+void NewResourceModal::toggle_visibility()
+{
+	if (is_visible())
+	{
+		hide();
+	}
+	else
+	{
+		popup_centered();
+	}
 }
