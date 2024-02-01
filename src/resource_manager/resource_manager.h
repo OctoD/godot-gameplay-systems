@@ -53,10 +53,14 @@ namespace ggs
 		void ensure_directory(const String &p_dir) const;
 		/// @brief Ensures that the directories for the ggs resources exist, if not, they are created.
 		void ensure_directories() const;
-		/// @brief Saves the given resource to the file system.
-		/// @param p_dirname The directory to save the resource to.
-		/// @param p_ref The resource to save.
-		Error save_resource(const String &p_dirname, Ref<Resource> p_ref) const;
+        /// @brief Removes the given resource from the file system.
+        /// @param p_ref The resource to remove.
+        /// @return The error code.
+        Error remove_resource(Ref<Resource> p_ref) const;
+        /// @brief Saves the given resource to the file system.
+        /// @param p_dirname The directory to save the resource to.
+        /// @param p_ref The resource to save.
+        Error save_resource(const String &p_dirname, Ref<Resource> p_ref) const;
 
 	public:
 		GGSResourceManager();

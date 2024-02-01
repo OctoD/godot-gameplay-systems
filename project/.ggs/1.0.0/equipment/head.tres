@@ -1,6 +1,0 @@
-[gd_resource type="EquipmentSlot" format=3 uid="uid://2h6o2lbxds84"]
-
-[resource]
-slot_name = &"head"
-accepts_items_with_tags = PackedStringArray("type.armor.helm")
-resource_name = "head.tres"

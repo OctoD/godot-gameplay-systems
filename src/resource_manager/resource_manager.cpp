@@ -69,6 +69,16 @@ void GGSResourceManager::ensure_directories() const
 	}
 }
 
+Error GGSResourceManager::remove_resource(Ref<Resource> p_ref) const
+{
+	if (Engine::get_singleton()->is_editor_hint())
+	{
+		return DirAccess::remove_absolute(p_ref->get_path());
+	}
+
+	return Error::ERR_UNAVAILABLE;
+}
+
 bool GGSResourceManager::save_resource(Ref<EquipmentSlot> p_ref) const
 {
 	return save_resource(String(EQUIPMENT_DIR), p_ref) == Error::OK;

@@ -2,6 +2,7 @@
 #define GGS_EQUIPMENT_SLOT_SCENE_H
 
 #include <godot_cpp/classes/v_box_container.hpp>
+#include <godot_cpp/classes/accept_dialog.hpp>
 #include <godot_cpp/classes/button.hpp>
 #include <godot_cpp/classes/tree.hpp>
 #include <godot_cpp/classes/window.hpp>
@@ -20,10 +21,14 @@ namespace ggs::editor_plugin
         GDCLASS(EquipmentSlotScene, VBoxContainer);
 
     private:
-        /// @brief Handles the add button pressed event.
-        void _handle_slot_create_requested(String p_name);
         /// @brief Handles the item edited event.
         void _handle_item_edited();
+        /// @brief Handles the slot tree button clicked event.
+        void _handle_slot_tree_button_clicked(TreeItem *p_item, int p_column, int p_id, int mouse_button_index);
+        /// @brief Handles the add button pressed event.
+        void _handle_slot_create_requested(String p_name);
+        /// @brief Handles the remove button pressed event.
+        void _handle_slot_remove_confirmed();
         /// @brief Handles the slot item selected event.
         void _handle_slot_item_selected();
         /// @brief handles the slot item name edited event.
@@ -50,6 +55,8 @@ namespace ggs::editor_plugin
         };
 
         static void _bind_methods();
+        /// @brief The confirm remove slot dialog.
+        AcceptDialog *confirm_remove_slot_dialog;
         /// @brief The new resource modal.
         NewResourceModal *new_resource_modal;
         /// @brief The selected equipment slot.

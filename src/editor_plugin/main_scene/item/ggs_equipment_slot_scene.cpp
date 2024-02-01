@@ -30,6 +30,27 @@ void EquipmentSlotScene::_handle_slot_create_requested(String p_name)
     _render_slots_tree();
 }
 
+void EquipmentSlotScene::_handle_slot_remove_confirmed()
+{
+    if (selected_equipment_slot == nullptr)
+    {
+        return;
+    }
+
+    Error result = GGSResourceManager::get_singleton()->remove_resource(selected_equipment_slot);
+
+    if (result == OK)
+    {
+        EquipmentManager::get_singleton()->remove_slot(selected_equipment_slot);
+        confirm_remove_slot_dialog->hide();
+        _render_slots_tree();
+    }
+    else
+    {
+        WARN_PRINT("Could not remove slot because of error " + String::num_int64(result) + ".");
+    }
+}
+
 void EquipmentSlotScene::_handle_item_edited()
 {
     TreeItem *selected = slots_tree->get_edited();
@@ -48,6 +69,19 @@ void EquipmentSlotScene::_handle_item_edited()
         slot->set_slot_name(slot_name);
         GGSResourceManager::get_singleton()->save_resource(slot);
     }
+}
+
+void EquipmentSlotScene::_handle_slot_tree_button_clicked(TreeItem *p_item, int p_column, int p_id, int mouse_button_index)
+{
+    Variant slot_variant = EquipmentManager::get_singleton()->slots[p_item->get_index()];
+    selected_equipment_slot = cast_to<EquipmentSlot>(slot_variant);
+
+    if (selected_equipment_slot == nullptr)
+    {
+        return;
+    }
+
+    confirm_remove_slot_dialog->popup_centered();
 }
 
 void EquipmentSlotScene::_handle_slot_item_selected()
@@ -226,6 +260,8 @@ void EquipmentSlotScene::_bind_methods()
     ClassDB::bind_method(D_METHOD("_handle_slot_create_requested"), &EquipmentSlotScene::_handle_slot_create_requested);
     ClassDB::bind_method(D_METHOD("_handle_slot_item_name_edited"), &EquipmentSlotScene::_handle_slot_item_name_edited);
     ClassDB::bind_method(D_METHOD("_handle_slot_item_selected"), &EquipmentSlotScene::_handle_slot_item_selected);
+    ClassDB::bind_method(D_METHOD("_handle_slot_remove_confirmed"), &EquipmentSlotScene::_handle_slot_remove_confirmed);
+    ClassDB::bind_method(D_METHOD("_handle_slot_tree_button_clicked", "p_item", "p_column", "p_id", "mouse_button_index"), &EquipmentSlotScene::_handle_slot_tree_button_clicked);
     ClassDB::bind_method(D_METHOD("_handle_tag_selection_window_closed"), &EquipmentSlotScene::_handle_tag_selection_window_closed);
     ClassDB::bind_method(D_METHOD("_handle_tags_changed"), &EquipmentSlotScene::_handle_tags_changed);
     ClassDB::bind_method(D_METHOD("_handle_tags_deselected", "p_tag_path"), &EquipmentSlotScene::_handle_tags_deselected);
@@ -275,6 +311,15 @@ void EquipmentSlotScene::_ready()
     slots_tree = memnew(Tree);
     selected_slot_tag_dictionary = memnew(TagDictionary);
 
+    confirm_remove_slot_dialog = memnew(AcceptDialog);
+    confirm_remove_slot_dialog->add_cancel_button(tr("Cancel"));
+    confirm_remove_slot_dialog->connect("confirmed", Callable(this, "_handle_slot_remove_confirmed"));
+    confirm_remove_slot_dialog->set_close_on_escape(true);
+    confirm_remove_slot_dialog->set_ok_button_text(tr("Yes, remove it"));
+    confirm_remove_slot_dialog->set_text(tr("Are you sure you want to remove this slot?"));
+    confirm_remove_slot_dialog->set_title(tr("Do you wish to remove this slot?"));
+    add_child(confirm_remove_slot_dialog);
+
     new_resource_modal = memnew(NewResourceModal);
     new_resource_modal->connect("create_requested", Callable(this, "_handle_slot_create_requested"));
 
@@ -296,8 +341,9 @@ void EquipmentSlotScene::_ready()
     header->set_anchors_and_offsets_preset(PRESET_TOP_WIDE);
     header->set_h_size_flags(SIZE_EXPAND_FILL);
 
-    slots_tree->connect("item_selected", Callable(this, "_handle_slot_item_selected"));
+    slots_tree->connect("button_clicked", Callable(this, "_handle_slot_tree_button_clicked"));
     slots_tree->connect("item_edited", Callable(this, "_handle_item_edited"));
+    slots_tree->connect("item_selected", Callable(this, "_handle_slot_item_selected"));
     slots_tree->set_columns(4);
     slots_tree->set_column_title(0, tr("Slot name"));
     slots_tree->set_column_title(1, tr("Accepts items with tags"));
