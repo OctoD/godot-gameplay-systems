@@ -1,0 +1,6 @@
+[gd_resource type="EquipmentSlot" format=3 uid="uid://dom3adsfay6i1"]
+
+[resource]
+slot_name = &"weapon_2"
+accepts_items_with_tags = PackedStringArray("type.weapon.1h")
+resource_name = "weapon_2.tres"

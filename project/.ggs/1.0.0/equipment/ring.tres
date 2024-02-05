@@ -1,0 +1,6 @@
+[gd_resource type="EquipmentSlot" format=3 uid="uid://dwpj8cbdscluy"]
+
+[resource]
+slot_name = &"ring"
+accepts_items_with_tags = PackedStringArray("type.armor.ring")
+resource_name = "ring.tres"

@@ -237,9 +237,11 @@ void EquipmentSlotScene::_render_slots_tree()
 
     TypedArray<EquipmentSlot> slots = EquipmentManager::get_singleton()->slots;
 
+    TreeItem *root = slots_tree->create_item();
+
     for (int i = 0; i < slots.size(); i++)
     {
-        TreeItem *slot_item = slots_tree->create_item();
+        TreeItem *slot_item = root->create_child();
         Variant slot_variant = slots[i];
         EquipmentSlot *slot = cast_to<EquipmentSlot>(slot_variant);
 
@@ -344,6 +346,7 @@ void EquipmentSlotScene::_ready()
     slots_tree->connect("button_clicked", Callable(this, "_handle_slot_tree_button_clicked"));
     slots_tree->connect("item_edited", Callable(this, "_handle_item_edited"));
     slots_tree->connect("item_selected", Callable(this, "_handle_slot_item_selected"));
+    slots_tree->set_hide_root(true);
     slots_tree->set_columns(4);
     slots_tree->set_column_title(0, tr("Slot name"));
     slots_tree->set_column_title(1, tr("Accepts items with tags"));
