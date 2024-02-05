@@ -1,6 +1,7 @@
 #include "ggs_item_main_scene.h"
 
 #include "ggs_equipment_slot_scene.h"
+#include "ggs_item_pool_scene.h"
 
 #include <godot_cpp/classes/button.hpp>
 #include <godot_cpp/classes/label.hpp>
@@ -46,8 +47,8 @@ void ItemMainScene::_ready()
 	Button *items_button = memnew(Button);
 	VBoxContainer *tab_buttons = memnew(VBoxContainer);
 	Panel *tabs_panel = memnew(Panel);
-	Panel *items_panel = memnew(Panel);
 	EquipmentSlotScene *equipment_slot_scene = memnew(EquipmentSlotScene);
+	ItemPoolScene *items_pool_scene = memnew(ItemPoolScene);
 
 	equipment_slot_scene->hide();
 
@@ -59,19 +60,19 @@ void ItemMainScene::_ready()
 	items_button->connect("pressed", Callable(this, "_handle_tab_pressed").bind(1));
 	items_button->set_text(tr("Items"));
 
-	items_panel->set_anchors_and_offsets_preset(PRESET_FULL_RECT);
-
 	tab_buttons->add_child(equipment_button);
 	tab_buttons->add_child(items_button);
 
-	tabs_container->add_child(equipment_slot_scene);
-	tabs_container->add_child(items_panel);
 	tabs_container->set_anchors_and_offsets_preset(PRESET_FULL_RECT);
+	tabs_container->set_h_size_flags(SIZE_EXPAND_FILL);
+	tabs_container->set_v_size_flags(SIZE_EXPAND_FILL);
+	tabs_container->add_child(equipment_slot_scene);
+	tabs_container->add_child(items_pool_scene);
 
 	tabs_panel->add_child(tabs_container);
-	tabs_panel->set_v_size_flags(SIZE_EXPAND_FILL);
-	tabs_panel->set_h_size_flags(SIZE_EXPAND_FILL);
 	tabs_panel->set_anchors_and_offsets_preset(PRESET_FULL_RECT);
+	tabs_panel->set_h_size_flags(SIZE_EXPAND_FILL);
+	tabs_panel->set_v_size_flags(SIZE_EXPAND_FILL);
 
 	add_child(tab_buttons);
 

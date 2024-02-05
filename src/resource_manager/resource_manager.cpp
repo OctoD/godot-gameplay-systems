@@ -29,18 +29,19 @@ Ref<EquipmentSlot> GGSResourceManager::create_equipment_slot_resource(String p_f
 	return resource;
 }
 
-Ref<ItemsPool> GGSResourceManager::create_item_resource(String p_file_name) const
+Ref<ItemsPool> GGSResourceManager::create_items_pool_resource(String p_file_name) const
 {
 	Ref<ItemsPool> resource = memnew(ItemsPool);
-	resource->set_name(p_file_name);
+	resource->set_name(p_file_name.replace(".tres", ""));
 	resource->set_path(String(ITEMS_DIR) + "/" + p_file_name);
+	resource->set_pool_name(p_file_name.replace(".tres", ""));
 	return resource;
 }
 
 Ref<TagDictionary> GGSResourceManager::create_tag_resource(String p_file_name) const
 {
 	Ref<TagDictionary> resource = memnew(TagDictionary);
-	resource->set_name(p_file_name);
+	resource->set_name(p_file_name.replace(".tres", ""));
 	resource->set_path(String(TAGS_DIR) + "/" + p_file_name);
 	return resource;
 }
@@ -171,7 +172,7 @@ TypedArray<EquipmentSlot> GGSResourceManager::get_equipment_slot_resources() con
 	return get_resources(EQUIPMENT_DIR);
 }
 
-TypedArray<ItemsPool> GGSResourceManager::get_item_resources() const
+TypedArray<ItemsPool> GGSResourceManager::get_items_pool_resources() const
 {
 	return get_resources(ITEMS_DIR);
 }

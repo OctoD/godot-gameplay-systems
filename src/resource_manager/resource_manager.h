@@ -15,6 +15,7 @@ namespace ggs
 	{
 		class EquipmentSlotScene;
 		class GGSEditorPlugin;
+		class ItemPoolScene;
 		class TagMainScene;
 	}
 
@@ -29,6 +30,7 @@ namespace ggs
 	protected:
 		friend class editor_plugin::EquipmentSlotScene;
 		friend class editor_plugin::GGSEditorPlugin;
+		friend class editor_plugin::ItemPoolScene;
 		friend class editor_plugin::TagMainScene;
 
 		/// @brief The resource manager's initialization method.
@@ -41,7 +43,7 @@ namespace ggs
 		Ref<EquipmentSlot> create_equipment_slot_resource(String p_file_name) const;
 		/// @brief Creates a new items pool resource.
 		/// @return The new items pool resource.
-		Ref<ItemsPool> create_item_resource(String p_file_name) const;
+		Ref<ItemsPool> create_items_pool_resource(String p_file_name) const;
 		/// @brief Creates a new tag dictionary resource.
 		/// @return The new tag dictionary resource.
 		Ref<TagDictionary> create_tag_resource(String p_file_name) const;
@@ -77,7 +79,7 @@ namespace ggs
 		TypedArray<EquipmentSlot> get_equipment_slot_resources() const;
 		/// @brief Gets all the resources in the items directory.
 		/// @return The resources in the items directory.
-		TypedArray<ItemsPool> get_item_resources() const;
+		TypedArray<ItemsPool> get_items_pool_resources() const;
 		/// @brief Gets all the resources in the tags directory.
 		/// @return The resources in the tags directory.
 		TypedArray<TagDictionary> get_tag_resources() const;
