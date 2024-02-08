@@ -131,7 +131,7 @@ void TagManager::_handle_dictionary_tag_replaced(const TagDictionary *p_tag_dict
 
 void TagManager::load_dictionaries()
 {
-	TypedArray<TagDictionary> tag_dictionaries = GGSResourceManager::get_singleton()->get_tag_resources();
+	TypedArray<TagDictionary> tag_dictionaries = ResourceManager::get_singleton()->get_tag_resources();
 
 	for (int i = 0; i < tag_dictionaries.size(); i++)
 	{

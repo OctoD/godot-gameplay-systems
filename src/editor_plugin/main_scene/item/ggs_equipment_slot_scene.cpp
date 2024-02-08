@@ -20,7 +20,7 @@ void EquipmentSlotScene::_handle_slot_create_requested(String p_name)
         return;
     }
 
-    GGSResourceManager *resource_manager = GGSResourceManager::get_singleton();
+    ResourceManager *resource_manager = ResourceManager::get_singleton();
     Ref<EquipmentSlot> slot = resource_manager->create_equipment_slot_resource(p_name);
 
     resource_manager->save_resource(slot);
@@ -37,7 +37,7 @@ void EquipmentSlotScene::_handle_slot_remove_confirmed()
         return;
     }
 
-    Error result = GGSResourceManager::get_singleton()->remove_resource(selected_equipment_slot);
+    Error result = ResourceManager::get_singleton()->remove_resource(selected_equipment_slot);
 
     if (result == OK)
     {
@@ -67,7 +67,7 @@ void EquipmentSlotScene::_handle_item_edited()
     if (slot)
     {
         slot->set_slot_name(slot_name);
-        GGSResourceManager::get_singleton()->save_resource(slot);
+        ResourceManager::get_singleton()->save_resource(slot);
     }
 }
 
@@ -133,8 +133,7 @@ void EquipmentSlotScene::_handle_slot_item_name_edited(String p_new_text)
         return;
     }
 
-    Variant slot_variant = EquipmentManager::get_singleton()->slots[selected->get_index()];
-    EquipmentSlot *slot = cast_to<EquipmentSlot>(slot_variant);
+    EquipmentSlot *slot = cast_to<EquipmentSlot>(EquipmentManager::get_singleton()->slots[selected->get_index()]);
 
     if (slot == nullptr)
     {
@@ -149,7 +148,7 @@ void EquipmentSlotScene::_handle_slot_item_name_edited(String p_new_text)
     slot->set_slot_name(p_new_text);
     selected->set_text(0, p_new_text);
 
-    GGSResourceManager::get_singleton()->save_resource(slot);
+    ResourceManager::get_singleton()->save_resource(slot);
 }
 
 void EquipmentSlotScene::_handle_tags_changed()
@@ -192,7 +191,7 @@ void EquipmentSlotScene::_handle_tags_deselected(PackedStringArray p_tags)
 
         slots_tree->get_selected()->set_text(tag_selection_mode, new_text);
 
-        GGSResourceManager::get_singleton()->save_resource(slot);
+        ResourceManager::get_singleton()->save_resource(slot);
     }
 }
 
@@ -218,15 +217,15 @@ void EquipmentSlotScene::_handle_tags_selected(PackedStringArray p_tags)
 
         slots_tree->get_selected()->set_text(tag_selection_mode, new_text);
 
-        GGSResourceManager::get_singleton()->save_resource(slot);
+        ResourceManager::get_singleton()->save_resource(slot);
     }
 }
 
 void EquipmentSlotScene::_handle_tag_selection_window_closed()
 {
-    selected_equipment_slot = nullptr;
     selected_slot_tag_selection_tree->deselect_all();
     selected_slot_tag_selection_window->hide();
+    selected_equipment_slot = nullptr;
 }
 
 void EquipmentSlotScene::_render_slots_tree()

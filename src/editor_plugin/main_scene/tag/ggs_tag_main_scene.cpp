@@ -67,7 +67,7 @@ void TagMainScene::render_tag_dictionaries()
 
 void TagMainScene::_handle_add_tag_dictionary_requested(String p_name)
 {
-	GGSResourceManager *resource_manager = GGSResourceManager::get_singleton();
+	ResourceManager *resource_manager = ResourceManager::get_singleton();
 	resource_manager->save_resource(resource_manager->create_tag_resource(p_name));
 
 	TagManager::get_singleton()->load_dictionaries();
@@ -122,7 +122,7 @@ void TagMainScene::_handle_add_tag(TagDictionary *p_dictionary, LineEdit *p_tag_
 
 	p_dictionary->add_tag(tag_path);
 
-	GGSResourceManager::get_singleton()->save_resource(p_dictionary);
+	ResourceManager::get_singleton()->save_resource(p_dictionary);
 
 	render_tag_dictionaries();
 }
@@ -137,7 +137,7 @@ void TagMainScene::_handle_edit_tag(TagDictionary *p_dictionary, LineEdit *p_tag
 
 	p_dictionary->replace_tag_path(old_path, tag_path);
 
-	GGSResourceManager::get_singleton()->save_resource(p_dictionary);
+	ResourceManager::get_singleton()->save_resource(p_dictionary);
 
 	render_tag_dictionaries();
 }
@@ -146,7 +146,7 @@ void TagMainScene::_handle_delete_tag(TagDictionary *p_dictionary, String p_tag_
 {
 	p_dictionary->remove_tag_path(p_tag_path);
 
-	GGSResourceManager::get_singleton()->save_resource(p_dictionary);
+	ResourceManager::get_singleton()->save_resource(p_dictionary);
 
 	render_tag_dictionaries();
 }

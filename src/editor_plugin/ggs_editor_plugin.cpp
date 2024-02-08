@@ -41,7 +41,7 @@ void GGSEditorPlugin::_enter_tree()
 
 	ggs_tag_main_scene->set_visible(false);
 
-	GGSResourceManager::get_singleton()->ensure_directories();
+	ResourceManager::get_singleton()->ensure_directories();
 }
 
 void GGSEditorPlugin::_exit_tree()

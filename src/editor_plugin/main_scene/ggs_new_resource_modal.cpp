@@ -40,7 +40,7 @@ void NewResourceModal::_handle_create_button_pressed()
 
 void NewResourceModal::_handle_line_edit_text_changed(String text)
 {
-	resource_name_label->set_text(GGSResourceManager::get_resource_name_from_name(text));
+	resource_name_label->set_text(ResourceManager::get_resource_name_from_name(text));
 }
 
 void NewResourceModal::_ready()
@@ -59,7 +59,7 @@ void NewResourceModal::_ready()
 	HBoxContainer *h_box_container = memnew(HBoxContainer);
 	VBoxContainer *v_box_container = memnew(VBoxContainer);
 
-	GGSResourceManager *resource_manager = GGSResourceManager::get_singleton();
+	ResourceManager *resource_manager = ResourceManager::get_singleton();
 
 	add_child(v_box_container);
 

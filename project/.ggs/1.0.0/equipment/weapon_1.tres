@@ -3,4 +3,5 @@
 [resource]
 slot_name = &"weapon_1"
 accepts_items_with_tags = PackedStringArray("type.weapon.1h", "type.weapon.2h")
+denies_items_with_tags = PackedStringArray("type.weapon.shield")
 resource_name = "weapon_1.tres"

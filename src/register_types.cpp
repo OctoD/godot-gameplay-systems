@@ -106,9 +106,9 @@ void initialize_ggs_module(ModuleInitializationLevel p_level)
 	}
 	else if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR)
 	{
-		ClassDB::register_internal_class<ggs::GGSResourceManager>();
+		ClassDB::register_internal_class<ggs::ResourceManager>();
 
-		Engine::get_singleton()->register_singleton("GGSResourceManager", ggs::GGSResourceManager::get_singleton());
+		Engine::get_singleton()->register_singleton("GGSResourceManager", ggs::ResourceManager::get_singleton());
 
 		ClassDB::register_internal_class<ggs::editor_plugin::NewResourceModal>();
 		ClassDB::register_internal_class<ggs::editor_plugin::AbilityInspectorPlugin>();

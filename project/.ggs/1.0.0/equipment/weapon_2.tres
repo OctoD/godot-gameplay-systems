@@ -2,5 +2,5 @@
 
 [resource]
 slot_name = &"weapon_2"
-accepts_items_with_tags = PackedStringArray("type.weapon.1h")
+accepts_items_with_tags = PackedStringArray("type.weapon.1h", "type.weapon.shield")
 resource_name = "weapon_2.tres"

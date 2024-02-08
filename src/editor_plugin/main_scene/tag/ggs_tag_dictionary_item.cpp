@@ -142,7 +142,7 @@ void TagDictionaryItem::_handle_add_tag_button_pressed()
 
     dictionary->add_tag(tag_name);
 
-    GGSResourceManager::get_singleton()->save_resource(dictionary);
+    ResourceManager::get_singleton()->save_resource(dictionary);
 
     new_tag_line_edit->set_text("");
     tag_tree->clear();

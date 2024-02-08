@@ -10,17 +10,17 @@
 
 using namespace ggs;
 
-GGSResourceManager *GGSResourceManager::instance = nullptr;
+ResourceManager *ResourceManager::instance = nullptr;
 
-const char *GGSResourceManager::EQUIPMENT_DIR = "res://.ggs/1.0.0/equipment";
-const char *GGSResourceManager::ITEMS_DIR = "res://.ggs/1.0.0/items";
-const char *GGSResourceManager::TAGS_DIR = "res://.ggs/1.0.0/tags";
+const char *ResourceManager::EQUIPMENT_DIR = "res://.ggs/1.0.0/equipment";
+const char *ResourceManager::ITEMS_DIR = "res://.ggs/1.0.0/items";
+const char *ResourceManager::TAGS_DIR = "res://.ggs/1.0.0/tags";
 
-void GGSResourceManager::_bind_methods()
+void ResourceManager::_bind_methods()
 {
 }
 
-Ref<EquipmentSlot> GGSResourceManager::create_equipment_slot_resource(String p_file_name) const
+Ref<EquipmentSlot> ResourceManager::create_equipment_slot_resource(String p_file_name) const
 {
 	Ref<EquipmentSlot> resource = memnew(EquipmentSlot);
 	resource->set_name(p_file_name);
@@ -29,7 +29,7 @@ Ref<EquipmentSlot> GGSResourceManager::create_equipment_slot_resource(String p_f
 	return resource;
 }
 
-Ref<ItemsPool> GGSResourceManager::create_items_pool_resource(String p_file_name) const
+Ref<ItemsPool> ResourceManager::create_items_pool_resource(String p_file_name) const
 {
 	Ref<ItemsPool> resource = memnew(ItemsPool);
 	resource->set_name(p_file_name.replace(".tres", ""));
@@ -38,7 +38,7 @@ Ref<ItemsPool> GGSResourceManager::create_items_pool_resource(String p_file_name
 	return resource;
 }
 
-Ref<TagDictionary> GGSResourceManager::create_tag_resource(String p_file_name) const
+Ref<TagDictionary> ResourceManager::create_tag_resource(String p_file_name) const
 {
 	Ref<TagDictionary> resource = memnew(TagDictionary);
 	resource->set_name(p_file_name.replace(".tres", ""));
@@ -46,7 +46,7 @@ Ref<TagDictionary> GGSResourceManager::create_tag_resource(String p_file_name) c
 	return resource;
 }
 
-void GGSResourceManager::ensure_directory(const String &p_dir) const
+void ResourceManager::ensure_directory(const String &p_dir) const
 {
 	if (Engine::get_singleton()->is_editor_hint() && !DirAccess::dir_exists_absolute(p_dir))
 	{
@@ -60,7 +60,7 @@ void GGSResourceManager::ensure_directory(const String &p_dir) const
 	}
 }
 
-void GGSResourceManager::ensure_directories() const
+void ResourceManager::ensure_directories() const
 {
 	if (Engine::get_singleton()->is_editor_hint())
 	{
@@ -70,7 +70,7 @@ void GGSResourceManager::ensure_directories() const
 	}
 }
 
-Error GGSResourceManager::remove_resource(Ref<Resource> p_ref) const
+Error ResourceManager::remove_resource(Ref<Resource> p_ref) const
 {
 	if (Engine::get_singleton()->is_editor_hint())
 	{
@@ -80,22 +80,22 @@ Error GGSResourceManager::remove_resource(Ref<Resource> p_ref) const
 	return Error::ERR_UNAVAILABLE;
 }
 
-bool GGSResourceManager::save_resource(Ref<EquipmentSlot> p_ref) const
+bool ResourceManager::save_resource(Ref<EquipmentSlot> p_ref) const
 {
 	return save_resource(String(EQUIPMENT_DIR), p_ref) == Error::OK;
 }
 
-bool GGSResourceManager::save_resource(Ref<ItemsPool> p_ref) const
+bool ResourceManager::save_resource(Ref<ItemsPool> p_ref) const
 {
 	return save_resource(String(ITEMS_DIR), p_ref) == Error::OK;
 }
 
-bool GGSResourceManager::save_resource(Ref<TagDictionary> p_ref) const
+bool ResourceManager::save_resource(Ref<TagDictionary> p_ref) const
 {
 	return save_resource(String(TAGS_DIR), p_ref) == Error::OK;
 }
 
-Error GGSResourceManager::save_resource(const String &p_dirname, Ref<Resource> p_ref) const
+Error ResourceManager::save_resource(const String &p_dirname, Ref<Resource> p_ref) const
 {
 	if (!Engine::get_singleton()->is_editor_hint())
 	{
@@ -111,7 +111,7 @@ Error GGSResourceManager::save_resource(const String &p_dirname, Ref<Resource> p
 	return Error::ERR_DOES_NOT_EXIST;
 }
 
-GGSResourceManager::GGSResourceManager()
+ResourceManager::ResourceManager()
 {
 	if (instance == nullptr)
 	{
@@ -119,7 +119,7 @@ GGSResourceManager::GGSResourceManager()
 	}
 }
 
-TypedArray<Resource> GGSResourceManager::get_resources(const String &p_dir) const
+TypedArray<Resource> ResourceManager::get_resources(const String &p_dir) const
 {
 	TypedArray<Resource> returnvalue = TypedArray<Resource>();
 
@@ -137,7 +137,7 @@ TypedArray<Resource> GGSResourceManager::get_resources(const String &p_dir) cons
 	return returnvalue;
 }
 
-GGSResourceManager::~GGSResourceManager()
+ResourceManager::~ResourceManager()
 {
 	if (instance == this)
 	{
@@ -145,17 +145,17 @@ GGSResourceManager::~GGSResourceManager()
 	}
 }
 
-GGSResourceManager *GGSResourceManager::get_singleton()
+ResourceManager *ResourceManager::get_singleton()
 {
 	if (instance == nullptr)
 	{
-		instance = memnew(GGSResourceManager);
+		instance = memnew(ResourceManager);
 	}
 
 	return instance;
 }
 
-String GGSResourceManager::get_resource_name_from_name(const String &p_string)
+String ResourceManager::get_resource_name_from_name(const String &p_string)
 {
 	String normalized = p_string.replace(" ", "_").to_lower();
 
@@ -167,17 +167,17 @@ String GGSResourceManager::get_resource_name_from_name(const String &p_string)
 	return normalized + ".tres";
 }
 
-TypedArray<EquipmentSlot> GGSResourceManager::get_equipment_slot_resources() const
+TypedArray<EquipmentSlot> ResourceManager::get_equipment_slot_resources() const
 {
 	return get_resources(EQUIPMENT_DIR);
 }
 
-TypedArray<ItemsPool> GGSResourceManager::get_items_pool_resources() const
+TypedArray<ItemsPool> ResourceManager::get_items_pool_resources() const
 {
 	return get_resources(ITEMS_DIR);
 }
 
-TypedArray<TagDictionary> GGSResourceManager::get_tag_resources() const
+TypedArray<TagDictionary> ResourceManager::get_tag_resources() const
 {
 	return get_resources(TAGS_DIR);
 }

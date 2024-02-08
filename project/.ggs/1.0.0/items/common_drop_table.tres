@@ -1,0 +1,8 @@
+[gd_resource type="ItemsPool" load_steps=2 format=3 uid="uid://cq5poyahoqrmu"]
+
+[ext_resource type="Item" uid="uid://cmuoe6r8lr7g" path="res://demos/item_test_ui/items/test_item_000.tres" id="1_a8emk"]
+
+[resource]
+items = Array[Item]([ExtResource("1_a8emk"), ExtResource("1_a8emk")])
+pool_name = &"items_pool_001"
+resource_name = "common_drop_table"

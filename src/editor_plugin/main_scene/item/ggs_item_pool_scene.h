@@ -3,6 +3,7 @@
 
 #include <godot_cpp/classes/v_box_container.hpp>
 #include <godot_cpp/classes/tree.hpp>
+#include <godot_cpp/classes/window.hpp>
 
 #include "editor_plugin/main_scene/ggs_new_resource_modal.h"
 #include "system/item/items_pool.h"
@@ -22,8 +23,10 @@ namespace ggs::editor_plugin
 		};
 	
 		void _handle_add_button_pressed();
-		void _handle_create_requested(String p_resource_name);
-		void _handle_tree_button_pressed(TreeItem *p_item, int p_column, int p_id, int p_mouse_button_index);
+        void _handle_cell_selected();
+        void _handle_create_requested(String p_resource_name);
+		void _handle_resource_pool_changed(int p_item_pool_index);
+        void _handle_tree_button_pressed(TreeItem *p_item, int p_column, int p_id, int p_mouse_button_index);
 
 	protected:
 		static void _bind_methods();

@@ -13,24 +13,30 @@ void ItemsPool::_bind_methods()
 	ClassDB::bind_method(D_METHOD("set_pool_name", "p_pool_name"), &ItemsPool::set_pool_name);
 
 	/// binds properties
-	ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "items"), "set_items", "get_items");
+	ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "items", PROPERTY_HINT_RESOURCE_TYPE, vformat("%s/%s:%s", Variant::OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "Item")), "set_items", "get_items");
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "pool_name"), "set_pool_name", "get_pool_name");
+
+	/// signals bindings
+	ADD_SIGNAL(MethodInfo("items_changed"));
+	ADD_SIGNAL(MethodInfo("pool_name_changed"));
 }
 
 TypedArray<Item> ItemsPool::get_items() const
 {
-    return items;
+	return items;
 }
 
 StringName ItemsPool::get_pool_name() const
 {
-    return pool_name;
+	return pool_name;
 }
 
 void ItemsPool::set_items(const TypedArray<Item> &p_items)
 {
 	items = p_items;
-	
+
+	emit_signal("items_changed");
+
 	if (Engine::get_singleton()->is_editor_hint())
 	{
 		emit_changed();
@@ -40,7 +46,9 @@ void ItemsPool::set_items(const TypedArray<Item> &p_items)
 void ItemsPool::set_pool_name(const StringName &p_pool_name)
 {
 	pool_name = p_pool_name;
-	
+
+	emit_signal("pool_name_changed");
+
 	if (Engine::get_singleton()->is_editor_hint())
 	{
 		emit_changed();

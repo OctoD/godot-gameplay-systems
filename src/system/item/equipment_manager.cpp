@@ -72,7 +72,7 @@ void EquipmentManager::remove_slot(EquipmentSlot *p_slot)
 
 void EquipmentManager::load_slots()
 {
-	slots = GGSResourceManager::get_singleton()->get_equipment_slot_resources();
+	slots = ResourceManager::get_singleton()->get_equipment_slot_resources();
 }
 
 EquipmentManager::EquipmentManager()
@@ -121,8 +121,8 @@ bool EquipmentManager::has_slot(StringName p_slot_name) const
 			}
 		}
 	}
-	
-    return false;
+
+	return false;
 }
 
 EquipmentManager *EquipmentManager::get_singleton()

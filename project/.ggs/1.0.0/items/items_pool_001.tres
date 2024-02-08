@@ -1,0 +1,8 @@
+[gd_resource type="ItemsPool" load_steps=2 format=3 uid="uid://b2a7tiunflpnh"]
+
+[ext_resource type="Item" uid="uid://cmuoe6r8lr7g" path="res://demos/item_test_ui/items/test_item_000.tres" id="1_ocre2"]
+
+[resource]
+items = Array[Item]([ExtResource("1_ocre2")])
+pool_name = &"items_pool_002"
+resource_name = "items_pool_001"

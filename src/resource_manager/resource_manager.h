@@ -19,9 +19,9 @@ namespace ggs
 		class TagMainScene;
 	}
 
-	class GGSResourceManager : public Node
+	class ResourceManager : public Node
 	{
-		GDCLASS(GGSResourceManager, Node);
+		GDCLASS(ResourceManager, Node);
 
 		static const char *EQUIPMENT_DIR;
 		static const char *ITEMS_DIR;
@@ -36,7 +36,7 @@ namespace ggs
 		/// @brief The resource manager's initialization method.
 		static void _bind_methods();
 		/// @brief The singleton instance of the resource manager.
-		static GGSResourceManager *instance;
+		static ResourceManager *instance;
 
 		/// @brief Creates a new equipment slot resource.
 		/// @return The new equipment slot resource.
@@ -65,12 +65,12 @@ namespace ggs
         Error save_resource(const String &p_dirname, Ref<Resource> p_ref) const;
 
 	public:
-		GGSResourceManager();
-		~GGSResourceManager();
+		ResourceManager();
+		~ResourceManager();
 
 		/// @brief Gets the singleton instance of the resource manager.
 		/// @return The singleton instance of the resource manager.
-		static GGSResourceManager *get_singleton();
+		static ResourceManager *get_singleton();
 
 		static String get_resource_name_from_name(const String &p_string);
 
