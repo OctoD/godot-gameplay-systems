@@ -1,6 +1,7 @@
 # Objects.
 .scons-cache/
 *.os
+*.pdb
 *.windows.editor.*
 *.windows.template_debug.x86_64.obj
 
