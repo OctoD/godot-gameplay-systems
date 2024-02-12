@@ -57,7 +57,7 @@ void TagDocks::render()
 	TagDictionary *all_tags = memnew(TagDictionary);
 	AttributeManager *attribute_manager = AttributeManager::get_singleton();
 
-	all_tags->from_many(TagManager::get_singleton()->dictionaries);
+	all_tags->from_many(TagManager::get_singleton()->get_dictionaries());
 	all_tags->remove_tags(attribute_manager->get_attributes());
 
 	for (int i = 0; i < selected_nodes.size(); i++)

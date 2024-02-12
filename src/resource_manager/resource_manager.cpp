@@ -149,7 +149,7 @@ ResourceManager *ResourceManager::get_singleton()
 {
 	if (instance == nullptr)
 	{
-		instance = memnew(ResourceManager);
+		return memnew(ResourceManager);
 	}
 
 	return instance;

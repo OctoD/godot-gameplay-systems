@@ -153,11 +153,11 @@ void EquipmentSlotScene::_handle_slot_item_name_edited(String p_new_text)
 
 void EquipmentSlotScene::_handle_tags_changed()
 {
-    TypedArray<TagDictionary> *dictionaries = TagManager::get_singleton()->dictionaries;
+    TypedArray<TagDictionary> dictionaries = TagManager::get_singleton()->get_dictionaries();
 
-    for (int i = 0; i < dictionaries->size(); i++)
+    for (int i = 0; i < dictionaries.size(); i++)
     {
-        Variant dictionary_variant = dictionaries->operator[](i);
+        Variant dictionary_variant = dictionaries[i];
         TagDictionary *_dictionary = cast_to<TagDictionary>(dictionary_variant);
 
         if (_dictionary)

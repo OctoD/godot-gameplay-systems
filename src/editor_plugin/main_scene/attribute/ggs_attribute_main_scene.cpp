@@ -69,8 +69,8 @@ void AttributeMainScene::_ready()
 
 void AttributeMainScene::_handle_dictionary_selected(int p_item_index)
 {
-	TypedArray<TagDictionary> *items = TagManager::get_singleton()->dictionaries;
-	Variant variant = items->operator[](p_item_index);
+	TypedArray<TagDictionary> items = TagManager::get_singleton()->get_dictionaries();
+	Variant variant = items[p_item_index];
 	TagDictionary *tag_dictionary = cast_to<TagDictionary>(variant);
 
 	if (tag_dictionary != nullptr)
@@ -86,17 +86,17 @@ void AttributeMainScene::_handle_dictionary_selected(int p_item_index)
 
 void AttributeMainScene::render()
 {
-	TypedArray<TagDictionary> *items = TagManager::get_singleton()->dictionaries;
+	TypedArray<TagDictionary> items = TagManager::get_singleton()->get_dictionaries();
 	String current_value = AttributeProjectSettings::get_attribute_resource_path();
 
 	int preselect_index = -1;
-	int size = items->size();
+	int size = items.size();
 
 	tag_select->clear();
 
 	for (int i = 0; i < size; i++)
 	{
-		Variant item = items->operator[](i);
+		Variant item = items[i];
 		TagDictionary *tag_dictionary = cast_to<TagDictionary>(item);
 
 		tag_select->add_item(tag_dictionary->get_path());

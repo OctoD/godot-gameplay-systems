@@ -106,11 +106,11 @@ void TagDictionary::clear_tags()
 	emit_changed();
 }
 
-void TagDictionary::from_many(const TypedArray<TagDictionary> *p_tag_dictionaries)
+void TagDictionary::from_many(const TypedArray<TagDictionary> p_tag_dictionaries)
 {
-	for (int i = 0; i < p_tag_dictionaries->size(); i++)
+	for (int i = 0; i < p_tag_dictionaries.size(); i++)
 	{
-		TagDictionary *x = cast_to<TagDictionary>(p_tag_dictionaries->operator[](i));
+		TagDictionary *x = cast_to<TagDictionary>(p_tag_dictionaries[i]);
 		add_tags(x->get_tags());
 	}
 }

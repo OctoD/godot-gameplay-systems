@@ -10,15 +10,6 @@ using namespace godot;
 
 namespace ggs
 {
-	namespace editor_plugin
-	{
-		class AbilityInspectorPluginEditor;
-		class AttributeMainScene;
-		class EquipmentSlotScene;
-		class TagDocks;
-		class TagMainScene;
-	}
-
 	/// @brief The tag manager node. It is used to manage tags.
 	class TagManager : public Node
 	{
@@ -59,6 +50,9 @@ namespace ggs
 		/// @param p_node The node to get the tag container from.
 		/// @return
 		TypedArray<Node> get_child_tagged_nodes(const Node *p_node) const;
+		/// @brief Returns the dictionaries
+		/// @return The dictionaries
+		TypedArray<TagDictionary> get_dictionaries() const;
 		/// @brief Gets the tags associated with a node.
 		/// @param p_node The node to get the tags from.
 		/// @return The tags associated with the node.
@@ -96,16 +90,12 @@ namespace ggs
 		/// @param p_node
 		/// @param p_tags
 		void remove_tags(Node *p_node, const PackedStringArray &p_tags);
+		/// @brief Loads all dictionaries.
+		void load_dictionaries();
 		/// @brief Called when the node enters the scene tree for the first time.
 		void _ready() override;
 
 	protected:
-		friend class editor_plugin::AttributeMainScene;
-		friend class editor_plugin::AbilityInspectorPluginEditor;
-		friend class editor_plugin::EquipmentSlotScene;
-		friend class editor_plugin::TagDocks;
-		friend class editor_plugin::TagMainScene;
-
 		/// @brief Registers all methods that can be called from Godot.
 		static void _bind_methods();
 		/// @brief Adds a tag dictionary.
@@ -120,7 +110,7 @@ namespace ggs
 		/// @param dictionary	The tag dictionary to remove.
 		void remove_dictionary(TagDictionary *p_dictionary);
 		/// @brief The tag dictionary.
-		TypedArray<TagDictionary> *dictionaries;
+		TypedArray<TagDictionary> dictionaries;
 
 	private:
 		/// @brief Binds all signals of a tag dictionary.
@@ -146,8 +136,6 @@ namespace ggs
 		/// @param p_old_tag The old tag.
 		/// @param p_new_tag The new tag.
 		void _handle_dictionary_tag_replaced(const TagDictionary *p_tag_dictionary, const String &p_old_tag, const String &p_new_tag);
-		/// @brief Loads all dictionaries.
-		void load_dictionaries();
 	};
 }
 

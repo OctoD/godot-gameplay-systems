@@ -129,7 +129,7 @@ EquipmentManager *EquipmentManager::get_singleton()
 {
 	if (singleton == nullptr)
 	{
-		singleton = memnew(EquipmentManager);
+		return memnew(EquipmentManager);
 	}
 
 	return singleton;

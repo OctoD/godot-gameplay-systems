@@ -59,7 +59,7 @@ AttributeManager *AttributeManager::get_singleton()
 {
 	if (_singleton == nullptr)
 	{
-		_singleton = memnew(AttributeManager);
+		return memnew(AttributeManager);
 	}
 	
 	return _singleton;

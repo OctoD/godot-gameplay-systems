@@ -138,7 +138,7 @@ ItemManager *ItemManager::get_singleton()
 {
 	if (singleton == nullptr)
 	{
-		singleton = memnew(ItemManager);
+		return memnew(ItemManager);
 	}
 
 	return singleton;

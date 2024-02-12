@@ -37,7 +37,7 @@ void TagMainScene::render_tag_dictionaries()
 
 	tag_manager->load_dictionaries();
 
-	TypedArray<TagDictionary> *dictionaries = tag_manager->dictionaries;
+	TypedArray<TagDictionary> dictionaries = tag_manager->get_dictionaries();
 	TypedArray<godot::Node> children = _dictionaries_container->get_children();
 
 	for (int i = 0; i < _dictionaries_container->get_child_count(); i++)
@@ -50,7 +50,7 @@ void TagMainScene::render_tag_dictionaries()
 		}
 	}
 
-	for (int i = 0; i < dictionaries->size(); i++)
+	for (int i = 0; i < dictionaries.size(); i++)
 	{
 		TagDictionaryItem *dict_container = memnew(TagDictionaryItem);
 
@@ -60,7 +60,7 @@ void TagMainScene::render_tag_dictionaries()
 		dict_container->connect("remove_tag_requested", Callable(this, "_handle_remove_tag_requested"));
 		dict_container->connect("add_tag_requested", Callable(this, "_handle_tag_add_requested"));
 		dict_container->connect("edit_tag_requested", Callable(this, "_handle_tag_edit_requested"));
-		dict_container->set_tag_dictionary(cast_to<TagDictionary>(dictionaries->operator[](i)));
+		dict_container->set_tag_dictionary(cast_to<TagDictionary>(dictionaries[i]));
 		dict_container->render();
 	}
 }

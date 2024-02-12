@@ -184,9 +184,11 @@ void AbilityInspectorPluginEditor::_ready()
 	button = memnew(Button);
 	tag_tree = memnew(TagTree);
 
-	for (int i = 0; i < tag_manager->dictionaries->size(); i++)
+	TypedArray<TagDictionary> dictionaries = tag_manager->get_dictionaries();
+
+	for (int i = 0; i < dictionaries.size(); i++)
 	{
-		Variant variant = tag_manager->dictionaries->operator[](i);
+		Variant variant = dictionaries[i];
 		TagDictionary *dictionary = cast_to<TagDictionary>(variant);
 
 		if (dictionary != nullptr)

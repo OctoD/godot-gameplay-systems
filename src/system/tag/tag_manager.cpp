@@ -151,7 +151,7 @@ TagManager::TagManager()
 {
 	if (singleton == nullptr)
 	{
-		dictionaries = memnew(TypedArray<TagDictionary>);
+		dictionaries = TypedArray<TagDictionary>();
 		singleton = this;
 	}
 	else
@@ -172,7 +172,7 @@ TagManager *TagManager::get_singleton()
 {
 	if (singleton == nullptr)
 	{
-		singleton = memnew(TagManager);
+		return memnew(TagManager);
 	}
 
 	return singleton;
@@ -239,6 +239,11 @@ TypedArray<Node> TagManager::get_child_tagged_nodes(const Node *p_node) const
 	return output;
 }
 
+TypedArray<TagDictionary> TagManager::get_dictionaries() const
+{
+	return TypedArray<TagDictionary>(dictionaries);
+}
+
 PackedStringArray TagManager::get_tags(const Node *p_node) const
 {
 	if (p_node != nullptr)
@@ -253,24 +258,24 @@ int TagManager::add_dictionary(TagDictionary *p_dictionary)
 {
 	if (p_dictionary != nullptr && !has_dictionary(p_dictionary))
 	{
-		dictionaries->append(p_dictionary);
+		dictionaries.append(p_dictionary);
 
 		emit_signal("dictionary_added", p_dictionary);
 		emit_signal("dictionaries_changed");
 
 		_bind_dictionary_signals(p_dictionary);
 
-		return dictionaries->size();
+		return dictionaries.size();
 	}
 
-	return dictionaries->size();
+	return dictionaries.size();
 }
 
 bool TagManager::has_dictionary(const TagDictionary *p_dictionary) const
 {
 	if (p_dictionary != nullptr)
 	{
-		return dictionaries->has(p_dictionary);
+		return dictionaries.has(p_dictionary);
 	}
 
 	return false;
@@ -402,13 +407,13 @@ void TagManager::remove_dictionary(TagDictionary *p_dictionary)
 {
 	if (p_dictionary != nullptr)
 	{
-		for (int i = 0; i < dictionaries->size(); i++)
+		for (int i = 0; i < dictionaries.size(); i++)
 		{
-			int64_t index = dictionaries->find(p_dictionary);
+			int64_t index = dictionaries.find(p_dictionary);
 
 			if (index > -1)
 			{
-				dictionaries->remove_at(index);
+				dictionaries.remove_at(index);
 				emit_signal("dictionary_removed", p_dictionary);
 				emit_signal("dictionaries_changed");
 			}

@@ -36,7 +36,7 @@ namespace ggs
 		void clear_tags();
 		/// @brief Adds all tags from the tag dictionaries passed to this one.
 		/// @param p_tag_dictionaries
-		void from_many(const TypedArray<TagDictionary> *p_tag_dictionaries);
+		void from_many(const TypedArray<TagDictionary> p_tag_dictionaries);
 		/// @brief Returns all tags as an array of packed string arrays.
 		/// @return
 		TypedArray<PackedStringArray> get_chunks() const;
