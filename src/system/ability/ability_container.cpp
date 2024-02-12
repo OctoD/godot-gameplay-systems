@@ -158,7 +158,7 @@ AbilityContainer::~AbilityContainer()
 {
 }
 
-void AbilityContainer::_process(float delta)
+void AbilityContainer::_process(double delta)
 {
 	ability_queue->process(delta);
 }

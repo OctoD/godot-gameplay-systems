@@ -64,7 +64,7 @@ namespace ggs
 
 		/// @brief Handles the process of the node.
 		/// @param delta
-		void _process(float delta);
+		void _process(double delta) override;
 		/// @brief Called when the node enters the scene tree for the first time.
 		void _ready() override;
 

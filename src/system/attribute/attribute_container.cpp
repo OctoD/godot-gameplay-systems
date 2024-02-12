@@ -183,7 +183,7 @@ AttributeContainer::~AttributeContainer()
 {
 }
 
-void AttributeContainer::_process(float delta)
+void AttributeContainer::_process(double delta)
 {
 	if (Engine::get_singleton()->is_editor_hint())
 	{

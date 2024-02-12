@@ -56,7 +56,7 @@ namespace ggs
 		~AbilityContainer();
 		/// @brief The process function from Godot.
 		/// @param delta The time since the last frame.
-		void _process(float delta);
+		void _process(double delta) override;
 		/// @brief Override of the ready function from Godot.
 		void _ready() override;
 		/// @brief Activates an ability.
