@@ -12,8 +12,8 @@ albedo_color = Color(0.584314, 0.278431, 0.0941176, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_csts3"]
 render_priority = 0
 shader = ExtResource("2_cveab")
-shader_parameter/light_color = Quaternion(0.952941, 0.858824, 0.74902, 1)
-shader_parameter/dark_color = Quaternion(0.74902, 0.619608, 0.490196, 1)
+shader_parameter/light_color = Vector4(0.952941, 0.858824, 0.74902, 1)
+shader_parameter/dark_color = Vector4(0.74902, 0.619608, 0.490196, 1)
 shader_parameter/ring_scale = 4.4
 shader_parameter/wave_scale = 8.454
 shader_parameter/random_scale = 4.6

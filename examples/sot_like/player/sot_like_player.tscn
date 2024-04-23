@@ -12,13 +12,13 @@
 
 [node name="sot_like_player" type="CharacterBody3D"]
 collision_layer = 2
+collision_mask = 29
 script = ExtResource("1_68dqe")
 
 [node name="CameraNeck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.663021, 0.320864)
 
 [node name="Camera3D" type="Camera3D" parent="CameraNeck"]
-current = true
 fov = 78.0
 
 [node name="InteractionRayCast3D" type="RayCast3D" parent="CameraNeck/Camera3D"]

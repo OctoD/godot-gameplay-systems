@@ -17,7 +17,7 @@ sky = SubResource("Sky_04jxc")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f3t33"]
 render_priority = 0
 shader = ExtResource("3_7is3y")
-shader_parameter/tint_color = Quaternion(0.3, 0.4, 0.45, 1)
+shader_parameter/tint_color = Vector4(0.3, 0.4, 0.45, 1)
 shader_parameter/slowdown = 5.0
 shader_parameter/time_caust = 0.13
 shader_parameter/caust_form = 0.15
