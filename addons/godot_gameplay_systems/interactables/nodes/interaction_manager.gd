@@ -60,10 +60,7 @@ var can_interact: bool:
 				if not tags.has(tag):
 					return false
 
-		if focused_interactable != null:
-			return tags_blocking_interaction.size() == 0 and tags_required_to_interact.size() == 0
-
-		return false
+		return focused_interactable != null
 ## Is the interacting owner. Usually a [CharacterBody2D] or [CharacterBody3D].
 var interacting_owner: Node:
 	get:
