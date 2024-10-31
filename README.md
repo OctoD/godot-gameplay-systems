@@ -1,47 +1,41 @@
-> [!WARNING] 
-> A full rewrite is going on (using gdextension). Some old api will change and be aware that all hard references (like extends `res://`) in your custom classes will stop working with the approach of 1.0.0
-
 ⚔️ GGS ⚔️
 =======
 
-Godot Gameplay Systems (formerly godot gameplay attributes) is a set of nodes and resources which speed up development your gameplay systems.
+Godot Gameplay Systems.
+
+This is the main repo which collects and manages all the binaries from each godot addon composing this addon.
 
 - [⚔️ GGS ⚔️](#️-ggs-️)
 - [Install](#install)
   - [How does it work?](#how-does-it-work)
-- [Networking and multiplayer](#networking-attributes-effects-and-abilities)
 - [Contribution](#contribution)
 - [Licence](#licence)
 
 # Install
 
-Clone this repo, copy the `addons` folder content inside your project's `addons` directory.
+Clone this repo, done.
 
-Enable this plugin by going to `project settings/plugins`.
-
-> Important: reload the project after activating the plugin
+You can also install this addon with the godot assets store.
 
 Enjoy! 
 
-## How does it work?
+# Contents
 
-You can check some tutorials/doc/examples [here](./docs/readme.md)
+- [Ability system](https://github.com/OctoD/godot-gameplay-abilities)
+- [Attribute system](https://github.com/OctoD/godot_gameplay_attributes)
+- [Tagging system](https://github.com/OctoD/godot-gameplay-tags)
 
-I am making also small "demos" to demonstrate how things work. You can check them out opening this repository using godot 4.x (stable), pressing the play button and choosing one.
+# Docs
 
-`Esc` key will always return you to the main menu.
-
-# Networking and multiplayer
-
-Did not test too much, but abilities, effects and attributes could be replicated using the `MultiplayerSynchronizer` node provided by godot4.x.
-
-The same should apply to `Inventory` and `Equipment`.
+- [Ability system](https://github.com/OctoD/godot-gameplay-abilities/blob/main/README.md)
+- [Attribute system](https://github.com/OctoD/godot_gameplay_attributes/blob/master/README.md)
+- [Tagging system](https://github.com/OctoD/godot-gameplay-tags/blob/main/docs/readme.md)
 
 # Contribution
 
 Every contribution is really welcome, feel free to contribute!
 
-You can open PR, issues or you can suggest features. Have a good day you wonderful Godot people!
+You can open PR, issues, or you can suggest features. Have a good day you wonderful Godot people!
 
 # Licence
 

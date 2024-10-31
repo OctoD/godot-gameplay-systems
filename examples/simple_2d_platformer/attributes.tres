@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="AttributeTable" load_steps=2 format=3 uid="uid://dfts4bf8f1u8a"]
-
-[ext_resource type="Script" path="res://addons/godot_gameplay_systems/attributes_and_abilities/resources/attribute_table.gd" id="1_vjqjq"]
-
-[resource]
-script = ExtResource("1_vjqjq")
-attributes = Array[String](["speed", "jump_height", "health", "score"])

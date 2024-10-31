@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://68whnoq8d5mm"]
-
-[ext_resource type="ArrayMesh" uid="uid://b1kts3ifnxu7x" path="res://examples/doom_like_fps/kenney_weapon-pack/Models/shotgun.obj" id="1_7uf7r"]
-
-[node name="FpsShotgun" type="Node3D"]
-
-[node name="Shotgun" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 3.48787e-16, -8.74228e-08, 3.48787e-16, 1, -3.48787e-16, 8.74228e-08, -3.48787e-16, -1, 0, 0, 0)
-mesh = ExtResource("1_7uf7r")
