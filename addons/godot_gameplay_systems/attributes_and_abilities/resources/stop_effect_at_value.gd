@@ -18,7 +18,7 @@ func should_apply(attribute_effect: AttributeEffect, effect: GameplayEffect, gam
 		1:	return attribute.current_value > value_to_stop_at
 		2:	return attribute.current_value < value_to_stop_at
 		3:	return attribute.current_value >= value_to_stop_at
-		3:	return attribute.current_value <= value_to_stop_at
+		4:	return attribute.current_value <= value_to_stop_at
 
 
 	return false
