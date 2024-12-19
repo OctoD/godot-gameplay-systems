@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.2
+reloadable = true
+
+[libraries]
+linux.debug.x86_64 =     "./build/debug/libgodot_gameplay_tags.so"
+linux.release.x86_64 =   "./build/release/libgodot_gameplay_tags.so"
+windows.debug.x86_64 =   "./build/debug/godot_gameplay_tags.dll"
+windows.release.x86_64 = "./build/release/godot_gameplay_tags.dll"
+macos.debug =            "./build/debug/libgodot_gameplay_tags.dylib"
+macos.release =          "./build/release/libgodot_gameplay_tags.dylib"
+macos.debug.arm64 =      "./build/debug/libgodot_gameplay_tags.dylib"
+macos.release.arm64 =    "./build/release/libgodot_gameplay_tags.dylib"

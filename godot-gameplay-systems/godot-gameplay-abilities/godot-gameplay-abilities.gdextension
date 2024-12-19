@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "godot_gameplay_abilities_init"
+compatibility_minimum = 4.4
+reloadable = true
+
+[libraries]
+windows.debug.x86_64 = "windows/godot-gameplay-abilities.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "windows/godot-gameplay-abilities.windows.template_release.x86_64.dll"
+linux.debug.x86_64 = "linux/libgodot-gameplay-abilities.linux.template_debug.x86_64.so"
+linux.release.x86_64 = "linux/libgodot-gameplay-abilities.linux.template_release.x86_64.so"
+linux.debug.arm64 = "linux/libgodot-gameplay-abilities.linux.template_debug.arm64.so"
+linux.debug.rv64 = "linux/libgodot-gameplay-abilities.linux.template_debug.rv64.so"
+android.debug.arm32 = "android/libgodot-gameplay-abilities.android.template_debug.arm32.so"
+android.debug.arm64 = "android/libgodot-gameplay-abilities.android.template_debug.arm64.so"

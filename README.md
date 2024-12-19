@@ -6,10 +6,16 @@ Godot Gameplay Systems.
 This is the main repo which collects and manages all the binaries from each godot addon composing this addon.
 
 - [⚔️ GGS ⚔️](#️-ggs-️)
+- [Requirements](#requirements)
 - [Install](#install)
-  - [How does it work?](#how-does-it-work)
+- [Contents](#contents)
+- [Docs](#docs)
 - [Contribution](#contribution)
 - [Licence](#licence)
+
+# Requirements
+
+Godot 4.4 or higher.
 
 # Install
 

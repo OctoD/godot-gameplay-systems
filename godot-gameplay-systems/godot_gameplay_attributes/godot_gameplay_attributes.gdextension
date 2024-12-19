@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "gdextension_init"
+compatibility_minimum = 4.3
+reloadable = true
+
+[libraries]
+windows.debug.x86_64 = "windows/godot_gameplay_attributes.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "windows/godot_gameplay_attributes.windows.template_release.x86_64.dll"
+linux.debug.x86_64 = "linux/godot_gameplay_attributes.linux.template_debug.x86_64.so"
+linux.release.x86_64 = "linux/godot_gameplay_attributes.linux.template_release.x86_64.so"
+linux.debug.arm64 = "linux/godot_gameplay_attributes.linux.template_debug.arm64.so"
+linux.debug.rv64 = "linux/godot_gameplay_attributes.linux.template_debug.rv64.so"
+android.debug.arm32 = "android/godot_gameplay_attributes.android.template_debug.arm32.so"
+android.debug.arm64 = "android/godot_gameplay_attributes.android.template_debug.arm64.so"
