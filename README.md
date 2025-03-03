@@ -1,6 +1,8 @@
 > [!WARNING] 
 > A full rewrite is going on (using gdextension). Some old api will change and be aware that all hard references (like extends `res://`) in your custom classes will stop working with the approach of 1.0.0
 
+[discord server here](https://discord.gg/meA6pDTXpr)
+
 ⚔️ GGS ⚔️
 =======
 
